@@ -29,7 +29,26 @@ body {
 #reflist h4 { font-size: 0.9em; }
 #reflist .block { margin: 0; padding: 0; }
 
-.box pre { background: #ffe; }
+code { background: #ffe; padding: 2px 5px; }
+
+.box pre { 
+  margin-top: 10px;
+  padding: 8px;
+  background: #ffe; 
+}
+
+.note { 
+  float: right; 
+  border: 10px; 
+  padding: 8px; 
+  background: #dfd;
+  border: 1px solid #8a8;
+  width: 120px;
+}
+.note h3 {
+  font-size: 1.1em;
+  color: #353;
+}
 
 ul#menu { 
     background: #c9182f;
@@ -123,15 +142,33 @@ h1 a {
 	margin:-10px -10px 0 -10px;
 	padding:6px 12px;
 }
+.box h2 .desc {
+  margin-left: 20px;
+	text-transform:none;
+  color: #aaa;
+}
 .box h2 a,
 .box h2 a.visible {
+	background-color:#111;
 	color:#fff;
-	background:#333 url("../img/switch_minus.gif") 97% 50% no-repeat;
-	display:block;
+	display:inline;
 	padding:6px 12px;
 	margin:-6px -12px;
 	border:none;
+	text-transform:none;
 }
+.box h2 .docs {
+  color: #999;
+	display:inline;
+  float: right;
+	background-color:#333;
+}
+.box h2 .docs a {
+	background-color:#333;
+	padding:0;
+	margin:0;
+}
+
 .grid_4 .box h2 a {
 	background-position: 97% 50%;
 }
@@ -143,10 +180,6 @@ h1 a {
 }
 
 
-.box h2 a.hidden,
-.box h2 a.hidden:hover {
-	background-image: url("../img/switch_plus.gif");
-}
 .box h2 a:hover {
 	background-color:#111;
 }
