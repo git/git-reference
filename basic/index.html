@@ -6,10 +6,196 @@ layout: reference
   <h2>Basic Snapshotting</h2>
   <div class="block">
     <p>
-    something
+    Git is all about composing and saving snapshots of your project and then
+    working with and comparing those snapshots.  This section will explain
+    the commands needed to compose and commit snapshots of your project.
     </p>
+
+    <p>
+    An important concept here is that Git has an 'index', which acts as sort
+    of a staging area for your snapshot.  This allows you to build up a series
+    of well composed snapshots from changed files in your working directory, 
+    rather than having to commit all of the file changes at once.
+    </p>
+
+    <p class="nutshell">
+    <strong>In a nutshell</strong>, you will use <code>git add</code> to start tracking new
+    files and also to stage changes to already tracked files, then 
+    <code>git status</code> and <code>git diff</code> to see what has been
+    modified and staged and finally <code>git commit</code> to record your
+    snapshot into your history.  This will be the basic workflow that you use
+    most of the time.
+    </p>
+
   </div>
 </div>
 
-<p><a href="/basic">On to Adding Content &#187;</a></p>
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a href="#">docs</a> &nbsp;
+      <a href="#">book</a>
+    </span>
+    <a name="add">git add</a>
+    <span class="desc">adds file contents to the staging area</span>
+  </h2>
+
+  <div class="block">
+    <p>
+    In Git, you have to add file contents to your staging area before you 
+    can commit them.  If the file is new, you can run <code>git add</code>
+    to initially add the file to your staging area, but even if the file
+    is already "tracked" - ie, it was in your last commit - you still need
+    to call <code>git add</code> to add new modifications to your staging
+    area. Let's see a few examples of this.
+    </p>
+
+    <p>Going back to our Hello World example, once we've initiated the project,
+    we would now start adding our files to it and we would do that with 
+    <code>git add</code>.  We can use <code>git status</code> to see what the
+    state of our project is.
+    </p>
+
+<pre>
+$ git status -s
+?? README
+?? hello.rb
+</pre>
+
+    So right now we have two untracked files.  We can now add them.
+
+<pre>
+$ git add README hello.rb
+</pre>
+    
+    Now if we run <code>git status</code> again, we'll see that they've been
+    added.
+
+<pre>
+$ git status -s
+A  README
+A  hello.rb
+</pre>
+
+    <p>OK, so now if we edit one of these files and run <code>git status</code>
+    again, we will see something odd.</p>
+<pre>
+$ vim README
+$ git status -s
+AM README
+A  hello.rb
+</pre>
+
+    <p>The 'AM' status means that the file has been modified on disk since we
+    last added it.  This means that if we commit our snapshot right now, we will
+    be recording the version of the file when we last ran <code>git add</code>,
+    not the version that is on our disk.  Git does not assume that what the file
+    looks like on disk is neccesarily what you want to snapshot - you have to
+    tell Git with the <code>git add</code> command.
+    </p>
+
+    <p class="nutshell">
+    <strong>In a nutshell</strong>, 
+    you run <code>git add</code> on a file when you want to 
+    include whatever changes you've made to it in your next commit snapshot.
+    Anything you've changed that is not added will not be included - this means
+    you can craft your snapshots with a bit more precision than most other SCM
+    systems.</p>
+
+    <p>For a very interesting example of using this flexibility to stage only
+    parts of modified files at a time, see the '-p' option to 
+    <code>git add</code> in the Pro Git book.</p>
+
+
+  </div>
+
+</div>
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a href="#">docs</a> &nbsp;
+      <a href="#">book</a>
+    </span>
+    <a name="status">git status</a>
+    <span class="desc">view the status of your files in the working directory and staging area</span>
+  </h2>
+
+  <div class="block">
+    <p>As you saw in the <code>git add</code> section, in order to see what the
+    status of your staging area is compared to the code in your working 
+    directory, you can run the <code>git status</code> command. I demonstrated
+    using it with the <code>-s</code> option, which gives you short output.
+    Without that flag, the <code>git status</code> command will give you more
+    context and hints.  Here is the same status output with and without the 
+    <code>-s</code>.  The short output looks like this:
+    </p>
+
+<pre>
+<b>$ git status -s</b>
+<span class="green">A</span><span class="red">M</span> README
+<span class="green">A</span>  hello.rb
+</pre>
+
+    Where the same status with the long output looks like this:
+
+<pre>
+<b>$ git status</b>
+# On branch master
+#
+# Initial commit
+#
+# Changes to be committed:
+#   (use "git rm --cached <file>..." to unstage)
+#
+# <span class="green">new file:   README</span>
+# <span class="green">new file:   hello.rb</span>
+#
+# Changed but not updated:
+#   (use "git add <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+# <span class="red">modified:   README</span>
+#
+</pre>
+
+    <p>You can easily see how much more compact the short output is, but the
+    long output has useful tips and hints as to what commands you may want to 
+    use next.
+    </p>
+
+    <p>Git will also tell you about files that were deleted since your last 
+    commit or files that were modified or staged since your last commit.</p>
+
+<pre>
+<b>$ git status -s</b>
+<span class="green">M</span>  README
+ <span class="red">D</span> hello.rb
+</pre>
+
+    You can see there are two columns in the short status output.  The first
+    column is for the staging area, the second is for the working directory.
+    So for example, if you have the README file staged and then you modify
+    it again without running <code>git add</code> a second time, you'll see 
+    this:
+
+<pre>
+<b>$ git status -s</b>
+<span class="green">M</span><span class="red">M</span> README
+ <span class="red">D</span> hello.rb
+</pre>
+    <p class="nutshell">
+    <strong>In a nutshell</strong>, 
+    you run <code>git status</code> to see if anything has been modified 
+    and/or staged since your last commit so you can decide if you want to
+    commit a new snapshot and what will be recorded in it.
+    </p>
+
+
+    </p>
+
+  </div>
+</div>
+
+<p><a href="/basic">On to Branching and Merging &#187;</a></p>
 
