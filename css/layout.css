@@ -29,6 +29,8 @@ body {
 #reflist h4 { font-size: 0.9em; }
 #reflist .block { margin: 0; padding: 0; }
 
+.box pre { background: #ffe; }
+
 ul#menu { 
     background: #c9182f;
     padding: .5em;
