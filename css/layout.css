@@ -40,6 +40,7 @@ p.nutshell {
   margin-top: 10px;
   padding: 8px;
   background: #ffe; 
+  color: #555;
 }
 
 .box code.code {
@@ -51,9 +52,22 @@ p.nutshell {
   margin: 10px;
   color: #555;
 }
-code.code b { color: #111; }
-.red { color: #833; }
+pre b { color: #111; }
+.red { color: #d33; }
 .green { color: #383; }
+.umber { color: #8A3324; }
+.lblue { color: #55a; }
+
+.box h4 { 
+  font-family:monospace;
+  margin-top: 20px;
+}
+.box h4 small { 
+  color: #888;
+  font-size: 0.8em;
+  margin-left: 10px;
+  font-weight: normal;
+}
 
 .note { 
   float: right; 
