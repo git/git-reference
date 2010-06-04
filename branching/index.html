@@ -1,0 +1,468 @@
+---
+layout: reference
+---
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a target="new" href="http://progit.org/book/ch2-2.html">book</a>
+    </span>
+    Branching and Merging
+  </h2>
+  <div class="block">
+    <p>Branching in Git is one of my favorite features.  If you have used other
+    version control systems, it's probably helpful to forget most of what you
+    think about branches - in fact, it may be more helpful to think of them
+    practically as <i>contexts</i> since that is how you will most often be
+    using them.  When you checkout different branches, you change contexts 
+    that you are working in and you can quickly context-switch back and forth
+    between several different branches.
+    </p>
+
+    <p class="nutshell">
+    <b>In a nutshell</b> you can create a branch with 
+    <code>git branch (branchname)</code>, switch into that context with
+    <code>git checkout (branchname)</code>, record commit snapshots while
+    in that context, then can switch back and forth easily. When you switch
+    branches, Git replaces your working directory with the snapshot of the
+    latest commit on that branch so you don't have to have multiple directories
+    for multiple branches.  You merge branches together with 
+    <code>git merge</code>.  You can easily merge multiple times from the same
+    branch over time, or alternately you can choose to delete a branch 
+    immediately after merging it.
+    </p>
+
+  </div>
+</div>
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a target="new" href="http://www.kernel.org/pub/software/scm/git/docs/git-branch.html">docs</a> &nbsp;
+      <a target="new" href="http://progit.org/book/">book</a>
+    </span>
+    <a name="branch">git branch</a>
+    <span class="desc">list, create and manage working contexts</span>
+  </h2>
+
+  <br/>
+
+  <h2>
+    <span class="docs">
+      <a target="new" href="http://www.kernel.org/pub/software/scm/git/docs/git-checkout.html">docs</a> &nbsp;
+      <a target="new" href="http://progit.org/book/">book</a>
+    </span>
+    <a name="checkout">git checkout</a>
+    <span class="desc">switch to a new branch context</span>
+  </h2>
+
+  <div class="block">
+    <p>The <code>git branch</code> command is a general branch management tool
+    for Git and can do several different things.  We'll cover the basic ones
+    that you'll use most - listing branches, creating branches and deleting
+    branches.  We will also cover basic <code>git checkout</code> here which
+    switches you between your branches.
+    </p>
+
+    <h4>
+      git branch
+      <small>list your available branches</small>
+    </h4>
+
+    <p>Without arguments, <code>git branch</code> will list out the local 
+    branches that you have.  The branch that you are currently working on will
+    have a star next to it and if you have 
+    <a href="http://progit.org/book/ch7-1.html#colors_in_git">coloring turned on</a>, 
+    will show the current branch in green.
+    </p>
+
+<pre>
+$ git branch
+* <span class="green">master</span>
+</pre>
+
+    <p>This means that we have a 'master' branch and we are currently on it.
+    When you run <code>git init</code> it will automatically create a 'master'
+    branch for you by default, however there is nothing special about the name -
+    you don't actually have to have a 'master' branch but since it's the default
+    that is created, most projects do.
+    </p>
+
+    <h4>
+      git branch (branchname)
+      <small>create a new branch</small>
+    </h4>
+
+    <p>So let's start by creating a new branch and switching to it.  You can do
+    that by running <code>git branch (branchname)</code>.
+
+<pre>
+$ git branch testing
+$ git branch
+* <span class="green">master</span>
+  testing
+</pre>
+
+    <p>Now we can see that we have a new branch.  When you create a branch this
+    way it creates the branch at your last commit so if you record some commits
+    at this point and then switch to 'testing', it will revert your working 
+    directory context back to when you created the branch in the first place -
+    you can think of it like a bookmark for where you currently are.  Let's see
+    this in action - we use <code>git checkout (branch)</code> to switch the
+    branch we're currently on.
+    </p>
+
+<pre>
+<b>$ ls</b>
+README   hello.rb
+<b>$ echo 'test content' > test.txt</b>
+<b>$ echo 'more content' > more.txt</b>
+<b>$ git add *.txt</b>
+<b>$ git commit -m 'added two files'</b>
+[master 8bd6d8b] added two files
+ 2 files changed, 2 insertions(+), 0 deletions(-)
+ create mode 100644 more.txt
+ create mode 100644 test.txt
+<b>$ ls</b>
+README   hello.rb more.txt test.txt
+<b>$ git checkout testing</b>
+Switched to branch 'testing'
+<b>$ ls</b>
+README   hello.rb
+</pre>
+
+    <p>So now we can see that when we switch to the 'testing' branch, our new
+    files were removed.  We could switch back to the 'master' branch and see
+    them re-appear.</p>
+
+<pre>
+<b>$ ls</b>
+README   hello.rb
+<b>$ git checkout master</b>
+Switched to branch 'master'
+<b>$ ls</b>
+README   hello.rb more.txt test.txt
+</pre>
+
+    <h4>
+      git checkout -b (branchname)
+      <small>create and immediately switch to a branch</small>
+    </h4>
+
+    <p>
+    In most cases you will be wanting to switch to the branch immediately, so
+    you can do work in it and then merging into a branch that only contains
+    stable work (such as 'master') at a later point when the work in your new
+    context branch is stable.  You can do this pretty easily with
+    <code>git branch newbranch; git checkout newbranch</code>, but Git gives
+    you a shortcut for this: <code>git checkout -b newbranch</code>.
+    </p>
+
+<pre>
+<b>$ git branch</b>
+* master
+<b>$ ls</b>
+README   hello.rb more.txt test.txt
+<b>$ git checkout -b removals</b>
+Switched to a new branch 'removals'
+<b>$ git rm more.txt </b>
+rm 'more.txt'
+<b>$ git rm test.txt </b>
+rm 'test.txt'
+<b>$ ls</b>
+README   hello.rb
+<b>$ git commit -am 'removed useless files'</b>
+[removals 8f7c949] removed useless files
+ 2 files changed, 0 insertions(+), 2 deletions(-)
+ delete mode 100644 more.txt
+ delete mode 100644 test.txt
+<b>$ git checkout master</b>
+Switched to branch 'master'
+<b>$ ls</b>
+README   hello.rb more.txt test.txt
+</pre>
+
+    <p>You can see there how we created a branch, removed some of our files
+    while in the context of that branch, then switched back to our main branch
+    and we see the files return. Branching safely isolates work that we do into
+    contexts we can switch between.</p>
+
+    <p>
+    If you start on work it is very useful to 
+    always start it in a branch (because it's fast and easy to do) and then
+    merge it in and delete the branch when you're done.  That way if what you're
+    working on doesn't work out you can easily discard it and if you're forced
+    to switch back to a more stable context your work in progress is easy to put
+    aside and then come back to.</p>
+      
+    <h4>
+      git branch -d (branchname)
+      <small>delete a branch</small>
+    </h4>
+
+    <p>If we want to delete a branch (such as the 'testing' branch in the 
+    previous example, since there is no unique work on it), 
+    we can run <code>git branch -d (branch)</code> to remove it.
+
+<pre>
+<b>$ git branch</b>
+* <span class="green">master</span>
+  testing
+<b>$ git branch -d testing</b>
+Deleted branch testing (was 78b2670).
+<b>$ git branch</b>
+* <span class="green">master</span>
+</pre>
+
+    <p class="nutshell">
+    <b>In a nutshell</b> you use <code>git branch</code> to list your 
+    current branches, create new branches and delete unnecessary or 
+    already merged branches.
+    </p>
+
+  </div>
+</div>
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a target="new" href="http://www.kernel.org/pub/software/scm/git/docs/git-merge.html">docs</a> &nbsp;
+      <a target="new" href="http://progit.org/book/">book</a>
+    </span>
+    <a name="merge">git merge</a>
+    <span class="desc">merge a branch context into your current one</span>
+  </h2>
+
+  <div class="block">
+    <p>Once you have work isolated in a branch, you will eventually want to 
+    incorporate it into your main branch.  You can merge any branch into your
+    current branch with the <code>git merge</code> command.  Let's take as a 
+    simple example the 'removals' branch from above.  If we create a branch
+    and remove files in it and commit our removals to that branch, it is 
+    isolated from our main ('master', in this case) branch.  To include those
+    deletions in your 'master' branch, you can just merge in the 'removals' 
+    branch.
+    </p>
+
+<pre>
+<b>$ git branch</b>
+* <span class="green">master</span>
+  removals
+<b>$ ls</b>
+README   hello.rb more.txt test.txt
+<b>$ git merge removals</b>
+Updating 8bd6d8b..8f7c949
+Fast-forward
+ more.txt |    1 -
+ test.txt |    1 -
+ 2 files changed, 0 insertions(+), 2 deletions(-)
+ delete mode 100644 more.txt
+ delete mode 100644 test.txt
+<b>$ ls</b>
+<span class="hl">README   hello.rb</span>
+</pre>
+
+    <h4>
+      more complex merges
+    </h4>
+
+    <p>Of course, this doesn't just work for simple file additions and 
+    deletions. Git will merge file modifications as well - in fact, it's very
+    good at it.  For example, let's see what happens when we edit a file in
+    one branch and in another branch we rename it and then edit it and then
+    merge these branches together.  Chaos, you say?  Let's see.
+    </p>
+
+<pre>
+<b>$ git branch</b>
+* master
+<b>$ cat hello.rb </b>
+class HelloWorld
+  def self.hello
+    puts "Hello World"
+  end
+end
+
+HelloWorld.hello
+</pre>
+
+    <p>So first we're going to create a new branch named 'change_class' and 
+    switch to it so your class renaming changes are isolated. I'm going to 
+    change each instance of 'HelloWorld' to 'HiWorld'.</p>
+
+<pre>
+<b>$ git checkout -b change_class</b>
+M hello.rb
+Switched to a new branch 'change_class'
+<b>$ vim hello.rb </b>
+<b>$ head -1 hello.rb </b>
+class HiWorld
+<b>$ git commit -am 'changed the class name'</b>
+[change_class 3467b0a] changed the class name
+ 1 files changed, 2 insertions(+), 4 deletions(-)
+</pre>
+    
+    <p>So now I've committed the class renaming changes to the 'change_class'
+      branch.  If I now switch back to the 'master' branch my class name will
+      revert to what it was before I switched branches. Here I can change 
+      something different (in this case the printed output) and at the same
+      time rename the file from <code>hello.rb</code> to <code>ruby.rb</code>.
+      </b>
+
+<pre>
+<b>$ git checkout master</b>
+Switched to branch 'master'
+<b>$ git mv hello.rb ruby.rb</b>
+<b>$ vim ruby.rb </b>
+<b>$ git diff</b>
+<span class="umber">diff --git a/ruby.rb b/ruby.rb
+index 2aabb6e..bf64b17 100644
+--- a/ruby.rb
++++ b/ruby.rb</span>
+<span class="lblue">@@ -1,7 +1,7 @@</span>
+ class HelloWorld
+ 
+   def self.hello
+<span class="red">-    puts "Hello World"</span>
+<span class="green">+    puts "Hello World from Ruby"</span>
+   end
+ 
+ end
+<b>$ git commit -am 'added from ruby'</b>
+[master b7ae93b] added from ruby
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+ rename hello.rb => ruby.rb (65%)
+</pre>
+
+    <p>Now those changes are recorded in my 'master' branch.  Notice that the
+      class name is back to 'HelloWorld', not 'HiWorld'.  Now I want to 
+      incorporate the 'HiWorld' change so I can just merge in my 'change_class'
+      branch.  However, I've changed the name of the file since I branched, 
+      what will Git do?</p>
+
+<pre>
+<b>$ git branch</b>
+  change_class
+* master
+<b>$ git merge change_class</b>
+Renaming hello.rb => ruby.rb
+Auto-merging ruby.rb
+Merge made by recursive.
+ ruby.rb |    6 ++----
+ 1 files changed, 2 insertions(+), 4 deletions(-)
+<b>$ cat ruby.rb</b>
+class HiWorld
+  def self.hello
+    puts "Hello World from Ruby"
+  end
+end
+
+HiWorld.hello
+</pre>
+
+    <p>Well, it will just figure it out. Notice that I had no merge conflicts
+    and the file that had been renamed now has the 'HiWorld' class name change
+    that was done in the other branch. Pretty cool.</p>
+
+    <h4>
+      merge conflicts
+    </h4>
+
+    <p>So, Git merges are magical, we never ever have to deal with merge
+      conflicts again, right?  Not quite.  In situations where the same block
+      of code is edited in different branches there is no way for a computer
+      to figure it out, so it's up to us.  Let's see another example of changing
+      the same line in two branches.
+    <p> 
+
+<pre>
+<b>$ git branch</b>
+* master
+<b>$ git checkout -b fix_readme</b>
+Switched to a new branch 'fix_readme'
+<b>$ vim README </b>
+<b>$ git commit -am 'fixed readme title'</b>
+[fix_readme 3ac015d] fixed readme title
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+</pre>
+
+    <p>Now we have committed a change to one line in our README file in a
+      branch.  Now let's change the same line in a different way back on 
+      our 'master' branch.</p>
+
+<pre>
+<b>$ git checkout master</b>
+Switched to branch 'master'
+<b>$ vim README </b>
+<b>$ git commit -am 'fixed readme title differently'</b>
+[master 3cbb6aa] fixed readme title differently
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+</pre>
+
+    <p>Now is the fun part - we will merge the first branch into our master
+      branch, causing a merge conflict.</p>
+
+<pre>
+<b>$ git merge fix_readme</b>
+Auto-merging README
+CONFLICT (content): Merge conflict in README
+Automatic merge failed; fix conflicts and then commit the result.
+<b>$ cat README </b>
+<<<<<<< HEAD
+Many Hello World Examples
+=======
+Hello World Lang Examples
+>>>>>>> fix_readme
+
+This project has examples of hello world in
+nearly every programming language.
+</pre>
+
+    <p>You can see that Git inserts standard merge conflict markers, much like
+      Subversion, into files when it gets a merge conflict.  Now it's up to us
+      to resolve them.  We will do it manually here, but check out
+      <a href="http://www.kernel.org/pub/software/scm/git/docs/git-mergetool.html">git mergetool</a>
+      if you want Git to fire up a graphical mergetool 
+      (like kdiff3, emerge, p4merge, etc) instead.
+    </p>
+
+<pre>
+<b>$ vim README </b>  <span class="exp"># here I'm fixing the conflict</span>
+<b>$ git diff</b>
+<span class="umber">diff --cc README
+index 9103e27,69cad1a..0000000
+--- a/README
++++ b/README</span>
+<span class="lblue">@@@ -1,4 -1,4 +1,4 @@@</span>
+<span class="red">- Many Hello World Examples</span>
+ <span class="red">-Hello World Lang Examples</span>
+<span class="green">++Many Hello World Lang Examples</span>
+  
+  This project has examples of hello world in
+</pre>
+
+    <p>A cool tip in doing merge conflict resolution in Git is that if you
+    run <code>git diff</code>, it will show you both sides of the conflict
+    and how you've resolved it as I've shown here. Now it's time to mark
+    the file as resolved.  In Git we do that with <code>git add</code> - 
+    to tell Git the file has been resolved, you have to stage it.</p>
+
+<pre>
+<b>$ git status -s</b>
+UU README
+<b>$ git add README </b>
+<b>$ git status -s</b>
+M  README
+<b>$ git commit </b>
+[master 8d585ea] Merge branch 'fix_readme'
+</pre>
+    
+    <p>And now we've successfully resolved our merge conflict and committed
+      the result.</p>
+
+  </div>
+
+</div>
+
+<p><a href="/basic">On to Sharing and Updating Projects &#187;</a></p>
+
