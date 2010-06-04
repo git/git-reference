@@ -458,10 +458,142 @@ M  README
 </pre>
     
     <p>And now we've successfully resolved our merge conflict and committed
-      the result.</p>
+    the result.</p>
+
+    <p class="nutshell">
+    <b>In a nutshell</b> you use <code>git merge</code> to combine another
+    branch context into your current branch.  It automatically figures out
+    how to best combine the different snapshots into a new snapshot with the
+    unique work of both.
+    </p>
 
   </div>
+</div>
 
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a target="new" href="http://www.kernel.org/pub/software/scm/git/docs/git-log.html">docs</a> &nbsp;
+      <a target="new" href="http://progit.org/book/">book</a>
+    </span>
+    <a name="branch">git log</a>
+    <span class="desc">show commit history of a branch</span>
+  </h2>
+
+  <div class="block">
+
+    <p>So far we have been committing snapshots of your project and switching
+    between different isolated contexts, but what if we've forgotten how we've
+    got to where we are?  Or what if we want to know how one branch differs
+    from another?  Git provides a tool that shows you all the commit messages
+    that have lead up to the snapshot you are currently on, which is called
+    <code>git log</code>.</p>
+
+    <p>To understand the log command, you have to understand what information
+    is stored when you run the <code>git commit</code> command to store a 
+    snapshot.  In addition to the manifest of files and commit message and 
+    information about the person who committed it, Git also stores the commit
+    that you based this snapshot on.  That is, if you clone a project, what was
+    the snapshot that you modified to get to the snapshot that you saved?  This
+    is helpful to give context to how the project got to where it is and allows
+    Git to figure out who changed what.  If Git has the snapshot you save and
+    the one you based it on, then it can automatically figure out what you
+    changed.  The commit that a new commit was based on is called the "parent".
+    </p>
+
+    <p>To see a chronological list of the parents of any branch, you can run
+    <code>git log</code> when you are in that branch.  For example, if we run
+    <code>git log</code> in the Hello World project that we have been working 
+    on in this section, we'll see all the commit messages that we've done. 
+
+<pre>
+<b>$ git log</b>
+<span class="yellow">commit 8d585ea6faf99facd39b55d6f6a3b3f481ad0d3d</span>
+Merge: 3cbb6aa 3ac015d
+Author: Scott Chacon &lt;schacon@gmail.com>
+Date:   Fri Jun 4 12:59:47 2010 +0200
+
+    Merge branch 'fix_readme'
+    
+    Conflicts:
+        README
+
+<span class="yellow">commit 3cbb6aae5c0cbd711c098e113ae436801371c95e</span>
+Author: Scott Chacon &lt;schacon@gmail.com>
+Date:   Fri Jun 4 12:58:53 2010 +0200
+
+    fixed readme title differently
+
+<span class="yellow">commit 3ac015da8ade34d4c7ebeffa2053fcac33fb495b</span>
+Author: Scott Chacon &lt;schacon@gmail.com>
+Date:   Fri Jun 4 12:58:36 2010 +0200
+
+    fixed readme title
+
+<span class="yellow">commit 558151a95567ba4181bab5746bc8f34bd87143d6</span>
+Merge: b7ae93b 3467b0a
+Author: Scott Chacon &lt;schacon@gmail.com>
+Date:   Fri Jun 4 12:37:05 2010 +0200
+
+    Merge branch 'change_class'
+...
+</pre>
+
+    <p>To see a more compact version of the same history, we can use the 
+    <code>--oneline</code> option.</p>
+
+<pre>
+<b>$ git log --oneline</b>
+8d585ea Merge branch 'fix_readme'
+3cbb6aa fixed readme title differently
+3ac015d fixed readme title
+558151a Merge branch 'change_class'
+b7ae93b added from ruby
+3467b0a changed the class name
+17f4acf first commit
+</pre>
+
+    <p>What this is telling us is that this is the history of the development
+    of this project.  If the commit messages are descriptive, this can inform
+    us as to what all changes have been applied or have influenced the current
+    state of the snapshot and thus what is in it.</p>
+
+    <p>We can also use it to see when the history was branched and merged with
+    the very helpful <code>--graph</code> option.  Here is the same command
+    but with the topology graph turned on:</p>
+
+<pre>
+<b>$ git log --oneline --graph</b>
+*   8d585ea Merge branch 'fix_readme'
+|\  
+| * 3ac015d fixed readme title
+* | 3cbb6aa fixed readme title differently
+|/  
+*   558151a Merge branch 'change_class'
+|\  
+| * 3467b0a changed the class name
+* | b7ae93b added from ruby
+|/  
+* 17f4acf first commit
+</pre>
+
+    <p>Now we can more clearly see when effort diverged and then was merged
+    back together.  This is very nice for seeing what has happened or what 
+    changes are applied, but
+    it is also incredibly useful for managing your branches.  Let's create a new
+    branch, do some work in it and then switch back and do some work in our 
+    master branch, then see how the <code>log</code> command can help us figure
+    out what is happening on each.</p>
+    
+
+    <p class="nutshell">
+    <b>In a nutshell</b> you use <code>git log</code> to list out the commit
+    history or list of changes people have made that have lead to the snapshot
+    at the tip of the branch.  This allows you to see how the project in that
+    context got to the state that it is currently in.
+    </p>
+    
+  </div>
 </div>
 
 <p><a href="/basic">On to Sharing and Updating Projects &#187;</a></p>
