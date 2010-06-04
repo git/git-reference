@@ -584,7 +584,101 @@ b7ae93b added from ruby
     branch, do some work in it and then switch back and do some work in our 
     master branch, then see how the <code>log</code> command can help us figure
     out what is happening on each.</p>
-    
+
+    <p>First we'll create a new branch to add the Erlang programming language
+    Hello World example - we want to do this in a branch so that we don't 
+    muddy up our stable branch with code that may not work for a while so we
+    can cleanly switch in and out of it.</p>
+
+<pre>
+<b>$ git checkout -b erlang</b>
+Switched to a new branch 'erlang'
+<b>$ vim erlang_hw.erl</b>
+<b>$ git add erlang_hw.erl </b>
+<b>$ git commit -m 'added erlang'</b>
+[erlang ab5ab4c] added erlang
+ 1 files changed, 5 insertions(+), 0 deletions(-)
+ create mode 100644 erlang_hw.erl
+</pre>
+
+    <p>Since we're having fun playing in functional programming languages we
+    get caught up in it and also add a Haskell example program while still in
+    the branch named 'erlang'.</p>
+
+<pre>
+<b>$ vim haskell.hs</b>
+<b>$ git add haskell.hs </b>
+<b>$ git commit -m 'added haskell'</b>
+[erlang 1834130] added haskell
+ 1 files changed, 4 insertions(+), 0 deletions(-)
+ create mode 100644 haskell.hs
+</pre>
+
+    <p>Finally, we decide that we want to change the class name of our Ruby
+    program back to the way it was.  So, we can go back to the master branch
+    and change that and we decide to just commit it directly in the master
+    branch instead of creating another branch.</p>
+
+<pre>
+<b>$ git checkout master</b>
+Switched to branch 'master'
+<b>$ ls</b>
+README  ruby.rb
+<b>$ vim ruby.rb </b>
+<b>$ git commit -am 'reverted to old class name'</b>
+[master 594f90b] reverted to old class name
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+</pre>
+
+    <p>So, now say we don't work on the project for a while, we have other
+    things to do.  When we come back we want to know what the 'erlang' branch
+    is all about and where we've left off on the master branch.  Just by looking
+    at the branch name, we can't know that we made Haskell changes in there, but
+    using <code>git log</code> we easily can.  If you give Git a branch name, 
+    it will show you just the commits that are "reachable" in the history of 
+    that branch, that is the commits that influenced the final snapshot.</p>
+
+<pre>
+<b>$ git log --oneline erlang</b>
+<span class="hl">1834130 added haskell</span>
+ab5ab4c added erlang
+8d585ea Merge branch 'fix_readme'
+3cbb6aa fixed readme title differently
+3ac015d fixed readme title
+558151a Merge branch 'change_class'
+b7ae93b added from ruby
+3467b0a changed the class name
+17f4acf first commit
+</pre>
+
+    <p>This way, it's pretty easy to see that we have Haskell code included in
+      the branch (as I've highlighted). What is even cooler is that we can 
+      easily tell Git that we only are interested in the commits that are
+      reachable in one branch that are not reachable in another, in other words
+      which commits are unique to a branch in comparison to another.
+    </p>
+
+    <p> 
+      In this case if we are interested in merging in the 'erlang' branch we 
+      want to see what commits are going to effect our snapshot when we do 
+      that merge.  The way we tell Git that is by putting a <code>^</code> in
+      front of the branch that we don't want to see.  For instance, if we want
+      to see the commits that are in the 'erlang' branch that are not in the
+      'master' branch, we can do <code>erlang ^master</code>, or vice versa.
+    </p>
+
+<pre>
+<b>$ git log --oneline erlang ^master</b>
+1834130 added haskell
+ab5ab4c added erlang
+<b>$ git log --oneline master ^erlang</b>
+594f90b reverted to old class name
+</pre>
+
+    <p>This gives us a nice, simple branch management tool. It allows us to
+      easily see what commits are unique to which branches so we know what
+      we're missing and what we would be merging in if we were to do a merge.
+    </p>
 
     <p class="nutshell">
     <b>In a nutshell</b> you use <code>git log</code> to list out the commit
