@@ -77,6 +77,17 @@ layout: reference
 <span class="green">A</span>  hello.rb
 </pre>
 
+    <p class="aside">
+    It is also common to recusively add all files in a new project by specifying
+    the current working directory like this: <code>git add .</code>.  Since Git
+    will recursively add all files under a directory you give it, if you give it
+    the current working directory, it will simply start tracking every file 
+    there.  In this case, a <code>git add .</code> would have done the same 
+    thing as a <code>git add README hello.rb</code>, or for that matter so would
+    <code>git add *</code>, but that's only because we don't have subdirectories
+    which the <code>*</code> would not recurse into.
+    </p>
+
     <p>OK, so now if we edit one of these files and run <code>git status</code>
     again, we will see something odd.</p>
 <pre>
@@ -562,6 +573,158 @@ Further paragraphs come after blank lines.
     you run <code>git commit</code> to record the snapshot of your staged
     content.  This snapshot can then be compared, shared and reverted to
     if you need to.
+    </p>
+
+  </div>
+</div>
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a href="#">docs</a> &nbsp;
+      <a href="#">book</a>
+    </span>
+    <a name="reset">git reset HEAD</a>
+    <span class="desc">unstage changes that you have staged</span>
+  </h2>
+
+  <div class="block">
+    <p><code>git reset</code> is probably the most confusing command written
+    by humans.  I've been using Git for years, even wrote a book on it and I 
+    still get confused by what it is going to do at times.  So, I'll just 
+    tell you the three specific invocations of it that are generally 
+    helpful and ask you to blindly use it as I do - because it can be 
+    very useful.
+    </p>
+
+    <p>In this case, we can use it to unstage something that you have 
+    accidentally staged.  Let's say that you have modified two files and want
+    to record them into two different commits.  You should stage and commit
+    one, then stage and commit the other.  If you accidentally stage both of
+    them, how do you <i>un-</i>stage one?  You do it with 
+    <code>git reset HEAD -- file</code>.  Technically here you don't have to
+    add the <code>--</code> - it is used to tell Git when you have stopped
+    listing options and are now listing file paths, but it's probably good to
+    get into the habit of using it to seperate options from paths even if you
+    don't need to.
+    </p>
+
+    <p>So, let's see what it looks like to unstage something.  Here we have
+    two files that have been modified since our last commit.  We will stage
+    both, then unstage one of them.</p>
+
+<pre>
+<b>$ git status -s</b>
+ <span class="red">M</span> README
+ <span class="red">M</span> hello.rb
+<b>$ git add .</b>
+<b>$ git status -s</b>
+<span class="green">M</span>  README
+<span class="green">M</span>  hello.rb
+<b>$ git reset HEAD -- hello.rb </b>
+Unstaged changes after reset:
+M hello.rb
+<b>$ git status -s</b>
+<span class="green">M</span>  README
+ <span class="red">M</span> hello.rb
+</pre>
+
+    <p>Now you can run a <code>git commit</span> which will just record
+    the changes to the <code>README</code> file, not the now unstaged
+    <code>hello.rb</code>.
+    </p>
+
+    <p class="aside">
+    In case you're curious, what it's actually doing here is it is resetting
+    the checksum of the entry for that file in the "index" to be what it was
+    in the last commit.  Since <code>git add</code> checksums a file and adds
+    it to the "index", <code>git reset HEAD</code> overwrites that with what
+    it was before, thereby effectively unstaging it.
+    </p>
+
+    <p class="tip">
+    If you want to be able to just run <code>git unstage</code>, you can easily
+    setup an alias in Git.  Just run 
+    <code>git config --global alias.unstage "reset HEAD"</code>.  
+    Once you have run that, you can then just run 
+    <code>git unstage [file]</code> instead.
+    </p>
+
+    <p>If you forget the command to unstage something, Git is helpful in
+       reminding you in the output of the normal <code>git status</code>
+       command.  For example, if you run <code>git status</code> without
+       the <code>-s</code> when you have staged files, it will tell you
+       how to unstage them:</p>
+
+<pre>
+<b>$ git status</b>
+# On branch master
+# Changes to be committed:
+#   <span class="hl">(use "git reset HEAD <file>..." to unstage)</span>
+#
+#   <span class="green">modified:   README</span>
+#   <span class="green">modified:   hello.rb</span>
+#
+</pre>
+
+    <p class="nutshell">
+    <strong>In a nutshell</strong>, 
+    you run <code>git reset HEAD</code> to unstage files that you previously
+    ran <code>git add</code> on and wish to not include in the next commit
+    snapshot</p>
+
+  </div>
+</div>
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a href="#">docs</a> &nbsp;
+      <a href="#">book</a>
+    </span>
+    <a name="rm-mv">git rm</a>
+    <span class="desc">remove files from the staging area</span>
+  </h2>
+
+  <div class="block">
+
+    <p><code>git rm</code> will remove entries from the staging area.  
+    This is a bit different from <code>git reset HEAD</code> which "unstages" 
+    files.  By "unstage" I mean it reverts the staging area to what was 
+    there before we started modifying things.  <code>git rm</code> on the 
+    other hand just kicks the file off the stage entirely, so that it's not 
+    included in the next commit snapshot, thereby effectively deleting it.</p>
+
+    <p>By default, a <code>git rm file</code> will remove the file from the 
+    staging area entirely and also off your disk (the working directory).</p>
+      
+    <h4>
+      git mv
+      <small>git rm orig; mv orig new; git add new</small>
+    </h4>
+
+    <p>
+    Unlike most other version control systems, Git does not track file renames.
+    Instead, it just tracks the snapshots and then figures out what files were
+    likely renamed by comparing snapshots.  If a file was removed from one
+    snapshot and another file was added to the next one and the contents are
+    similar, Git figures it was most likely a rename.  So, although the 
+    <code>git mv</code> command exists, it is superfluous - all it does is a
+    <code>git rm</code>, moves the file on disk, then runs a
+    <code>git add</code> on the new file.  You don't really need to use it, but
+    if it's easier, feel free.
+    </p>
+
+    <p class="aside">
+    I personally don't use this command that much in it's normal form - to
+    delete files.  It's often easier to just remove the files off your disk and
+    then run a <code>git commit -a</code>, which will automatically remove them
+    from your index, too.</p>
+
+    <p class="nutshell">
+    <strong>In a nutshell</strong>, 
+    you run <code>git rm</code> to remove files from being tracked in Git. It 
+    will also remove them from your working directory.</p>
     </p>
 
   </div>
