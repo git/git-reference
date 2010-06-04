@@ -355,6 +355,31 @@ index 2aabb6e..2ae9ba4 100644
  end
 </pre>
 
+    <h4>
+      git diff --stat
+      <small>show summary of changes instead of a full diff</small>
+    </h4>
+
+    <p>If we don't want the full diff output, but we want more than the
+    <code>git status</code> output, we can use the <code>--stat</code>
+    option, which will give us a summary of changes instead. Here is the
+    same example as above, but using the <code>--stat</code> option instead.
+    </p>
+    
+<pre>
+<b>$ git status -s</b>
+<span class="green">M</span><span class="red">M</span> hello.rb
+<b>$ git diff --stat</b>
+ hello.rb |    1 <span class="green">+</span>
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+<b>$ git diff --cached --stat</b>
+ hello.rb |    2 <span class="green">+</span><span class="red">-</span>
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+<b>$ git diff HEAD --stat</b>
+ hello.rb |    3 <span class="green">++</span><span class="red">-</span>
+ 1 files changed, 2 insertions(+), 1 deletions(-)
+</pre>
+
     <p>
     You can also provide a file path at the end of any of these options
     to limit the <code>diff</code> output to a specific file or subdirectory.
@@ -368,6 +393,176 @@ index 2aabb6e..2ae9ba4 100644
     basis. 
     </p>
 
+
+  </div>
+</div>
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a href="#">docs</a> &nbsp;
+      <a href="#">book</a>
+    </span>
+    <a name="commit">git commit</a>
+    <span class="desc">records a snapshot of the staging area</span>
+  </h2>
+
+  <div class="block">
+
+    <p>Now that you have staged the content you want to snapshot with the 
+    <code>git add</code> command, you run <code>git commit</code> to actually
+    record the snapshot.  Let's stage and commit all the changes to our 
+    <code>hello.rb</code> file.  In this first example, we'll use the 
+    <code>-m</code> option to provide the commit message on the command line.
+    </p>
+
+<pre>
+<b>$ git add hello.rb </b>
+<b>$ git status -s</b>
+<span class="green">M</span>  hello.rb
+<b>$ git commit -m 'my hola mundo changes'</b>
+[master 68aa034] my hola mundo changes
+ 1 files changed, 2 insertions(+), 1 deletions(-)
+</pre>
+
+    <p>Now we have recorded the snapshot.  If we run <code>git status</code>
+    again, we will see that we have a "clean working directory", which means
+    that we have not made any changes since our last commit - there is no
+    un-snapshotted work in our checkout.</p>
+
+<pre>
+<b>$ git status</b>
+# On branch master
+nothing to commit (working directory clean)
+</pre>
+
+    <p>If you leave off the <code>-m</code> option, Git will try to open a
+    text editor for you to write your commit message.  In <code>vim</code>,
+    which it will default to if it can find nothing else in your settings,
+    the screen might look something like this:
+    </p>
+
+<pre>
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+# modified:   hello.rb
+#
+~
+~
+".git/COMMIT_EDITMSG" 9L, 257C
+</pre>
+
+    <p>At this point you add your actual commit message at the top of the
+    document.  Any lines starting with '#' will be ignored - Git will put
+    the output of the <code>git status</code> command in there for you as
+    a reminder of what you have modified and staged.</p>
+
+    <p>In general, it's very important to write a good commit message. 
+    For open source projects, it's generally a rule to write your message
+    more or less in this format:</p>
+    
+<pre>
+Short (50 chars or less) summary of changes
+
+More detailed explanatory text, if necessary.  Wrap it to about 72
+characters or so.  In some contexts, the first line is treated as the
+subject of an email and the rest of the text as the body.  The blank
+line separating the summary from the body is critical (unless you omit
+the body entirely); some git tools can get confused if you run the
+two together.
+
+Further paragraphs come after blank lines.
+
+ - Bullet points are okay, too
+
+ - Typically a hyphen or asterisk is used for the bullet, preceded by a
+   single space, with blank lines in between, but conventions vary
+   here
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+# modified:   hello.rb
+#
+~
+~
+~
+".git/COMMIT_EDITMSG" 25L, 884C written
+</pre>
+
+    <p class="aside">
+    The commit message is very important. Since much of the power of
+    Git is this flexibility in carefully crafting commits locally and then
+    sharing them later, it is very powerful to be able to write three or
+    four commits of logically seperate changes so that your work may be more
+    easily peer reviewed.  Since there is a seperation between committing and
+    pushing those changes, do take the time to make it easier for the people
+    you are working with to see what you've done by putting each logically 
+    seperate change in a seperate commit with a nice commit message so it
+    is easier for them to see what you are doing and why.</p>
+
+    <h4>
+      git commit -a
+      <small>automatically stage all tracked, modified files before the commit</small>
+    </h4>
+
+    <p>If you think the <code>git add</code> stage of the workflow is too 
+    cumbersome, Git allows you to skip that part with the <code>-a</code> 
+    option.  This basically tells Git to run <code>git add</code> on any file
+    that is "tracked" - that is, any file that was in your last commit and
+    has been modified.  This allows you to do a more Subversion style workflow
+    if you want, simply editing files and then running <code>git commit -a</code>
+    when you want to snapshot everything that has been changed.  You still need
+    to run <code>git add</code> to start tracking new files, though, just like
+    Subversion.
+    </p>
+
+<pre>
+<b>$ vim hello.rb</b>
+<b>$ git status -s</b>
+ <span class="red">M</span>  hello.rb
+<b>$ git commit -m 'changes to hello file'</b>
+# On branch master
+# Changed but not updated:
+#   (use "git add <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+# modified:   hello.rb
+#
+<span class="hl">no changes added to commit (use "git add" and/or "git commit -a")</span>
+<b>$ git commit -am 'changes to hello file'</b>
+[master 78b2670] changes to hello file
+ 1 files changed, 2 insertions(+), 1 deletions(-)
+</pre>
+
+    <p>Notice how if you don't stage any changes and then run 
+    <code>git commit</code>, Git will simply give you the output of the
+    <code>git status</code> command, reminding you that nothing is staged.
+    I've highlighted the important part of that message, saying that nothing
+    is added to be committed.   If you use <code>-a</code>, it will add and
+    commit everything at once.
+    </p>
+
+    <p>This now lets you complete the entire snapshotting workflow - you
+    make changes to your files, then use <code>git add</code> to stage
+    files you want to change, <code>git status</code> and <code>git diff</code>
+    to see what you've changed, and then finally <code>git commit</code>
+    to actually record the snapshot forever.</p>
+
+    <p class="nutshell">
+    <strong>In a nutshell</strong>, 
+    you run <code>git commit</code> to record the snapshot of your staged
+    content.  This snapshot can then be compared, shared and reverted to
+    if you need to.
+    </p>
 
   </div>
 </div>

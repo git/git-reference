@@ -57,10 +57,12 @@ pre b { color: #111; }
 .green { color: #383; }
 .umber { color: #8A3324; }
 .lblue { color: #55a; }
+.hl { background: #eea; }
 
 .box h4 { 
   font-family:monospace;
   margin-top: 20px;
+  color: #833;
 }
 .box h4 small { 
   color: #888;
