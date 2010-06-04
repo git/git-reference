@@ -23,8 +23,8 @@ layout: reference
 <div class="box">
   <h2>
     <span class="docs">
-      <a href="#">docs</a> &nbsp;
-      <a href="#">book</a>
+      <a target="new" href="http://www.kernel.org/pub/software/scm/git/docs/git-init.html">docs</a> &nbsp;
+      <a target="new" href="http://progit.org/book/ch2-1.html#initializing_a_repository_in_an_existing_directory">book</a>
     </span>
     <a name="init">git init</a>
     <span class="desc">initializes a directory as a Git repository</span>
@@ -63,14 +63,19 @@ $ ls -a
     Congratulations, you now have a skeleton Git repository and can start
     snapshotting your project.
 
+    <p class="nutshell">
+    <strong>In a nutshell</strong>, you use <code>git init</code> to make an
+    existing directory of content into a new Git repository.  You can do this
+    in any directory at any time, completely locally.</p>
+
   </div>
 </div>
 
 <div class="box">
   <h2>
     <span class="docs">
-      <a href="#">docs</a> &nbsp;
-      <a href="#">book</a>
+      <a target="new" href="http://www.kernel.org/pub/software/scm/git/docs/git-clone.html">docs</a> &nbsp;
+      <a target="new" href="http://progit.org/book/ch2-1.html#cloning_an_existing_repository">book</a>
     </span>
     <a name="clone">git clone</a>
     <span class="desc">copy a git repository so you can add to it</span>
@@ -86,7 +91,18 @@ $ ls -a
     the URL of the project you want to copy.
     </p>
 
-<pre> [example] </pre>
+<pre>
+<b>$ git clone git://github.com/schacon/simplegit.git</b>
+Initialized empty Git repository in /private/tmp/simplegit/.git/
+remote: Counting objects: 100, done.
+remote: Compressing objects: 100% (86/86), done.
+remote: Total 100 (delta 35), reused 0 (delta 0)
+Receiving objects: 100% (100/100), 9.51 KiB, done.
+Resolving deltas: 100% (35/35), done.
+<b>$ cd simplegit/</b>
+<b>$ ls</b>
+README   Rakefile <span class="blue">lib</span>
+</pre>
 
     <p>
     This will copy the entire history of that project so you have it locally
@@ -96,7 +112,15 @@ $ ls -a
     where all the project data is.
     </p>
 
-<pre> [example] </pre>
+<pre>
+<b>$ ls -a</b>
+.        ..       <span class="blue">.git</span>     README   Rakefile <span class="blue">lib</span>
+<b>$ cd .git</b>
+<b>$ ls</b>
+HEAD        description <span class="blue">info</span>        packed-refs
+<span class="blue">branches    hooks       logs        refs</span>
+config      index       <span class="blue">objects</span>
+</pre>
 
     <p>
     By default, Git will create a directory that is the same name as the 
@@ -104,6 +128,11 @@ $ ls -a
     of the URL.  If you want something different, you can just put it at the
     end of the command, after the URL.
     </p>
+
+    <p class="nutshell">
+    <strong>In a nutshell</strong>, you use <code>git clone</code> to get a 
+    local copy of a Git repository so you can look at it or start modifying
+    it.</p>
 
   </div>
 </div>
