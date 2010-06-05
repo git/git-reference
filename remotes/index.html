@@ -178,7 +178,75 @@ github	git@github.com:schacon/hw.git (push)
   </h2>
 
   <div class="block">
-    <p>Git has two commands to update itself from a remote repository.</p>
+
+    <p>Git has two commands to update itself from a remote repository.
+    <code>git fetch</code> will syncronize you with another repo, pulling down any data
+    that you do not have locally and giving you bookmarks to where each branch on 
+    that remote was when you syncronized.  These are called "remote branches" and are
+    identical to local branches except that Git will not allow you to check them out - 
+    however, you can merge from them, diff them to other branches, run history logs on
+    them, etc.  You do all of that stuff locally after you syncronize.
+    </p>
+
+    <p>The second command that will fetch down new data from a remote server is
+    <code>git pull</code>.  This command will basically run a <code>git fetch</code>
+    immediately follwed by a <code>git merge</code> of the branch on that remote
+    that is tracked by whatever branch you are currently in.  I personally don't much
+    like this command - I prefer running <code>fetch</code> and <code>merge</code>
+    seperately.  Less magic, less problems.  However, if you like this idea, you
+    can read about it in more detail in the.
+    <a target="new" href="http://www.kernel.org/pub/software/scm/git/docs/git-pull.html">official docs</a>.
+    </p>
+
+    <p>Assuming you have a remote all set up and you want to pull in updates, you
+    would first run <code>git fetch [alias]</code> to tell Git to fetch down all the
+    data it has that you do not, then you would run <code>git merge [alias]/[branch]</code>
+    to merge into your current branch anything new you see on the server 
+    (like if someone else has pushed in the meantime). So, if I were working on my
+    Hello World project with several other people and I wanted to bring in any changes
+    that had been pushed since I last connected, I would do something like this:</p>
+
+<pre>
+<b>$ git fetch github</b>
+remote: Counting objects: 4006, done.
+remote: Compressing objects: 100% (1322/1322), done.
+remote: Total 2783 (delta 1526), reused 2587 (delta 1387)
+Receiving objects: 100% (2783/2783), 1.23 MiB | 10 KiB/s, done.
+Resolving deltas: 100% (1526/1526), completed with 387 local objects.
+From github.com:schacon/hw
+   8e29b09..c7c5a10  master     -> github/master
+   0709fdc..d4ccf73  c-langs    -> github/c-langs
+   6684f82..ae06d2b  java       -> github/java 
+ * [new branch]      ada        -> github/ada
+ * [new branch]      lisp       -> github/lisp
+</pre>
+
+    <p>I can see that since the last time I synchronized with this remote, five branches
+    have been added or updated.  The 'ada' and 'lisp' branches are new, where the
+    'master', 'c-langs' and 'java' branches have been updated.  In this case, my team
+    is pushing proposed updates to remote branches for review before they're merged
+    into 'master'.
+    </p>
+
+    <p>You can see the mapping that Git makes.  The 'master' branch on the remote 
+    repository becomes a branch named 'github/master' locally.  That way now I can
+    merge the 'master' branch on that remote into my local 'master' branch by running
+    <code>git merge github/master</code>.  Or, I can see what new commits are on that
+    branch by running <code>git log github/master ^master</code>.  If your remote 
+    is named 'origin' it would be <code>origin/master</code> instead.  Almost any
+    command you would run using local branches you can use remote branches with too.
+    </p>
+
+    <p>If you have more than one remote repository, you can either fetch from specific
+    ones by running <code>git fetch [alias]</code> or you can tell Git to syncronize
+    with all of your remotes by running <code>git fetch --all</code>.
+
+    <p class="nutshell">
+    <b>In a nutshell</b> you run <code>git fetch [alias]</code> to syncronize your 
+    repository with a remote repository, fetching all the data it has that you do 
+    not into branch references locally for merging and whatnot.
+    </p>
+
   </div>
 
 </div>
