@@ -10,10 +10,149 @@ layout: reference
     Sharing and Updating Projects
   </h2>
   <div class="block">
+    <p>
+    Git doesn't have a central server like Subversion.  All of the commands
+    so far have been done locally, just updating a local database. 
+    To collaborate with other developers in Git, you have to put all that 
+    data on a server that the other developers have access to.  The way Git
+    does this is to syncronize your data with another repository.  There
+    is no real difference between a server and a client - a Git repository
+    is a Git repository and you can syncronize between any two easily.
+    </p>
+
+    <p>Once you have a Git repository, either one that you set up on your
+    own server, or one hosted someplace like GitHub, you can tell Git to
+    either push any data that you have that is not in the remote repository
+    up, or you can ask Git to fetch differences down from the other repo.
+    </p>
+
+    <p>You can do this any time you are online, it does not have to correspond
+    with a <code>commit</code> or anything else.  Generally you will do a 
+    number of commits locally, then fetch data from the online shared repository
+    you cloned the project from to get up to date, merge any new work into the
+    stuff you did, then push your changes back up.</p>
+
     <p class="nutshell">
     <b>In a nutshell</b> you can update your project with <code>git fetch</code>
-    and share your changes with <code>git push</code>.
+    and share your changes with <code>git push</code>. You can manage your 
+    remote repositories with <code>git remote</code>.
     </p>
+  </div>
+</div>
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a target="new" href="http://www.kernel.org/pub/software/scm/git/docs/git-remote.html">docs</a> &nbsp;
+      <a target="new" href="http://progit.org/book/">book</a>
+    </span>
+    <a name="push">git remote</a>
+    <span class="desc">list, add and delete remote repository aliases</span>
+  </h2>
+
+  <div class="block">
+
+    <p>Unline centralized version control systems that have a client that is
+    very different from a server, Git repositories are all basically equal and
+    you simply syncronize between them. This makes it easy to have more than
+    one remote repository - you can have some that you have read-only access to
+    and others that you can write to as well.</p>
+
+    <p>So that you don't have to use the full URL of a remote repository every
+    time you want to syncronize with it, Git stores an alias or nickname for 
+    each remote repository URL you are interested in. You use the 
+    <code>git remote</code> command to manage this list of remote repos that
+    you care about.</p>
+
+    <h4>
+      git remote
+      <small>list your remote aliases</small>
+    </h4>
+
+    <p>Without any arguments, Git will simply show you the remote repository
+    aliases that it has stored. By default, if you cloned the project (as 
+    opposed to creating a new one locally), Git will automatically add the
+    URL of the repository that you cloned from under the name 'origin'. If
+    you run the command with the <code>-v</code> option, you can see the 
+    actual URL for each alias.</p>
+
+<pre>
+<b>$ git remote</b>
+origin
+<b>$ git remote -v</b>
+origin	git@github.com:schacon/git-reference.git (fetch)
+origin	git@github.com:schacon/git-reference.git (push)
+</pre>
+
+    <p>You see the URL there twice because Git allows you to have different
+    push and fetch URLs for each remote in case you want to use different
+    protocols for reads and writes.</p>
+
+    <h4>
+      git remote add
+      <small>add a new remote repository of your project</small>
+    </h4>
+
+    <p>If you want to share a locally created repository, or you want to take
+    contributions from someone elses repository - if you want to interact in 
+    any way with a new repository, it's generally easiest to add it as a remote.
+    You do that by running <code>git remote add [alias] [url]</code>.  That
+    adds <code>[url]</code> under a local remote named <code>[alias]</code>.</p>
+
+    <p>For example, if we want to share our Hello World program with the world, 
+    we can create a new repository on a server (I'll use GitHub as an example),
+    which should give you a URL, in this case "git@github.com:schacon/hw.git".
+    To add that to our project so we can push to it and fetch updates from it
+    we would do this:</p>
+
+<pre>
+<b>$ git remote</b>
+<b>$ git remote add github git@github.com:schacon/hw.git</b>
+<b>$ git remote -v</b>
+github	git@github.com:schacon/hw.git (fetch)
+github	git@github.com:schacon/hw.git (push)
+</pre>
+
+    <p>Like the branch naming, remote alias names are arbitrary - just as 'master'
+    has no special meaning but is widely used because <code>git init</code> 
+    sets it up by default, 'origin' is often used as a remote name because 
+    <code>git clone</code> sets it up by default as the cloned-from URL. In 
+    this case I've decided to name my remote 'github', but I could have really
+    named it just about anything.
+    </p>
+
+    <h4>
+      git remote rm
+      <small>removing an existing remote alias</small>
+    </h4>
+
+    <p>Git addeth and Git taketh away.  If you need to remove a remote - you are
+    not using it anymore, the project is gone, etc - you can remove it with
+    <code>git remote rm [alias]</code>.</p>
+
+<pre>
+<b>$ git remote -v</b>
+github	git@github.com:schacon/hw.git (fetch)
+github	git@github.com:schacon/hw.git (push)
+<b>$ git remote add origin git://github.com/pjhyett/hw.git</b>
+<b>$ git remote -v</b>
+github	git@github.com:schacon/hw.git (fetch)
+github	git@github.com:schacon/hw.git (push)
+origin	git://github.com/pjhyett/hw.git (fetch)
+origin	git://github.com/pjhyett/hw.git (push)
+<b>$ git remote rm origin</b>
+<b>$ git remote -v</b>
+github	git@github.com:schacon/hw.git (fetch)
+github	git@github.com:schacon/hw.git (push)
+</pre>
+
+    <p class="nutshell">
+    <b>In a nutshell</b> with <code>git remote</code> you can list our 
+    remote repositories and whatever URL
+    that repository is using.  You can use <code>git remote add</code> to 
+    add new remotes and <code>git remote rm</code> to delete existing ones.
+    </p>
+
   </div>
 </div>
 
@@ -37,9 +176,11 @@ layout: reference
     <a name="pull">git pull</a>
     <span class="desc">fetch from a remote repo and try to merge into the current branch</span>
   </h2>
+
   <div class="block">
-    <p>Cool.</p>
+    <p>Git has two commands to update itself from a remote repository.</p>
   </div>
+
 </div>
 
 <div class="box">
