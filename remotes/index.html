@@ -262,7 +262,81 @@ From github.com:schacon/hw
   </h2>
 
   <div class="block">
-    <p>Cool.</p>
+    <p>To share the cool commits you've done with others, you need to push your
+    changes to the remote repository. To do this, you run 
+    <code>git push [alias] [branch]</code> which will attempt to make your [branch]
+    the new [branch] on the [alias] remote. Let's try it by initially pushing
+    our 'master' branch to the new 'github' remote we created earlier.</p>
+
+<pre>
+<b>$ git push github master</b>
+Counting objects: 25, done.
+Delta compression using up to 2 threads.
+Compressing objects: 100% (25/25), done.
+Writing objects: 100% (25/25), 2.43 KiB, done.
+Total 25 (delta 4), reused 0 (delta 0)
+To git@github.com:schacon/hw.git
+ * [new branch]      master -> master
+</pre>
+
+    <p>Pretty easy. Now if someone clones that repository they will get exactly
+    what I have committed and all of it's history.</p>
+
+    <p>What if I have a topic branch like the 'erlang' branch we created earlier
+    and I just want to share that?  You can just push that branch instead.
+
+<pre>
+<b>$ git push github erlang</b>
+Counting objects: 7, done.
+Delta compression using up to 2 threads.
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (6/6), 652 bytes, done.
+Total 6 (delta 1), reused 0 (delta 0)
+To git@github.com:schacon/hw.git
+ * [new branch]      erlang -> erlang
+</pre>
+
+    <p>Now when people clone or fetch from that repository, they'll get a 'erlang'
+    branch they can look at and merge from. You can push any branch to any
+    remote repository that you have write access to in this way. If your branch
+    is already on the server, it will try to update it, if it is not, Git will
+    add it.</p>
+
+    <p>The last major issue you run into with pushing to remote branches is the
+    case of someone pushing in the meantime.  If you and another developer clone
+    at the same time, you both do commits, then she pushes and then you try to 
+    push, Git will by default not allow you to overwrite her changes.  Instead,
+    it basically runs <code>git log</code> on the branch you're trying to push and
+    makes sure it can see the current tip of the servers branch in your pushes
+    history.  If it can't see what is on the server in your history, it concludes
+    that you are out of date and will reject your push.  You will rightly have to
+    fetch, merge then push again - which makes sure you take her changes into 
+    account.</p>
+    
+    <p>This is what happens when you try to push a branch to a remote branch
+    that has been updated in the meantime:</p>
+
+<pre>
+<b>$ git push github master</b>
+To git@github.com:schacon/hw.git
+ ! [rejected]        master -> master (non-fast-forward)
+error: failed to push some refs to 'git@github.com:schacon/hw.git'
+To prevent you from losing history, non-fast-forward updates were rejected
+Merge the remote changes before pushing again.  See the 'Note about
+fast-forwards' section of 'git push --help' for details.
+</pre>
+
+    <p>You can fix this by running <code>git fetch github; git merge github/master</code>
+    and then pushing again.
+
+    <p class="nutshell">
+    <b>In a nutshell</b> you run <code>git push [alias] [branch]</code> to update a
+    remote repository with the changes you've made locally.  It will take what your
+    [branch] looks like and push it to be [branch] on the remote, if possible.  If
+    someone else has pushed since you last fetched and merged, the Git server will
+    deny your push until you are up to date.
+    </p>
+
   </div>
 </div>
 
