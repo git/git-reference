@@ -690,5 +690,90 @@ ab5ab4c added erlang
   </div>
 </div>
 
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a target="new" href="http://www.kernel.org/pub/software/scm/git/docs/git-tag.html">docs</a> &nbsp;
+      <a target="new" href="http://progit.org/book/">book</a>
+    </span>
+    <a name="log">git tag</a>
+    <span class="desc">tag a point in history as important</span>
+  </h2>
+
+  <div class="block">
+
+    <p>
+    If you get to a point that is important and you want to forever remember
+    that specific commit snapshot, you can tag it with <code>git tag</code>.
+    The <code>tag</code> command will basically put a permanent bookmark at
+    a specific commit so you can use it to compare to other commits in the
+    future.  This is often done when you cut a release or ship something.
+    </p>
+
+    <p>Let's say we want to release our Hello World project as version "1.0".
+    We can tag the last commit (<code>HEAD</code>) as "v1.0" by running
+    <code>git tag -a v1.0</code>.  The <code>-a</code> means "make an annotated
+    tag", which allows you to add a tag message to it, which is what you almost
+    always want to do.  Running this without the <code>-a</code> works too, but
+    it doesn't record when it was tagged, who tagged it, or let you add a tag
+    message. I would recommend always creating annotated tags.</p>
+
+<pre>
+<b>$ git tag -a v1.0 </b>
+</pre>
+
+  <p>When you run the <code>git tag -a</code> command, Git will open your editor
+    and have you write a tag message, just like you would write a commit 
+    message.</p>
+
+  <p>Now, notice when we run <code>git log --decorate</code>, we can see our
+    tag there.</p>
+
+<pre>
+<b>$ git log --oneline --decorate --graph</b>
+* 594f90b (HEAD, <span class="hl">tag: v1.0</span>, master) reverted to old class name
+*   8d585ea Merge branch 'fix_readme'
+|\  
+| * 3ac015d (fix_readme) fixed readme title
+* | 3cbb6aa fixed readme title differently
+|/  
+*   558151a Merge branch 'change_class'
+|\  
+| * 3467b0a changed the class name
+* | b7ae93b added from ruby
+|/  
+* 17f4acf first commit
+</pre>
+
+  <p>If we do more commits, the tag will stay right at that commit, so we have
+    that specific snapshot tagged forever and can always compare future 
+    snapshots to it.</p>
+
+  <p>We don't have to tag the commit that we're on, however.  If we forgot to
+    tag a commit that we released, we can retroactively tag it by running the
+    same command, but with the commit SHA at the end.  For example, say we had
+    released commit <code>558151a</code> (several commits back) but forgot to 
+    tag it at the time.  We can just tag it now:</p>
+
+<pre>
+<b>$ git tag -a v0.9 558151a</b>
+<b>$ git log --oneline --decorate --graph</b>
+* 594f90b (HEAD, tag: v1.0, master) reverted to old class name
+*   8d585ea Merge branch 'fix_readme'
+|\  
+| * 3ac015d (fix_readme) fixed readme title
+* | 3cbb6aa fixed readme title differently
+|/  
+*   558151a (<span class="hl">tag: v0.9</span>) Merge branch 'change_class'
+|\  
+| * 3467b0a changed the class name
+* | b7ae93b added from ruby
+|/  
+* 17f4acf first commit
+</pre>
+
+  </div>
+</div>
+
 <p><a href="/remotes">On to Sharing and Updating Projects &#187;</a></p>
 
