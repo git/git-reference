@@ -5,7 +5,7 @@ layout: reference
 <div class="box">
   <h2>
     <span class="docs">
-      <a target="new" href="http://progit.org/book">book</a>
+      <a target="new" href="http://progit.org/book/ch2-3.html">book</a>
     </span>
     Inspection and Comparison
   </h2>
@@ -18,10 +18,10 @@ layout: reference
     </p>
 
     <p class="nutshell">
-    <b>In a nutshell</b> you can use <code>git log</code> to find specific 
+    <b>In a nutshell</b> you can use <code>git log</code> to find specific
     commits in your project history - by author, date, content or
     history.  You can use <code>git diff</code> to compare two different points
-    in your history - generally to see how two branches differ or what has 
+    in your history - generally to see how two branches differ or what has
     changed from one version of your software to another.
     </p>
   </div>
@@ -31,7 +31,7 @@ layout: reference
   <h2>
     <span class="docs">
       <a target="new" href="http://www.kernel.org/pub/software/scm/git/docs/git-log.html">docs</a> &nbsp;
-      <a target="new" href="http://progit.org/book/">book</a>
+      <a target="new" href="http://progit.org/book/ch2-3.html">book</a>
     </span>
     <a name="log">git log</a>
     <span class="desc">filter your commit history</span>
@@ -55,10 +55,10 @@ layout: reference
     <p>
     To filter your commit history to only the ones done by a specific author,
     you can use the <code>--author</code> option.  For example, let's say we're
-    looking for the commits in the Git source code done by Linus.  We would 
-    type something like <code>git log --author=Linus</code>. The search is 
+    looking for the commits in the Git source code done by Linus.  We would
+    type something like <code>git log --author=Linus</code>. The search is
     case sensitive and also will search the email address.  I'll do the
-    example using the <code>-[number]</code> option, which will limit the 
+    example using the <code>-[number]</code> option, which will limit the
     results to the last [number] commits.
     </p>
 
@@ -79,7 +79,7 @@ b532581 make "git unpack-file" a built-in
     <p>
     If you want to specify a date range that you're interested in filtering your
     commits down to, you can use a number of options - I use <code>--since</code>
-    and <code>--before</code>, but you can also use <code>--until</code> and 
+    and <code>--before</code>, but you can also use <code>--until</code> and
     <code>--after</code>.  For example, if I wanted to see all the commits in
     the Git project before 3 weeks ago but after April 18th, I could run this
     (I'm also going to use <code>--no-merges</code> to remove merge commits):
@@ -106,7 +106,7 @@ b6c8d2d Documentation/remote-helpers: Add invocation section
     <p>
       You may also want to look for commits with a certain phrase in the commit
       message.  You can use <code>--grep</code> for that.  Let's say I knew there
-      was a commit that dealt with using the P4EDITOR environment variable and 
+      was a commit that dealt with using the P4EDITOR environment variable and
       I wanted to remember what that change looked like - I could find the commit
       with <code>--grep</code>.
     </p>
@@ -114,22 +114,22 @@ b6c8d2d Documentation/remote-helpers: Add invocation section
 <pre>
 <b>$ git log --grep=P4EDITOR --no-merges</b>
 <span class="yellow">commit 82cea9ffb1c4677155e3e2996d76542502611370</span>
-Author: Shawn Bohrer 
+Author: Shawn Bohrer
 Date:   Wed Mar 12 19:03:24 2008 -0500
 
     git-p4: Use P4EDITOR environment variable when set
-    
+
     Perforce allows you to set the P4EDITOR environment variable to your
     preferred editor for use in perforce.  Since we are displaying a
     perforce changelog to the user we should use it when it is defined.
-    
+
     Signed-off-by: Shawn Bohrer <shawn.bohrer@gmail.com>
     Signed-off-by: Simon Hausmann <simon@lst.de>
 </pre>
 
-    <p> 
+    <p>
     Git will logically OR all <code>--grep</code> and <code>--author</code>
-    arguments.  If you want to use <code>--grep</code> and <code>--author</code> 
+    arguments.  If you want to use <code>--grep</code> and <code>--author</code>
     to see commits that were authored by someone AND have a specific message
     content, you have to add the <code>--all-match</code> option. In these
     examples, I'm going to use the <code>--format</code> option, so we can see
@@ -146,7 +146,7 @@ da4a660 Benjamin Sergeant git-p4 fails when cloning a p4 depo.
 1cd5738 Simon Hausmann Make incremental imports easier to use by storing the p4 d
 </pre>
 
-    <p>If I add a <code>--author=Hausmann</code> argument, instead of further 
+    <p>If I add a <code>--author=Hausmann</code> argument, instead of further
     filtering it down to the one commit by Simon, it instead will show me all
     commits by Simon OR commits with "p4 depo" in the message:</p>
 
@@ -167,7 +167,7 @@ e96e400 Simon Hausmann git-p4: Fix submit user-interface.
 ...
 </pre>
 
-    <p>However, if I add a <code>--all-match</code>, I get the results I'm 
+    <p>However, if I add a <code>--all-match</code>, I get the results I'm
     looking for:</p>
 
 <pre>
@@ -181,11 +181,11 @@ e96e400 Simon Hausmann git-p4: Fix submit user-interface.
     </h4>
 
     <p>
-      What if you write really horrible commit messages?  Or, what if you are 
-      looking for when a function was introduced, or where variables started 
-      to be used?  You can also tell Git to look through the diff of each 
+      What if you write really horrible commit messages?  Or, what if you are
+      looking for when a function was introduced, or where variables started
+      to be used?  You can also tell Git to look through the diff of each
       commit for a string.  For example, if we wanted to find which commits
-      modified anything that looked like the function name 
+      modified anything that looked like the function name
       'userformat_find_requirements', we would run this: (note there is no '='
       between the '-S' and what you are searching for)
     </p>
@@ -193,21 +193,21 @@ e96e400 Simon Hausmann git-p4: Fix submit user-interface.
 <pre>
 <b>$ git log -Suserformat_find_requirements</b>
 <span class="yellow">commit 5b16360330822527eac1fa84131d185ff784c9fb</span>
-Author: Johannes Gilger 
+Author: Johannes Gilger
 Date:   Tue Apr 13 22:31:12 2010 +0200
 
     pretty: Initialize notes if %N is used
-    
+
     When using git log --pretty='%N' without an explicit --show-notes, git
     would segfault. This patches fixes this behaviour by loading the needed
     notes datastructures if --pretty is used and the format contains %N.
     When --pretty='%N' is used together with --no-notes, %N won't be
     expanded.
-    
+
     This is an extension to a proposed patch by Jeff King.
-    
-    Signed-off-by: Johannes Gilger 
-    Signed-off-by: Junio C Hamano 
+
+    Signed-off-by: Johannes Gilger
+    Signed-off-by: Junio C Hamano
 </pre>
 
     <h4>
@@ -220,7 +220,7 @@ Date:   Tue Apr 13 22:31:12 2010 +0200
     snapshot it was based off of, Git can always calculate the difference and
     show it to you as a patch.  That means for any commit you can get the patch
     that commit introduced to the project.  You can either do this by running
-    <code>git show [SHA]</code> with a specific commit SHA, or you can run 
+    <code>git show [SHA]</code> with a specific commit SHA, or you can run
     <code>git log -p</code>, which tells Git to put the patch after each commit.
     It is a great way to summarize what has happened on a branch or between
     commits.
@@ -245,7 +245,7 @@ index bb86f00..192151c 100644
      puts "Hello World from Ruby"
    end
  end
- 
+
 <span class="red">-HiWorld.hello</span>
 <span class="green">+HelloWorld.hello</span>
 
@@ -263,7 +263,7 @@ index d053cc8..9103e27 100644
 <span class="red">-Hello World Examples</span>
 <span class="green">+Many Hello World Examples</span>
  ======================
- 
+
  This project has examples of hello world in
 </pre>
 
@@ -310,7 +310,7 @@ Date:   Fri Jun 4 12:58:53 2010 +0200
   <h2>
     <span class="docs">
       <a target="new" href="http://www.kernel.org/pub/software/scm/git/docs/git-diff.html">docs</a> &nbsp;
-      <a target="new" href="http://progit.org/book/">book</a>
+      <a target="new" href="http://progit.org/book/ch5-3.html#determining_what_is_introduced">book</a>
     </span>
     <a name="diff">git diff</a>
     <span class="desc"></span>
@@ -318,15 +318,15 @@ Date:   Fri Jun 4 12:58:53 2010 +0200
 
   <div class="block">
 
-    <p>Finally, to see the absolute changes between any two commit snapshots, 
+    <p>Finally, to see the absolute changes between any two commit snapshots,
     you can use the <code>git diff</code> command. This is largely used in two
-    main situations - seeing how two branches differ from one another and 
-    seeing what has changed since a release or some other older point in 
+    main situations - seeing how two branches differ from one another and
+    seeing what has changed since a release or some other older point in
     history.  Let's look at both of these situations.</p>
 
     <p>To see what has changed since the last release, you can simply run
-    <code>git diff [version]</code> (or whatever you tagged the release). 
-    For example, if we want to see what has changed in our project since 
+    <code>git diff [version]</code> (or whatever you tagged the release).
+    For example, if we want to see what has changed in our project since
     the v0.9 release, we can run <code>git diff v0.9</code>.
     </p>
 
@@ -340,7 +340,7 @@ index d053cc8..d4173d5 100644
 <span class="red">-Hello World Examples</span>
 <span class="green">+Many Hello World Lang Examples</span>
  ======================
- 
+
  This project has examples of hello world in
 <span class="umber">diff --git a/ruby.rb b/ruby.rb
 index bb86f00..192151c 100644
@@ -353,12 +353,12 @@ index bb86f00..192151c 100644
      puts "Hello World from Ruby"
    end
  end
- 
+
 <span class="red">-HiWorld.hello</span>
 <span class="green">+HelloWorld.hello</span>
 </pre>
 
-    <p>Just like <code>git log</code>, you can use the <code>--stat</code> 
+    <p>Just like <code>git log</code>, you can use the <code>--stat</code>
       option with it.</p>
 
 <pre>
@@ -373,7 +373,7 @@ index bb86f00..192151c 100644
     exactly what you are asking - it will basically give you a patch file that
     would turn the snapshot at the tip of branchA into the snapshot at the tip
     of branchB.  This means if the two branches have diverged - gone in different
-    directions - it will remove all the work that was introduced into branchA 
+    directions - it will remove all the work that was introduced into branchA
     and then add everything that was introduced into branchB.  This is probably
     not what you want - you want the changes added to branchB that are not in
     branchA, so you really want the difference between where the two branches
@@ -384,7 +384,7 @@ index bb86f00..192151c 100644
 * 594f90b (HEAD, tag: v1.0, master) reverted to old class name
 | * 1834130 (erlang) added haskell
 | * ab5ab4c added erlang
-|/  
+|/
 *   8d585ea Merge branch 'fix_readme'
 ...
 </pre>
@@ -403,7 +403,7 @@ index bb86f00..192151c 100644
 
     <p>You see that it adds the erlang and haskell files, which is what we did
     in that branch, but then the output also reverts the changes to the ruby file
-    that we did in the master branch.  What we really want to see is just the 
+    that we did in the master branch.  What we really want to see is just the
     changes that happened in the "erlang" branch (adding the two files).  We can
     get the desired result by doing the diff from the common commit they diverged
     from:</p>
@@ -416,9 +416,9 @@ index bb86f00..192151c 100644
 </pre>
 
     <p>That's what we're looking for, but we don't want to have to figure out
-    what commit the two branches diverged from every time. Luckily, Git has a 
+    what commit the two branches diverged from every time. Luckily, Git has a
     shortcut for this. If you run <code>git diff master...erlang</code> (with        three dots in between the branch names), Git will automatically figure out
-    what the common commit (otherwise known as the "merge base") of the two 
+    what the common commit (otherwise known as the "merge base") of the two
     commit is and do the diff off of that.</p>
 
 <pre>
@@ -437,7 +437,7 @@ index bb86f00..192151c 100644
     the triple-dot syntax, because it will almost always give you what you want.
     </p>
 
-    <p>As a bit of an aside, you can also have git manually calculate the 
+    <p>As a bit of an aside, you can also have git manually calculate the
     merge-base (first common ancestor commit) of any two commits would be with
     the <code>git merge-base</code> command:</p>
 
@@ -462,13 +462,13 @@ index bb86f00..192151c 100644
     <p class="nutshell">
     <b>In a nutshell</b> you can use <code>git diff</code> to see how a project
     has changed since a known point in the past or to see what unique work is
-    in one branch since it diverged from another.  Always use 
-    <code>git diff branchA...branchB</code> to inspect branchB relative to 
+    in one branch since it diverged from another.  Always use
+    <code>git diff branchA...branchB</code> to inspect branchB relative to
     branchA to make things easier.
     </p>
 
   </div>
 </div>
 
-<p>And that's it!  For more information, try reading the 
+<p>And that's it!  For more information, try reading the
 <a href="http://progit.org">Pro Git book</a>.</p>

@@ -5,7 +5,7 @@ layout: reference
 <div class="box">
   <h2>
     <span class="docs">
-      <a target="new" href="http://progit.org/book/ch2-2.html">book</a>
+      <a target="new" href="http://progit.org/book/ch3-0.html">book</a>
     </span>
     Branching and Merging
   </h2>
@@ -14,21 +14,21 @@ layout: reference
     version control systems, it's probably helpful to forget most of what you
     think about branches - in fact, it may be more helpful to think of them
     practically as <i>contexts</i> since that is how you will most often be
-    using them.  When you checkout different branches, you change contexts 
+    using them.  When you checkout different branches, you change contexts
     that you are working in and you can quickly context-switch back and forth
     between several different branches.
     </p>
 
     <p class="nutshell">
-    <b>In a nutshell</b> you can create a branch with 
+    <b>In a nutshell</b> you can create a branch with
     <code>git branch (branchname)</code>, switch into that context with
     <code>git checkout (branchname)</code>, record commit snapshots while
     in that context, then can switch back and forth easily. When you switch
     branches, Git replaces your working directory with the snapshot of the
     latest commit on that branch so you don't have to have multiple directories
-    for multiple branches.  You merge branches together with 
+    for multiple branches.  You merge branches together with
     <code>git merge</code>.  You can easily merge multiple times from the same
-    branch over time, or alternately you can choose to delete a branch 
+    branch over time, or alternately you can choose to delete a branch
     immediately after merging it.
     </p>
 
@@ -39,7 +39,7 @@ layout: reference
   <h2>
     <span class="docs">
       <a target="new" href="http://www.kernel.org/pub/software/scm/git/docs/git-branch.html">docs</a> &nbsp;
-      <a target="new" href="http://progit.org/book/">book</a>
+      <a target="new" href="http://progit.org/book/ch3-2.html">book</a>
     </span>
     <a name="branch">git branch</a>
     <span class="desc">list, create and manage working contexts</span>
@@ -50,7 +50,7 @@ layout: reference
   <h2>
     <span class="docs">
       <a target="new" href="http://www.kernel.org/pub/software/scm/git/docs/git-checkout.html">docs</a> &nbsp;
-      <a target="new" href="http://progit.org/book/">book</a>
+      <a target="new" href="http://progit.org/book/ch3-2.html">book</a>
     </span>
     <a name="checkout">git checkout</a>
     <span class="desc">switch to a new branch context</span>
@@ -69,10 +69,10 @@ layout: reference
       <small>list your available branches</small>
     </h4>
 
-    <p>Without arguments, <code>git branch</code> will list out the local 
+    <p>Without arguments, <code>git branch</code> will list out the local
     branches that you have.  The branch that you are currently working on will
-    have a star next to it and if you have 
-    <a href="http://progit.org/book/ch7-1.html#colors_in_git">coloring turned on</a>, 
+    have a star next to it and if you have
+    <a href="http://progit.org/book/ch7-1.html#colors_in_git">coloring turned on</a>,
     will show the current branch in green.
     </p>
 
@@ -105,7 +105,7 @@ $ git branch
 
     <p>Now we can see that we have a new branch.  When you create a branch this
     way it creates the branch at your last commit so if you record some commits
-    at this point and then switch to 'testing', it will revert your working 
+    at this point and then switch to 'testing', it will revert your working
     directory context back to when you created the branch in the first place -
     you can think of it like a bookmark for where you currently are.  Let's see
     this in action - we use <code>git checkout (branch)</code> to switch the
@@ -188,20 +188,20 @@ README   hello.rb more.txt test.txt
     contexts we can switch between.</p>
 
     <p>
-    If you start on work it is very useful to 
+    If you start on work it is very useful to
     always start it in a branch (because it's fast and easy to do) and then
     merge it in and delete the branch when you're done.  That way if what you're
     working on doesn't work out you can easily discard it and if you're forced
     to switch back to a more stable context your work in progress is easy to put
     aside and then come back to.</p>
-      
+
     <h4>
       git branch -d (branchname)
       <small>delete a branch</small>
     </h4>
 
-    <p>If we want to delete a branch (such as the 'testing' branch in the 
-    previous example, since there is no unique work on it), 
+    <p>If we want to delete a branch (such as the 'testing' branch in the
+    previous example, since there is no unique work on it),
     we can run <code>git branch -d (branch)</code> to remove it.
 
 <pre>
@@ -215,8 +215,8 @@ Deleted branch testing (was 78b2670).
 </pre>
 
     <p class="nutshell">
-    <b>In a nutshell</b> you use <code>git branch</code> to list your 
-    current branches, create new branches and delete unnecessary or 
+    <b>In a nutshell</b> you use <code>git branch</code> to list your
+    current branches, create new branches and delete unnecessary or
     already merged branches.
     </p>
 
@@ -227,20 +227,20 @@ Deleted branch testing (was 78b2670).
   <h2>
     <span class="docs">
       <a target="new" href="http://www.kernel.org/pub/software/scm/git/docs/git-merge.html">docs</a> &nbsp;
-      <a target="new" href="http://progit.org/book/">book</a>
+      <a target="new" href="http://progit.org/book/ch3-2.html#basic_merging">book</a>
     </span>
     <a name="merge">git merge</a>
     <span class="desc">merge a branch context into your current one</span>
   </h2>
 
   <div class="block">
-    <p>Once you have work isolated in a branch, you will eventually want to 
+    <p>Once you have work isolated in a branch, you will eventually want to
     incorporate it into your main branch.  You can merge any branch into your
-    current branch with the <code>git merge</code> command.  Let's take as a 
+    current branch with the <code>git merge</code> command.  Let's take as a
     simple example the 'removals' branch from above.  If we create a branch
-    and remove files in it and commit our removals to that branch, it is 
+    and remove files in it and commit our removals to that branch, it is
     isolated from our main ('master', in this case) branch.  To include those
-    deletions in your 'master' branch, you can just merge in the 'removals' 
+    deletions in your 'master' branch, you can just merge in the 'removals'
     branch.
     </p>
 
@@ -266,7 +266,7 @@ Fast-forward
       more complex merges
     </h4>
 
-    <p>Of course, this doesn't just work for simple file additions and 
+    <p>Of course, this doesn't just work for simple file additions and
     deletions. Git will merge file modifications as well - in fact, it's very
     good at it.  For example, let's see what happens when we edit a file in
     one branch and in another branch we rename it and then edit it and then
@@ -286,8 +286,8 @@ end
 HelloWorld.hello
 </pre>
 
-    <p>So first we're going to create a new branch named 'change_class' and 
-    switch to it so your class renaming changes are isolated. I'm going to 
+    <p>So first we're going to create a new branch named 'change_class' and
+    switch to it so your class renaming changes are isolated. I'm going to
     change each instance of 'HelloWorld' to 'HiWorld'.</p>
 
 <pre>
@@ -301,10 +301,10 @@ class HiWorld
 [change_class 3467b0a] changed the class name
  1 files changed, 2 insertions(+), 4 deletions(-)
 </pre>
-    
+
     <p>So now I've committed the class renaming changes to the 'change_class'
       branch.  If I now switch back to the 'master' branch my class name will
-      revert to what it was before I switched branches. Here I can change 
+      revert to what it was before I switched branches. Here I can change
       something different (in this case the printed output) and at the same
       time rename the file from <code>hello.rb</code> to <code>ruby.rb</code>.
       </b>
@@ -321,12 +321,12 @@ index 2aabb6e..bf64b17 100644
 +++ b/ruby.rb</span>
 <span class="lblue">@@ -1,7 +1,7 @@</span>
  class HelloWorld
- 
+
    def self.hello
 <span class="red">-    puts "Hello World"</span>
 <span class="green">+    puts "Hello World from Ruby"</span>
    end
- 
+
  end
 <b>$ git commit -am 'added from ruby'</b>
 [master b7ae93b] added from ruby
@@ -335,9 +335,9 @@ index 2aabb6e..bf64b17 100644
 </pre>
 
     <p>Now those changes are recorded in my 'master' branch.  Notice that the
-      class name is back to 'HelloWorld', not 'HiWorld'.  Now I want to 
+      class name is back to 'HelloWorld', not 'HiWorld'.  Now I want to
       incorporate the 'HiWorld' change so I can just merge in my 'change_class'
-      branch.  However, I've changed the name of the file since I branched, 
+      branch.  However, I've changed the name of the file since I branched,
       what will Git do?</p>
 
 <pre>
@@ -373,7 +373,7 @@ HiWorld.hello
       of code is edited in different branches there is no way for a computer
       to figure it out, so it's up to us.  Let's see another example of changing
       the same line in two branches.
-    <p> 
+    <p>
 
 <pre>
 <b>$ git branch</b>
@@ -387,7 +387,7 @@ Switched to a new branch 'fix_readme'
 </pre>
 
     <p>Now we have committed a change to one line in our README file in a
-      branch.  Now let's change the same line in a different way back on 
+      branch.  Now let's change the same line in a different way back on
       our 'master' branch.</p>
 
 <pre>
@@ -422,7 +422,7 @@ nearly every programming language.
       Subversion, into files when it gets a merge conflict.  Now it's up to us
       to resolve them.  We will do it manually here, but check out
       <a href="http://www.kernel.org/pub/software/scm/git/docs/git-mergetool.html">git mergetool</a>
-      if you want Git to fire up a graphical mergetool 
+      if you want Git to fire up a graphical mergetool
       (like kdiff3, emerge, p4merge, etc) instead.
     </p>
 
@@ -437,14 +437,14 @@ index 9103e27,69cad1a..0000000
 <span class="red">- Many Hello World Examples</span>
  <span class="red">-Hello World Lang Examples</span>
 <span class="green">++Many Hello World Lang Examples</span>
-  
+
   This project has examples of hello world in
 </pre>
 
     <p>A cool tip in doing merge conflict resolution in Git is that if you
     run <code>git diff</code>, it will show you both sides of the conflict
     and how you've resolved it as I've shown here. Now it's time to mark
-    the file as resolved.  In Git we do that with <code>git add</code> - 
+    the file as resolved.  In Git we do that with <code>git add</code> -
     to tell Git the file has been resolved, you have to stage it.</p>
 
 <pre>
@@ -456,7 +456,7 @@ M  README
 <b>$ git commit </b>
 [master 8d585ea] Merge branch 'fix_readme'
 </pre>
-    
+
     <p>And now we've successfully resolved our merge conflict and committed
     the result.</p>
 
@@ -474,7 +474,7 @@ M  README
   <h2>
     <span class="docs">
       <a target="new" href="http://www.kernel.org/pub/software/scm/git/docs/git-log.html">docs</a> &nbsp;
-      <a target="new" href="http://progit.org/book/">book</a>
+      <a target="new" href="http://progit.org/book/ch6-1.html#commit_ranges">book</a>
     </span>
     <a name="log">git log</a>
     <span class="desc">show commit history of a branch</span>
@@ -490,8 +490,8 @@ M  README
     <code>git log</code>.</p>
 
     <p>To understand the log command, you have to understand what information
-    is stored when you run the <code>git commit</code> command to store a 
-    snapshot.  In addition to the manifest of files and commit message and 
+    is stored when you run the <code>git commit</code> command to store a
+    snapshot.  In addition to the manifest of files and commit message and
     information about the person who committed it, Git also stores the commit
     that you based this snapshot on.  That is, if you clone a project, what was
     the snapshot that you modified to get to the snapshot that you saved?  This
@@ -503,8 +503,8 @@ M  README
 
     <p>To see a chronological list of the parents of any branch, you can run
     <code>git log</code> when you are in that branch.  For example, if we run
-    <code>git log</code> in the Hello World project that we have been working 
-    on in this section, we'll see all the commit messages that we've done. 
+    <code>git log</code> in the Hello World project that we have been working
+    on in this section, we'll see all the commit messages that we've done.
 
 <pre>
 <b>$ git log</b>
@@ -514,7 +514,7 @@ Author: Scott Chacon &lt;schacon@gmail.com>
 Date:   Fri Jun 4 12:59:47 2010 +0200
 
     Merge branch 'fix_readme'
-    
+
     Conflicts:
         README
 
@@ -539,7 +539,7 @@ Date:   Fri Jun 4 12:37:05 2010 +0200
 ...
 </pre>
 
-    <p>To see a more compact version of the same history, we can use the 
+    <p>To see a more compact version of the same history, we can use the
     <code>--oneline</code> option.</p>
 
 <pre>
@@ -565,28 +565,28 @@ b7ae93b added from ruby
 <pre>
 <b>$ git log --oneline --graph</b>
 *   8d585ea Merge branch 'fix_readme'
-|\  
+|\
 | * 3ac015d fixed readme title
 * | 3cbb6aa fixed readme title differently
-|/  
+|/
 *   558151a Merge branch 'change_class'
-|\  
+|\
 | * 3467b0a changed the class name
 * | b7ae93b added from ruby
-|/  
+|/
 * 17f4acf first commit
 </pre>
 
     <p>Now we can more clearly see when effort diverged and then was merged
-    back together.  This is very nice for seeing what has happened or what 
+    back together.  This is very nice for seeing what has happened or what
     changes are applied, but
     it is also incredibly useful for managing your branches.  Let's create a new
-    branch, do some work in it and then switch back and do some work in our 
+    branch, do some work in it and then switch back and do some work in our
     master branch, then see how the <code>log</code> command can help us figure
     out what is happening on each.</p>
 
     <p>First we'll create a new branch to add the Erlang programming language
-    Hello World example - we want to do this in a branch so that we don't 
+    Hello World example - we want to do this in a branch so that we don't
     muddy up our stable branch with code that may not work for a while so we
     can cleanly switch in and out of it.</p>
 
@@ -634,8 +634,8 @@ README  ruby.rb
     things to do.  When we come back we want to know what the 'erlang' branch
     is all about and where we've left off on the master branch.  Just by looking
     at the branch name, we can't know that we made Haskell changes in there, but
-    using <code>git log</code> we easily can.  If you give Git a branch name, 
-    it will show you just the commits that are "reachable" in the history of 
+    using <code>git log</code> we easily can.  If you give Git a branch name,
+    it will show you just the commits that are "reachable" in the history of
     that branch, that is the commits that influenced the final snapshot.</p>
 
 <pre>
@@ -652,15 +652,15 @@ b7ae93b added from ruby
 </pre>
 
     <p>This way, it's pretty easy to see that we have Haskell code included in
-      the branch (as I've highlighted). What is even cooler is that we can 
+      the branch (as I've highlighted). What is even cooler is that we can
       easily tell Git that we only are interested in the commits that are
       reachable in one branch that are not reachable in another, in other words
       which commits are unique to a branch in comparison to another.
     </p>
 
-    <p> 
-      In this case if we are interested in merging in the 'erlang' branch we 
-      want to see what commits are going to effect our snapshot when we do 
+    <p>
+      In this case if we are interested in merging in the 'erlang' branch we
+      want to see what commits are going to effect our snapshot when we do
       that merge.  The way we tell Git that is by putting a <code>^</code> in
       front of the branch that we don't want to see.  For instance, if we want
       to see the commits that are in the 'erlang' branch that are not in the
@@ -686,7 +686,7 @@ ab5ab4c added erlang
     at the tip of the branch.  This allows you to see how the project in that
     context got to the state that it is currently in.
     </p>
-    
+
   </div>
 </div>
 
@@ -694,7 +694,7 @@ ab5ab4c added erlang
   <h2>
     <span class="docs">
       <a target="new" href="http://www.kernel.org/pub/software/scm/git/docs/git-tag.html">docs</a> &nbsp;
-      <a target="new" href="http://progit.org/book/">book</a>
+      <a target="new" href="http://progit.org/book/ch2-6.html">book</a>
     </span>
     <a name="log">git tag</a>
     <span class="desc">tag a point in history as important</span>
@@ -723,7 +723,7 @@ ab5ab4c added erlang
 </pre>
 
   <p>When you run the <code>git tag -a</code> command, Git will open your editor
-    and have you write a tag message, just like you would write a commit 
+    and have you write a tag message, just like you would write a commit
     message.</p>
 
   <p>Now, notice when we run <code>git log --decorate</code>, we can see our
@@ -733,26 +733,26 @@ ab5ab4c added erlang
 <b>$ git log --oneline --decorate --graph</b>
 * 594f90b (HEAD, <span class="hl">tag: v1.0</span>, master) reverted to old class name
 *   8d585ea Merge branch 'fix_readme'
-|\  
+|\
 | * 3ac015d (fix_readme) fixed readme title
 * | 3cbb6aa fixed readme title differently
-|/  
+|/
 *   558151a Merge branch 'change_class'
-|\  
+|\
 | * 3467b0a changed the class name
 * | b7ae93b added from ruby
-|/  
+|/
 * 17f4acf first commit
 </pre>
 
   <p>If we do more commits, the tag will stay right at that commit, so we have
-    that specific snapshot tagged forever and can always compare future 
+    that specific snapshot tagged forever and can always compare future
     snapshots to it.</p>
 
   <p>We don't have to tag the commit that we're on, however.  If we forgot to
     tag a commit that we released, we can retroactively tag it by running the
     same command, but with the commit SHA at the end.  For example, say we had
-    released commit <code>558151a</code> (several commits back) but forgot to 
+    released commit <code>558151a</code> (several commits back) but forgot to
     tag it at the time.  We can just tag it now:</p>
 
 <pre>
@@ -760,15 +760,15 @@ ab5ab4c added erlang
 <b>$ git log --oneline --decorate --graph</b>
 * 594f90b (HEAD, tag: v1.0, master) reverted to old class name
 *   8d585ea Merge branch 'fix_readme'
-|\  
+|\
 | * 3ac015d (fix_readme) fixed readme title
 * | 3cbb6aa fixed readme title differently
-|/  
+|/
 *   558151a (<span class="hl">tag: v0.9</span>) Merge branch 'change_class'
-|\  
+|\
 | * 3467b0a changed the class name
 * | b7ae93b added from ruby
-|/  
+|/
 * 17f4acf first commit
 </pre>
 
