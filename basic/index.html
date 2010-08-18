@@ -701,11 +701,13 @@ M hello.rb
     included in the next commit snapshot, thereby effectively deleting it.</p>
 
     <p>By default, a <code>git rm file</code> will remove the file from the 
-    staging area entirely and also off your disk (the working directory).</p>
+    staging area entirely and also off your disk (the working directory). To
+    leave the file in the working directory, you can use <code>git rm --cached
+    </code>.</p>
       
     <h4>
       git mv
-      <small>git rm orig; mv orig new; git add new</small>
+      <small>git rm --cached orig; mv orig new; git add new</small>
     </h4>
 
     <p>
@@ -715,7 +717,7 @@ M hello.rb
     snapshot and another file was added to the next one and the contents are
     similar, Git figures it was most likely a rename.  So, although the 
     <code>git mv</code> command exists, it is superfluous - all it does is a
-    <code>git rm</code>, moves the file on disk, then runs a
+    <code>git rm --cached</code>, moves the file on disk, then runs a
     <code>git add</code> on the new file.  You don't really need to use it, but
     if it's easier, feel free.
     </p>
