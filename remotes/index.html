@@ -15,9 +15,9 @@ layout: reference
     so far have been done locally, just updating a local database.
     To collaborate with other developers in Git, you have to put all that
     data on a server that the other developers have access to.  The way Git
-    does this is to syncronize your data with another repository.  There
+    does this is to synchronize your data with another repository.  There
     is no real difference between a server and a client - a Git repository
-    is a Git repository and you can syncronize between any two easily.
+    is a Git repository and you can synchronize between any two easily.
     </p>
 
     <p>Once you have a Git repository, either one that you set up on your
@@ -54,12 +54,12 @@ layout: reference
 
     <p>Unlike centralized version control systems that have a client that is
     very different from a server, Git repositories are all basically equal and
-    you simply syncronize between them. This makes it easy to have more than
+    you simply synchronize between them. This makes it easy to have more than
     one remote repository - you can have some that you have read-only access to
     and others that you can write to as well.</p>
 
     <p>So that you don't have to use the full URL of a remote repository every
-    time you want to syncronize with it, Git stores an alias or nickname for
+    time you want to synchronize with it, Git stores an alias or nickname for
     each remote repository URL you are interested in. You use the
     <code>git remote</code> command to manage this list of remote repos that
     you care about.</p>
@@ -180,12 +180,12 @@ github	git@github.com:schacon/hw.git (push)
   <div class="block">
 
     <p>Git has two commands to update itself from a remote repository.
-    <code>git fetch</code> will syncronize you with another repo, pulling down any data
+    <code>git fetch</code> will synchronize you with another repo, pulling down any data
     that you do not have locally and giving you bookmarks to where each branch on
-    that remote was when you syncronized.  These are called "remote branches" and are
+    that remote was when you synchronized.  These are called "remote branches" and are
     identical to local branches except that Git will not allow you to check them out -
     however, you can merge from them, diff them to other branches, run history logs on
-    them, etc.  You do all of that stuff locally after you syncronize.
+    them, etc.  You do all of that stuff locally after you synchronize.
     </p>
 
     <p>The second command that will fetch down new data from a remote server is
@@ -238,11 +238,11 @@ From github.com:schacon/hw
     </p>
 
     <p>If you have more than one remote repository, you can either fetch from specific
-    ones by running <code>git fetch [alias]</code> or you can tell Git to syncronize
+    ones by running <code>git fetch [alias]</code> or you can tell Git to synchronize
     with all of your remotes by running <code>git fetch --all</code>.
 
     <p class="nutshell">
-    <b>In a nutshell</b> you run <code>git fetch [alias]</code> to syncronize your
+    <b>In a nutshell</b> you run <code>git fetch [alias]</code> to synchronize your
     repository with a remote repository, fetching all the data it has that you do
     not into branch references locally for merging and whatnot.
     </p>
