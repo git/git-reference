@@ -194,7 +194,7 @@ github	git@github.com:schacon/hw.git (push)
     that is tracked by whatever branch you are currently in.  I personally don't much
     like this command - I prefer running <code>fetch</code> and <code>merge</code>
     seperately.  Less magic, less problems.  However, if you like this idea, you
-    can read about it in more detail in the.
+    can read about it in more detail in the
     <a target="new" href="http://www.kernel.org/pub/software/scm/git/docs/git-pull.html">official docs</a>.
     </p>
 
@@ -280,7 +280,7 @@ To git@github.com:schacon/hw.git
 </pre>
 
     <p>Pretty easy. Now if someone clones that repository they will get exactly
-    what I have committed and all of it's history.</p>
+    what I have committed and all of its history.</p>
 
     <p>What if I have a topic branch like the 'erlang' branch we created earlier
     and I just want to share that?  You can just push that branch instead.
@@ -296,7 +296,7 @@ To git@github.com:schacon/hw.git
  * [new branch]      erlang -> erlang
 </pre>
 
-    <p>Now when people clone or fetch from that repository, they'll get a 'erlang'
+    <p>Now when people clone or fetch from that repository, they'll get an 'erlang'
     branch they can look at and merge from. You can push any branch to any
     remote repository that you have write access to in this way. If your branch
     is already on the server, it will try to update it, if it is not, Git will
@@ -307,7 +307,7 @@ To git@github.com:schacon/hw.git
     at the same time, you both do commits, then she pushes and then you try to
     push, Git will by default not allow you to overwrite her changes.  Instead,
     it basically runs <code>git log</code> on the branch you're trying to push and
-    makes sure it can see the current tip of the servers branch in your pushes
+    makes sure it can see the current tip of the server's branch in your push's
     history.  If it can't see what is on the server in your history, it concludes
     that you are out of date and will reject your push.  You will rightly have to
     fetch, merge then push again - which makes sure you take her changes into
