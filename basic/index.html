@@ -427,7 +427,17 @@ index 2aabb6e..2ae9ba4 100644
 
     <p>Now that you have staged the content you want to snapshot with the 
     <code>git add</code> command, you run <code>git commit</code> to actually
-    record the snapshot.  Let's stage and commit all the changes to our 
+    record the snapshot.
+    Git records your name and email address with every commit you make,
+    so the first step is to tell Git what these are.
+    </p>
+
+<pre>
+<b>$ git config --global user.name 'Your Name'</b>
+<b>$ git config --global user.email you@somedomain.com</b>
+</pre>
+
+    <p>Let's stage and commit all the changes to our
     <code>hello.rb</code> file.  In this first example, we'll use the 
     <code>-m</code> option to provide the commit message on the command line.
     </p>
