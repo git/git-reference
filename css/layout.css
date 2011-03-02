@@ -123,6 +123,65 @@ a {
 a:hover {
 	color:#333;
 }
+a.page-button {
+	background: #e4eafa none 0 0 repeat-x;
+	border: solid 1px #c9172e;
+	color: #c9172e;
+	cursor: pointer;
+	display: inline-block;
+	font-weight: bold;
+	font-size: 12px;
+	line-height: 100%;
+	margin: 1px;
+	padding: 0.8em 1em;
+	position: relative;
+	text-decoration: none;
+	text-shadow: #fff 0 1px 0;
+	vertical-align: middle;
+	white-space: nowrap;
+	float:right;
+	background-image: -moz-linear-gradient(-90deg,
+		#eeeeee 1%,
+		#fdf6f7 5%,
+		#fae9eb 70%,
+		#f7dcdf 100%);
+	background-image: -webkit-gradient(linear,left top,left bottom,
+		color-stop(0.01, #eee),
+		color-stop(0.05, #fdf6f7),
+		color-stop(0.70, #fae9eb),
+		color-stop(1, #f7dcdf));
+}
+a.next-page {
+	border-right: none;
+	margin-right: 26px;
+	padding-right: 0;
+}
+a.next-page:after, a.prev-page:after {
+	border: solid 1px #c9172e;
+	content: '';
+	display: block;
+	position: absolute;
+	top: .37em;
+	width: 1.7em;
+	height: 1.7em;
+	text-shadow: none;
+	z-index: -1;
+}
+a.next-page:after {
+	right: -.97em;
+	-moz-transform: rotate(-45deg);
+	background-image: -moz-linear-gradient(-135deg,
+		#eeeeee 1%,
+		#fdf6f7 5%,
+		#fae9eb 70%,
+		#f7dcdf 100%);
+	-webkit-transform:rotate(-45deg);
+	background-image: -webkit-gradient(linear,100% 0%, 0% 100%,
+		color-stop(0.1, #eee),
+		color-stop(0.05, #fdf6f7),
+		color-stop(0.70, #fae9eb),
+		color-stop(1, #f7dcdf));
+}
 
 /* headings
 ----------------------------------------------- */
