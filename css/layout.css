@@ -177,7 +177,7 @@ a.next-page:after {
 		#f7dcdf 100%);
 	-webkit-transform:rotate(-45deg);
 	background-image: -webkit-gradient(linear,100% 0%, 0% 100%,
-		color-stop(0.1, #eee),
+		color-stop(0.01, #eee),
 		color-stop(0.05, #fdf6f7),
 		color-stop(0.70, #fae9eb),
 		color-stop(1, #f7dcdf));
