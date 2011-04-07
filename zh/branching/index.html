@@ -1,0 +1,630 @@
+---
+layout: zh_reference
+---
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a target="new" href="http://progit.org/book/ch3-0.html">书</a>
+    </span>
+    分支与合并
+  </h2>
+  <div class="block">
+	<p>分支是我最喜欢的 Git 特性之一。如果您用过其他版本控制系统，把您所知的分支给忘记，倒可能更有帮助些 —— 事实上，以我们使用分支的方式，把 Git 的分支看作 <i>上下文</i> 反而更合适。当您检出分支时，您可以在两三个不同的分支之间来回切换。
+    </p>
+
+    <p class="nutshell">
+	<b>一言以蔽之</b>，您可以执行 <code>git branch (branchname)</code> 来创建分支，使用 <code>git checkout (branchname)</code> 命令切换到该分支，在该分支的上下文环境中，提交快照等，之后可以很容易地来回切换。当您切换分支的时候，Git 会用该分支的最后提交的快照替换您的工作目录的内容，所以多个分支不需要多个目录。使用 <code>git merge</code> 来合并分支。您可以多次合并到统一分支，也可以选择在合并之后直接删除被并入的分支。
+    </p>
+
+  </div>
+</div>
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a target="new" href="http://www.kernel.org/pub/software/scm/git/docs/git-branch.html">文档</a> &nbsp;
+      <a target="new" href="http://progit.org/book/ch3-2.html">书</a>
+    </span>
+    <a name="branch">git branch</a>
+    <span class="desc">列出、创建与管理工作上下文</span>
+  </h2>
+
+  <br/>
+
+  <h2>
+    <span class="docs">
+      <a target="new" href="http://www.kernel.org/pub/software/scm/git/docs/git-checkout.html">文档</a> &nbsp;
+      <a target="new" href="http://progit.org/book/ch3-2.html">书</a>
+    </span>
+    <a name="checkout">git checkout</a>
+    <span class="desc">切换到新的分支上下文</span>
+  </h2>
+
+  <div class="block">
+	<p><code>git branch</code> 命令是 Git 中的通用分支管理工具，可以通过它完成多项任务。我们先说您会用到的最多的命令 —— 列出分支、创建分支和删除分支。我们还会介绍用来切换分支的 <code>git checkout</code> 命令。
+    </p>
+
+    <h4>
+      git branch
+      <small>列出可用的分支</small>
+    </h4>
+
+	<p>没有参数是，<code>git branch</code> 会列出您在本地的分支。您所在的分支的行首会有个星号作标记。如果您开启了<a href="http://progit.org/book/ch7-1.html#colors_in_git">彩色模式</a>，当前分支会用绿色显示。
+    </p>
+
+<pre>
+$ git branch
+* <span class="green">master</span>
+</pre>
+
+	<p>此例的意思就是，我们有一个叫做“master”的分支，并且该分支是当前分支。当您执行 <code>git init</code> 的时候，缺省情况下 Git 就会为您创建“master”分支。但是这名字一点特殊意味都没有 —— 事实上您并不非得要一个叫做“master”的分支。不过由于它是缺省分支名的缘故，绝大部分项目都有这个分支。
+    </p>
+
+    <h4>
+      git branch (branchname)
+      <small>创建新分支</small>
+    </h4>
+
+	<p>我们动手创建一个分支，并切换过去。执行 <code>git branch (branchname)</code> 即可。
+
+<pre>
+$ git branch testing
+$ git branch
+* <span class="green">master</span>
+  testing
+</pre>
+
+	<p>现在我们可以看到，有了一个新分支。当您以此方式在上次提交更新之后创建了新分支，如果后来又有更新提交，然后又切换到了“testing”分支，Git 将还原您的工作目录到您创建分支时候的样子 —— 您可以把它看作一个记录您当前进度的书签。让我们实际运用看看 —— 我们用 <code>git checkout (branch)</code> 切换到我们要修改的分支。
+    </p>
+
+<pre>
+<b>$ ls</b>
+README   hello.rb
+<b>$ echo 'test content' > test.txt</b>
+<b>$ echo 'more content' > more.txt</b>
+<b>$ git add *.txt</b>
+<b>$ git commit -m 'added two files'</b>
+[master 8bd6d8b] added two files
+ 2 files changed, 2 insertions(+), 0 deletions(-)
+ create mode 100644 more.txt
+ create mode 100644 test.txt
+<b>$ ls</b>
+README   hello.rb more.txt test.txt
+<b>$ git checkout testing</b>
+Switched to branch 'testing'
+<b>$ ls</b>
+README   hello.rb
+</pre>
+
+    <p>当我们切换到“测试”分支的时候，我们添加的新文件被移除了。切换回“master”分支的时候，它们有重新出现了。
+    </p>
+
+<pre>
+<b>$ ls</b>
+README   hello.rb
+<b>$ git checkout master</b>
+Switched to branch 'master'
+<b>$ ls</b>
+README   hello.rb more.txt test.txt
+</pre>
+
+    <h4>
+      git checkout -b (branchname)
+      <small>创建新分支，并立即切换到它</small>
+    </h4>
+
+    <p>
+	通常情况下，您会更希望立即切换到新分支，从而在该分支中操作，然后当此分支的开发日趋稳定时，将它合并到稳定版本的分支（例如“master”）中去。执行 <code>git branch newbranch; git checkout newbranch</code> 也很简单，不过 Git 还为您提供了快捷方式：<code>git checkout -b newbranch</code>。
+    </p>
+
+<pre>
+<b>$ git branch</b>
+* master
+<b>$ ls</b>
+README   hello.rb more.txt test.txt
+<b>$ git checkout -b removals</b>
+Switched to a new branch 'removals'
+<b>$ git rm more.txt </b>
+rm 'more.txt'
+<b>$ git rm test.txt </b>
+rm 'test.txt'
+<b>$ ls</b>
+README   hello.rb
+<b>$ git commit -am 'removed useless files'</b>
+[removals 8f7c949] removed useless files
+ 2 files changed, 0 insertions(+), 2 deletions(-)
+ delete mode 100644 more.txt
+ delete mode 100644 test.txt
+<b>$ git checkout master</b>
+Switched to branch 'master'
+<b>$ ls</b>
+README   hello.rb more.txt test.txt
+</pre>
+
+	<p>如您所见，我们创建了一个分支，在该分支的上下文中移除了一些文件，然后切换回我们的主分支，那些文件又回来了。使用分支将工作切分开来，从而让我们能够在不同上下文中做事，并来回切换。
+    </p>
+
+    <p>
+	创建新分支，在其中完成一部分工作，完成之后将它合并到主分支并删除。您会觉得这很方便，因为这么做很快很容易。如此，当您觉得这部分工作并不靠谱，舍弃它很容易。并且，如果您必须回到稳定分支做些事情，也可以很方便地这个独立分支的工作先丢在一边，完成要事之后再切换回来。
+    </p>
+
+    <h4>
+      git branch -d (branchname)
+      <small>删除分支</small>
+    </h4>
+
+	<p>假设我们要删除一个分支（比如上例中的“testing”分支，该分支没啥特殊的内容了），可以执行 <code>git branch -d (branch)</code> 把它删掉。
+
+<pre>
+<b>$ git branch</b>
+* <span class="green">master</span>
+  testing
+<b>$ git branch -d testing</b>
+Deleted branch testing (was 78b2670).
+<b>$ git branch</b>
+* <span class="green">master</span>
+</pre>
+
+    <p class="nutshell">
+	<b>一言以蔽之</b> 使用 <code>git branch</code> 列出现有的分支、创建新分支以及删除不必要或者已合并的分支。
+    </p>
+
+  </div>
+</div>
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a target="new" href="http://www.kernel.org/pub/software/scm/git/docs/git-merge.html">docs</a> &nbsp;
+      <a target="new" href="http://progit.org/book/ch3-2.html#basic_merging">book</a>
+    </span>
+    <a name="merge">git merge</a>
+    <span class="desc">将分支合并到您的当前分支</span>
+  </h2>
+
+  <div class="block">
+	<p>一旦某分支有了独立内容，您终究会希望将它合并回到您的主分支。您可以使用 <code>git merge</code> 命令将任何分支合并到当前分支中去。我们那上例中的“removals”分支为例。假设我们创建了一个分支，移除了一些文件，并将它提交到该分支，其实该分支是与我们的主分支（也就是“master”）独立开来的。要想将这些移除操作包含在主分支中，您可以将“removals”分支合并回去。
+    </p>
+
+<pre>
+<b>$ git branch</b>
+* <span class="green">master</span>
+  removals
+<b>$ ls</b>
+README   hello.rb more.txt test.txt
+<b>$ git merge removals</b>
+Updating 8bd6d8b..8f7c949
+Fast-forward
+ more.txt |    1 -
+ test.txt |    1 -
+ 2 files changed, 0 insertions(+), 2 deletions(-)
+ delete mode 100644 more.txt
+ delete mode 100644 test.txt
+<b>$ ls</b>
+<span class="hl">README   hello.rb</span>
+</pre>
+
+    <h4>
+      更多复杂合并
+    </h4>
+
+    <p>当然，合并并不仅仅是简单的文件添加、移除的操作，Git 也会合并修改 —— 事实上，它很会合并修改。举例，我们看看在某分支中编辑某个文件，然后在另一个分支中把它的名字改掉再做些修改，最后将这俩分支合并起来。您觉得会变成一坨 shi？我们试试看。
+    </p>
+
+<pre>
+<b>$ git branch</b>
+* master
+<b>$ cat hello.rb </b>
+class HelloWorld
+  def self.hello
+    puts "Hello World"
+  end
+end
+
+HelloWorld.hello
+</pre>
+
+	<p>首先，我们创建一个叫做“change_class”的分支，切换过去，从而将重命名类等操作独立出来。我们将类名从 “HelloWorld” 改为 “HiWorld”。
+    </p>
+
+<pre>
+<b>$ git checkout -b change_class</b>
+M hello.rb
+Switched to a new branch 'change_class'
+<b>$ vim hello.rb </b>
+<b>$ head -1 hello.rb </b>
+class HiWorld
+<b>$ git commit -am 'changed the class name'</b>
+[change_class 3467b0a] changed the class name
+ 1 files changed, 2 insertions(+), 4 deletions(-)
+</pre>
+
+	<p>然后，将重命名类操作提交到 “change_class” 分支中。现在，假如切换回 “master” 分支我们可以看到类名恢复到了我们切换到 “change_class” 分支之前的样子。现在，再做些修改（即代码中的输出），同时将文件名从 <code>hello.rb</code> 改为 <code>ruby.rb</code>。
+
+<pre>
+<b>$ git checkout master</b>
+Switched to branch 'master'
+<b>$ git mv hello.rb ruby.rb</b>
+<b>$ vim ruby.rb </b>
+<b>$ git diff</b>
+<span class="umber">diff --git a/ruby.rb b/ruby.rb
+index 2aabb6e..bf64b17 100644
+--- a/ruby.rb
++++ b/ruby.rb</span>
+<span class="lblue">@@ -1,7 +1,7 @@</span>
+ class HelloWorld
+
+   def self.hello
+<span class="red">-    puts "Hello World"</span>
+<span class="green">+    puts "Hello World from Ruby"</span>
+   end
+
+ end
+<b>$ git commit -am 'added from ruby'</b>
+[master b7ae93b] added from ruby
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+ rename hello.rb => ruby.rb (65%)
+</pre>
+
+	<p>现在这些改变已经记录到我的 “master” 分支了。请注意，这里类名还是 “HelloWorld”，而不是 “HiWorld”。然后我想将类名的改变合并过来，我把 “change_class” 分支合并过来就行了。但是，我已经将文件名都改掉了，Git 知道该怎么办么？
+      </p>
+
+<pre>
+<b>$ git branch</b>
+  change_class
+* master
+<b>$ git merge change_class</b>
+Renaming hello.rb => ruby.rb
+Auto-merging ruby.rb
+Merge made by recursive.
+ ruby.rb |    6 ++----
+ 1 files changed, 2 insertions(+), 4 deletions(-)
+<b>$ cat ruby.rb</b>
+class HiWorld
+  def self.hello
+    puts "Hello World from Ruby"
+  end
+end
+
+HiWorld.hello
+</pre>
+
+    <p>不错，它就是发现了。请注意，在这部操作，我没有遇到合并冲突，并且文件已经重命名、类名也换掉了。挺酷。
+    </p>
+
+    <h4>
+      合并冲突
+    </h4>
+
+    <p>那么，Git 合并很有魔力，我们再也不用处理合并冲突了，对吗？不太确切。不同分支中修改了相同区块的代码，电脑自己猜不透神马的情况下，冲突就摆在我们面前了。我们看看两个分支中改了同一行代码的例子。
+    <p>
+
+<pre>
+<b>$ git branch</b>
+* master
+<b>$ git checkout -b fix_readme</b>
+Switched to a new branch 'fix_readme'
+<b>$ vim README </b>
+<b>$ git commit -am 'fixed readme title'</b>
+[fix_readme 3ac015d] fixed readme title
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+</pre>
+
+	<p>我们在某分支中修改了 README 文件中的一行，并提交了。我们再在 “master” 分支中对同个文件的同一行内容作不同的修改。
+    </p>
+
+<pre>
+<b>$ git checkout master</b>
+Switched to branch 'master'
+<b>$ vim README </b>
+<b>$ git commit -am 'fixed readme title differently'</b>
+[master 3cbb6aa] fixed readme title differently
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+</pre>
+
+    <p>有意思的来了 —— 我们将前一个分支合并到 “master” 分支，一个合并冲突就出现了。
+      </p>
+
+<pre>
+<b>$ git merge fix_readme</b>
+Auto-merging README
+CONFLICT (content): Merge conflict in README
+Automatic merge failed; fix conflicts and then commit the result.
+<b>$ cat README </b>
+<<<<<<< HEAD
+Many Hello World Examples
+=======
+Hello World Lang Examples
+>>>>>>> fix_readme
+
+This project has examples of hello world in
+nearly every programming language.
+</pre>
+
+    <p>您可以看到，Git 在产生合并冲突的地方插入了标准的与 Subversion 很像的合并冲突标记。轮到我们去解决这些冲突了。在这里我们就手动把它解决。如果您要 Git 打开一个图形化的合并工具，可以看看 <a href="http://www.kernel.org/pub/software/scm/git/docs/git-mergetool.html">git 合并工具</a>（比如 kdiff3、emerge、p4merge 等）。
+    </p>
+
+<pre>
+<b>$ vim README </b>  <span class="exp">here I'm fixing the conflict</span>
+<b>$ git diff</b>
+<span class="umber">diff --cc README
+index 9103e27,69cad1a..0000000
+--- a/README
++++ b/README</span>
+<span class="lblue">@@@ -1,4 -1,4 +1,4 @@@</span>
+<span class="red">- Many Hello World Examples</span>
+ <span class="red">-Hello World Lang Examples</span>
+<span class="green">++Many Hello World Lang Examples</span>
+
+  This project has examples of hello world in
+</pre>
+
+	<p>在 Git 中，处理合并冲突的时候有个很酷的提示。如果您执行 <code>git diff</code>，就像我演示的这样，它会告诉您冲突的两方，和您是如何解决的。现在是时候把它标记为已解决了。在 Git 中，我们可以用 <code>git add</code> —— 要告诉 Git 文件冲突已经解决，您必须把它写入缓存区。
+    </p>
+
+<pre>
+<b>$ git status -s</b>
+UU README
+<b>$ git add README </b>
+<b>$ git status -s</b>
+M  README
+<b>$ git commit </b>
+[master 8d585ea] Merge branch 'fix_readme'
+</pre>
+
+    <p>现在我们成功解决了合并中的冲突，并提交了结果
+    </p>
+
+    <p class="nutshell">
+    <b>一言以蔽之</b> 使用 <code>git merge</code> 将另一个分支并入当前的分支中去。Git 会自动以最佳方式将两个不同快照中独特的工作合并到一个新快照中去。
+    </p>
+
+  </div>
+</div>
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a target="new" href="http://www.kernel.org/pub/software/scm/git/docs/git-log.html">文档</a> &nbsp;
+      <a target="new" href="http://progit.org/book/ch6-1.html#commit_ranges">书</a>
+    </span>
+    <a name="log">git log</a>
+    <span class="desc">显示一个分支中提交的更改记录</span>
+  </h2>
+
+  <div class="block">
+
+	<p>
+	到目前为止，我们已经提交快照到项目中，在不同的各自分离的上下文中切换，但假如我们忘了自己是如何到目前这一步的那该怎么办？或者假如我们想知道此分支与彼分支到底有啥区别？Git 提供了一个告诉您使您达成当前快照的所有提交消息的工具，叫做 <code>git log</code>。
+    </p>
+
+	<p>
+	要理解日志（log）命令，您需要了解当执行 <code>git commit</code> 以存储一个快照的时候，都有啥信息被保存了。除了文件详单、提交消息和提交者的信息，Git 还保存了您的此次提交所基于的快照。也就是，假如您克隆了一个项目，您是在什么快照的基础上做的修改而得到新保存的快照的？这有益于为项目进程提供上下文，使 Git 能够弄明白谁做了什么改动。如果 Git 有您的快照所基于的快照的话，它就能自动判断您都改变了什么。而新提交所基于的提交，被称作新提交的“父亲”。
+    </p>
+
+	<p>某分支的按时间排序的“父亲”列表，当您在该分支时，可以执行 <code>git log</code> 以查看。例如，如果我们在本章中操作的 Hello World 项目中执行 <code>git log</code>，我们可以看到已提交的消息。
+
+<pre>
+<b>$ git log</b>
+<span class="yellow">commit 8d585ea6faf99facd39b55d6f6a3b3f481ad0d3d</span>
+Merge: 3cbb6aa 3ac015d
+Author: Scott Chacon &lt;schacon@gmail.com>
+Date:   Fri Jun 4 12:59:47 2010 +0200
+
+    Merge branch 'fix_readme'
+
+    Conflicts:
+        README
+
+<span class="yellow">commit 3cbb6aae5c0cbd711c098e113ae436801371c95e</span>
+Author: Scott Chacon &lt;schacon@gmail.com>
+Date:   Fri Jun 4 12:58:53 2010 +0200
+
+    fixed readme title differently
+
+<span class="yellow">commit 3ac015da8ade34d4c7ebeffa2053fcac33fb495b</span>
+Author: Scott Chacon &lt;schacon@gmail.com>
+Date:   Fri Jun 4 12:58:36 2010 +0200
+
+    fixed readme title
+
+<span class="yellow">commit 558151a95567ba4181bab5746bc8f34bd87143d6</span>
+Merge: b7ae93b 3467b0a
+Author: Scott Chacon &lt;schacon@gmail.com>
+Date:   Fri Jun 4 12:37:05 2010 +0200
+
+    Merge branch 'change_class'
+...
+</pre>
+
+	<p>我们可以用 <code>--oneline</code> 选项来查看历史记录的紧凑简洁的版本。
+    </p>
+
+<pre>
+<b>$ git log --oneline</b>
+8d585ea Merge branch 'fix_readme'
+3cbb6aa fixed readme title differently
+3ac015d fixed readme title
+558151a Merge branch 'change_class'
+b7ae93b added from ruby
+3467b0a changed the class name
+17f4acf first commit
+</pre>
+
+	<p>
+	这告诉我们的是，此项目的开发历史。如果提交消息描述性很好，这就能为我们提供关于有啥改动被应用、或者影响了当前快照的状态、以及这快照里头都有啥。
+    </p>
+
+	<p>我们还可以用它的十分有帮助的 <code>--graph</code> 选项，查看历史中什么时候出现了分支、合并。以下为相同的命令，开启了拓扑图选项：
+    </p>
+
+<pre>
+<b>$ git log --oneline --graph</b>
+*   8d585ea Merge branch 'fix_readme'
+|\
+| * 3ac015d fixed readme title
+* | 3cbb6aa fixed readme title differently
+|/
+*   558151a Merge branch 'change_class'
+|\
+| * 3467b0a changed the class name
+* | b7ae93b added from ruby
+|/
+* 17f4acf first commit
+</pre>
+
+	<p>现在我们可以更清楚明了地看到何时工作分叉、又何时归并。这对查看发生了什么、应用了什么改变很有帮助，并且极大地帮助您管理您的分支。让我们创建一个分支，在里头做些事情，然后切回到主分支，也做点事情，然后看看 <code>log</code> 命令是如何帮助我们理清这俩分支上都发生了啥的。
+    </p>
+
+    <p>首先我们创建一个分支，来添加 Erlang 编程语言的 Hello World 示例 —— 我们想要在一个分支里头做这个，以避免让可能还不能工作的代码弄乱我们的稳定分支。这样就可以切来切去，片叶不沾身。
+    </p>
+
+<pre>
+<b>$ git checkout -b erlang</b>
+Switched to a new branch 'erlang'
+<b>$ vim erlang_hw.erl</b>
+<b>$ git add erlang_hw.erl </b>
+<b>$ git commit -m 'added erlang'</b>
+[erlang ab5ab4c] added erlang
+ 1 files changed, 5 insertions(+), 0 deletions(-)
+ create mode 100644 erlang_hw.erl
+</pre>
+
+    <p>由于我们玩函数式编程很开心，以至于沉迷其中，又在“erlang”分支中添加了一个 Haskell 的示例程序。
+    </p>
+
+<pre>
+<b>$ vim haskell.hs</b>
+<b>$ git add haskell.hs </b>
+<b>$ git commit -m 'added haskell'</b>
+[erlang 1834130] added haskell
+ 1 files changed, 4 insertions(+), 0 deletions(-)
+ create mode 100644 haskell.hs
+</pre>
+
+    <p>最后，我们决定还是把 Ruby 程序的类名改回原先的样子。与其创建另一个分支，我们可以返回主分支，改变它，然后直接提交。
+    </p>
+
+<pre>
+<b>$ git checkout master</b>
+Switched to branch 'master'
+<b>$ ls</b>
+README  ruby.rb
+<b>$ vim ruby.rb </b>
+<b>$ git commit -am 'reverted to old class name'</b>
+[master 594f90b] reverted to old class name
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+</pre>
+
+	<p>现在假设我们有段时间不做这个项目了，我们做别的去了。当我们回来的时候，我们想知道“erlang”分支都是啥，而主分支的进度又是怎样。仅仅看分支的名字，我们是无从知道自己还在里面有 Haskell 的改动的，但是用 <code>git log</code> 我们就可以。如果您在命令行中提供一个分支名字，它就会显示该分支历史中“可及”的提交，即从该分支创立起可追溯的影响了最终的快照的提交。
+    </p>
+
+<pre>
+<b>$ git log --oneline erlang</b>
+<span class="hl">1834130 added haskell</span>
+ab5ab4c added erlang
+8d585ea Merge branch 'fix_readme'
+3cbb6aa fixed readme title differently
+3ac015d fixed readme title
+558151a Merge branch 'change_class'
+b7ae93b added from ruby
+3467b0a changed the class name
+17f4acf first commit
+</pre>
+
+	<p>如此，我们很容易就看到分支里头还包括了 Haskell 代码（高亮显示了）。更酷的是，我们很容易地告诉 Git，我们只对某个分支中可及的提交感兴趣。换句话说，某分支中与其他分支相比唯一的提交。
+    </p>
+
+	<p>在此例中，如果我们想要合并“erlang”分支，我们需要看当合并的时候，都有啥提交会作用到我们的快照上去。我们告诉 Git 的方式是，在不想要看到的分支前放一个 <code>^</code>。例如，如果我们想要看“erlang”分支中但不在主分支中的提交，我们可以用 <code>erlang ^master</code>，或者反之。
+    </p>
+
+<pre>
+<b>$ git log --oneline erlang ^master</b>
+1834130 added haskell
+ab5ab4c added erlang
+<b>$ git log --oneline master ^erlang</b>
+594f90b reverted to old class name
+</pre>
+
+    <p>这为我们提供了一个良好的、简易的分支管理工具。它使我们能够非常容易地查看对某个分支唯一的提交，从而知道我们缺少什么，以及当我们要合并时，会有什么被合并进去。
+    </p>
+
+    <p class="nutshell">
+	<b>一言以蔽之</b> 使用 <code>git log</code> 列出促成当前分支目前的快照的提交历史记录。这使您能够看到项目是如何到达现在的状况的。
+    </p>
+
+  </div>
+</div>
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a target="new" href="http://www.kernel.org/pub/software/scm/git/docs/git-tag.html">文档</a> &nbsp;
+      <a target="new" href="http://progit.org/book/ch2-6.html">书</a>
+    </span>
+    <a name="tag">git tag</a>
+    <span class="desc">给历史记录中的某个重要的一点打上标签</span>
+  </h2>
+
+  <div class="block">
+
+    <p>
+	如果您达到一个重要的阶段，并希望永远记住那个特别的提交快照，您可以使用 <code>git tag</code> 给它打上标签。该 <code>tag</code> 命令基本上会给该特殊提交打上永久的书签，从而使您在将来能够用它与其他提交比较。通常，您会在切取一个发布版本或者交付一些东西的时候打个标签。
+    </p>
+
+	<p>比如说，我们想为我们的 Hello World 项目发布一个“1.0”版本。我们可以用 <code>git tag -a v1.0</code> 命令给最新一次提交打上（<code>HEAD</code>）“v1.0”的标签。<code>-a</code> 选项意为“创建一个带注解的标签”，从而使您为标签添加注解。绝大部分时候都会这么做的。不用 <code>-a</code> 选项也可以执行的，但它不会记录这标签是啥时候打的，谁打的，也不会让你添加个标签的注解。我推荐一直创建带注解的标签。</p>
+
+<pre>
+<b>$ git tag -a v1.0 </b>
+</pre>
+
+	<p>当您执行 <code>git tag -a</code> 命令时，Git 会打开您的编辑器，让您写一句标签注解，就像您给提交写注解一样。
+    </p>
+
+	<p>现在，注意当我们执行 <code>git log --decorate</code> 时，我们可以看到我们的标签了：
+    </p>
+
+<pre>
+<b>$ git log --oneline --decorate --graph</b>
+* 594f90b (HEAD, <span class="hl">tag: v1.0</span>, master) reverted to old class name
+*   8d585ea Merge branch 'fix_readme'
+|\
+| * 3ac015d (fix_readme) fixed readme title
+* | 3cbb6aa fixed readme title differently
+|/
+*   558151a Merge branch 'change_class'
+|\
+| * 3467b0a changed the class name
+* | b7ae93b added from ruby
+|/
+* 17f4acf first commit
+</pre>
+
+	<p>如果我们有新提交，该标签依然会待在该提交的边上，所以我们已经给那个特定快照永久打上标签，并且能够将它与未来的快照做比较。
+    </p>
+
+	<p>不过我们并不需要给当前提交打标签。如果我们忘了给某个提交打标签，又将它发布了，我们可以给它追加标签。在相同的命令末尾加上提交的 SHA，执行，就可以了。例如，假设我们发布了提交 <code>558151a</code>（几个提交之前的事情了），但是那时候忘了给它打标签。我们现在也可以：</p>
+
+<pre>
+<b>$ git tag -a v0.9 558151a</b>
+<b>$ git log --oneline --decorate --graph</b>
+* 594f90b (HEAD, tag: v1.0, master) reverted to old class name
+*   8d585ea Merge branch 'fix_readme'
+|\
+| * 3ac015d (fix_readme) fixed readme title
+* | 3cbb6aa fixed readme title differently
+|/
+*   558151a (<span class="hl">tag: v0.9</span>) Merge branch 'change_class'
+|\
+| * 3467b0a changed the class name
+* | b7ae93b added from ruby
+|/
+* 17f4acf first commit
+</pre>
+
+  </div>
+</div>
+
+<p><a href="/zh/remotes">到 分享与更新项目 &#187;</a></p>
+

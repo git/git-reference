@@ -1,0 +1,112 @@
+---
+layout: zh_reference
+---
+
+<div class="box">
+  <h2>获取与创建项目</h2>
+  <div class="block">
+    <p>
+    您得现有一个 Git 仓库，才能用它进行操作。仓库是 Git 存放您要保存的快照的数据的地方。
+    </p>
+
+    <p>
+	拥有一个 Git 仓库的途径有两种。在已有的目录中，初始化一个新的，其一。比如一个新的项目，或者一个已存在的项目，但该项目尚未有版本控制。如果您想要复制一份别人的项目，或者与别人合作某个项目，也可以从一个公开的 Git 仓库克隆，其二。本章将对两者都做介绍。
+    </p>
+  </div>
+</div>
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a target="new" href="http://www.kernel.org/pub/software/scm/git/docs/git-init.html">文档</a> &nbsp;
+      <a target="new" href="http://progit.org/book/ch2-1.html#initializing_a_repository_in_an_existing_directory">书</a>
+    </span>
+    <a name="init">git init</a>
+    <span class="desc">将一个目录初始化为 Git 仓库</span>
+  </h2>
+
+  <div class="block">
+	在目录中执行 <code>git init</code>，就可以创建一个 Git 仓库了。比如，我们恰好有个目录，里头有些许文件，如下：
+<pre>
+<b>$ cd konichiwa</b>
+<b>$ ls</b>
+README   hello.rb
+</pre>
+
+	在这个项目里头，我们会用各种编程语言写 "Hello World" 实例。到目前为止，我们只有 Ruby 的，不过，这才刚上路嘛。为了开始用 Git 对这个项目作版本控制，我们执行一下 <code>git init</code>。
+
+<pre>
+<b>$ git init</b>
+Initialized empty Git repository in /opt/konichiwa/.git/
+# 在 /opt/konichiwa/.git 目录初始化空 Git 仓库完毕。
+</pre>
+
+	现在您可以看到在您的项目目录中有个 <code>.git</code> 的子目录。这就是您的 Git 仓库了，所有有关您的此项目的快照数据都存放在这里。
+
+<pre>
+<b>$ ls -a</b>
+.        ..       .git     README   hello.rb
+</pre>
+
+	恭喜，现在您就有了一个 Git 仓库的架子，可以开始快照您的项目了。
+
+    <p class="nutshell">
+    <strong>一言以蔽之</strong>，用 <code>git init</code> 来在目录中创建新的 Git 仓库。您可以在任何时候、任何目录中这么做，完全是本地化的。
+    </p>
+
+  </div>
+</div>
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a target="new" href="http://www.kernel.org/pub/software/scm/git/docs/git-clone.html">文档 </a> &nbsp;
+      <a target="new" href="http://progit.org/book/ch2-1.html#cloning_an_existing_repository">书</a>
+    </span>
+    <a name="clone">git clone</a>
+    <span class="desc">复制一个 Git 仓库，以上下其手</span>
+  </h2>
+  <div class="block">
+	<p>
+	如果您需要与他人合作一个项目，或者想要拷贝一个项目，看看代码，您就可以克隆那个项目。执行 <code>git clone [url]</code>，[url] 为您想要拷贝的项目，就可以了。
+    </p>
+
+<pre>
+<b>$ git clone git://github.com/schacon/simplegit.git</b>
+Initialized empty Git repository in /private/tmp/simplegit/.git/
+remote: Counting objects: 100, done.
+remote: Compressing objects: 100% (86/86), done.
+remote: Total 100 (delta 35), reused 0 (delta 0)
+Receiving objects: 100% (100/100), 9.51 KiB, done.
+Resolving deltas: 100% (35/35), done.
+<b>$ cd simplegit/</b>
+<b>$ ls</b>
+README   Rakefile <span class="blue">lib</span>
+</pre>
+
+    <p>
+	上述操作将拷贝该项目的全部记录，让您本地拥有这些。并且该操作将拷贝该项目的主分支，是您能够查看代码，或编辑修改。进到该目录中，您会看到 <code>.git</code> 子目录。所有的项目数据都存在那里。
+    </p>
+
+<pre>
+<b>$ ls -a</b>
+.        ..       <span class="blue">.git</span>     README   Rakefile <span class="blue">lib</span>
+<b>$ cd .git</b>
+<b>$ ls</b>
+HEAD        description <span class="blue">info</span>        packed-refs
+<span class="blue">branches    hooks       logs        refs</span>
+config      index       <span class="blue">objects</span>
+</pre>
+
+    <p>
+	默认情况下，Git 会按照您提供的 URL 所指示的项目的名称创建您的本地项目目录。通常就是该 URL 最后一个 <code>/</code> 之后的任何东西。如果你想要一个不一样的名字，您可以在该命令后加上它，就在那个 URL 后面。
+    </p>
+
+    <p class="nutshell">
+    <strong>一言以蔽之</strong>，使用 <code>git clone</code> 本地拷贝一个 Git 仓库，让自己能够查看该项目，或者动手修改
+    </p>
+
+  </div>
+</div>
+
+<p><a href="/zh/basic">接下来：简单快照 &#187;</a></p>
