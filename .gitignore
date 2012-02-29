@@ -1,5 +1,5 @@
 _site
 *~
-\.*.swp
+.*.swp
 .gitignore
 .DS_Store
