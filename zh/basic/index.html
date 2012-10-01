@@ -7,19 +7,19 @@ layout: zh_reference
     <span class="docs">
       <a target="new" href="http://progit.org/book/ch2-2.html">书</a>
     </span>
-    基本的快照
+    基本快照
   </h2>
   <div class="block">
     <p>
-    Git 的所有工作就是创建与保存您的项目的快照以及之后的快照对比等工作。本章将对有关创建与提交您的项目的快照的命令作介绍。
+    Git 的工作就是创建和保存您的项目的快照并和之后的快照进行对比。本章将对有关创建与提交您的项目的快照的命令作介绍。
     </p>
 
     <p>
-    这里有个重要的概念，Git 有一个叫做“索引”的东东，有点像是您的快照的缓存区。这就使您能够从更改的文件中创建出一系列组织良好的快照，而不是一次提交所有的更改。
+    这里有个重要的概念，Git 有一个叫做“索引”的东东，有点像是您的快照的缓存区。这使得Git能够很方便的从更改的文件中创建出一系列的快照，而不是一次提交所有的更改。
     </p>
 
     <p class="nutshell">
-	<strong>一言以蔽之</strong>，使用 <code>git add</code> 添加需要追踪的新文件和待提交的更改，然后使用 <code>git status</code> 和 <code>git diff</code> 查看有何改动，最后用 <code>git commit</code> 将您的快照记录。这就是您要用的基本流程，绝大部分时候都是这样的。
+	<strong>简而言之</strong>，使用 <code>git add</code> 添加需要追踪的新文件和待提交的更改，然后使用 <code>git status</code> 和 <code>git diff</code> 查看有何改动，最后用 <code>git commit</code> 将您的快照记录。这就是您要用的基本流程，绝大部分时候都是这样的。
     </p>
 
   </div>
@@ -37,7 +37,7 @@ layout: zh_reference
 
   <div class="block">
 	<p>
-	在 Git 中，在提交您修改的文件之前，您需要把它们添加到缓存。如果该文件是新的，您可以执行 <code>git add</code> 将该文件添加到缓存，但是，即使该文件已经被追踪了 —— 也就是说，曾经提交过了 —— 你仍然需要执行 <cpde>git add</code> 将新更改的文件添加到缓存去。让我们看几个例子：
+	在 Git 中，在提交您修改的文件之前，您需要把它们添加到缓存。如果该文件是新创建的，您可以执行 <code>git add</code> 将该文件添加到缓存，但是，即使该文件已经被追踪了 —— 也就是说，曾经提交过了 —— 你仍然需要执行 <cpde>git add</code> 将新更改的文件添加到缓存去。让我们看几个例子：
     </p>
 
 	<p>回到我们的 Hello World 示例，初始化该项目之后，我们就要用 <code>git add</code> 将我们的文件添加进去了。我们可以用 <code>git status</code> 看看我们的项目的当前状态。
@@ -76,12 +76,12 @@ layout: zh_reference
 </pre>
 
 	<p>
-	“AM” 状态的意思是，这个文件在我们将它添加到缓存之后又有改动。这意味着如果我们现在提交快照，我们记录的将是上次跑 <code>git add</code> 的时候的文件版本，而不是现在在磁盘中的这个。Git 并不认为磁盘中的文件与您想快照的文件必须是一致的 —— （如果您需要它们一致，）得用 <code>git add</code> 命令告诉它。
+	“AM” 状态的意思是，这个文件在我们将它添加到缓存之后又有改动。这意味着如果我们现在提交快照，我们提交的将是上次执行 <code>git add</code> 的时候的文件版本，而不是现在在磁盘中的这个。Git 并不认为磁盘中的文件与您想快照的文件必须是一致的 —— （如果您需要它们一致，）得用 <code>git add</code> 命令告诉它。
     </p>
 
     <p class="nutshell">
-	<strong>一言以蔽之</strong>，
-	当您要将您的修改包含在即将提交的快照里的时候，执行 <code>git add</code>。任何您没有添加的改动都不会被包含在内 —— 这意味着您可以比绝大多数其他源代码版本控制系统更精确地归置您的快照。
+	<strong>简而言之</strong>，
+	当您想要将您的修改包含在即将提交的快照里的时候，执行 <code>git add</code>。任何您没有添加的改动都不会被包含在内 —— 这意味着您可以比其他的绝大多数源代码版本控制系统更精确地控制您的快照。
     </p>
 
 	<p>请查看《Pro Git》中 <code>git add</code> 的 “-p” 参数，以了解更多关于提交文件的灵活性的例子。
@@ -102,7 +102,7 @@ layout: zh_reference
   </h2>
 
   <div class="block">
-	<p>正如您在 <code>git add</code> 小节中所看到的，您可以执行 <code>git status</code> 命令查看您的代码在缓存与当前工作目录的状态。我演示该命令的时候加了 <code>-s</code> 参数，以获得简短的结果输出。若没有这个标记，命令 <code>git status</code> 将告诉您更多的提示与上下文欣喜。以下便是同样状态下，有跟没有 <code>-s</code> 参数的输出对比。简短的输出如下：
+	<p>正如您在 <code>git add</code> 小节中所看到的，您可以执行 <code>git status</code> 命令查看您的代码在缓存与当前工作目录的状态。我演示该命令的时候加了 <code>-s</code> 参数，以获得简短的结果输出。若没有这个标记，命令 <code>git status</code> 将告诉您更多的提示与上下文信息。以下便是同样状态下，有跟没有 <code>-s</code> 参数的输出对比。简短的输出如下：
     </p>
 
 <pre>
@@ -153,7 +153,7 @@ layout: zh_reference
 </pre>
 
     <p class="nutshell">
-	<strong>一言以蔽之</strong>，执行 <code>git status</code> 以查看在您上次提交之后有啥被修改或者临时提交了，从而决定自己是否需要提交一次快照，同时也能知道有什么改变被记录进去了。
+	<strong>简而言之</strong>，执行 <code>git status</code> 以查看在您上次提交之后有啥被修改或者临时提交了，从而决定自己是否需要提交一次快照，同时也能知道有什么改变被记录进去了。
     </p>
 
   </div>
@@ -327,7 +327,7 @@ index 2aabb6e..2ae9ba4 100644
 
 
     <p class="nutshell">
-    <strong>一言以蔽之</strong>，
+    <strong>简而言之</strong>，
     执行 <code>git diff</code> 来查看执行 <code>git status</code> 的结果的详细信息 —— 一行一行地显示这些文件是如何被修改或写入缓存的。
     </p>
 
@@ -466,7 +466,7 @@ nothing to commit (working directory clean)
 	</p>
 
     <p class="nutshell">
-	<strong>一言以蔽之</strong>，执行 <code>git commit</code> 记录缓存区的快照。这个快照就可以用来做比较、分享以及，如果需要，恢复。
+	<strong>简而言之</strong>，执行 <code>git commit</code> 记录缓存区的快照。如果需要的话，这个快照可以用来做比较、共享以及恢复。
     </p>
 
   </div>
@@ -513,7 +513,7 @@ M hello.rb
     </p>
 
     <p class="aside">
-	如果您好奇，它实际的操作是将该文件在“索引”中的校验和重置为最近一次提交中的值。<code>git add</code> 会计算一个文件的校验和，将它添加到“索引”中，而 <code>git reset HEAD</code> 将它改写回原先的，从而取消缓存。
+	如果您好奇，它实际的操作是将该文件在“索引”中的校验和重置为最近一次提交中的值。<code>git add</code> 会计算一个文件的校验和，将它添加到“索引”中，而 <code>git reset HEAD</code> 将它改写回原先的，从而取消缓存操作。
     </p>
 
     <p class="tip">
@@ -535,7 +535,7 @@ M hello.rb
 </pre>
 
     <p class="nutshell">
-	<strong>一言以蔽之</strong>，执行 <code>git reset HEAD</code> 以取消之前 <code>git add</code> 添加，但不希望包含在下一提交快照中的缓存。
+	<strong>简而言之</strong>，执行 <code>git reset HEAD</code> 以取消之前 <code>git add</code> 添加，但不希望包含在下一提交快照中的缓存。
     </p>
 
   </div>
@@ -571,11 +571,11 @@ M hello.rb
     </p>
 
     <p class="aside">
-    我自己不会用此命令的普通形式 —— 删除文件。通常直接从硬盘删除文件，然后执行 <code>git commit -a</code> 会简单些。它会自动将删除的文件从索引中移除。
+    我自己并不使用此命令的普通形式 —— 删除文件。通常直接从硬盘删除文件，然后执行 <code>git commit -a</code> 会简单些。它会自动将删除的文件从索引中移除。
     </p>
 
     <p class="nutshell">
-    <strong>一言以蔽之</strong>，
+    <strong>简而言之</strong>，
     执行 <code>git rm</code> 来删除 Git 追踪的文件。它还会删除您的工作目录中的相应文件。
     </p>
 
