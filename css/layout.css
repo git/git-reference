@@ -3,10 +3,11 @@
 Grey Box Method - Layout CSS
 ----------------------------------------------- */
 
-body {
+html, body {
 	border-top: 5px solid #000;
 	color: #333;
 	padding: 0 0 40px;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 #about_me img { border: 5px solid #333; margin: 3px; }
@@ -45,7 +46,7 @@ p.nutshell {
 
 .box code.code {
   white-space:pre;
-  font-family:monospace;
+  font-family: Consolas, 'Liberation Mono', Courier, monospace;
   padding: 8px;
   background: #ffe;
   display: block;
@@ -62,7 +63,7 @@ pre b { color: #111; }
 .hl { background: #eea; }
 
 .box h4 { 
-  font-family:monospace;
+  font-family: Consolas, 'Liberation Mono', Courier, monospace;
   margin-top: 20px;
   color: #833;
 }
@@ -99,7 +100,6 @@ ul#menu li {
     padding-right: 10px;
     padding-left: 10px;
     display:inline;
-    font-family: "inconsolata-1","inconsolata-2";
     font-size: 1.1em;
 }
 
@@ -298,7 +298,7 @@ p {
 	margin-bottom:1em;
 }
 blockquote {
-  font-family: "inconsolata-1","inconsolata-2";
+  font-family: Consolas, 'Liberation Mono', Courier, monospace;
   padding-left:1em;
   border-left:4px solid #ccc;
 }
