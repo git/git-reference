@@ -13,7 +13,7 @@ body {
 
 .info { background: #fff; padding: 10px;}
 
-.article { border-bottom: 5px solid #c9182f; padding-bottom: 10px; margin-bottom: 15px;}
+.article { border-bottom: 5px solid rgb(20,120,200); padding-bottom: 10px; margin-bottom: 15px;}
 
 .non_home_box {
     display: none;
@@ -24,7 +24,7 @@ body {
   background: #fff; 
 }
 #reflist h3 a { 
- color: #c9182f;
+ color: rgb(20,120,200);
 }
 #reflist h4 { font-size: 0.9em; }
 #reflist .block { margin: 0; padding: 0; }
@@ -87,7 +87,7 @@ pre b { color: #111; }
 }
 
 ul#menu { 
-    background: #c9182f;
+    background: rgb(20,120,200);
     padding: .5em;
     display: inline;
     color: #fff;
@@ -189,7 +189,7 @@ h1, h2, h3, h4, h5, h6 {line-height:1.2em; margin-bottom:.3em;}
 h2 {margin-top:1em; }
 h5 {font-size:1.2em;}
 h6 {font-size:1em; text-transform:uppercase;}
-h3 { color: #c9182f; }
+h3 { color: rgb(20,120,200); }
 
 h1 a {
 	font-weight:normal;
