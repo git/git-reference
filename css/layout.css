@@ -3,17 +3,18 @@
 Grey Box Method - Layout CSS
 ----------------------------------------------- */
 
-body {
+html, body {
 	border-top: 5px solid #000;
 	color: #333;
 	padding: 0 0 40px;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 #about_me img { border: 5px solid #333; margin: 3px; }
 
 .info { background: #fff; padding: 10px;}
 
-.article { border-bottom: 5px solid #c9182f; padding-bottom: 10px; margin-bottom: 15px;}
+.article { border-bottom: 5px solid rgb(20,120,200); padding-bottom: 10px; margin-bottom: 15px;}
 
 .non_home_box {
     display: none;
@@ -24,7 +25,7 @@ body {
   background: #fff; 
 }
 #reflist h3 a { 
- color: #c9182f;
+ color: rgb(20,120,200);
 }
 #reflist h4 { font-size: 0.9em; }
 #reflist .block { margin: 0; padding: 0; }
@@ -45,7 +46,7 @@ p.nutshell {
 
 .box code.code {
   white-space:pre;
-  font-family:monospace;
+  font-family: Consolas, 'Liberation Mono', Courier, monospace;
   padding: 8px;
   background: #ffe;
   display: block;
@@ -62,7 +63,7 @@ pre b { color: #111; }
 .hl { background: #eea; }
 
 .box h4 { 
-  font-family:monospace;
+  font-family: Consolas, 'Liberation Mono', Courier, monospace;
   margin-top: 20px;
   color: #833;
 }
@@ -87,7 +88,7 @@ pre b { color: #111; }
 }
 
 ul#menu { 
-    background: #c9182f;
+    background: rgb(20,120,200);
     padding: .5em;
     display: inline;
     color: #fff;
@@ -99,7 +100,6 @@ ul#menu li {
     padding-right: 10px;
     padding-left: 10px;
     display:inline;
-    font-family: "inconsolata-1","inconsolata-2";
     font-size: 1.1em;
 }
 
@@ -123,6 +123,65 @@ a {
 a:hover {
 	color:#333;
 }
+a.page-button {
+	background: #e4eafa none 0 0 repeat-x;
+	border: solid 1px #c9172e;
+	color: #c9172e;
+	cursor: pointer;
+	display: inline-block;
+	font-weight: bold;
+	font-size: 12px;
+	line-height: 100%;
+	margin: 1px;
+	padding: 0.8em 1em;
+	position: relative;
+	text-decoration: none;
+	text-shadow: #fff 0 1px 0;
+	vertical-align: middle;
+	white-space: nowrap;
+	float:right;
+	background-image: -moz-linear-gradient(-90deg,
+		#eeeeee 1%,
+		#fdf6f7 5%,
+		#fae9eb 70%,
+		#f7dcdf 100%);
+	background-image: -webkit-gradient(linear,left top,left bottom,
+		color-stop(0.01, #eee),
+		color-stop(0.05, #fdf6f7),
+		color-stop(0.70, #fae9eb),
+		color-stop(1, #f7dcdf));
+}
+a.next-page {
+	border-right: none;
+	margin-right: 26px;
+	padding-right: 0;
+}
+a.next-page:after, a.prev-page:after {
+	border: solid 1px #c9172e;
+	content: '';
+	display: block;
+	position: absolute;
+	top: .37em;
+	width: 1.7em;
+	height: 1.7em;
+	text-shadow: none;
+	z-index: -1;
+}
+a.next-page:after {
+	right: -.97em;
+	-moz-transform: rotate(-45deg);
+	background-image: -moz-linear-gradient(-135deg,
+		#eeeeee 1%,
+		#fdf6f7 5%,
+		#fae9eb 70%,
+		#f7dcdf 100%);
+	-webkit-transform:rotate(-45deg);
+	background-image: -webkit-gradient(linear,100% 0%, 0% 100%,
+		color-stop(0.01, #eee),
+		color-stop(0.05, #fdf6f7),
+		color-stop(0.70, #fae9eb),
+		color-stop(1, #f7dcdf));
+}
 
 /* headings
 ----------------------------------------------- */
@@ -130,7 +189,7 @@ h1, h2, h3, h4, h5, h6 {line-height:1.2em; margin-bottom:.3em;}
 h2 {margin-top:1em; }
 h5 {font-size:1.2em;}
 h6 {font-size:1em; text-transform:uppercase;}
-h3 { color: #c9182f; }
+h3 { color: rgb(20,120,200); }
 
 h1 a {
 	font-weight:normal;
@@ -239,7 +298,7 @@ p {
 	margin-bottom:1em;
 }
 blockquote {
-  font-family: "inconsolata-1","inconsolata-2";
+  font-family: Consolas, 'Liberation Mono', Courier, monospace;
   padding-left:1em;
   border-left:4px solid #ccc;
 }

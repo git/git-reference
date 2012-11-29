@@ -38,7 +38,7 @@ layout: reference
 <div class="box">
   <h2>
     <span class="docs">
-      <a target="new" href="http://www.kernel.org/pub/software/scm/git/docs/git-branch.html">docs</a> &nbsp;
+      <a target="new" href="http://git-scm.com/docs/git-branch">docs</a> &nbsp;
       <a target="new" href="http://progit.org/book/ch3-2.html">book</a>
     </span>
     <a name="branch">git branch</a>
@@ -49,7 +49,7 @@ layout: reference
 
   <h2>
     <span class="docs">
-      <a target="new" href="http://www.kernel.org/pub/software/scm/git/docs/git-checkout.html">docs</a> &nbsp;
+      <a target="new" href="http://git-scm.com/docs/git-checkout">docs</a> &nbsp;
       <a target="new" href="http://progit.org/book/ch3-2.html">book</a>
     </span>
     <a name="checkout">git checkout</a>
@@ -226,7 +226,7 @@ Deleted branch testing (was 78b2670).
 <div class="box">
   <h2>
     <span class="docs">
-      <a target="new" href="http://www.kernel.org/pub/software/scm/git/docs/git-merge.html">docs</a> &nbsp;
+      <a target="new" href="http://git-scm.com/docs/git-merge">docs</a> &nbsp;
       <a target="new" href="http://progit.org/book/ch3-2.html#basic_merging">book</a>
     </span>
     <a name="merge">git merge</a>
@@ -292,7 +292,6 @@ HelloWorld.hello
 
 <pre>
 <b>$ git checkout -b change_class</b>
-M hello.rb
 Switched to a new branch 'change_class'
 <b>$ vim hello.rb </b>
 <b>$ head -1 hello.rb </b>
@@ -421,7 +420,7 @@ nearly every programming language.
     <p>You can see that Git inserts standard merge conflict markers, much like
       Subversion, into files when it gets a merge conflict.  Now it's up to us
       to resolve them.  We will do it manually here, but check out
-      <a href="http://www.kernel.org/pub/software/scm/git/docs/git-mergetool.html">git mergetool</a>
+      <a href="http://git-scm.com/docs/git-mergetool">git mergetool</a>
       if you want Git to fire up a graphical mergetool
       (like kdiff3, emerge, p4merge, etc) instead.
     </p>
@@ -473,7 +472,7 @@ M  README
 <div class="box">
   <h2>
     <span class="docs">
-      <a target="new" href="http://www.kernel.org/pub/software/scm/git/docs/git-log.html">docs</a> &nbsp;
+      <a target="new" href="http://git-scm.com/docs/git-log">docs</a> &nbsp;
       <a target="new" href="http://progit.org/book/ch6-1.html#commit_ranges">book</a>
     </span>
     <a name="log">git log</a>
@@ -665,6 +664,9 @@ b7ae93b added from ruby
       front of the branch that we don't want to see.  For instance, if we want
       to see the commits that are in the 'erlang' branch that are not in the
       'master' branch, we can do <code>erlang ^master</code>, or vice versa.
+      Note that the Windows command-line treats <code>^</code> as a special
+      character, in which case you'll need to surround <code>^master</code>
+      in quotes.
     </p>
 
 <pre>
@@ -693,7 +695,7 @@ ab5ab4c added erlang
 <div class="box">
   <h2>
     <span class="docs">
-      <a target="new" href="http://www.kernel.org/pub/software/scm/git/docs/git-tag.html">docs</a> &nbsp;
+      <a target="new" href="http://git-scm.com/docs/git-tag">docs</a> &nbsp;
       <a target="new" href="http://progit.org/book/ch2-6.html">book</a>
     </span>
     <a name="tag">git tag</a>
@@ -775,5 +777,5 @@ ab5ab4c added erlang
   </div>
 </div>
 
-<p><a href="/remotes">On to Sharing and Updating Projects &#187;</a></p>
+<p><a class="page-button next-page" href="/remotes">On to Sharing and Updating Projects &#187;</a></p>
 

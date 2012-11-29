@@ -6,11 +6,12 @@ layout: zh_reference
   <h2>获取与创建项目</h2>
   <div class="block">
     <p>
-    你得现有一个 Git 仓库，才能用它进行操作。仓库是 Git 存放你要保存的快照的数据的地方。
+      你得先有一个 Git 仓库，才能用它进行操作。仓库是 Git 存放你要保存的快照的数据的地方。
     </p>
 
-    <p>
-	拥有一个 Git 仓库的途径有两种。在已有的目录中，初始化一个新的，其一。比如一个新的项目，或者一个已存在的项目，但该项目尚未有版本控制。如果你想要复制一份别人的项目，或者与别人合作某个项目，也可以从一个公开的 Git 仓库克隆，其二。本章将对两者都做介绍。
+    <p>拥有一个 Git 仓库的途径有两种。在已有的目录中，初始化一个新的，其一。
+      比如一个新的项目，或者一个已存在的项目，但该项目尚未有版本控制。如果你想要复制一份别人的项目，
+      或者与别人合作某个项目，也可以从一个公开的 Git 仓库克隆，其二。本章将对两者都做介绍。
     </p>
   </div>
 </div>
@@ -26,14 +27,17 @@ layout: zh_reference
   </h2>
 
   <div class="block">
-	在目录中执行 <code>git init</code>，就可以创建一个 Git 仓库了。比如，我们恰好有个目录，里头有些许文件，如下：
+  在目录中执行 <code>git init</code>，就可以创建一个 Git 仓库了。比如，我们恰好有个目录，里头有些许文件，如下：
 <pre>
 <b>$ cd konichiwa</b>
 <b>$ ls</b>
 README   hello.rb
 </pre>
 
-	在这个项目里头，我们会用各种编程语言写 "Hello World" 实例。到目前为止，我们只有 Ruby 的，不过，这才刚上路嘛。为了开始用 Git 对这个项目作版本控制，我们执行一下 <code>git init</code>。
+    <p>
+      在这个项目里头，我们会用各种编程语言写 "Hello World" 实例。
+      到目前为止，我们只有 Ruby 的，不过，这才刚上路嘛。为了开始用 Git 对这个项目作版本控制，我们执行一下 <code>git init</code>。
+    </p>
 
 <pre>
 <b>$ git init</b>
@@ -41,17 +45,20 @@ Initialized empty Git repository in /opt/konichiwa/.git/
 # 在 /opt/konichiwa/.git 目录初始化空 Git 仓库完毕。
 </pre>
 
-	现在你可以看到在你的项目目录中有个 <code>.git</code> 的子目录。这就是你的 Git 仓库了，所有有关你的此项目的快照数据都存放在这里。
+    <p>现在你可以看到在你的项目目录中有个 <code>.git</code> 的子目录。
+      这就是你的 Git 仓库了，所有有关你的此项目的快照数据都存放在这里。
+    </p>
 
 <pre>
 <b>$ ls -a</b>
 .        ..       .git     README   hello.rb
 </pre>
 
-	恭喜，现在你就有了一个 Git 仓库的架子，可以开始快照你的项目了。
+  恭喜，现在你就有了一个 Git 仓库的架子，可以开始快照你的项目了。
 
     <p class="nutshell">
-    <strong>一言以蔽之</strong>，用 <code>git init</code> 来在目录中创建新的 Git 仓库。你可以在任何时候、任何目录中这么做，完全是本地化的。
+      <strong>简而言之</strong>，用 <code>git init</code> 来在目录中创建新的 Git 仓库。
+      你可以在任何时候、任何目录中这么做，完全是本地化的。
     </p>
 
   </div>
@@ -67,8 +74,8 @@ Initialized empty Git repository in /opt/konichiwa/.git/
     <span class="desc">复制一个 Git 仓库，以上下其手</span>
   </h2>
   <div class="block">
-	<p>
-	如果你需要与他人合作一个项目，或者想要拷贝一个项目，看看代码，你就可以克隆那个项目。执行 <code>git clone [url]</code>，[url] 为你想要拷贝的项目，就可以了。
+    <p>如果你需要与他人合作一个项目，或者想要复制一个项目，看看代码，你就可以克隆那个项目。
+      执行 <code>git clone [url]</code>，[url] 为你想要复制的项目，就可以了。
     </p>
 
 <pre>
@@ -84,8 +91,9 @@ Resolving deltas: 100% (35/35), done.
 README   Rakefile <span class="blue">lib</span>
 </pre>
 
-    <p>
-	上述操作将拷贝该项目的全部记录，让你本地拥有这些。并且该操作将拷贝该项目的主分支，是你能够查看代码，或编辑修改。进到该目录中，你会看到 <code>.git</code> 子目录。所有的项目数据都存在那里。
+    <p>上述操作将复制该项目的全部记录，让你本地拥有这些。并且该操作将拷贝该项目的主分支，
+      使你能够查看代码，或编辑、修改。进到该目录中，你会看到 <code>.git</code> 子目录。
+      所有的项目数据都存在那里。
     </p>
 
 <pre>
@@ -98,15 +106,16 @@ HEAD        description <span class="blue">info</span>        packed-refs
 config      index       <span class="blue">objects</span>
 </pre>
 
-    <p>
-	默认情况下，Git 会按照你提供的 URL 所指示的项目的名称创建你的本地项目目录。通常就是该 URL 最后一个 <code>/</code> 之后的任何东西。如果你想要一个不一样的名字，你可以在该命令后加上它，就在那个 URL 后面。
+    <p>默认情况下，Git 会按照你提供的 URL 所指示的项目的名称创建你的本地项目目录。
+      通常就是该 URL 最后一个 <code>/</code> 之后的任何东西。如果你想要一个不一样的名字，
+      你可以在该命令后加上它，就在那个 URL 后面。
     </p>
 
     <p class="nutshell">
-    <strong>一言以蔽之</strong>，使用 <code>git clone</code> 本地拷贝一个 Git 仓库，让自己能够查看该项目，或者动手修改
+    <strong>简而言之</strong>，使用 <code>git clone</code> 拷贝一个 Git 仓库到本地，让自己能够查看该项目，或者进行修改。
     </p>
 
   </div>
 </div>
 
-<p><a href="/zh/basic">接下来：简单快照 &#187;</a></p>
+<p><a href="/zh/basic">接下来：基本快照 &#187;</a></p>

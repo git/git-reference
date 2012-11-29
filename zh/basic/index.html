@@ -7,19 +7,21 @@ layout: zh_reference
     <span class="docs">
       <a target="new" href="http://progit.org/book/ch2-2.html">书</a>
     </span>
-    基本的快照
+    基本快照
   </h2>
   <div class="block">
     <p>
-    Git 的所有工作就是创建与保存你的项目的快照以及之后的快照对比等工作。本章将对有关创建与提交你的项目的快照的命令作介绍。
+      Git 的工作就是创建和保存你的项目的快照及与之后的快照进行对比。本章将对有关创建与提交你的项目的快照的命令作介绍。
     </p>
 
     <p>
-    这里有个重要的概念，Git 有一个叫做“索引”的东东，有点像是你的快照的缓存区。这就使你能够从更改的文件中创建出一系列组织良好的快照，而不是一次提交所有的更改。
+      这里有个重要的概念，Git 有一个叫做“索引”的东东，有点像是你的快照的缓存区。这就使你能够从更改的文件中创建出一系列组织良好的快照，而不是一次提交所有的更改。
     </p>
 
     <p class="nutshell">
-	<strong>一言以蔽之</strong>，使用 <code>git add</code> 添加需要追踪的新文件和待提交的更改，然后使用 <code>git status</code> 和 <code>git diff</code> 查看有何改动，最后用 <code>git commit</code> 将你的快照记录。这就是你要用的基本流程，绝大部分时候都是这样的。
+      <strong>简而言之</strong>，使用 <code>git add</code> 添加需要追踪的新文件和待提交的更改，
+      然后使用 <code>git status</code> 和 <code>git diff</code> 查看有何改动，
+      最后用 <code>git commit</code> 将你的快照记录。这就是你要用的基本流程，绝大部分时候都是这样的。
     </p>
 
   </div>
@@ -36,11 +38,14 @@ layout: zh_reference
   </h2>
 
   <div class="block">
-	<p>
-	在 Git 中，在提交你修改的文件之前，你需要把它们添加到缓存。如果该文件是新的，你可以执行 <code>git add</code> 将该文件添加到缓存，但是，即使该文件已经被追踪了 —— 也就是说，曾经提交过了 —— 你仍然需要执行 <cpde>git add</code> 将新更改的文件添加到缓存去。让我们看几个例子：
+    <p>
+      在 Git 中，在提交你修改的文件之前，你需要把它们添加到缓存。如果该文件是新创建的，你可以执行
+      <code>git add</code> 将该文件添加到缓存，但是，即使该文件已经被追踪了 —— 也就是说，曾经提交过了 ——
+      你仍然需要执行 <cpde>git add</code> 将新更改的文件添加到缓存去。让我们看几个例子：
     </p>
 
-	<p>回到我们的 Hello World 示例，初始化该项目之后，我们就要用 <code>git add</code> 将我们的文件添加进去了。我们可以用 <code>git status</code> 看看我们的项目的当前状态。
+    <p>回到我们的 Hello World 示例，初始化该项目之后，我们就要用 <code>git add</code> 将我们的文件添加进去了。
+      我们可以用 <code>git status</code> 看看我们的项目的当前状态。
     </p>
 
 <pre>
@@ -49,13 +54,13 @@ layout: zh_reference
 <span class="red">??</span> hello.rb
 </pre>
 
-    我们有俩尚未被追踪的文件，得添加一下。
+    <p>我们有俩尚未被追踪的文件，得添加一下。</p>
 
 <pre>
 <b>$ git add README hello.rb</b>
 </pre>
 
-	现在我们再执行 <code>git status</code>，就可以看到这俩文件已经加上去了。
+    <p>现在我们再执行 <code>git status</code>，就可以看到这俩文件已经加上去了。</p>
 
 <pre>
 <b>$ git status -s</b>
@@ -64,10 +69,14 @@ layout: zh_reference
 </pre>
 
     <p class="aside">
-	新项目中，添加所有文件很普遍，可以在当前工作目录执行命令：<code>git add .</code>。因为 Git 会递归地将你执行命令时所在的目录中的所有文件添加上去，所以如果你将当前的工作目录作为参数，它就会追踪那儿的所有文件了。如此，<code>git add .</code> 就和 <code>git add README hello.rb</code> 有一样的效果。此外，效果一致的还有 <code>git add *</code>，不过那只是因为我们这还木有子目录，不需要递归地添加新文件。
+      新项目中，添加所有文件很普遍，可以在当前工作目录执行命令：<code>git add .</code>。
+      因为 Git 会递归地将你执行命令时所在的目录中的所有文件添加上去，所以如果你将当前的工作目录作为参数，
+      它就会追踪那儿的所有文件了。如此，<code>git add .</code> 就和 <code>git add README hello.rb</code>
+      有一样的效果。
+      此外，效果一致的还有 <code>git add *</code>，不过那只是因为我们这还木有子目录，不需要递归地添加新文件。
     </p>
 
-	<p>好了，现在我们改个文件，再跑一下 <code>git status</code>，有点古怪。</p>
+    <p>好了，现在我们改个文件，再跑一下 <code>git status</code>，有点古怪。</p>
 <pre>
 <b>$ vim README</b>
 <b>$ git status -s</b>
@@ -75,17 +84,19 @@ layout: zh_reference
 <span class="green">A</span>  hello.rb
 </pre>
 
-	<p>
-	“AM” 状态的意思是，这个文件在我们将它添加到缓存之后又有改动。这意味着如果我们现在提交快照，我们记录的将是上次跑 <code>git add</code> 的时候的文件版本，而不是现在在磁盘中的这个。Git 并不认为磁盘中的文件与你想快照的文件必须是一致的 —— （如果你需要它们一致，）得用 <code>git add</code> 命令告诉它。
+    <p>“AM” 状态的意思是，这个文件在我们将它添加到缓存之后又有改动。这意味着如果我们现在提交快照，
+      我们记录的将是上次跑 <code>git add</code> 的时候的文件版本，而不是现在在磁盘中的这个。
+      Git 并不认为磁盘中的文件与你想快照的文件必须是一致的 —— （如果你需要它们一致，）得用 <code>git add</code> 命令告诉它。
     </p>
 
     <p class="nutshell">
-	<strong>一言以蔽之</strong>，
-	当你要将你的修改包含在即将提交的快照里的时候，执行 <code>git add</code>。任何你没有添加的改动都不会被包含在内 —— 这意味着你可以比绝大多数其他源代码版本控制系统更精确地归置你的快照。
+      <strong>一言以蔽之</strong>，
+      当你要将你的修改包含在即将提交的快照里的时候，执行 <code>git add</code>。
+      任何你没有添加的改动都不会被包含在内 —— 这意味着你可以比绝大多数其他源代码版本控制系统更精确地归置你的快照。
     </p>
 
-	<p>请查看《Pro Git》中 <code>git add</code> 的 “-p” 参数，以了解更多关于提交文件的灵活性的例子。
-	</p>
+  <p>请查看《Pro Git》中 <code>git add</code> 的 “-p” 参数，以了解更多关于提交文件的灵活性的例子。
+  </p>
 
   </div>
 
@@ -102,7 +113,10 @@ layout: zh_reference
   </h2>
 
   <div class="block">
-	<p>正如你在 <code>git add</code> 小节中所看到的，你可以执行 <code>git status</code> 命令查看你的代码在缓存与当前工作目录的状态。我演示该命令的时候加了 <code>-s</code> 参数，以获得简短的结果输出。若没有这个标记，命令 <code>git status</code> 将告诉你更多的提示与上下文欣喜。以下便是同样状态下，有跟没有 <code>-s</code> 参数的输出对比。简短的输出如下：
+    <p>正如你在 <code>git add</code> 小节中所看到的，你可以执行 <code>git status</code>
+      命令查看你的代码在缓存与当前工作目录的状态。我演示该命令的时候加了 <code>-s</code> 参数，以获得简短的结果输出。
+      若没有这个标记，命令 <code>git status</code> 将告诉你更多的提示与上下文欣喜。
+      以下便是同样状态下，有跟没有 <code>-s</code> 参数的输出对比。简短的输出如下：
     </p>
 
 <pre>
@@ -111,7 +125,7 @@ layout: zh_reference
 <span class="green">A</span>  hello.rb
 </pre>
 
-    而同样的状态，详细的输出看起来是这样的：
+    <p>而同样的状态，详细的输出看起来是这样的：</p>
 
 <pre>
 <b>$ git status</b>
@@ -144,7 +158,8 @@ layout: zh_reference
  <span class="red">D</span> hello.rb
 </pre>
 
-	你可以看到，在简短输出中，有两栏。第一栏是缓存的，第二栏则是工作目录的。所以假设你临时提交了 README 文件，然后又改了些，并且没有执行 <code>git add</code>，你会看到这个：
+    <p>你可以看到，在简短输出中，有两栏。第一栏是缓存的，第二栏则是工作目录的。
+      所以假设你临时提交了 README 文件，然后又改了些，并且没有执行 <code>git add</code>，你会看到这个：</p>
 
 <pre>
 <b>$ git status -s</b>
@@ -153,7 +168,8 @@ layout: zh_reference
 </pre>
 
     <p class="nutshell">
-	<strong>一言以蔽之</strong>，执行 <code>git status</code> 以查看在你上次提交之后有啥被修改或者临时提交了，从而决定自己是否需要提交一次快照，同时也能知道有什么改变被记录进去了。
+      <strong>一言以蔽之</strong>，执行 <code>git status</code> 以查看在你上次提交之后有啥被修改或者临时提交了，
+      从而决定自己是否需要提交一次快照，同时也能知道有什么改变被记录进去了。
     </p>
 
   </div>
@@ -170,7 +186,9 @@ layout: zh_reference
   </h2>
 
   <div class="block">
-	<p><code>git diff</code> 有两个主要的应用场景。我们将在此介绍其一，在 <a href="/inspect">检阅与对照</a> 一章中，我们将介绍其二。我们这里介绍的方式是用此命令描述已临时提交的或者已修改但尚未提交的改动。
+    <p><code>git diff</code> 有两个主要的应用场景。我们将在此介绍其一，
+      在 <a href="/inspect">检阅与对照</a> 一章中，我们将介绍其二。
+      我们这里介绍的方式是用此命令描述已临时提交的或者已修改但尚未提交的改动。
     </p>
 
     <h4>
@@ -201,7 +219,9 @@ index d62ac43..8d15d50 100644
  end
 </pre>
 
-    <p>所以，<code>git status</code>显示你上次提交更新至后所更改或者写入缓存的改动，而 <code>git diff</code> 一行一行地显示这些改动具体是啥。通常执行完 <code>git status</code> 之后接着跑一下 <code>git diff</code> 是个好习惯。
+    <p>所以，<code>git status</code>显示你上次提交更新至后所更改或者写入缓存的改动，
+      而 <code>git diff</code> 一行一行地显示这些改动具体是啥。
+      通常执行完 <code>git status</code> 之后接着跑一下 <code>git diff</code> 是个好习惯。
     </p>
 
     <h4>
@@ -209,7 +229,9 @@ index d62ac43..8d15d50 100644
       <small>#查看已缓存的改动</small>
     </h4>
 
-    <p><code>git diff --cached</code> 命令会告诉你有哪些内容已经写入缓存了。也就是说，此命令显示的是接下来要写入快照的内容。所以，如果你将上述示例中的 <code>hello.rb</code> 写入缓存，因为 <code>git diff</code> 显示的是尚未缓存的改动，所以在此执行它不会显示任何信息。
+    <p><code>git diff --cached</code> 命令会告诉你有哪些内容已经写入缓存了。
+      也就是说，此命令显示的是接下来要写入快照的内容。所以，如果你将上述示例中的 <code>hello.rb</code>
+      写入缓存，因为 <code>git diff</code> 显示的是尚未缓存的改动，所以在此执行它不会显示任何信息。
     </p>
 
 <pre>
@@ -251,7 +273,10 @@ index d62ac43..8d15d50 100644
       <small>查看已缓存的与未缓存的所有改动</small>
     </h4>
 
-    <p>如果你想一并查看已缓存的与未缓存的改动，可以执行 <code>git diff HEAD</code> ——也就是说你要看到的是工作目录与上一次提交的更新的区别，无视缓存。假设我们又改了些 <code>ruby.rb</code> 的内容，那缓存的与未缓存的改动我们就都有了。以上三个 <code>diff</code> 命令的结果如下：
+    <p>如果你想一并查看已缓存的与未缓存的改动，可以执行 <code>git diff HEAD</code> ——
+      也就是说你要看到的是工作目录与上一次提交的更新的区别，无视缓存。
+      假设我们又改了些 <code>ruby.rb</code> 的内容，那缓存的与未缓存的改动我们就都有了。
+      以上三个 <code>diff</code> 命令的结果如下：
     </p>
 <pre>
 <b>$ vim hello.rb </b>
@@ -305,7 +330,8 @@ index 2aabb6e..2ae9ba4 100644
       <small>显示摘要而非整个 diff</small>
     </h4>
 
-    <p>如果我们不想要看整个 diff 输出，但是又想比 <code>git status</code> 详细点，就可以用 <code>--stat</code> 选项。该选项使它显示摘要而非全文。上文示例在使用 <code>--stat</code> 选项时，输出如下：
+    <p>如果我们不想要看整个 diff 输出，但是又想比 <code>git status</code> 详细点，
+      就可以用 <code>--stat</code> 选项。该选项使它显示摘要而非全文。上文示例在使用 <code>--stat</code> 选项时，输出如下：
     </p>
 
 <pre>
@@ -327,8 +353,9 @@ index 2aabb6e..2ae9ba4 100644
 
 
     <p class="nutshell">
-    <strong>一言以蔽之</strong>，
-    执行 <code>git diff</code> 来查看执行 <code>git status</code> 的结果的详细信息 —— 一行一行地显示这些文件是如何被修改或写入缓存的。
+      <strong>简而言之</strong>，
+      执行 <code>git diff</code> 来查看执行 <code>git status</code> 的结果的详细信息 ——
+      一行一行地显示这些文件是如何被修改或写入缓存的。
     </p>
 
   </div>
@@ -346,7 +373,9 @@ index 2aabb6e..2ae9ba4 100644
 
   <div class="block">
 
-	<p>现在你使用 <code>git add</code> 命令将想要快照的内容写入了缓存，执行 <code> git commit</code> 就将它实际存储快照了。Git 为你的每一个提交都记录你的名字与电子邮箱地址，所以第一步是告诉 Git 这些都是啥。
+    <p>现在你使用 <code>git add</code> 命令将想要快照的内容写入了缓存，
+      执行 <code> git commit</code> 就将它实际存储快照了。
+      Git 为你的每一个提交都记录你的名字与电子邮箱地址，所以第一步是告诉 Git 这些都是啥。
     </p>
 
 <pre>
@@ -354,7 +383,7 @@ index 2aabb6e..2ae9ba4 100644
 <b>$ git config --global user.email you@somedomain.com</b>
 </pre>
 
-	<p>让我们写入缓存，并提交对 <code>hello.rb</code> 的所有改动。在首个例子中，我们使用 <code>-m</code> 选项以在命令行中提供提交注释。
+  <p>让我们写入缓存，并提交对 <code>hello.rb</code> 的所有改动。在首个例子中，我们使用 <code>-m</code> 选项以在命令行中提供提交注释。
     </p>
 
 <pre>
@@ -366,7 +395,8 @@ index 2aabb6e..2ae9ba4 100644
  1 files changed, 2 insertions(+), 1 deletions(-)
 </pre>
 
-	<p>现在我们已经记录了快照。如果我们再执行 <code>git status</code>，会看到我们有一个“干净的工作目录”。这意味着我们在最近一次提交之后，没有做任何改动 —— 在我们的项目中没有未快照的工作。
+    <p>现在我们已经记录了快照。如果我们再执行 <code>git status</code>，会看到我们有一个“干净的工作目录”。
+      这意味着我们在最近一次提交之后，没有做任何改动 —— 在我们的项目中没有未快照的工作。
     </p>
 
 <pre>
@@ -375,7 +405,8 @@ index 2aabb6e..2ae9ba4 100644
 nothing to commit (working directory clean)
 </pre>
 
-	<p>如果你漏掉了 <code>-m</code> 选项，Git 会尝试为你打开一个编辑器以填写提交信息。如果 Git 在你对它的配置中找不到相关信息，默认会打开 <code>vim</code>。屏幕会像这样：
+    <p>如果你漏掉了 <code>-m</code> 选项，Git 会尝试为你打开一个编辑器以填写提交信息。
+    如果 Git 在你对它的配置中找不到相关信息，默认会打开 <code>vim</code>。屏幕会像这样：
     </p>
 
 <pre>
@@ -393,10 +424,10 @@ nothing to commit (working directory clean)
 ".git/COMMIT_EDITMSG" 9L, 257C
 </pre>
 
-	<p>在此，你在文件头部添加实际的提交信息。以“#”开头的行都会被无视 ——Git 将 <code> git status</code> 的输出结果放在那儿以提示你都改了、缓存了啥。
+  <p>在此，你在文件头部添加实际的提交信息。以“#”开头的行都会被无视 ——Git 将 <code> git status</code> 的输出结果放在那儿以提示你都改了、缓存了啥。
     </p>
 
-	<p>通常，撰写良好的提交信息是很重要的。以开放源代码项目为例，多多少少以以下格式写你的提示消息是个不成文的规定：
+  <p>通常，撰写良好的提交信息是很重要的。以开放源代码项目为例，多多少少以以下格式写你的提示消息是个不成文的规定：
     </p>
 
 <pre>
@@ -429,7 +460,10 @@ nothing to commit (working directory clean)
 </pre>
 
     <p class="aside">
-	提交注解是很重要的。因为 Git 很大一部分能耐就是它在组织本地提交和与他人分享的弹性，它很给力地能够让你为逻辑独立的改变写三到四条提交注解，以便你的工作被同仁审阅。因为提交与推送改动是有区别的，请务必花时间将各个逻辑独立的改动放到另外一个提交，并附上一份良好的提交注解，以使与你合作的人能够方便地了解你所做的，以及你为何要这么做。
+    提交注解是很重要的。因为 Git 很大一部分能耐就是它在组织本地提交和与他人分享的弹性，
+    它很给力地能够让你为逻辑独立的改变写三到四条提交注解，以便你的工作被同仁审阅。因为提交与推送改动是有区别的，
+    请务必花时间将各个逻辑独立的改动放到另外一个提交，并附上一份良好的提交注解，
+    以使与你合作的人能够方便地了解你所做的，以及你为何要这么做。
     </p>
 
     <h4>
@@ -437,7 +471,11 @@ nothing to commit (working directory clean)
       <small>自动将在提交前将已记录、修改的文件放入缓存区</small>
     </h4>
 
-	<p>如果你觉得 <code>git add</code> 提交缓存的流程太过繁琐，Git 也允许你用 <code>-a</code> 选项跳过这一步。基本上这句话的意思就是，为任何已有记录的文件执行 <code>git add</code> —— 也就是说，任何在你最近的提交中已经存在，并且之后被修改的文件。这让你能够用更 Subversion 方式的流程，修改些文件，然后想要快照所有所做的改动的时候执行 <code>git commit -a</code>。不过你仍然需要执行 <code>git add</code> 来添加新文件，就像 Subversion 一样。
+    <p>如果你觉得 <code>git add</code> 提交缓存的流程太过繁琐，Git 也允许你用 <code>-a</code> 选项跳过这一步。
+      基本上这句话的意思就是，为任何已有记录的文件执行 <code>git add</code> ——
+      也就是说，任何在你最近的提交中已经存在，并且之后被修改的文件。
+      这让你能够用更 Subversion 方式的流程，修改些文件，然后想要快照所有所做的改动的时候执行 <code>git commit -a</code>。
+      不过你仍然需要执行 <code>git add</code> 来添加新文件，就像 Subversion 一样。
     </p>
 
 <pre>
@@ -458,15 +496,18 @@ nothing to commit (working directory clean)
  1 files changed, 2 insertions(+), 1 deletions(-)
 </pre>
 
-	<p>注意，如果你不缓存改动，直接执行 <code>git commit</code>，Git 会直接给出 <code>git status</code> 命令的输出，提醒你啥也没缓存。我已将该消息中的重要部分高亮，它说没有添加需要提交的缓存。如果你使用 <code>-a</code>，它会缓存并提交每个改动（不含新文件）。
+    <p>注意，如果你不缓存改动，直接执行 <code>git commit</code>，Git 会直接给出 <code>git status</code>
+     命令的输出，提醒你啥也没缓存。我已将该消息中的重要部分高亮，它说没有添加需要提交的缓存。
+     如果你使用 <code>-a</code>，它会缓存并提交每个改动（不含新文件）。
     </p>
 
-	<p>
-	现在你就完成了整个快照的流程 ——改些文件，然后用 <code>git add</code> 将要提交的改动提交到缓存，用 <code>git status</code> 和 <code>git diff</code> 看看你都改了啥，最后 <code>git commit</code> 永久地保存快照。
-	</p>
+    <p>
+    现在你就完成了整个快照的流程 ——改些文件，然后用 <code>git add</code> 将要提交的改动提交到缓存，
+    用 <code>git status</code> 和 <code>git diff</code> 看看你都改了啥，最后 <code>git commit</code> 永久地保存快照。
+    </p>
 
     <p class="nutshell">
-	<strong>一言以蔽之</strong>，执行 <code>git commit</code> 记录缓存区的快照。这个快照就可以用来做比较、分享以及，如果需要，恢复。
+  <strong>简而言之</strong>，执行 <code>git commit</code> 记录缓存区的快照。如果需要的话，这个快照可以用来做比较、共享以及恢复。
     </p>
 
   </div>
@@ -483,14 +524,19 @@ nothing to commit (working directory clean)
   </h2>
 
   <div class="block">
-	<p><code>git reset</code> 可能是人类写的最费解的命令了。我用 Git 有些年头了，甚至还写了本书，但有的时候还是会搞不清它会做什么。所以，我只说三个明确的，通常有用的调用。请你跟我一样尽管用它 —— 因为它可以很有用。
+    <p><code>git reset</code> 可能是人类写的最费解的命令了。
+      我用 Git 有些年头了，甚至还写了本书，但有的时候还是会搞不清它会做什么。
+      所以，我只说三个明确的，通常有用的调用。请你跟我一样尽管用它 —— 因为它可以很有用。
     </p>
 
-	<p>在此例中，我们可以用它来将不小心缓存的东东取消缓存。假设你修改了两个文件，想要将它们记录到两个不同的提交中去。你应该缓存并提交一个，再缓存并提交另外一个。如果你不小心两个都缓存了，那要如何才能<i>取消</i>缓存呢？你可以用 <code>git reset HEAD -- file</code>。技术上说，在这里你不需要使用 <code>--</code> —— 它用来告诉 Git 这时你已经不再列选项，剩下的是文件路径了。不过养成使用它分隔选项与路径的习惯很重要，即使在你可能并不需要的时候。
+    <p>在此例中，我们可以用它来将不小心缓存的东东取消缓存。假设你修改了两个文件，想要将它们记录到两个不同的提交中去。
+      你应该缓存并提交一个，再缓存并提交另外一个。如果你不小心两个都缓存了，那要如何才能<i>取消</i>缓存呢？
+      你可以用 <code>git reset HEAD -- file</code>。
+      技术上说，在这里你不需要使用 <code>--</code> —— 它用来告诉 Git 这时你已经不再列选项，剩下的是文件路径了。
+      不过养成使用它分隔选项与路径的习惯很重要，即使在你可能并不需要的时候。
     </p>
 
-	<p>好，让我们看看取消缓存是什么样子的。这里我们有两个最近提交之后又有所改动的文件。我们将两个都缓存，并取消缓存其中一个。
-	</p>
+    <p>好，让我们看看取消缓存是什么样子的。这里我们有两个最近提交之后又有所改动的文件。我们将两个都缓存，并取消缓存其中一个。</p>
 
 <pre>
 <b>$ git status -s</b>
@@ -508,19 +554,24 @@ M hello.rb
  <span class="red">M</span> hello.rb
 </pre>
 
-	<p>
-	现在你执行 <code>git commit</code> 将只记录 <code>README</code> 文件的改动，并不含现在并不在缓存中的 <code>hello.rb</code>。
+    <p>
+    现在你执行 <code>git commit</code> 将只记录 <code>README</code> 文件的改动，并不含现在并不在缓存中的 <code>hello.rb</code>。
     </p>
 
     <p class="aside">
-	如果你好奇，它实际的操作是将该文件在“索引”中的校验和重置为最近一次提交中的值。<code>git add</code> 会计算一个文件的校验和，将它添加到“索引”中，而 <code>git reset HEAD</code> 将它改写回原先的，从而取消缓存。
+    如果你好奇，它实际的操作是将该文件在“索引”中的校验和重置为最近一次提交中的值。
+    <code>git add</code> 会计算一个文件的校验和，将它添加到“索引”中，
+    而 <code>git reset HEAD</code> 将它改写回原先的，从而取消缓存操作。
     </p>
 
     <p class="tip">
-	如果你想直接执行 <code>git unstage</code>，你可以在 Git 中配置个别名。执行 <code>git config --global alias.unstage "reset HEAD"</code> 即可。一旦执行完它，你就可以直接用 <code>git unstage [file]</code> 作为代替了。
+    如果你想直接执行 <code>git unstage</code>，你可以在 Git 中配置个别名。
+    执行 <code>git config --global alias.unstage "reset HEAD"</code> 即可。
+    一旦执行完它，你就可以直接用 <code>git unstage [file]</code> 作为代替了。
     </p>
 
-	<p>如果你忘了取消缓存的命令，Git 的常规 <code>git status</code> 输出的提示会很有帮助。例如，在你有已缓存的文件时，如果你不带 <code>-s</code> 执行 <code>git status</code>，它将告诉你怎样取消缓存：
+    <p>如果你忘了取消缓存的命令，Git 的常规 <code>git status</code> 输出的提示会很有帮助。
+      例如，在你有已缓存的文件时，如果你不带 <code>-s</code> 执行 <code>git status</code>，它将告诉你怎样取消缓存：
     </p>
 
 <pre>
@@ -535,7 +586,7 @@ M hello.rb
 </pre>
 
     <p class="nutshell">
-	<strong>一言以蔽之</strong>，执行 <code>git reset HEAD</code> 以取消之前 <code>git add</code> 添加，但不希望包含在下一提交快照中的缓存。
+  <strong>简而言之</strong>，执行 <code>git reset HEAD</code> 以取消之前 <code>git add</code> 添加，但不希望包含在下一提交快照中的缓存。
     </p>
 
   </div>
@@ -553,12 +604,15 @@ M hello.rb
 
   <div class="block">
 
-	<p>
-	<code>git rm</code> 会将条目从缓存区中移除。这与 <code>git reset HEAD</code> 将条目取消缓存是有区别的。“取消缓存”的意思就是将缓存区恢复为我们做出修改之前的样子。在另一方面，<code>git rm</code> 则将该文件彻底从缓存区踢出，因此它不再下一个提交快照之内，进而有效地删除它。
-	</p>
+    <p>
+    <code>git rm</code> 会将条目从缓存区中移除。这与 <code>git reset HEAD</code> 将条目取消缓存是有区别的。
+    “取消缓存”的意思就是将缓存区恢复为我们做出修改之前的样子。
+    在另一方面，<code>git rm</code> 则将该文件彻底从缓存区踢出，因此它不再下一个提交快照之内，进而有效地删除它。
+    </p>
 
-	<p>
-	默认情况下，<code>git rm file</code> 会将文件从缓存区和你的硬盘中（工作目录）删除。如果要在工作目录中留着该文件，可以使用 <code>git rm --cached</code>
+    <p>
+    默认情况下，<code>git rm file</code> 会将文件从缓存区和你的硬盘中（工作目录）删除。
+    如果要在工作目录中留着该文件，可以使用 <code>git rm --cached</code>
     </p>
 
     <h4>
@@ -567,15 +621,20 @@ M hello.rb
     </h4>
 
     <p>
-    不像绝大多数其他版本控制系统，Git 并不记录记录文件重命名。它反而只记录快照，并对比快照以找到有啥文件可能被重命名了。如果一个文件从更新中删除了，而在下次快照中新添加的另一个文件的内容与它很相似，Git 就知道这极有可能是个重命名。因此，虽然有 <code>git mv</code> 命令，但它有点多余 —— 它做得所有事情就是 <code>git rm --cached</code>，重命名磁盘上的文件，然后再执行 <code>git add</code> 把新文件添加到缓存区。你并不需要用它，不过如果觉得这样容易些，尽管用吧。
+    不像绝大多数其他版本控制系统，Git 并不记录记录文件重命名。它反而只记录快照，并对比快照以找到有啥文件可能被重命名了。
+    如果一个文件从更新中删除了，而在下次快照中新添加的另一个文件的内容与它很相似，Git 就知道这极有可能是个重命名。
+    因此，虽然有 <code>git mv</code> 命令，但它有点多余 —— 它做得所有事情就是 <code>git rm --cached</code>，
+    重命名磁盘上的文件，然后再执行 <code>git add</code> 把新文件添加到缓存区。
+    你并不需要用它，不过如果觉得这样容易些，尽管用吧。
     </p>
 
     <p class="aside">
-    我自己不会用此命令的普通形式 —— 删除文件。通常直接从硬盘删除文件，然后执行 <code>git commit -a</code> 会简单些。它会自动将删除的文件从索引中移除。
+    我自己并不使用此命令的普通形式 —— 删除文件。通常直接从硬盘删除文件，然后执行 <code>git commit -a</code> 会简单些。
+    它会自动将删除的文件从索引中移除。
     </p>
 
     <p class="nutshell">
-    <strong>一言以蔽之</strong>，
+    <strong>简而言之</strong>，
     执行 <code>git rm</code> 来删除 Git 追踪的文件。它还会删除你的工作目录中的相应文件。
     </p>
 
