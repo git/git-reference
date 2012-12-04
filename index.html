@@ -16,9 +16,9 @@ layout: reference
     Each section will link to the next section, so it can be used
     as a tutorial.  Every page will also link to more in-depth
     Git documentation such as the official manual pages and relevant
-    sections in the <a href="http://progit.org">Pro Git book</a>, 
-    so you can learn more about any of 
-    the commands. First, we'll start with thinking about source code 
+    sections in the <a href="http://git-scm.com/book">Pro Git book</a>,
+    so you can learn more about any of
+    the commands. First, we'll start with thinking about source code
     management like Git does.
     </p>
   </div>
@@ -29,7 +29,7 @@ layout: reference
   <div class="block">
     <p>
     The first thing that is important to understand about Git is
-    that it thinks about version control very differently than 
+    that it thinks about version control very differently than
     Subversion or Perforce or whatever SCM you may be used to. It
     is often easier to learn Git by trying to forget your assumptions
     about how version control works and try to think about it in the
@@ -37,16 +37,16 @@ layout: reference
     </p>
 
     <p>
-    Let's start from scratch.  Assume you are designing a new source 
+    Let's start from scratch.  Assume you are designing a new source
     code management system.  How did you do basic version control before
-    you used a tool for it?  Chances are that you simply copied your 
+    you used a tool for it?  Chances are that you simply copied your
     project directory to save what it looked like at that point.
     </p>
 
     <pre> $ cp -R project project.bak </pre>
 
     <p>
-    That way, you can easily revert files that get messed up later, or 
+    That way, you can easily revert files that get messed up later, or
     see what you have changed by comparing what the project looks like
     now to what it looked like when you copied it.
     </p>
@@ -59,8 +59,8 @@ layout: reference
     <pre> $ cp -R project project.2010-06-01.bak </pre>
 
     <p>
-    In that case, you may have a bunch of snapshots of your project that 
-    you can compare and inspect from. You can even use this model to 
+    In that case, you may have a bunch of snapshots of your project that
+    you can compare and inspect from. You can even use this model to
     fairly effectively share changes with someone.  If you zip up your
     project at a known state and put it on your website, other developers
     can download that, change it and send you a patch pretty easily.
@@ -77,7 +77,7 @@ layout: reference
 
     <p>
     Now the original developer can apply that patch to their copy of the
-    project and they have your changes. This is how many open source 
+    project and they have your changes. This is how many open source
     projects have been collaborated on for several years.
     </p>
 
@@ -91,10 +91,10 @@ layout: reference
 
     <p>
     This is essentially what Git is. You tell Git you want to save a snapshot
-    of your project with the <code>git commit</code> command and it basically 
-    records a manifest of what all of the files in your project look like at 
+    of your project with the <code>git commit</code> command and it basically
+    records a manifest of what all of the files in your project look like at
     that point.  Then most of the commands work with those manifests to see
-    how they differ or pull content out of them, etc.  
+    how they differ or pull content out of them, etc.
     </p>
 
     <center><img src="./images/snapshots.png"/></center>
@@ -102,7 +102,7 @@ layout: reference
     <p>
     If you think about Git
     as a tool for storing and comparing and merging snapshots of your project,
-    it may be easier to understand what is going on and how to do things 
+    it may be easier to understand what is going on and how to do things
     properly.
     </p>
 
