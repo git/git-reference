@@ -597,10 +597,10 @@ Further paragraphs come after blank lines.
   <h2>
     <span class="docs">
       <a target="new" href="http://git-scm.com/docs/git-reset">docs</a> &nbsp;
-      <a target="new" href="http://git-scm.com/book/ch2-4.html#Unstaging-a-Staged-File">book</a>
+      <a target="new" href="http://git-scm.com/book/en/Git-Basics-Undoing-Things#Unstaging-a-Staged-File">book</a>
     </span>
-    <a name="reset">git reset HEAD</a>
-    <span class="desc">unstage changes that you have staged</span>
+    <a name="reset">git reset</a>
+    <span class="desc">undo changes and commits</span>
   </h2>
 
   <div class="block">
@@ -612,7 +612,12 @@ Further paragraphs come after blank lines.
     very useful.
     </p>
 
-    <p>In this case, we can use it to unstage something that you have
+    <h4>
+      git reset HEAD
+      <small>undo the last commit and unstage the files</small>
+    </h4>
+
+    <p>In the first case, we can use it to unstage something that you have
     accidentally staged.  Let's say that you have modified two files and want
     to record them into two different commits.  You should stage and commit
     one, then stage and commit the other.  If you accidentally stage both of
@@ -682,11 +687,83 @@ M hello.rb
 #
 </pre>
 
+    <p>When you run <code>git reset</code> without specifying a flag
+       it defaults to <code>--mixed</code>. The other options are
+       <code>--soft</code> and <code>--hard</code>.</p>
+
+    <h4>
+      git reset --soft
+      <small>undo the last commit</small>
+    </h4>
+
+    <p>The first thing <code>git reset</code> does is undo the last
+       commit and put the files back onto the stage. If you include the
+       <code>--soft</code> flag this is where it stops.  For example,
+       if you run <code>git reset --soft HEAD~</code> (the parent of the
+       HEAD) the last commit will be undone and the files touched
+       will be back on the stage again.</p>
+
+<pre>
+<b>$ git status -s</b>
+<span class="green">M</span>  hello.rb
+<b>$ git commit -am 'hello with a flower'</b>
+[master 5857ac1] hello with a flower
+ 1 files changed, 3 insertions(+), 1 deletions(-)
+<b>$ git status</b>
+# On branch master
+nothing to commit (working directory clean)
+<b>$ git reset --soft HEAD~</b>
+<b>$ git status -s</b>
+<span class="green">M</span>  hello.rb
+</pre>
+
+    <p>This is basically doing the same thing as
+       <code>git commit --amend</code>, allowing you to do more work
+       before you roll in the file changes into the same commit.</p>
+
+    <h4>
+      git reset --hard
+      <small>undo the last commit, unstage files AND undo any changes in the working directory</small>
+    </h4>
+
+    <p>The third option is to go <code>--hard</code> and make your working
+       directory look like the index, unstage files and undo the last commit.
+       This is the most dangerous option and not working directory safe. Any
+       changes not in the index or have not been commited will be lost.</p>
+
+<pre>
+<b>$ git status</b>
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+# <span class="green">modified:   README</span>
+#
+# Changes not staged for commit:
+#   (use "git add <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+# <span class="red">modified:   README</span>
+#
+<b>$ git reset --hard HEAD</b>
+HEAD is now at 5857ac1 hello with a flower
+<b>$ git status</b>
+# On branch master
+nothing to commit (working directory clean)
+</pre>
+
+    <p>In the above example, while we had both changes ready to commit and
+       ready to stage, a <code>git reset --hard</code> wiped them out.
+       On top of that, the last commit has been undone.</p>
+
+    <p>You can replace <code>HEAD</code> with a commit SHA-1 or another
+    parent reference to reset to that specific point.</p>
+
     <p class="nutshell">
     <strong>In a nutshell</strong>,
-    you run <code>git reset HEAD</code> to unstage files that you previously
-    ran <code>git add</code> on and wish to not include in the next commit
-    snapshot</p>
+    you run <code>git reset HEAD</code> to undo the last commit, unstage
+    files that you previously ran <code>git add</code> on and wish to not
+    include in the next commit snapshot</p>
 
   </div>
 </div>
