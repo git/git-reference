@@ -774,10 +774,11 @@ ab5ab4c added erlang
 * 17f4acf first commit
 </pre>
 
-    <p>By default, tags are not included when you <code>push</code> to or
-      <code>fetch</code> from a remote repository. In order to explicitly
-      update these you must include the <code>--tags</code> option to transfer
-      all the tags on the repo.
+    <p>Tags pointing to objects tracked from branch heads will be
+      automatically downloaded when you <code>fetch</code> from a remote
+      repository. However, tags that aren't reachable from branch heads
+      will be skipped. If you want to make sure <em>all</em> tags are <em>always</em>
+      included, you must include the <code>--tags</code> option.
     </p>
 
 <pre>
@@ -794,6 +795,11 @@ From git://github.com:example-user/example-repo
 
     <p>If you just want a single tag, use
       <code>git fetch &lt;remote> tag &lt;tag-name></code>.
+    </p>
+
+    <p>By default, tags are not included when you <code>push</code> to
+      a remote repository. In order to explicitly update these you must
+      include the <code>--tags</code> option when using <code>git push</code>.
     </p>
 
     <p class="nutshell">
