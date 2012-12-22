@@ -315,6 +315,7 @@ From github.com:schacon/hw
     <p>If you have more than one remote repository, you can either fetch from specific
     ones by running <code>git fetch [alias]</code> or you can tell Git to synchronize
     with all of your remotes by running <code>git fetch --all</code>.
+	</p>
 
     <p class="nutshell">
     <b>In a nutshell</b> you run <code>git fetch [alias]</code> to synchronize your
@@ -358,7 +359,7 @@ To git@github.com:schacon/hw.git
     what I have committed and all of its history.</p>
 
     <p>What if I have a topic branch like the 'erlang' branch we created earlier
-    and I just want to share that?  You can just push that branch instead.
+    and I just want to share that?  You can just push that branch instead.</p>
 
 <pre>
 <b>$ git push github erlang</b>
@@ -403,6 +404,7 @@ fast-forwards' section of 'git push --help' for details.
 
     <p>You can fix this by running <code>git fetch github; git merge github/master</code>
     and then pushing again.
+	</p>
 
     <p class="nutshell">
     <b>In a nutshell</b> you run <code>git push [alias] [branch]</code> to update a
