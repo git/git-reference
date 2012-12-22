@@ -774,6 +774,41 @@ ab5ab4c added erlang
 * 17f4acf first commit
 </pre>
 
+    <p>Tags pointing to objects tracked from branch heads will be
+      automatically downloaded when you <code>fetch</code> from a remote
+      repository. However, tags that aren't reachable from branch heads
+      will be skipped. If you want to make sure <em>all</em> tags are <em>always</em>
+      included, you must include the <code>--tags</code> option.
+    </p>
+
+<pre>
+<b>$ git fetch origin --tags</b>
+remote: Counting objects: 1832, done.
+remote: Compressing objects: 100% (726/726), done.
+remote: Total 1519 (delta 1000), reused 1202 (delta 764)
+Receiving objects: 100% (1519/1519), 1.30 MiB | 1.21 MiB/s, done.
+Resolving deltas: 100% (1000/1000), completed with 182 local objects.
+From git://github.com:example-user/example-repo
+ * [new tag]         v1.0       -> v1.0
+ * [new tag]         v1.1       -> v1.1
+</pre>
+
+    <p>If you just want a single tag, use
+      <code>git fetch &lt;remote> tag &lt;tag-name></code>.
+    </p>
+
+    <p>By default, tags are not included when you <code>push</code> to
+      a remote repository. In order to explicitly update these you must
+      include the <code>--tags</code> option when using <code>git push</code>.
+    </p>
+
+    <p class="nutshell">
+    <b>In a nutshell</b> you use <code>git tag</code> to mark a
+    commit or point in your repo as important. This also allows
+    you to refer to that commit with a more memorable reference
+    than a SHA.
+    </p>
+
   </div>
 </div>
 
