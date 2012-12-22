@@ -877,18 +877,36 @@ nothing to commit (working directory clean)
 stash@{0}: WIP on master: 5857ac1 hello with a flower
 </pre>
 
-    <h4>
-      git stash pop
-      <small>remove item from the list and apply to current working directory</small>
-    </h4>
-
-    <p>After you've done the changes you were called away for, and you're ready to
-    continue from where you left off, run the <code>git stash pop</code> command
-    to bring back the working directory to that state and remove it from the stash list.
+    <p>The last item added onto the stash will be referenced by
+    <code>stash@{0}</code> and increment those already there by one.
     </p>
 
 <pre>
-<b>$ git stash pop</b>
+<b>$ vim hello.rb</b>
+<b>$ git commit -am 'it stops raining'</b>
+[master ee2d2c6] it stops raining
+1 files changed, 1 insertions(+), 1 deletions(-)
+<b>$ vim hello.rb</b>
+<b>$ git stash</b>
+Saved working directory and index state WIP on master: ee2d2c6 it stops raining
+HEAD is now at ee2d2c6 it stops raining
+<b>$ git stash list</b>
+stash@{0}: WIP on master: ee2d2c6 it stops raining
+stash@{1}: WIP on master: 5857ac1 hello with a flower
+</pre>
+
+    <h4>
+      git stash apply
+      <small>grab the item from the stash list and apply to current working directory</small>
+    </h4>
+
+    <p>When you're ready to continue from where you left off, run the
+    <code>git stash apply</code> command to bring back the saved changes
+    onto the working directory.
+    </p>
+
+<pre>
+<b>$ git stash apply</b>
 # On branch master
 # Changes not staged for commit:
 #   (use "git add &lt;file>..." to update what will be committed)
@@ -897,28 +915,43 @@ stash@{0}: WIP on master: 5857ac1 hello with a flower
 # <span class="red">modified:   hello.rb</span>
 #
 no changes added to commit (use "git add" and/or "git commit -a")
-Dropped refs/stash@{0}: (14ddbc6f2c26330e33d08faf15d88f816b6cbd45)
 </pre>
 
     <p>By default it will reapply the last added stash item to the working
     directory. This will be the item referenced by <code>stash@{0}</code>.
     You can grab another stash item instead if you reference it in the arguments
-    list. For example, <code>git stash pop stash@{1}</code> will apply the item
+    list. For example, <code>git stash apply stash@{1}</code> will apply the item
     referenced by <code>stash@{1}</code>.
     </p>
 
-    <p>If you want to leave the item on the stack, use
-    <code>git stash apply</code> instead.
+    <p>If you also want to remove the item from the stack at the same time,
+    use <code>git stash pop</code> instead.
     </p>
 
     <h4>
-      git stash clear
-      <small>remove all items from the stash list</small>
+      git stash drop
+      <small>remove an item from the stash list</small>
     </h4>
 
-    <p>When you're done with the stash and/or you want to remove of all the
-    stored items, just run the <code>git stash clear</code> command. But only
-    do this if you're sure you're done with the stash.
+    <p>When you're done with the stashed item and/or want to remove it from the
+    list, run the <code>git stash drop</code> command. By default this will
+    remove the last added stash item. You can also remove a specific item if
+    you include it as an argument.
+    </p>
+
+    <p>In this example, our stash list has at least two items, but we want
+    to get rid of the item added before last, which is referenced by
+    <code>stash@{1}</code>.
+    </p>
+
+<pre>
+<b>$ git stash drop stash@{1}</b>
+Dropped stash@{1} (0b1478540189f30fef9804684673907c65865d8f)
+</pre>
+
+    <p>If you want to remove of all the stored items, just run
+    the <code>git stash clear</code> command. But only do this if you're
+    sure you're done with the stash.
     </p>
 
     <p class="nutshell">
