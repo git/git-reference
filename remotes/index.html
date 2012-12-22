@@ -153,6 +153,81 @@ github	git@github.com:schacon/hw.git (push)
     add new remotes and <code>git remote rm</code> to delete existing ones.
     </p>
 
+    <h4>
+      git remote set-url
+      <small>update an existing remote URL</small>
+    </h4>
+
+    <p>Should you ever need to update a remote's URL, you can do so with
+    the <code>git remote set-url</code> command.
+    </p>
+
+<pre>
+<b>$ git remote -v</b>
+github	git@github.com:schacon/hw.git (fetch)
+github	git@github.com:schacon/hw.git (push)
+origin	git://github.com/pjhyett/hw.git (fetch)
+origin	git://github.com/pjhyett/hw.git (push)
+<b>$ git remote set-url origin git://github.com/github/git-reference.git</b>
+<b>$ git remote -v</b>
+github	git@github.com:schacon/hw.git (fetch)
+github	git@github.com:schacon/hw.git (push)
+origin	git://github.com/github/git-reference.git (fetch)
+origin	git://github.com/github/git-reference.git (push)
+</pre>
+
+    <p>In addition to this, you can set a different push URL when you
+    include the <code>--push</code> flag. This allows you to fetch from
+    one repo while pushing to another and yet both use the same remote alias.
+    </p>
+
+<pre>
+<b>$ git remote -v</b>
+github	git@github.com:schacon/hw.git (fetch)
+github	git@github.com:schacon/hw.git (push)
+origin	git://github.com/github/git-reference.git (fetch)
+origin	git://github.com/github/git-reference.git (push)
+<b>$ git remote set-url --push origin git://github.com/pjhyett/hw.git</b>
+<b>$ git remote -v</b>
+github	git@github.com:schacon/hw.git (fetch)
+github	git@github.com:schacon/hw.git (push)
+origin	git://github.com/github/git-reference.git (fetch)
+origin	git://github.com/pjhyett/hw.git (push)
+</pre>
+
+    <p>Internally, the <code>git remote set-url</code> command calls
+    <code>git config remote</code>, but has the added benefit of reporting
+    back any errors. <code>git config remote</code> on the other hand, will
+    silently fail if you mistype an argument or option and not actually set
+    anything.
+    </p>
+
+    <p>For example, we'll update the <code>github</code> remote but
+    instead reference it as <code>guhflub</code> in both invocations.
+    </p>
+
+<pre>
+<b>$ git remote -v</b>
+github	git@github.com:schacon/hw.git (fetch)
+github	git@github.com:schacon/hw.git (push)
+origin	git://github.com/github/git-reference.git (fetch)
+origin	git://github.com/github/git-reference.git (push)
+<b>$ git config remote.guhflub git://github.com/mojombo/hw.git</b>
+<b>$ git remote -v</b>
+github	git@github.com:schacon/hw.git (fetch)
+github	git@github.com:schacon/hw.git (push)
+origin	git://github.com/github/git-reference.git (fetch)
+origin	git://github.com/github/git-reference.git (push)
+<b>$ git remote set-url guhflub git://github.com/mojombo/hw.git</b>
+fatal: No such remote 'guhflub'
+</pre>
+
+    <p class="nutshell">
+    <b>In a nutshell</b>, you can update the locations of your remotes
+    with <code>git remote set-url</code>. You can also set different push
+    and fetch URLs under the same remote alias.
+    </p>
+
   </div>
 </div>
 
