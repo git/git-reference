@@ -818,7 +818,113 @@ nothing to commit (working directory clean)
     <p class="nutshell">
     <strong>In a nutshell</strong>,
     you run <code>git rm</code> to remove files from being tracked in Git. It
-    will also remove them from your working directory.</p>
+    will also remove them from your working directory.
+    </p>
+
+  </div>
+</div>
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a href="http://git-scm.com/docs/git-stash">docs</a> &nbsp;
+      <a href="http://git-scm.com/book/en/Git-Tools-Stashing">book</a>
+    </span>
+    <a name="stash">git stash</a>
+    <span class="desc">save changes made in the current index and working directory for later</span>
+  </h2>
+
+  <div class="block">
+
+    <p>You're in the middle of some changes but something comes up that you
+    need to jump over to, like a so-urgent-right-now bugfix, but don't want
+    to commit or lose your current edits. <code>git stash</code> is there for you.
+    </p>
+
+    <h4>
+      git stash
+      <small>add current changes to the stack</small>
+    </h4>
+
+    <p>Stashing takes the current state of the working directory and index,
+    puts it on a stack for later, and gives you back a clean working directory.
+    It will then leave you at the state of the last commit.
+    </p>
+
+<pre>
+<b>$ git status -s</b>
+<span class="red">M</span> hello.rb
+<b>$ git stash</b>
+Saved working directory and index state WIP on master: 5857ac1 hello with a flower
+HEAD is now at 5857ac1 hello with a flower
+<b>$ git status</b>
+# On branch master
+nothing to commit (working directory clean)
+</pre>
+
+    <h4>
+      git stash list
+      <small>view stashes currently on the stack</small>
+    </h4>
+
+    <p>It's helpful to know what you've got stowed on the stash and this is where
+    <code>git stash list</code> comes in. Running this command will display a queue
+    of current stash items.
+    </p>
+
+<pre>
+<b>$ git stash list</b>
+stash@{0}: WIP on master: 5857ac1 hello with a flower
+</pre>
+
+    <h4>
+      git stash pop
+      <small>remove item from the list and apply to current working directory</small>
+    </h4>
+
+    <p>After you've done the changes you were called away for, and you're ready to
+    continue from where you left off, run the <code>git stash pop</code> command
+    to bring back the working directory to that state and remove it from the stash list.
+    </p>
+
+<pre>
+<b>$ git stash pop</b>
+# On branch master
+# Changes not staged for commit:
+#   (use "git add &lt;file>..." to update what will be committed)
+#   (use "git checkout -- &lt;file>..." to discard changes in working directory)
+#
+# <span class="red">modified:   hello.rb</span>
+#
+no changes added to commit (use "git add" and/or "git commit -a")
+Dropped refs/stash@{0}: (14ddbc6f2c26330e33d08faf15d88f816b6cbd45)
+</pre>
+
+    <p>By default it will reapply the last added stash item to the working
+    directory. This will be the item referenced by <code>stash@{0}</code>.
+    You can grab another stash item instead if you reference it in the arguments
+    list. For example, <code>git stash pop stash@{1}</code> will apply the item
+    referenced by <code>stash@{1}</code>.
+    </p>
+
+    <p>If you want to leave the item on the stack, use
+    <code>git stash apply</code> instead.
+    </p>
+
+    <h4>
+      git stash clear
+      <small>remove all items from the stash list</small>
+    </h4>
+
+    <p>When you're done with the stash and/or you want to remove of all the
+    stored items, just run the <code>git stash clear</code> command. But only
+    do this if you're sure you're done with the stash.
+    </p>
+
+    <p class="nutshell">
+    <strong>In a nutshell</strong>, run <code>git stash</code> to quickly save
+    some changes that you're not ready to commit or save, but want to come
+    back to while you work on something else.
     </p>
 
   </div>
