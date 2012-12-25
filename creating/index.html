@@ -17,6 +17,7 @@ layout: reference
     public Git repository, as you would do if you wanted a copy or wanted to
     work with someone on a project.  We will cover both of these here.
     </p>
+
   </div>
 </div>
 
@@ -31,9 +32,10 @@ layout: reference
   </h2>
 
   <div class="block">
-    To create a repository from an existing directory of files, you can
+    <p>To create a repository from an existing directory of files, you can
     simply run <code>git init</code> in that directory.  For example,
     let's say we have a directory with a few files in it, like this:
+    </p>
 
 <pre>
 <b>$ cd konichiwa</b>
@@ -41,27 +43,30 @@ layout: reference
 README   hello.rb
 </pre>
 
-    This is a project where we are writing examples of the "Hello World"
+    <p>This is a project where we are writing examples of the "Hello World"
     program in every language.  So far, we just have Ruby, but hey, it's
     a start.  To start version controlling this with Git, we can simply
     run <code>git init</code>.
+    </p>
 
 <pre>
 <b>$ git init</b>
 Initialized empty Git repository in /opt/konichiwa/.git/
 </pre>
 
-    Now you can see that there is a <code>.git</code> subdirectory in your
+    <p>Now you can see that there is a <code>.git</code> subdirectory in your
     project.  This is your Git repository where all the data of your
     project snapshots are stored.
+    </p>
 
 <pre>
 <b>$ ls -a</b>
 .        ..       .git     README   hello.rb
 </pre>
 
-    Congratulations, you now have a skeleton Git repository and can start
+    <p>Congratulations, you now have a skeleton Git repository and can start
     snapshotting your project.
+    </p>
 
     <p class="nutshell">
     <strong>In a nutshell</strong>, you use <code>git init</code> to make an
