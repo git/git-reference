@@ -203,7 +203,7 @@ README   hello.rb more.txt test.txt
 
     <p>If we want to delete a branch (such as the 'testing' branch in the
     previous example, since there is no unique work on it),
-    we can run <code>git branch -d (branch)</code> to remove it.
+    we can run <code>git branch -d (branch)</code> to remove it.</p>
 
 <pre>
 <b>$ git branch</b>
@@ -214,6 +214,37 @@ Deleted branch testing (was 78b2670).
 <b>$ git branch</b>
 * <span class="green">master</span>
 </pre>
+
+    <h4>
+      git push (remote-name) :(branchname)
+      <small>delete a remote branch</small>
+    </h4>
+
+    <p>When you're done with a remote branch, whether it's been merged
+    into the remote master or you want to abandon it and sweep it under
+    the rug, you'll issue a <code>git push</code> command with a specially
+    placed colon symbol to remove that branch.</p>
+
+<pre>
+<b>$ git push origin :tidy-cutlery</b>
+To git@github.com:octocat/Spoon-Knife.git
+ - [deleted]         tidy-cutlery
+</pre>
+
+    <p>In the above example you've deleted the "tidy-cutlery" branch
+    of the "origin" remote. A way to remember this is to think of the
+    <code>git push remote-name local-branch:remote-branch</code> syntax.
+    This states that you want to push your local branch to match that
+    of the remote. When you remove the <code>local-branch</code> portion
+    you're now matching nothing to the remote, effectively telling the
+    remote branch to become nothing.
+    </p>
+
+    <p>Alternatively, you can run
+    <code>git push remote-name --delete branchname</code>
+    which is a wrapper for the colon refspec (a <code>source:destination</code> pair)
+    of deleting a remote branch.
+    </p>
 
     <p class="nutshell">
     <b>In a nutshell</b> you use <code>git branch</code> to list your
