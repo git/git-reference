@@ -222,8 +222,8 @@ Deleted branch testing (was 78b2670).
 
     <p>When you're done with a remote branch, whether it's been merged
     into the remote master or you want to abandon it and sweep it under
-    the rug, you'll issue a <code>git push</code> command with special
-    colon to nuke that branch.</p>
+    the rug, you'll issue a <code>git push</code> command with a specially
+    placed colon symbol to remove that branch.</p>
 
 <pre>
 <b>$ git push origin :tidy-cutlery</b>
@@ -240,9 +240,9 @@ To git@github.com:octocat/Spoon-Knife.git
     remote branch to become nothing.
     </p>
 
-    <p>Alternatively, you can also run
+    <p>Alternatively, you can run
     <code>git push remote-name --delete branchname</code>
-    which is basically a wrapper for the above colon prefix version.
+    which is a wrapper for the colon technique of deleting a remote branch.
     </p>
 
     <p class="nutshell">
