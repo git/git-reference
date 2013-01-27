@@ -140,8 +140,8 @@ layout: reference
   <div class="block">
     <p>As you saw in the <code>git add</code> section, in order to see what the
     status of your staging area is compared to the code in your working
-    directory, you can run the <code>git status</code> command. I demonstrated
-    using it with the <code>-s</code> option, which gives you short output.
+    directory, you can run the <code>git status</code> command. Using the
+    <code>-s</code> option will give you short output.
     Without that flag, the <code>git status</code> command will give you more
     context and hints.  Here is the same status output with and without the
     <code>-s</code>.  The short output looks like this:
@@ -572,7 +572,7 @@ Further paragraphs come after blank lines.
     <p>Notice how if you don't stage any changes and then run
     <code>git commit</code>, Git will simply give you the output of the
     <code>git status</code> command, reminding you that nothing is staged.
-    I've highlighted the important part of that message, saying that nothing
+    The important part of that message has been highlighted, saying that nothing
     is added to be committed.   If you use <code>-a</code>, it will add and
     commit everything at once.
     </p>
@@ -605,11 +605,9 @@ Further paragraphs come after blank lines.
 
   <div class="block">
     <p><code>git reset</code> is probably the most confusing command written
-    by humans.  I've been using Git for years, even wrote a book on it and I
-    still get confused by what it is going to do at times.  So, I'll just
-    tell you the three specific invocations of it that are generally
-    helpful and ask you to blindly use it as I do - because it can be
-    very useful.
+    by humans, but it can be very useful when you get the hang of it.
+    There are three specific invocations of it that are generally
+    helpful.
     </p>
 
     <h4>
@@ -617,19 +615,19 @@ Further paragraphs come after blank lines.
       <small>undo the last commit and unstage the files</small>
     </h4>
 
-    <p>In the first case, we can use it to unstage something that you have
+    <p>First, you can use it to unstage something that has been
     accidentally staged.  Let's say that you have modified two files and want
     to record them into two different commits.  You should stage and commit
     one, then stage and commit the other.  If you accidentally stage both of
     them, how do you <i>un-</i>stage one?  You do it with
-    <code>git reset HEAD -- file</code>.  Technically here you don't have to
+    <code>git reset HEAD -- file</code>.  Technically you don't have to
     add the <code>--</code> - it is used to tell Git when you have stopped
     listing options and are now listing file paths, but it's probably good to
     get into the habit of using it to separate options from paths even if you
     don't need to.
     </p>
 
-    <p>So, let's see what it looks like to unstage something.  Here we have
+    <p>Let's see what it looks like to unstage something.  Here we have
     two files that have been modified since our last commit.  We will stage
     both, then unstage one of them.</p>
 
@@ -782,7 +780,7 @@ nothing to commit (working directory clean)
 
     <p><code>git rm</code> will remove entries from the staging area.
     This is a bit different from <code>git reset HEAD</code> which "unstages"
-    files.  By "unstage" I mean it reverts the staging area to what was
+    files.  To "unstage" means it reverts the staging area to what was
     there before we started modifying things.  <code>git rm</code> on the
     other hand just kicks the file off the stage entirely, so that it's not
     included in the next commit snapshot, thereby effectively deleting it.</p>
@@ -810,10 +808,10 @@ nothing to commit (working directory clean)
     </p>
 
     <p class="aside">
-    I personally don't use this command that much in it's normal form - to
-    delete files.  It's often easier to just remove the files off your disk and
-    then run a <code>git commit -a</code>, which will automatically remove them
-    from your index, too.</p>
+    In its normal form the command is used to delete files.
+    But it's often easier to just remove the files off your disk and
+    then run <code>git commit -a</code>, which will also automatically remove
+    them from your index.</p>
 
     <p class="nutshell">
     <strong>In a nutshell</strong>,
