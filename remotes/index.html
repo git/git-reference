@@ -100,7 +100,7 @@ origin	git@github.com:github/git-reference.git (push)
     adds <code>[url]</code> under a local remote named <code>[alias]</code>.</p>
 
     <p>For example, if we want to share our Hello World program with the world,
-    we can create a new repository on a server (I'll use GitHub as an example),
+    we can create a new repository on a server (Using GitHub as an example),
     which should give you a URL, in this case "git@github.com:schacon/hw.git".
     To add that to our project so we can push to it and fetch updates from it
     we would do this:</p>
@@ -117,8 +117,8 @@ github	git@github.com:schacon/hw.git (push)
     has no special meaning but is widely used because <code>git init</code>
     sets it up by default, 'origin' is often used as a remote name because
     <code>git clone</code> sets it up by default as the cloned-from URL. In
-    this case I've decided to name my remote 'github', but I could have really
-    named it just about anything.
+    this case we'll name the remote 'github', but you could name it just
+    about anything.
     </p>
 
     <h4>
@@ -266,10 +266,10 @@ fatal: No such remote 'guhflub'
     <p>The second command that will fetch down new data from a remote server is
     <code>git pull</code>.  This command will basically run a <code>git fetch</code>
     immediately followed by a <code>git merge</code> of the branch on that remote
-    that is tracked by whatever branch you are currently in.  I personally don't much
-    like this command - I prefer running <code>fetch</code> and <code>merge</code>
-    separately.  Less magic, less problems.  However, if you like this idea, you
-    can read about it in more detail in the
+    that is tracked by whatever branch you are currently in.  Running the
+    <code>fetch</code> and <code>merge</code> commands separately involves less magic
+    and less problems, but if you like the idea of <code>pull</code>, you can
+    read about it in more detail in the
     <a target="new" href="http://git-scm.com/docs/git-pull">official docs</a>.
     </p>
 
@@ -277,9 +277,9 @@ fatal: No such remote 'guhflub'
     would first run <code>git fetch [alias]</code> to tell Git to fetch down all the
     data it has that you do not, then you would run <code>git merge [alias]/[branch]</code>
     to merge into your current branch anything new you see on the server
-    (like if someone else has pushed in the meantime). So, if I were working on my
-    Hello World project with several other people and I wanted to bring in any changes
-    that had been pushed since I last connected, I would do something like this:</p>
+    (like if someone else has pushed in the meantime). So, if you were working on a
+    Hello World project with several other people and wanted to bring in any changes
+    that had been pushed since we last connected, we would do something like this:</p>
 
 <pre>
 <b>$ git fetch github</b>
@@ -296,17 +296,17 @@ From github.com:schacon/hw
  * [new branch]      lisp       -> github/lisp
 </pre>
 
-    <p>I can see that since the last time I synchronized with this remote, five branches
+    <p>Here we can see that since we last synchronized with this remote, five branches
     have been added or updated.  The 'ada' and 'lisp' branches are new, where the
-    'master', 'c-langs' and 'java' branches have been updated.  In this case, my team
-    is pushing proposed updates to remote branches for review before they're merged
-    into 'master'.
+    'master', 'c-langs' and 'java' branches have been updated.  In our example case,
+    other developers are pushing proposed updates to remote branches for review before
+    they're merged into 'master'.
     </p>
 
     <p>You can see the mapping that Git makes.  The 'master' branch on the remote
-    repository becomes a branch named 'github/master' locally.  That way now I can
-    merge the 'master' branch on that remote into my local 'master' branch by running
-    <code>git merge github/master</code>.  Or, I can see what new commits are on that
+    repository becomes a branch named 'github/master' locally.  That way you can
+    merge the 'master' branch on that remote into the local 'master' branch by running
+    <code>git merge github/master</code>.  Or, you can see what new commits are on that
     branch by running <code>git log github/master ^master</code>.  If your remote
     is named 'origin' it would be <code>origin/master</code> instead.  Almost any
     command you would run using local branches you can use remote branches with too.
@@ -356,10 +356,10 @@ To git@github.com:schacon/hw.git
 </pre>
 
     <p>Pretty easy. Now if someone clones that repository they will get exactly
-    what I have committed and all of its history.</p>
+    what we have committed and all of its history.</p>
 
-    <p>What if I have a topic branch like the 'erlang' branch we created earlier
-    and I just want to share that?  You can just push that branch instead.</p>
+    <p>What if you have a topic branch like the 'erlang' branch created earlier
+    and want to share just that?  You can just push that branch instead.</p>
 
 <pre>
 <b>$ git push github erlang</b>
