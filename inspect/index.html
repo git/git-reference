@@ -57,8 +57,8 @@ layout: reference
     you can use the <code>--author</code> option.  For example, let's say we're
     looking for the commits in the Git source code done by Linus.  We would
     type something like <code>git log --author=Linus</code>. The search is
-    case sensitive and also will search the email address.  I'll do the
-    example using the <code>-[number]</code> option, which will limit the
+    case sensitive and will also search the email address.  The following
+    example will use the <code>-[number]</code> option, which will limit the
     results to the last [number] commits.
     </p>
 
@@ -78,11 +78,11 @@ b532581 make "git unpack-file" a built-in
 
     <p>
     If you want to specify a date range that you're interested in filtering your
-    commits down to, you can use a number of options - I use <code>--since</code>
-    and <code>--before</code>, but you can also use <code>--until</code> and
-    <code>--after</code>.  For example, if I wanted to see all the commits in
-    the Git project before 3 weeks ago but after April 18th, I could run this
-    (I'm also going to use <code>--no-merges</code> to remove merge commits):
+    commits down to, you can use a number of options such as <code>--since</code>
+    and <code>--before</code>, or you can also use <code>--until</code> and
+    <code>--after</code>.  For example, to see all the commits in
+    the Git project before three weeks ago but after April 18th, you could run this
+    (We're also going to use <code>--no-merges</code> to remove merge commits):
     </p>
 
 <pre>
@@ -105,9 +105,9 @@ b6c8d2d Documentation/remote-helpers: Add invocation section
 
     <p>
       You may also want to look for commits with a certain phrase in the commit
-      message.  You can use <code>--grep</code> for that.  Let's say I knew there
+      message.  Use <code>--grep</code> for that.  Let's say there
       was a commit that dealt with using the P4EDITOR environment variable and
-      I wanted to remember what that change looked like - I could find the commit
+      you wanted to remember what that change looked like - you could find the commit
       with <code>--grep</code>.
     </p>
 
@@ -132,11 +132,11 @@ Date:   Wed Mar 12 19:03:24 2008 -0500
     arguments.  If you want to use <code>--grep</code> and <code>--author</code>
     to see commits that were authored by someone AND have a specific message
     content, you have to add the <code>--all-match</code> option. In these
-    examples, I'm going to use the <code>--format</code> option, so we can see
+    examples we're going to use the <code>--format</code> option, so we can see
     who the author of each commit was.
     </p>
 
-    <p>If I look for the commit messages with 'p4 depo' in them, I get these
+    <p>If we look for the commit messages with 'p4 depo' in them, we get these
     three commits:</p>
 
 <pre>
@@ -146,8 +146,8 @@ da4a660 Benjamin Sergeant git-p4 fails when cloning a p4 depo.
 1cd5738 Simon Hausmann Make incremental imports easier to use by storing the p4 d
 </pre>
 
-    <p>If I add a <code>--author=Hausmann</code> argument, instead of further
-    filtering it down to the one commit by Simon, it instead will show me all
+    <p>If we add a <code>--author=Hausmann</code> argument, instead of further
+    filtering it down to the one commit by Simon, it instead will show all
     commits by Simon OR commits with "p4 depo" in the message:</p>
 
 <pre>
@@ -167,7 +167,7 @@ e96e400 Simon Hausmann git-p4: Fix submit user-interface.
 ...
 </pre>
 
-    <p>However, if I add a <code>--all-match</code>, I get the results I'm
+    <p>However, adding <code>--all-match</code> will get the results you're
     looking for:</p>
 
 <pre>
@@ -417,7 +417,7 @@ index bb86f00..192151c 100644
 
     <p>That's what we're looking for, but we don't want to have to figure out
     what commit the two branches diverged from every time. Luckily, Git has a
-    shortcut for this. If you run <code>git diff master...erlang</code> (with 
+    shortcut for this. If you run <code>git diff master...erlang</code> (with
 	three dots in between the branch names), Git will automatically figure out
     what the common commit (otherwise known as the "merge base") of the two
     commit is and do the diff off of that.</p>
@@ -438,7 +438,7 @@ index bb86f00..192151c 100644
     the triple-dot syntax, because it will almost always give you what you want.
     </p>
 
-    <p>As a bit of an aside, you can also have git manually calculate the
+    <p>As a bit of an aside, you can also have Git manually calculate what the
     merge-base (first common ancestor commit) of any two commits would be with
     the <code>git merge-base</code> command:</p>
 
@@ -447,7 +447,7 @@ index bb86f00..192151c 100644
 8d585ea6faf99facd39b55d6f6a3b3f481ad0d3d
 </pre>
 
-    <p>So, you can do the equivalent of <code>git diff master...erlang</code>
+    <p>You can do the equivalent of <code>git diff master...erlang</code>
     by running this:</p>
 
 <pre>
@@ -457,7 +457,7 @@ index bb86f00..192151c 100644
  2 files changed, 9 insertions(+), 0 deletions(-)
 </pre>
 
-    <p>I would of course recommend using the easier syntax, though.</p>
+    <p>You may prefer using the easier syntax though.</p>
 
 
     <p class="nutshell">

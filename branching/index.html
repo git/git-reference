@@ -10,7 +10,7 @@ layout: reference
     Branching and Merging
   </h2>
   <div class="block">
-    <p>Branching in Git is one of my favorite features.  If you have used other
+    <p>Branching in Git is one of its many great features.  If you have used other
     version control systems, it's probably helpful to forget most of what you
     think about branches - in fact, it may be more helpful to think of them
     practically as <i>contexts</i> since that is how you will most often be
@@ -319,7 +319,7 @@ HelloWorld.hello
 </pre>
 
     <p>So first we're going to create a new branch named 'change_class' and
-    switch to it so your class renaming changes are isolated. I'm going to
+    switch to it so your class renaming changes are isolated. We're going to
     change each instance of 'HelloWorld' to 'HiWorld'.</p>
 
 <pre>
@@ -333,9 +333,9 @@ class HiWorld
  1 files changed, 2 insertions(+), 4 deletions(-)
 </pre>
 
-    <p>So now I've committed the class renaming changes to the 'change_class'
-      branch.  If I now switch back to the 'master' branch my class name will
-      revert to what it was before I switched branches. Here I can change
+    <p>So now we've committed the class renaming changes to the 'change_class'
+      branch.  To switch back to the 'master' branch the class name will
+      revert to what it was before we switched branches. Here we can change
       something different (in this case the printed output) and at the same
       time rename the file from <code>hello.rb</code> to <code>ruby.rb</code>.
       </p>
@@ -365,10 +365,10 @@ index 2aabb6e..bf64b17 100644
  rename hello.rb => ruby.rb (65%)
 </pre>
 
-    <p>Now those changes are recorded in my 'master' branch.  Notice that the
-      class name is back to 'HelloWorld', not 'HiWorld'.  Now I want to
-      incorporate the 'HiWorld' change so I can just merge in my 'change_class'
-      branch.  However, I've changed the name of the file since I branched,
+    <p>Now those changes are recorded in the 'master' branch.  Notice that the
+      class name is back to 'HelloWorld', not 'HiWorld'.  To incorporate
+      the 'HiWorld' change we can just merge in the 'change_class'
+      branch.  However, the name of the file has changed since we branched,
       what will Git do?</p>
 
 <pre>
@@ -391,7 +391,7 @@ end
 HiWorld.hello
 </pre>
 
-    <p>Well, it will just figure it out. Notice that I had no merge conflicts
+    <p>Well, it will just figure it out. Notice that there are no merge conflicts
     and the file that had been renamed now has the 'HiWorld' class name change
     that was done in the other branch. Pretty cool.</p>
 
@@ -474,9 +474,9 @@ index 9103e27,69cad1a..0000000
 
     <p>A cool tip in doing merge conflict resolution in Git is that if you
     run <code>git diff</code>, it will show you both sides of the conflict
-    and how you've resolved it as I've shown here. Now it's time to mark
+    and how you've resolved it as shown here. Now it's time to mark
     the file as resolved.  In Git we do that with <code>git add</code> -
-    to tell Git the file has been resolved, you have to stage it.</p>
+    to tell Git the file has been resolved you have to stage it.</p>
 
 <pre>
 <b>$ git status -s</b>
@@ -684,7 +684,7 @@ b7ae93b added from ruby
 </pre>
 
     <p>This way, it's pretty easy to see that we have Haskell code included in
-      the branch (as I've highlighted). What is even cooler is that we can
+      the branch (highlighted in the output). What is even cooler is that we can
       easily tell Git that we only are interested in the commits that are
       reachable in one branch that are not reachable in another, in other words
       which commits are unique to a branch in comparison to another.
@@ -751,7 +751,7 @@ ab5ab4c added erlang
     tag", which allows you to add a tag message to it, which is what you almost
     always want to do.  Running this without the <code>-a</code> works too, but
     it doesn't record when it was tagged, who tagged it, or let you add a tag
-    message. I would recommend always creating annotated tags.</p>
+    message. It's recommended you always create annotated tags.</p>
 
 <pre>
 <b>$ git tag -a v1.0 </b>
