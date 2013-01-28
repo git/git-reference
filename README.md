@@ -1,8 +1,18 @@
-Online Git Reference
-====================
+# Online Git Reference
 
-I've been giving out git reference cards and wanted a sort of online version
-of that.  A list of the common commands, grouped by task, with the common
-invocations in an easy to reference site.  This is my shot at that site -
-hopefully it is a nice way to get into this stuff if someone is intimidated
-by the pro git book.
+Quick reference guide of basic Git commands along with examples of
+common uses and options.
+
+Each section includes tasks related to the type of operation you
+may be trying to do.
+
+If you would like to know more about a command listed, each command
+links to both the official manual page and its relevant chapter
+in the [Pro Git book](http://git-scm.com/book).
+
+## Contributing
+
+If you would like to contribute, simply fork the repository, push
+your changes to a branch and send a pull request.
+
+Typo fixes, improvements to grammar or readability, it's all welcome.
