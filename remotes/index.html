@@ -113,6 +113,26 @@ github	git@github.com:schacon/hw.git (fetch)
 github	git@github.com:schacon/hw.git (push)
 </pre>
 
+	<h4>
+      git remote rename [old-alias] [new-alias]
+      <small>rename remote aliases</small>
+    </h4>
+
+    <p>If you want to rename remote aliases without having to delete them and add them again 
+    you can do that by running <code>git remote rename [old-alias] [new-alias]</code>. This will
+    allow you to modify current name of the remote.</p>
+
+<pre>
+<b>$ git remote add github git@github.com:schacon/hw.git</b>
+<b>$ git remote -v</b>
+github	git@github.com:schacon/hw.git (fetch)
+github	git@github.com:schacon/hw.git (push)
+<b>$ git remote rename github origin</b>
+<b>$ git remote -v</b>
+origin	git@github.com:schacon/hw.git (fetch)
+origin	git@github.com:schacon/hw.git (push)
+</pre>
+
     <p>Like the branch naming, remote alias names are arbitrary - just as 'master'
     has no special meaning but is widely used because <code>git init</code>
     sets it up by default, 'origin' is often used as a remote name because
