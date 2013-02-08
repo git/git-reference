@@ -322,6 +322,21 @@ HelloWorld.hello
     switch to it so your class renaming changes are isolated. We're going to
     change each instance of 'HelloWorld' to 'HiWorld'.</p>
 
+    <h4>
+      git branch -v
+      <small>see the last commit on each branch</small>
+    </h4>
+
+    <p>If we want to see last commits on each branch 
+    we can run <code>git branch -v</code> to see them.</p>
+
+<pre>
+<b>$ git branch -v</b>
+* <span class="green">master</span>      54b417d fix javascript issue
+  development 74c111d modify component.json file
+  testing     62a557a update test scripts
+</pre>
+
 <pre>
 <b>$ git checkout -b change_class</b>
 Switched to a new branch 'change_class'
