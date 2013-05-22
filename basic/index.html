@@ -691,7 +691,7 @@ M hello.rb
 
     <h4>
       git reset --soft
-      <small>moves what HEAD points to, index and staging are untouched</small>
+      <small>moves HEAD to specified commit reference, index and staging are untouched</small>
     </h4>
 
     <p>The first thing <code>git reset</code> does is undo the last
@@ -753,8 +753,8 @@ nothing to commit (working directory clean)
 
     <p>In the above example, while we had both changes ready to commit and
        ready to stage, a <code>git reset --hard</code> wiped them out.
-       The working tree and stage are now reset to the point just after the
-       commit pointed at by HEAD.</p>
+       The working tree and staging area are reset to the tip of the current
+       branch or HEAD.</p>
 
     <p>You can replace <code>HEAD</code> with a commit SHA-1 or another
     parent reference to reset to that specific point.</p>
