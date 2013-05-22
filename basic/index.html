@@ -612,7 +612,7 @@ Further paragraphs come after blank lines.
 
     <h4>
       git reset HEAD
-      <small>undo the last commit and unstage the files</small>
+      <small>unstage files from index and reset pointer to HEAD</small>
     </h4>
 
     <p>First, you can use it to unstage something that has been
@@ -691,7 +691,7 @@ M hello.rb
 
     <h4>
       git reset --soft
-      <small>undo the last commit</small>
+      <small>moves what HEAD points to, index and staging are untouched</small>
     </h4>
 
     <p>The first thing <code>git reset</code> does is undo the last
@@ -721,11 +721,12 @@ nothing to commit (working directory clean)
 
     <h4>
       git reset --hard
-      <small>undo the last commit, unstage files AND undo any changes in the working directory</small>
+      <small>unstage files AND undo any changes in the working directory since last commit</small>
     </h4>
 
     <p>The third option is to go <code>--hard</code> and make your working
-       directory look like the index, unstage files and undo the last commit.
+       directory look like the index, unstage files and undo any changes made
+       since the last commit.
        This is the most dangerous option and not working directory safe. Any
        changes not in the index or have not been commited will be lost.</p>
 
@@ -752,7 +753,8 @@ nothing to commit (working directory clean)
 
     <p>In the above example, while we had both changes ready to commit and
        ready to stage, a <code>git reset --hard</code> wiped them out.
-       On top of that, the last commit has been undone.</p>
+       The working tree and stage are now reset to the point just after the
+       commit pointed at by HEAD.</p>
 
     <p>You can replace <code>HEAD</code> with a commit SHA-1 or another
     parent reference to reset to that specific point.</p>
