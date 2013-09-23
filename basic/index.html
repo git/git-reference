@@ -849,11 +849,11 @@ nothing to commit (working directory clean)
     It will then leave you at the state of the last commit.
     </p>
 
-    <p>If you have untracked files, <code>git stash</code> doesn't save it. You
-    can either add stage those files with <code>git add</code> (you don't have
-    to commit) before stashing, or, if you have a recent Git version (1.7.7 or
-    above), you can use <code>git stash -u</code> to stash also unversioned
-    files.</p>
+    <p>If you have untracked files, <code>git stash</code> will not include
+    them. You can either stage those files with <code>git add</code> (you don't
+    have to commit) before stashing, or, if you have a recent Git version
+    (1.7.7 or above), you can use <code>git stash -u</code> to also stash also
+    unversioned files.</p>
 
 <pre>
 <b>$ git status -s</b>
