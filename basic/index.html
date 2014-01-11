@@ -265,8 +265,7 @@ index d62ac43..8d15d50 100644
     a good follow-up command to <code>git status</code>
     </p>
 
-    <h4>
-      <a name="diff-cached"></a>
+    <h4 id="diff-cached">
       git diff --cached
       <small>show diff of staged changes</small>
     </h4>
@@ -313,8 +312,7 @@ index d62ac43..8d15d50 100644
  end
 </pre>
 
-    <h4>
-      <a name="diff-head"></a>
+    <h4 id="diff-head">
       git diff HEAD
       <small>show diff of all staged or unstaged changes</small>
     </h4>
@@ -373,8 +371,7 @@ index 2aabb6e..2ae9ba4 100644
  end
 </pre>
 
-    <h4>
-      <a name="diff-stat"></a>
+    <h4 id="diff-stat">
       git diff --stat
       <small>show summary of changes instead of a full diff</small>
     </h4>
@@ -538,8 +535,7 @@ Further paragraphs come after blank lines.
     separate change in a separate commit with a nice commit message so it
     is easier for them to see what you are doing and why.</p>
 
-    <h4>
-      <a name="commit-a"></a>
+    <h4 id="commit-a">
       git commit -a
       <small>automatically stage all tracked, modified files before the commit</small>
     </h4>
@@ -614,8 +610,7 @@ Further paragraphs come after blank lines.
     helpful.
     </p>
 
-    <h4>
-      <a name="reset-head"></a>
+    <h4 id="reset-head">
       git reset HEAD
       <small>unstage files from index and reset pointer to HEAD</small>
     </h4>
@@ -694,8 +689,7 @@ M hello.rb
        it defaults to <code>--mixed</code>. The other options are
        <code>--soft</code> and <code>--hard</code>.</p>
 
-    <h4>
-      <a name="reset-soft"></a>
+    <h4 id="reset-soft">
       git reset --soft
       <small>moves HEAD to specified commit reference, index and staging are untouched</small>
     </h4>
@@ -725,8 +719,7 @@ nothing to commit (working directory clean)
        <code>git commit --amend</code>, allowing you to do more work
        before you roll in the file changes into the same commit.</p>
 
-    <h4>
-      <a name="reset-hard"></a>
+    <h4 id="reset-hard">
       git reset --hard
       <small>unstage files AND undo any changes in the working directory since last commit</small>
     </h4>
@@ -875,8 +868,7 @@ HEAD is now at 5857ac1 hello with a flower
 nothing to commit (working directory clean)
 </pre>
 
-    <h4>
-      <a name="stash-list"></a>
+    <h4 id="stash-list">
       git stash list
       <small>view stashes currently on the stack</small>
     </h4>
@@ -909,8 +901,7 @@ stash@{0}: WIP on master: ee2d2c6 it stops raining
 stash@{1}: WIP on master: 5857ac1 hello with a flower
 </pre>
 
-    <h4>
-      <a name="stash-apply"></a>
+    <h4 id="stash-apply">
       git stash apply
       <small>grab the item from the stash list and apply to current working directory</small>
     </h4>
@@ -943,8 +934,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
     use <code>git stash pop</code> instead.
     </p>
 
-    <h4>
-      <a name="stash-drop"></a>
+    <h4 id="stash-drop">
       git stash drop
       <small>remove an item from the stash list</small>
     </h4>
