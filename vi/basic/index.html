@@ -1,0 +1,973 @@
+---
+layout: reference
+---
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a target="new" href="http://git-scm.com/book/en/Git-Basics-Recording-Changes-to-the-Repository">book</a>
+    </span>
+    Basic Snapshotting
+  </h2>
+  <div class="block">
+    <p>
+    Git is all about composing and saving snapshots of your project and then
+    working with and comparing those snapshots.  This section will explain
+    the commands needed to compose and commit snapshots of your project.
+    </p>
+
+    <p>
+    An important concept here is that Git has an 'index', which acts as sort
+    of a staging area for your snapshot.  This allows you to build up a series
+    of well composed snapshots from changed files in your working directory,
+    rather than having to commit all of the file changes at once.
+    </p>
+
+    <p class="nutshell">
+    <strong>In a nutshell</strong>, you will use <code>git add</code> to start tracking new
+    files and also to stage changes to already tracked files, then
+    <code>git status</code> and <code>git diff</code> to see what has been
+    modified and staged and finally <code>git commit</code> to record your
+    snapshot into your history.  This will be the basic workflow that you use
+    most of the time.
+    </p>
+
+  </div>
+</div>
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a target="new" href="http://git-scm.com/docs/git-add">docs</a> &nbsp;
+      <a target="new" href="http://git-scm.com/book/en/Git-Basics-Recording-Changes-to-the-Repository#Tracking-New-Files">book</a>
+    </span>
+    <a name="add">git add</a>
+    <span class="desc">adds file contents to the staging area</span>
+  </h2>
+
+  <div class="block">
+    <p>
+    In Git, you have to add file contents to your staging area before you
+    can commit them.  If the file is new, you can run <code>git add</code>
+    to initially add the file to your staging area, but even if the file
+    is already "tracked" - ie, it was in your last commit - you still need
+    to call <code>git add</code> to add new modifications to your staging
+    area. Let's see a few examples of this.
+    </p>
+
+    <p>Going back to our Hello World example, once we've initiated the project,
+    we would now start adding our files to it and we would do that with
+    <code>git add</code>.  We can use <code>git status</code> to see what the
+    state of our project is.
+    </p>
+
+<pre>
+<b>$ git status -s</b>
+<span class="red">??</span> README
+<span class="red">??</span> hello.rb
+</pre>
+
+    So right now we have two untracked files.  We can now add them.
+
+<pre>
+<b>$ git add README hello.rb</b>
+</pre>
+
+    Now if we run <code>git status</code> again, we'll see that they've been
+    added.
+
+<pre>
+<b>$ git status -s</b>
+<span class="green">A</span>  README
+<span class="green">A</span>  hello.rb
+</pre>
+
+    <p class="aside">
+    It is also common to recursively add all files in a new project by specifying
+    the current working directory like this: <code>git add .</code>.  Since Git
+    will recursively add all files under a directory you give it, if you give it
+    the current working directory, it will simply start tracking every file
+    there.  In this case, a <code>git add .</code> would have done the same
+    thing as a <code>git add README hello.rb</code>, or for that matter so would
+    <code>git add *</code>, but that's only because we don't have subdirectories
+    which the <code>*</code> would not recurse into.
+    </p>
+
+    <p>OK, so now if we edit one of these files and run <code>git status</code>
+    again, we will see something odd.</p>
+<pre>
+<b>$ vim README</b>
+<b>$ git status -s</b>
+<span class="green">A</span><span class="red">M</span> README
+<span class="green">A</span>  hello.rb
+</pre>
+
+    <p>The 'AM' status means that the file has been modified on disk since we
+    last added it.  This means that if we commit our snapshot right now, we will
+    be recording the version of the file when we last ran <code>git add</code>,
+    not the version that is on our disk.  Git does not assume that what the file
+    looks like on disk is necessarily what you want to snapshot - you have to
+    tell Git with the <code>git add</code> command.
+    </p>
+
+    <p class="nutshell">
+    <strong>In a nutshell</strong>,
+    you run <code>git add</code> on a file when you want to
+    include whatever changes you've made to it in your next commit snapshot.
+    Anything you've changed that is not added will not be included - this means
+    you can craft your snapshots with a bit more precision than most other SCM
+    systems.</p>
+
+    <p>For a very interesting example of using this flexibility to stage only
+    parts of modified files at a time, see the '-p' option to
+    <code>git add</code> in the Pro Git book.</p>
+
+
+  </div>
+
+</div>
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a target="new" href="http://git-scm.com/docs/git-status">docs</a> &nbsp;
+      <a target="new" href="http://git-scm.com/book/en/Git-Basics-Recording-Changes-to-the-Repository#Checking-the-Status-of-Your-Files">book</a>
+    </span>
+    <a name="status">git status</a>
+    <span class="desc">view the status of your files in the working directory and staging area</span>
+  </h2>
+
+  <div class="block">
+    <p>As you saw in the <code>git add</code> section, in order to see what the
+    status of your staging area is compared to the code in your working
+    directory, you can run the <code>git status</code> command. Using the
+    <code>-s</code> option will give you short output.
+    Without that flag, the <code>git status</code> command will give you more
+    context and hints.  Here is the same status output with and without the
+    <code>-s</code>.  The short output looks like this:
+    </p>
+
+<pre>
+<b>$ git status -s</b>
+<span class="green">A</span><span class="red">M</span> README
+<span class="green">A</span>  hello.rb
+</pre>
+
+    Where the same status with the long output looks like this:
+
+<pre>
+<b>$ git status</b>
+# On branch master
+#
+# Initial commit
+#
+# Changes to be committed:
+#   (use "git rm --cached &lt;file>..." to unstage)
+#
+# <span class="green">new file:   README</span>
+# <span class="green">new file:   hello.rb</span>
+#
+# Changed but not updated:
+#   (use "git add &lt;file>..." to update what will be committed)
+#   (use "git checkout -- &lt;file>..." to discard changes in working directory)
+#
+# <span class="red">modified:   README</span>
+#
+</pre>
+
+    <p>You can easily see how much more compact the short output is, but the
+    long output has useful tips and hints as to what commands you may want to
+    use next.
+    </p>
+
+    <p>Git will also tell you about files that were deleted since your last
+    commit or files that were modified or staged since your last commit.</p>
+
+<pre>
+<b>$ git status -s</b>
+<span class="green">M</span>  README
+ <span class="red">D</span> hello.rb
+</pre>
+
+    You can see there are two columns in the short status output.  The first
+    column is for the staging area, the second is for the working directory.
+    So for example, if you have the README file staged and then you modify
+    it again without running <code>git add</code> a second time, you'll see
+    this:
+
+<pre>
+<b>$ git status -s</b>
+<span class="green">M</span><span class="red">M</span> README
+ <span class="red">D</span> hello.rb
+</pre>
+
+    <p class="nutshell">
+    <strong>In a nutshell</strong>,
+    you run <code>git status</code> to see if anything has been modified
+    and/or staged since your last commit so you can decide if you want to
+    commit a new snapshot and what will be recorded in it.
+    </p>
+
+  </div>
+</div>
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a target="new" href="http://git-scm.com/docs/git-diff">docs</a> &nbsp;
+      <a target="new" href="http://git-scm.com/book/en/Git-Basics-Recording-Changes-to-the-Repository#Viewing-Your-Staged-and-Unstaged-Changes">book</a>
+    </span>
+    <a name="diff">git diff</a>
+    <span class="desc">shows diff of what is staged and what is modified but unstaged</span>
+  </h2>
+
+  <div class="block">
+    <p>There are two main uses of the <code>git diff</code> command.  One use we
+    will describe here, the other we will describe later in the
+    <a href="/inspect">"Inspection and Comparison"</a>
+    section. The way we're going to use it here is to describe the
+    changes that are staged or modified on disk but unstaged.</p>
+
+    <h4>
+      git diff
+      <small>show diff of unstaged changes</small>
+    </h4>
+
+    <p>Without any extra arguments, a simple <code>git diff</code> will display
+    in unified diff format (a patch) what code or content you've changed in your
+    project since the last commit that are not yet staged for the next commit
+    snapshot.
+    </p>
+
+<pre>
+<b>$ vim hello.rb</b>
+<b>$ git status -s</b>
+ <span class="red">M</span> hello.rb
+<b>$ git diff</b>
+<span class="umber">diff --git a/hello.rb b/hello.rb
+index d62ac43..8d15d50 100644
+--- a/hello.rb
++++ b/hello.rb</span>
+<span class="lblue">@@ -1,7 +1,7 @@</span>
+ class HelloWorld
+
+   def self.hello
+<span class="red">-    puts "hello world"</span>
+<span class="green">+    puts "hola mundo"</span>
+   end
+
+ end
+</pre>
+
+    <p>So where <code>git status</code> will show you what files have changed
+    and/or been staged since your last commit, <code>git diff</code> will
+    show you what those changes actually are, line by line.  It's generally
+    a good follow-up command to <code>git status</code>
+    </p>
+
+    <h4>
+      git diff --cached
+      <small>show diff of staged changes</small>
+    </h4>
+
+    <p>The <code>git diff --cached</code> command will show you what contents
+    have been staged.  That is, this will show you the changes that will
+    currently go into the next commit snapshot.  So, if you were to stage
+    the change to <code>hello.rb</code> in the example above,
+    <code>git diff</code> by itself won't show you any output because it will
+    only show you what is <i>not yet</i> staged.
+    </p>
+
+<pre>
+<b>$ git status -s</b>
+ <span class="red">M</span> hello.rb
+<b>$ git add hello.rb </b>
+<b>$ git status -s</b>
+<span class="green">M</span>  hello.rb
+<b>$ git diff</b>
+<b>$ </b>
+</pre>
+
+    <p>If you want to see the staged changes, you can run
+    <code>git diff --cached</code> instead.</p>
+
+<pre>
+<b>$ git status -s</b>
+<span class="green">M</span>  hello.rb
+<b>$ git diff</b>
+<b>$ </b>
+<b>$ git diff --cached</b>
+<span class="umber">diff --git a/hello.rb b/hello.rb
+index d62ac43..8d15d50 100644
+--- a/hello.rb
++++ b/hello.rb</span>
+<span class="lblue">@@ -1,7 +1,7 @@</span>
+ class HelloWorld
+
+   def self.hello
+<span class="red">-    puts "hello world"</span>
+<span class="green">+    puts "hola mundo"</span>
+   end
+
+ end
+</pre>
+
+    <h4>
+      git diff HEAD
+      <small>show diff of all staged or unstaged changes</small>
+    </h4>
+
+    <p>If you want to see both staged and unstaged changes together, you
+    can run <code>git diff HEAD</code> - this basically means you want to
+    see the difference between your working directory and the last commit,
+    ignoring the staging area. If we make another change to our
+    <code>hello.rb</code> file then we'll have some changes staged and some
+    changes unstaged.  Here are what all three <code>diff</code> commands
+    will show you:</p>
+<pre>
+<b>$ vim hello.rb </b>
+<b>$ git diff</b>
+<span class="umber">diff --git a/hello.rb b/hello.rb
+index 4f40006..2ae9ba4 100644
+--- a/hello.rb
++++ b/hello.rb</span>
+<span class="lblue">@@ -1,7 +1,7 @@</span>
+ class HelloWorld
+
+<span class="green">+  # says hello</span>
+   def self.hello
+     puts "hola mundo"
+   end
+
+ end
+<b>$ git diff --cached</b>
+<span class="umber">diff --git a/hello.rb b/hello.rb
+index 2aabb6e..4f40006 100644
+--- a/hello.rb
++++ b/hello.rb</span>
+<span class="lblue">@@ -1,7 +1,7 @@</span>
+ class HelloWorld
+
+   def self.hello
+<span class="red">-    puts "hello world"</span>
+<span class="green">+    puts "hola mundo"</span>
+   end
+
+ end
+<b>$ git diff HEAD</b>
+<span class="umber">diff --git a/hello.rb b/hello.rb
+index 2aabb6e..2ae9ba4 100644
+--- a/hello.rb
++++ b/hello.rb</span>
+<span class="lblue">@@ -1,7 +1,8 @@</span>
+ class HelloWorld
+
+<span class="green">+  # says hello</span>
+   def self.hello
+<span class="red">-    puts "hello world"</span>
+<span class="green">+    puts "hola mundo"</span>
+   end
+
+ end
+</pre>
+
+    <h4>
+      git diff --stat
+      <small>show summary of changes instead of a full diff</small>
+    </h4>
+
+    <p>If we don't want the full diff output, but we want more than the
+    <code>git status</code> output, we can use the <code>--stat</code>
+    option, which will give us a summary of changes instead. Here is the
+    same example as above, but using the <code>--stat</code> option instead.
+    </p>
+
+<pre>
+<b>$ git status -s</b>
+<span class="green">M</span><span class="red">M</span> hello.rb
+<b>$ git diff --stat</b>
+ hello.rb |    1 <span class="green">+</span>
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+<b>$ git diff --cached --stat</b>
+ hello.rb |    2 <span class="green">+</span><span class="red">-</span>
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+<b>$ git diff HEAD --stat</b>
+ hello.rb |    3 <span class="green">++</span><span class="red">-</span>
+ 1 files changed, 2 insertions(+), 1 deletions(-)
+</pre>
+
+    <p>
+    You can also provide a file path at the end of any of these options
+    to limit the <code>diff</code> output to a specific file or subdirectory.
+    </p>
+
+
+    <p class="nutshell">
+    <strong>In a nutshell</strong>,
+    you run <code>git diff</code> to see details of the <code>git status</code>
+    command - <i>how</i> files have been modified or staged on a line by line
+    basis.
+    </p>
+
+
+  </div>
+</div>
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a target="new" href="http://git-scm.com/docs/git-commit">docs</a> &nbsp;
+      <a target="new" href="http://git-scm.com/book/en/Git-Basics-Recording-Changes-to-the-Repository#Committing-Your-Changes">book</a>
+    </span>
+    <a name="commit">git commit</a>
+    <span class="desc">records a snapshot of the staging area</span>
+  </h2>
+
+  <div class="block">
+
+    <p>Now that you have staged the content you want to snapshot with the
+    <code>git add</code> command, you run <code>git commit</code> to actually
+    record the snapshot.
+    Git records your name and email address with every commit you make,
+    so the first step is to tell Git what these are.
+    </p>
+
+<pre>
+<b>$ git config --global user.name 'Your Name'</b>
+<b>$ git config --global user.email you@somedomain.com</b>
+</pre>
+
+    <p>Let's stage and commit all the changes to our
+    <code>hello.rb</code> file.  In this first example, we'll use the
+    <code>-m</code> option to provide the commit message on the command line.
+    </p>
+
+<pre>
+<b>$ git add hello.rb </b>
+<b>$ git status -s</b>
+<span class="green">M</span>  hello.rb
+<b>$ git commit -m 'my hola mundo changes'</b>
+[master 68aa034] my hola mundo changes
+ 1 files changed, 2 insertions(+), 1 deletions(-)
+</pre>
+
+    <p>Now we have recorded the snapshot.  If we run <code>git status</code>
+    again, we will see that we have a "clean working directory", which means
+    that we have not made any changes since our last commit - there is no
+    un-snapshotted work in our checkout.</p>
+
+<pre>
+<b>$ git status</b>
+# On branch master
+nothing to commit (working directory clean)
+</pre>
+
+    <p>If you leave off the <code>-m</code> option, Git will try to open a
+    text editor for you to write your commit message.  In <code>vim</code>,
+    which it will default to if it can find nothing else in your settings,
+    the screen might look something like this:
+    </p>
+
+<pre>
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD &lt;file>..." to unstage)
+#
+# modified:   hello.rb
+#
+~
+~
+".git/COMMIT_EDITMSG" 9L, 257C
+</pre>
+
+    <p>At this point you add your actual commit message at the top of the
+    document.  Any lines starting with '#' will be ignored - Git will put
+    the output of the <code>git status</code> command in there for you as
+    a reminder of what you have modified and staged.</p>
+
+    <p>In general, it's very important to write a good commit message.
+    For open source projects, it's generally a rule to write your message
+    more or less in this format:</p>
+
+<pre>
+Short (50 chars or less) summary of changes
+
+More detailed explanatory text, if necessary.  Wrap it to about 72
+characters or so.  In some contexts, the first line is treated as the
+subject of an email and the rest of the text as the body.  The blank
+line separating the summary from the body is critical (unless you omit
+the body entirely); some git tools can get confused if you run the
+two together.
+
+Further paragraphs come after blank lines.
+
+ - Bullet points are okay, too
+
+ - Typically a hyphen or asterisk is used for the bullet, preceded by a
+   single space, with blank lines in between, but conventions vary
+   here
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD &lt;file>..." to unstage)
+#
+# modified:   hello.rb
+#
+~
+~
+~
+".git/COMMIT_EDITMSG" 25L, 884C written
+</pre>
+
+    <p class="aside">
+    The commit message is very important. Since much of the power of
+    Git is this flexibility in carefully crafting commits locally and then
+    sharing them later, it is very powerful to be able to write three or
+    four commits of logically separate changes so that your work may be more
+    easily peer reviewed.  Since there is a separation between committing and
+    pushing those changes, do take the time to make it easier for the people
+    you are working with to see what you've done by putting each logically
+    separate change in a separate commit with a nice commit message so it
+    is easier for them to see what you are doing and why.</p>
+
+    <h4>
+      git commit -a
+      <small>automatically stage all tracked, modified files before the commit</small>
+    </h4>
+
+    <p>If you think the <code>git add</code> stage of the workflow is too
+    cumbersome, Git allows you to skip that part with the <code>-a</code>
+    option.  This basically tells Git to run <code>git add</code> on any file
+    that is "tracked" - that is, any file that was in your last commit and
+    has been modified.  This allows you to do a more Subversion style workflow
+    if you want, simply editing files and then running <code>git commit -a</code>
+    when you want to snapshot everything that has been changed.  You still need
+    to run <code>git add</code> to start tracking new files, though, just like
+    Subversion.
+    </p>
+
+<pre>
+<b>$ vim hello.rb</b>
+<b>$ git status -s</b>
+ <span class="red">M</span>  hello.rb
+<b>$ git commit -m 'changes to hello file'</b>
+# On branch master
+# Changed but not updated:
+#   (use "git add &lt;file>..." to update what will be committed)
+#   (use "git checkout -- &lt;file>..." to discard changes in working directory)
+#
+# modified:   hello.rb
+#
+<span class="hl">no changes added to commit (use "git add" and/or "git commit -a")</span>
+<b>$ git commit -am 'changes to hello file'</b>
+[master 78b2670] changes to hello file
+ 1 files changed, 2 insertions(+), 1 deletions(-)
+</pre>
+
+    <p>Notice how if you don't stage any changes and then run
+    <code>git commit</code>, Git will simply give you the output of the
+    <code>git status</code> command, reminding you that nothing is staged.
+    The important part of that message has been highlighted, saying that nothing
+    is added to be committed.   If you use <code>-a</code>, it will add and
+    commit everything at once.
+    </p>
+
+    <p>This now lets you complete the entire snapshotting workflow - you
+    make changes to your files, then use <code>git add</code> to stage
+    files you want to change, <code>git status</code> and <code>git diff</code>
+    to see what you've changed, and then finally <code>git commit</code>
+    to actually record the snapshot forever.</p>
+
+    <p class="nutshell">
+    <strong>In a nutshell</strong>,
+    you run <code>git commit</code> to record the snapshot of your staged
+    content.  This snapshot can then be compared, shared and reverted to
+    if you need to.
+    </p>
+
+  </div>
+</div>
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a target="new" href="http://git-scm.com/docs/git-reset">docs</a> &nbsp;
+      <a target="new" href="http://git-scm.com/book/en/Git-Basics-Undoing-Things#Unstaging-a-Staged-File">book</a>
+    </span>
+    <a name="reset">git reset</a>
+    <span class="desc">undo changes and commits</span>
+  </h2>
+
+  <div class="block">
+    <p><code>git reset</code> is probably the most confusing command written
+    by humans, but it can be very useful once you get the hang of it.
+    There are three specific invocations of it that are generally
+    helpful.
+    </p>
+
+    <h4>
+      git reset HEAD
+      <small>unstage files from index and reset pointer to HEAD</small>
+    </h4>
+
+    <p>First, you can use it to unstage something that has been
+    accidentally staged.  Let's say that you have modified two files and want
+    to record them into two different commits.  You should stage and commit
+    one, then stage and commit the other.  If you accidentally stage both of
+    them, how do you <i>un-</i>stage one?  You do it with
+    <code>git reset HEAD -- file</code>.  Technically you don't have to
+    add the <code>--</code> - it is used to tell Git when you have stopped
+    listing options and are now listing file paths, but it's probably good to
+    get into the habit of using it to separate options from paths even if you
+    don't need to.
+    </p>
+
+    <p>Let's see what it looks like to unstage something.  Here we have
+    two files that have been modified since our last commit.  We will stage
+    both, then unstage one of them.</p>
+
+<pre>
+<b>$ git status -s</b>
+ <span class="red">M</span> README
+ <span class="red">M</span> hello.rb
+<b>$ git add .</b>
+<b>$ git status -s</b>
+<span class="green">M</span>  README
+<span class="green">M</span>  hello.rb
+<b>$ git reset HEAD -- hello.rb </b>
+Unstaged changes after reset:
+M hello.rb
+<b>$ git status -s</b>
+<span class="green">M</span>  README
+ <span class="red">M</span> hello.rb
+</pre>
+
+    <p>Now you can run a <code>git commit</code> which will just record
+    the changes to the <code>README</code> file, not the now unstaged
+    <code>hello.rb</code>.
+    </p>
+
+    <p class="aside">
+    In case you're curious, what it's actually doing here is it is resetting
+    the checksum of the entry for that file in the "index" to be what it was
+    in the last commit.  Since <code>git add</code> checksums a file and adds
+    it to the "index", <code>git reset HEAD</code> overwrites that with what
+    it was before, thereby effectively unstaging it.
+    </p>
+
+    <p class="tip">
+    If you want to be able to just run <code>git unstage</code>, you can easily
+    setup an alias in Git.  Just run
+    <code>git config --global alias.unstage "reset HEAD"</code>.
+    Once you have run that, you can then just run
+    <code>git unstage [file]</code> instead.
+    </p>
+
+    <p>If you forget the command to unstage something, Git is helpful in
+       reminding you in the output of the normal <code>git status</code>
+       command.  For example, if you run <code>git status</code> without
+       the <code>-s</code> when you have staged files, it will tell you
+       how to unstage them:</p>
+
+<pre>
+<b>$ git status</b>
+# On branch master
+# Changes to be committed:
+#   <span class="hl">(use "git reset HEAD &lt;file>..." to unstage)</span>
+#
+#   <span class="green">modified:   README</span>
+#   <span class="green">modified:   hello.rb</span>
+#
+</pre>
+
+    <p>When you run <code>git reset</code> without specifying a flag
+       it defaults to <code>--mixed</code>. The other options are
+       <code>--soft</code> and <code>--hard</code>.</p>
+
+    <h4>
+      git reset --soft
+      <small>moves HEAD to specified commit reference, index and staging are untouched</small>
+    </h4>
+
+    <p>The first thing <code>git reset</code> does is undo the last
+       commit and put the files back onto the stage. If you include the
+       <code>--soft</code> flag this is where it stops.  For example,
+       if you run <code>git reset --soft HEAD~</code> (the parent of the
+       HEAD) the last commit will be undone and the files touched
+       will be back on the stage again.</p>
+
+<pre>
+<b>$ git status -s</b>
+<span class="green">M</span>  hello.rb
+<b>$ git commit -am 'hello with a flower'</b>
+[master 5857ac1] hello with a flower
+ 1 files changed, 3 insertions(+), 1 deletions(-)
+<b>$ git status</b>
+# On branch master
+nothing to commit (working directory clean)
+<b>$ git reset --soft HEAD~</b>
+<b>$ git status -s</b>
+<span class="green">M</span>  hello.rb
+</pre>
+
+    <p>This is basically doing the same thing as
+       <code>git commit --amend</code>, allowing you to do more work
+       before you roll in the file changes into the same commit.</p>
+
+    <h4>
+      git reset --hard
+      <small>unstage files AND undo any changes in the working directory since last commit</small>
+    </h4>
+
+    <p>The third option is to go <code>--hard</code> and make your working
+       directory look like the index, unstage files and undo any changes made
+       since the last commit.
+       This is the most dangerous option and not working directory safe. Any
+       changes not in the index or have not been commited will be lost.</p>
+
+<pre>
+<b>$ git status</b>
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD &lt;file>..." to unstage)
+#
+# <span class="green">modified:   README</span>
+#
+# Changes not staged for commit:
+#   (use "git add &lt;file>..." to update what will be committed)
+#   (use "git checkout -- &lt;file>..." to discard changes in working directory)
+#
+# <span class="red">modified:   README</span>
+#
+<b>$ git reset --hard HEAD</b>
+HEAD is now at 5857ac1 hello with a flower
+<b>$ git status</b>
+# On branch master
+nothing to commit (working directory clean)
+</pre>
+
+    <p>In the above example, while we had both changes ready to commit and
+       ready to stage, a <code>git reset --hard</code> wiped them out.
+       The working tree and staging area are reset to the tip of the current
+       branch or HEAD.</p>
+
+    <p>You can replace <code>HEAD</code> with a commit SHA-1 or another
+    parent reference to reset to that specific point.</p>
+
+    <p class="nutshell">
+    <strong>In a nutshell</strong>,
+    you run <code>git reset HEAD</code> to undo the last commit, unstage
+    files that you previously ran <code>git add</code> on and wish to not
+    include in the next commit snapshot</p>
+
+  </div>
+</div>
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a href="http://git-scm.com/docs/git-rm">docs</a> &nbsp;
+      <a href="http://git-scm.com/book/en/Git-Basics-Recording-Changes-to-the-Repository#Removing-Files">book</a>
+    </span>
+    <a name="rm-mv">git rm</a>
+    <span class="desc">remove files from the staging area</span>
+  </h2>
+
+  <div class="block">
+
+    <p><code>git rm</code> will remove entries from the staging area.
+    This is a bit different from <code>git reset HEAD</code> which "unstages"
+    files.  To "unstage" means it reverts the staging area to what was
+    there before we started modifying things.  <code>git rm</code> on the
+    other hand just kicks the file off the stage entirely, so that it's not
+    included in the next commit snapshot, thereby effectively deleting it.</p>
+
+    <p>By default, a <code>git rm file</code> will remove the file from the
+    staging area entirely and also off your disk (the working directory). To
+    leave the file in the working directory, you can use <code>git rm --cached
+    </code>.</p>
+
+    <h4>
+      git mv
+      <small>git rm --cached orig; mv orig new; git add new</small>
+    </h4>
+
+    <p>
+    Unlike most other version control systems, Git does not track file renames.
+    Instead, it just tracks the snapshots and then figures out what files were
+    likely renamed by comparing snapshots.  If a file was removed from one
+    snapshot and another file was added to the next one and the contents are
+    similar, Git figures it was most likely a rename.  So, although the
+    <code>git mv</code> command exists, it is superfluous - all it does is a
+    <code>git rm --cached</code>, moves the file on disk, then runs a
+    <code>git add</code> on the new file.  You don't really need to use it, but
+    if it's easier, feel free.
+    </p>
+
+    <p class="aside">
+    In its normal form the command is used to delete files.
+    But it's often easier to just remove the files off your disk and
+    then run <code>git commit -a</code>, which will also automatically remove
+    them from your index.</p>
+
+    <p class="nutshell">
+    <strong>In a nutshell</strong>,
+    you run <code>git rm</code> to remove files from being tracked in Git. It
+    will also remove them from your working directory.
+    </p>
+
+  </div>
+</div>
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a href="http://git-scm.com/docs/git-stash">docs</a> &nbsp;
+      <a href="http://git-scm.com/book/en/Git-Tools-Stashing">book</a>
+    </span>
+    <a name="stash">git stash</a>
+    <span class="desc">save changes made in the current index and working directory for later</span>
+  </h2>
+
+  <div class="block">
+
+    <p>You're in the middle of some changes but something comes up that you
+    need to jump over to, like a so-urgent-right-now bugfix, but don't want
+    to commit or lose your current edits. <code>git stash</code> is there for you.
+    </p>
+
+    <h4>
+      git stash
+      <small>add current changes to the stack</small>
+    </h4>
+
+    <p>Stashing takes the current state of the working directory and index,
+    puts it on a stack for later, and gives you back a clean working directory.
+    It will then leave you at the state of the last commit.
+    </p>
+
+    <p>If you have untracked files, <code>git stash</code> will not include
+    them. You can either stage those files with <code>git add</code> (you don't
+    have to commit) before stashing, or, if you have a recent Git version
+    (1.7.7 or above), you can use <code>git stash -u</code> to also stash also
+    unversioned files.</p>
+
+<pre>
+<b>$ git status -s</b>
+<span class="red">M</span> hello.rb
+<b>$ git stash</b>
+Saved working directory and index state WIP on master: 5857ac1 hello with a flower
+HEAD is now at 5857ac1 hello with a flower
+<b>$ git status</b>
+# On branch master
+nothing to commit (working directory clean)
+</pre>
+
+    <h4>
+      git stash list
+      <small>view stashes currently on the stack</small>
+    </h4>
+
+    <p>It's helpful to know what you've got stowed on the stash and this is where
+    <code>git stash list</code> comes in. Running this command will display a queue
+    of current stash items.
+    </p>
+
+<pre>
+<b>$ git stash list</b>
+stash@{0}: WIP on master: 5857ac1 hello with a flower
+</pre>
+
+    <p>The last item added onto the stash will be referenced by
+    <code>stash@{0}</code> and increment those already there by one.
+    </p>
+
+<pre>
+<b>$ vim hello.rb</b>
+<b>$ git commit -am 'it stops raining'</b>
+[master ee2d2c6] it stops raining
+1 files changed, 1 insertions(+), 1 deletions(-)
+<b>$ vim hello.rb</b>
+<b>$ git stash</b>
+Saved working directory and index state WIP on master: ee2d2c6 it stops raining
+HEAD is now at ee2d2c6 it stops raining
+<b>$ git stash list</b>
+stash@{0}: WIP on master: ee2d2c6 it stops raining
+stash@{1}: WIP on master: 5857ac1 hello with a flower
+</pre>
+
+    <h4>
+      git stash apply
+      <small>grab the item from the stash list and apply to current working directory</small>
+    </h4>
+
+    <p>When you're ready to continue from where you left off, run the
+    <code>git stash apply</code> command to bring back the saved changes
+    onto the working directory.
+    </p>
+
+<pre>
+<b>$ git stash apply</b>
+# On branch master
+# Changes not staged for commit:
+#   (use "git add &lt;file>..." to update what will be committed)
+#   (use "git checkout -- &lt;file>..." to discard changes in working directory)
+#
+# <span class="red">modified:   hello.rb</span>
+#
+no changes added to commit (use "git add" and/or "git commit -a")
+</pre>
+
+    <p>By default it will reapply the last added stash item to the working
+    directory. This will be the item referenced by <code>stash@{0}</code>.
+    You can grab another stash item instead if you reference it in the arguments
+    list. For example, <code>git stash apply stash@{1}</code> will apply the item
+    referenced by <code>stash@{1}</code>.
+    </p>
+
+    <p>If you also want to remove the item from the stack at the same time,
+    use <code>git stash pop</code> instead.
+    </p>
+
+    <h4>
+      git stash drop
+      <small>remove an item from the stash list</small>
+    </h4>
+
+    <p>When you're done with the stashed item and/or want to remove it from the
+    list, run the <code>git stash drop</code> command. By default this will
+    remove the last added stash item. You can also remove a specific item if
+    you include it as an argument.
+    </p>
+
+    <p>In this example, our stash list has at least two items, but we want
+    to get rid of the item added before last, which is referenced by
+    <code>stash@{1}</code>.
+    </p>
+
+<pre>
+<b>$ git stash drop stash@{1}</b>
+Dropped stash@{1} (0b1478540189f30fef9804684673907c65865d8f)
+</pre>
+
+    <p>If you want to remove of all the stored items, just run
+    the <code>git stash clear</code> command. But only do this if you're
+    sure you're done with the stash.
+    </p>
+
+    <p class="nutshell">
+    <strong>In a nutshell</strong>, run <code>git stash</code> to quickly save
+    some changes that you're not ready to commit or save, but want to come
+    back to while you work on something else.
+    </p>
+
+  </div>
+</div>
+
+<p><a class="page-button next-page" href="/branching">On to Branching and Merging &#187;</a></p>
+

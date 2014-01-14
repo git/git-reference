@@ -1,0 +1,440 @@
+---
+layout: reference
+---
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a target="new" href="http://git-scm.com/book/en/Git-Basics-Working-with-Remotes">book</a>
+    </span>
+    Sharing and Updating Projects
+  </h2>
+  <div class="block">
+    <p>
+    Git doesn't have a central server like Subversion.  All of the commands
+    so far have been done locally, just updating a local database.
+    To collaborate with other developers in Git, you have to put all that
+    data on a server that the other developers have access to.  The way Git
+    does this is to synchronize your data with another repository.  There
+    is no real difference between a server and a client - a Git repository
+    is a Git repository and you can synchronize between any two easily.
+    </p>
+
+    <p>Once you have a Git repository, either one that you set up on your
+    own server, or one hosted someplace like GitHub, you can tell Git to
+    either push any data that you have that is not in the remote repository
+    up, or you can ask Git to fetch differences down from the other repo.
+    </p>
+
+    <p>You can do this any time you are online, it does not have to correspond
+    with a <code>commit</code> or anything else.  Generally you will do a
+    number of commits locally, then fetch data from the online shared repository
+    you cloned the project from to get up to date, merge any new work into the
+    stuff you did, then push your changes back up.</p>
+
+    <p class="nutshell">
+    <b>In a nutshell</b> you can update your project with <code>git fetch</code>
+    and share your changes with <code>git push</code>. You can manage your
+    remote repositories with <code>git remote</code>.
+    </p>
+  </div>
+</div>
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a target="new" href="http://git-scm.com/docs/git-remote">docs</a> &nbsp;
+      <a target="new" href="http://git-scm.com/book/en/Git-Basics-Working-with-Remotes#Showing-Your-Remotes">book</a>
+    </span>
+    <a name="remote">git remote</a>
+    <span class="desc">list, add and delete remote repository aliases</span>
+  </h2>
+
+  <div class="block">
+
+    <p>Unlike centralized version control systems that have a client that is
+    very different from a server, Git repositories are all basically equal and
+    you simply synchronize between them. This makes it easy to have more than
+    one remote repository - you can have some that you have read-only access to
+    and others that you can write to as well.</p>
+
+    <p>So that you don't have to use the full URL of a remote repository every
+    time you want to synchronize with it, Git stores an alias or nickname for
+    each remote repository URL you are interested in. You use the
+    <code>git remote</code> command to manage this list of remote repos that
+    you care about.</p>
+
+    <h4>
+      git remote
+      <small>list your remote aliases</small>
+    </h4>
+
+    <p>Without any arguments, Git will simply show you the remote repository
+    aliases that it has stored. By default, if you cloned the project (as
+    opposed to creating a new one locally), Git will automatically add the
+    URL of the repository that you cloned from under the name 'origin'. If
+    you run the command with the <code>-v</code> option, you can see the
+    actual URL for each alias.</p>
+
+<pre>
+<b>$ git remote</b>
+origin
+<b>$ git remote -v</b>
+origin	git@github.com:github/git-reference.git (fetch)
+origin	git@github.com:github/git-reference.git (push)
+</pre>
+
+    <p>You see the URL there twice because Git allows you to have different
+    push and fetch URLs for each remote in case you want to use different
+    protocols for reads and writes.</p>
+
+    <h4>
+      git remote add
+      <small>add a new remote repository of your project</small>
+    </h4>
+
+    <p>If you want to share a locally created repository, or you want to take
+    contributions from someone else's repository - if you want to interact in
+    any way with a new repository, it's generally easiest to add it as a remote.
+    You do that by running <code>git remote add [alias] [url]</code>.  That
+    adds <code>[url]</code> under a local remote named <code>[alias]</code>.</p>
+
+    <p>For example, if we want to share our Hello World program with the world,
+    we can create a new repository on a server (Using GitHub as an example),
+    which should give you a URL, in this case "git@github.com:schacon/hw.git".
+    To add that to our project so we can push to it and fetch updates from it
+    we would do this:</p>
+
+<pre>
+<b>$ git remote</b>
+<b>$ git remote add github git@github.com:schacon/hw.git</b>
+<b>$ git remote -v</b>
+github	git@github.com:schacon/hw.git (fetch)
+github	git@github.com:schacon/hw.git (push)
+</pre>
+
+    <p>Like the branch naming, remote alias names are arbitrary - just as 'master'
+    has no special meaning but is widely used because <code>git init</code>
+    sets it up by default, 'origin' is often used as a remote name because
+    <code>git clone</code> sets it up by default as the cloned-from URL. In
+    this case we'll name the remote 'github', but you could name it just
+    about anything.
+    </p>
+
+    <h4>
+      git remote rm
+      <small>removing an existing remote alias</small>
+    </h4>
+
+    <p>Git addeth and Git taketh away.  If you need to remove a remote - you are
+    not using it anymore, the project is gone, etc - you can remove it with
+    <code>git remote rm [alias]</code>.</p>
+
+<pre>
+<b>$ git remote -v</b>
+github	git@github.com:schacon/hw.git (fetch)
+github	git@github.com:schacon/hw.git (push)
+<b>$ git remote add origin git://github.com/pjhyett/hw.git</b>
+<b>$ git remote -v</b>
+github	git@github.com:schacon/hw.git (fetch)
+github	git@github.com:schacon/hw.git (push)
+origin	git://github.com/pjhyett/hw.git (fetch)
+origin	git://github.com/pjhyett/hw.git (push)
+<b>$ git remote rm origin</b>
+<b>$ git remote -v</b>
+github	git@github.com:schacon/hw.git (fetch)
+github	git@github.com:schacon/hw.git (push)
+</pre>
+
+	<h4>
+      git remote rename [old-alias] [new-alias]
+      <small>rename remote aliases</small>
+    </h4>
+
+    <p>If you want to rename remote aliases without having to delete them and add them again 
+    you can do that by running <code>git remote rename [old-alias] [new-alias]</code>. This will
+    allow you to modify the current name of the remote.</p>
+
+<pre>
+<b>$ git remote add github git@github.com:schacon/hw.git</b>
+<b>$ git remote -v</b>
+github	git@github.com:schacon/hw.git (fetch)
+github	git@github.com:schacon/hw.git (push)
+<b>$ git remote rename github origin</b>
+<b>$ git remote -v</b>
+origin	git@github.com:schacon/hw.git (fetch)
+origin	git@github.com:schacon/hw.git (push)
+</pre>
+
+    <p class="nutshell">
+    <b>In a nutshell</b> with <code>git remote</code> you can list our
+    remote repositories and whatever URL
+    that repository is using.  You can use <code>git remote add</code> to
+    add new remotes, <code>git remote rm</code> to delete existing ones or <code>git remote rename [old-alias] [new-alias]</code> to rename them.
+    </p>
+
+    <h4>
+      git remote set-url
+      <small>update an existing remote URL</small>
+    </h4>
+
+    <p>Should you ever need to update a remote's URL, you can do so with
+    the <code>git remote set-url</code> command.
+    </p>
+
+<pre>
+<b>$ git remote -v</b>
+github	git@github.com:schacon/hw.git (fetch)
+github	git@github.com:schacon/hw.git (push)
+origin	git://github.com/pjhyett/hw.git (fetch)
+origin	git://github.com/pjhyett/hw.git (push)
+<b>$ git remote set-url origin git://github.com/github/git-reference.git</b>
+<b>$ git remote -v</b>
+github	git@github.com:schacon/hw.git (fetch)
+github	git@github.com:schacon/hw.git (push)
+origin	git://github.com/github/git-reference.git (fetch)
+origin	git://github.com/github/git-reference.git (push)
+</pre>
+
+    <p>In addition to this, you can set a different push URL when you
+    include the <code>--push</code> flag. This allows you to fetch from
+    one repo while pushing to another and yet both use the same remote alias.
+    </p>
+
+<pre>
+<b>$ git remote -v</b>
+github	git@github.com:schacon/hw.git (fetch)
+github	git@github.com:schacon/hw.git (push)
+origin	git://github.com/github/git-reference.git (fetch)
+origin	git://github.com/github/git-reference.git (push)
+<b>$ git remote set-url --push origin git://github.com/pjhyett/hw.git</b>
+<b>$ git remote -v</b>
+github	git@github.com:schacon/hw.git (fetch)
+github	git@github.com:schacon/hw.git (push)
+origin	git://github.com/github/git-reference.git (fetch)
+origin	git://github.com/pjhyett/hw.git (push)
+</pre>
+
+    <p>Internally, the <code>git remote set-url</code> command calls
+    <code>git config remote</code>, but has the added benefit of reporting
+    back any errors. <code>git config remote</code> on the other hand, will
+    silently fail if you mistype an argument or option and not actually set
+    anything.
+    </p>
+
+    <p>For example, we'll update the <code>github</code> remote but
+    instead reference it as <code>guhflub</code> in both invocations.
+    </p>
+
+<pre>
+<b>$ git remote -v</b>
+github	git@github.com:schacon/hw.git (fetch)
+github	git@github.com:schacon/hw.git (push)
+origin	git://github.com/github/git-reference.git (fetch)
+origin	git://github.com/github/git-reference.git (push)
+<b>$ git config remote.guhflub git://github.com/mojombo/hw.git</b>
+<b>$ git remote -v</b>
+github	git@github.com:schacon/hw.git (fetch)
+github	git@github.com:schacon/hw.git (push)
+origin	git://github.com/github/git-reference.git (fetch)
+origin	git://github.com/github/git-reference.git (push)
+<b>$ git remote set-url guhflub git://github.com/mojombo/hw.git</b>
+fatal: No such remote 'guhflub'
+</pre>
+
+    <p class="nutshell">
+    <b>In a nutshell</b>, you can update the locations of your remotes
+    with <code>git remote set-url</code>. You can also set different push
+    and fetch URLs under the same remote alias.
+    </p>
+
+  </div>
+</div>
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a target="new" href="http://git-scm.com/docs/git-fetch">docs</a> &nbsp;
+      <a target="new" href="http://git-scm.com/book/en/Git-Basics-Working-with-Remotes#Fetching-and-Pulling-from-Your-Remotes">book</a>
+    </span>
+    <a name="fetch">git fetch</a>
+    <span class="desc">download new branches and data from a remote repository</span>
+  </h2>
+
+  <br/>
+
+  <h2>
+    <span class="docs">
+      <a target="new" href="http://git-scm.com/docs/git-pull">docs</a> &nbsp;
+      <a target="new" href="http://git-scm.com/book/en/Git-Basics-Working-with-Remotes#Fetching-and-Pulling-from-Your-Remotes">book</a>
+    </span>
+    <a name="pull">git pull</a>
+    <span class="desc">fetch from a remote repo and try to merge into the current branch</span>
+  </h2>
+
+  <div class="block">
+
+    <p>Git has two commands to update itself from a remote repository.
+    <code>git fetch</code> will synchronize you with another repo, pulling down any data
+    that you do not have locally and giving you bookmarks to where each branch on
+    that remote was when you synchronized.  These are called "remote branches" and are
+    identical to local branches except that Git will not allow you to check them out -
+    however, you can merge from them, diff them to other branches, run history logs on
+    them, etc.  You do all of that stuff locally after you synchronize.
+    </p>
+
+    <p>The second command that will fetch down new data from a remote server is
+    <code>git pull</code>.  This command will basically run a <code>git fetch</code>
+    immediately followed by a <code>git merge</code> of the branch on that remote
+    that is tracked by whatever branch you are currently in.  Running the
+    <code>fetch</code> and <code>merge</code> commands separately involves less magic
+    and less problems, but if you like the idea of <code>pull</code>, you can
+    read about it in more detail in the
+    <a target="new" href="http://git-scm.com/docs/git-pull">official docs</a>.
+    </p>
+
+    <p>Assuming you have a remote all set up and you want to pull in updates, you
+    would first run <code>git fetch [alias]</code> to tell Git to fetch down all the
+    data it has that you do not, then you would run <code>git merge [alias]/[branch]</code>
+    to merge into your current branch anything new you see on the server
+    (like if someone else has pushed in the meantime). So, if you were working on a
+    Hello World project with several other people and wanted to bring in any changes
+    that had been pushed since we last connected, we would do something like this:</p>
+
+<pre>
+<b>$ git fetch github</b>
+remote: Counting objects: 4006, done.
+remote: Compressing objects: 100% (1322/1322), done.
+remote: Total 2783 (delta 1526), reused 2587 (delta 1387)
+Receiving objects: 100% (2783/2783), 1.23 MiB | 10 KiB/s, done.
+Resolving deltas: 100% (1526/1526), completed with 387 local objects.
+From github.com:schacon/hw
+   8e29b09..c7c5a10  master     -> github/master
+   0709fdc..d4ccf73  c-langs    -> github/c-langs
+   6684f82..ae06d2b  java       -> github/java
+ * [new branch]      ada        -> github/ada
+ * [new branch]      lisp       -> github/lisp
+</pre>
+
+    <p>Here we can see that since we last synchronized with this remote, five branches
+    have been added or updated.  The 'ada' and 'lisp' branches are new, where the
+    'master', 'c-langs' and 'java' branches have been updated.  In our example case,
+    other developers are pushing proposed updates to remote branches for review before
+    they're merged into 'master'.
+    </p>
+
+    <p>You can see the mapping that Git makes.  The 'master' branch on the remote
+    repository becomes a branch named 'github/master' locally.  That way you can
+    merge the 'master' branch on that remote into the local 'master' branch by running
+    <code>git merge github/master</code>.  Or, you can see what new commits are on that
+    branch by running <code>git log github/master ^master</code>.  If your remote
+    is named 'origin' it would be <code>origin/master</code> instead.  Almost any
+    command you would run using local branches you can use remote branches with too.
+    </p>
+
+    <p>If you have more than one remote repository, you can either fetch from specific
+    ones by running <code>git fetch [alias]</code> or you can tell Git to synchronize
+    with all of your remotes by running <code>git fetch --all</code>.
+	</p>
+
+    <p class="nutshell">
+    <b>In a nutshell</b> you run <code>git fetch [alias]</code> to synchronize your
+    repository with a remote repository, fetching all the data it has that you do
+    not into branch references locally for merging and whatnot.
+    </p>
+
+  </div>
+
+</div>
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a target="new" href="http://git-scm.com/docs/git-push">docs</a> &nbsp;
+      <a target="new" href="http://git-scm.com/book/en/Git-Basics-Working-with-Remotes#Pushing-to-Your-Remotes">book</a>
+    </span>
+    <a name="push">git push</a>
+    <span class="desc">push your new branches and data to a remote repository</span>
+  </h2>
+
+  <div class="block">
+    <p>To share the cool commits you've done with others, you need to push your
+    changes to the remote repository. To do this, you run
+    <code>git push [alias] [branch]</code> which will attempt to make your [branch]
+    the new [branch] on the [alias] remote. Let's try it by initially pushing
+    our 'master' branch to the new 'github' remote we created earlier.</p>
+
+<pre>
+<b>$ git push github master</b>
+Counting objects: 25, done.
+Delta compression using up to 2 threads.
+Compressing objects: 100% (25/25), done.
+Writing objects: 100% (25/25), 2.43 KiB, done.
+Total 25 (delta 4), reused 0 (delta 0)
+To git@github.com:schacon/hw.git
+ * [new branch]      master -> master
+</pre>
+
+    <p>Pretty easy. Now if someone clones that repository they will get exactly
+    what we have committed and all of its history.</p>
+
+    <p>What if you have a topic branch like the 'erlang' branch created earlier
+    and want to share just that?  You can just push that branch instead.</p>
+
+<pre>
+<b>$ git push github erlang</b>
+Counting objects: 7, done.
+Delta compression using up to 2 threads.
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (6/6), 652 bytes, done.
+Total 6 (delta 1), reused 0 (delta 0)
+To git@github.com:schacon/hw.git
+ * [new branch]      erlang -> erlang
+</pre>
+
+    <p>Now when people clone or fetch from that repository, they'll get an 'erlang'
+    branch they can look at and merge from. You can push any branch to any
+    remote repository that you have write access to in this way. If your branch
+    is already on the server, it will try to update it, if it is not, Git will
+    add it.</p>
+
+    <p>The last major issue you run into with pushing to remote branches is the
+    case of someone pushing in the meantime.  If you and another developer clone
+    at the same time, you both do commits, then she pushes and then you try to
+    push, Git will by default not allow you to overwrite her changes.  Instead,
+    it basically runs <code>git log</code> on the branch you're trying to push and
+    makes sure it can see the current tip of the server's branch in your push's
+    history.  If it can't see what is on the server in your history, it concludes
+    that you are out of date and will reject your push.  You will rightly have to
+    fetch, merge then push again - which makes sure you take her changes into
+    account.</p>
+
+    <p>This is what happens when you try to push a branch to a remote branch
+    that has been updated in the meantime:</p>
+
+<pre>
+<b>$ git push github master</b>
+To git@github.com:schacon/hw.git
+ ! [rejected]        master -> master (non-fast-forward)
+error: failed to push some refs to 'git@github.com:schacon/hw.git'
+To prevent you from losing history, non-fast-forward updates were rejected
+Merge the remote changes before pushing again.  See the 'Note about
+fast-forwards' section of 'git push --help' for details.
+</pre>
+
+    <p>You can fix this by running <code>git fetch github; git merge github/master</code>
+    and then pushing again.
+	</p>
+
+    <p class="nutshell">
+    <b>In a nutshell</b> you run <code>git push [alias] [branch]</code> to update a
+    remote repository with the changes you've made locally.  It will take what your
+    [branch] looks like and push it to be [branch] on the remote, if possible.  If
+    someone else has pushed since you last fetched and merged, the Git server will
+    deny your push until you are up to date.
+    </p>
+
+  </div>
+</div>
+
+<p><a class="page-button next-page" href="/inspect">On to Inspection and Comparison &#187;</a></p>
