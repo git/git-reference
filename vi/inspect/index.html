@@ -1,5 +1,5 @@
 ---
-layout: reference
+layout: vi_reference
 ---
 
 <div class="box">
@@ -7,22 +7,31 @@ layout: reference
     <span class="docs">
       <a target="new" href="http://git-scm.com/book/en/Git-Basics-Viewing-the-Commit-History">book</a>
     </span>
-    Inspection and Comparison
+    Kiểm Tra và So Sánh
   </h2>
   <div class="block">
-    <p>
+    <!--<p>
     So now you have a bunch of branches that you are using for short lived
     topics, long lived features and what not.  How do you keep track of them?
     Git has a couple of tools to help you figure out where work was done, what
     the difference between two branches are and more.
+    </p>-->
+    <p>
+    Bạn đã có vài nhánh tách theo từng chủ đề, chức năng riêng biệt trong toàn
+    dự án. Vậy làm sao bạn theo dõi chúng? Git có nhiều công cụ giúp bạn kiểm
+    tra phần nào được chỉnh sửa, sự khác biệt giữa các nhánh,...
     </p>
 
     <p class="nutshell">
-    <b>In a nutshell</b> you can use <code>git log</code> to find specific
+    <!--<b>In a nutshell</b> you can use <code>git log</code> to find specific
     commits in your project history - by author, date, content or
     history.  You can use <code>git diff</code> to compare two different points
     in your history - generally to see how two branches differ or what has
-    changed from one version of your software to another.
+    changed from one version of your software to another.-->
+    <b>Tóm tắt:</b> bạn dùng lệnh <code>git log</code> để xác định các xác nhận
+    trong lược sử dự án theo tác giả, ngày tháng, nội dung hoặc lược sử. Và lệnh
+    <code>git diff</code> để so sánh các điểm khác nhau như là xem sự khác biệt
+    giữa hai nhánh hoặc một phiên bản nào đó khác phiên bản khác thế nào.
     </p>
   </div>
 </div>
@@ -34,25 +43,33 @@ layout: reference
       <a target="new" href="http://git-scm.com/book/en/Git-Basics-Viewing-the-Commit-History#Limiting-Log-Output">book</a>
     </span>
     <a name="log">git log</a>
-    <span class="desc">filter your commit history</span>
+    <span class="desc">lọc lược sử các xác nhận</span>
   </h2>
 
   <div class="block">
-    <p>We've already seen how to use <code>git log</code> to compare branches,
+    <!--<p>We've already seen how to use <code>git log</code> to compare branches,
     by looking at the commits on one branch that are not reachable from another.
     (If you don't remember, it looks like this: <code>git log branchA ^branchB</code>).
     However, you can also use <code>git log</code> to look for specific commits.
     Here we'll be looking at some of the more commonly used <code>git log</code>
     options, but there are many.  Take a look at the official docs for the whole
     list.
-    </p>
+    </p>-->
+    <p>
+    Chúng ta đã dùng lệnh <code>git log</code> để so sánh các nhánh theo cách
+    xem các xác nhận của một nhánh với một nhánh khác. (Gợi ý nếu bạn quên, đó
+    là lệnh: <code>git log branchA ^branchB</code>). Tuy nhiên, lệnh <code>git
+    log</code> có rất nhiều tùy chọn để chúng ta tìm kiếm các xác nhận. Bạn có
+    thể xem toàn bộ các tùy chọn này trong tài liệu chính thức vì ở đây, chúng
+    ta chỉ khám phá các tùy chọn thường dùng nhất trong quá trình quản lý kho
+    lưu trữ Git của bạn.
 
     <h4>
       git log --author
-      <small>look for only commits from a specific author</small>
+      <small>xem các xác nhận theo tác giả</small>
     </h4>
 
-    <p>
+    <!--<p>
     To filter your commit history to only the ones done by a specific author,
     you can use the <code>--author</code> option.  For example, let's say we're
     looking for the commits in the Git source code done by Linus.  We would
@@ -60,7 +77,13 @@ layout: reference
     case sensitive and will also search the email address.  The following
     example will use the <code>-[number]</code> option, which will limit the
     results to the last [number] commits.
-    </p>
+    </p>-->
+    <p>
+    Tùy chọn <code>--author</code> sẽ lọc lược sử xác nhận theo tác giả cho bạn.
+    Để tìm các xác nhận được viết bởi Linus trong bộ mã nguồn Git, chúng ta dùng
+    <code>git log --author=Linus</code>. Git phân biệt chữ hoa thường và cũng sẽ
+    tìm trong địa chỉ email. Chúng ta dùng <code>-[số]</code> để giới hạn kết
+    quả theo [số] xác nhận cuối trong ví dụ sau:
 
 <pre>
 <b>$ git log --author=Linus --oneline -5</b>
@@ -73,17 +96,24 @@ b532581 make "git unpack-file" a built-in
 
     <h4>
       git log --since --before
-      <small>filter commits by date committed</small>
+      <small>xem xác nhận theo ngày tháng</small>
     </h4>
 
-    <p>
+    <!--<p>
     If you want to specify a date range that you're interested in filtering your
     commits down to, you can use a number of options such as <code>--since</code>
     and <code>--before</code>, or you can also use <code>--until</code> and
     <code>--after</code>.  For example, to see all the commits in
     the Git project before three weeks ago but after April 18th, you could run this
     (We're also going to use <code>--no-merges</code> to remove merge commits):
-    </p>
+    </p>-->
+    <p>
+    Các tùy chọn <code>--since</code> và <code>--before</code> hoặc
+    <code>--until</code> và <code>--after</code> sẽ lọc lược sử xác nhận theo
+    ngày tháng. Trong mã nguồn Git, chúng ta sẽ xem được các xác nhận cách đây
+    ba tuần nhưng chỉ sau ngày 18 tháng Tư với ví dụ sau (dùng tùy chọn
+    <code>--no-merges</code> để loại bỏ các xác nhận được tích hợp trong quá
+    trình tìm kiếm):
 
 <pre>
 <b>$ git log --oneline --before={3.weeks.ago} --after={2010-04-18} --no-merges</b>
@@ -100,15 +130,21 @@ b6c8d2d Documentation/remote-helpers: Add invocation section
 
     <h4>
       git log --grep
-      <small>filter commits by commit message</small>
+      <small>lọc xác nhận theo thông điệp</small>
     </h4>
 
-    <p>
+    <!--<p>
       You may also want to look for commits with a certain phrase in the commit
       message.  Use <code>--grep</code> for that.  Let's say there
       was a commit that dealt with using the P4EDITOR environment variable and
       you wanted to remember what that change looked like - you could find the commit
       with <code>--grep</code>.
+    </p>-->
+    <p>
+    Bạn có thể tìm một cụm từ nhất định trong thông điệp xác nhận với tùy chọn
+    <code>--grep</code>. Chúng ta sẽ tìm trong mã nguồn Git một xác nhận có
+    chứa biến môi trường P4EDITOR để xem đã thay đổi những gì với tùy chọn
+    <code>--grep</code>.
     </p>
 
 <pre>
@@ -127,18 +163,27 @@ Date:   Wed Mar 12 19:03:24 2008 -0500
     Signed-off-by: Simon Hausmann &lt;simon@lst.de>
 </pre>
 
-    <p>
+    <!--<p>
     Git will logically OR all <code>--grep</code> and <code>--author</code>
     arguments.  If you want to use <code>--grep</code> and <code>--author</code>
     to see commits that were authored by someone AND have a specific message
     content, you have to add the <code>--all-match</code> option. In these
     examples we're going to use the <code>--format</code> option, so we can see
     who the author of each commit was.
+    </p>-->
+    <p>
+    Git sẽ tìm kiếm theo dạng OR (hay/hoặc) các đối số <code>--grep</code> và
+    <code>--author</code>. Nếu bạn muốn dùng dạng thức AND (và) giữa
+    <code>--grep</code> và <code>--author</code> để xem các xác nhận của tác
+    giả nào đó AND (và) có nội dung thông điệp cụ thể, bạn phải thêm tùy chọn
+    <code>--all-match</code>. Trong các ví dụ sau, chúng ta sẽ dùng tùy chọn
+    <code>--format</code> để xem tác giả của mỗi xác nhận.
     </p>
-
-    <p>If we look for the commit messages with 'p4 depo' in them, we get these
-    three commits:</p>
-
+    
+    <!--<p>If we look for the commit messages with 'p4 depo' in them, we get these
+    three commits:</p>-->
+    <p>Chúng ta có ba xác nhận với thông điệp có chứa cụm từ 'p4 depo':</p>
+    
 <pre>
 <b>$ git log --grep="p4 depo" --format="%h %an %s"</b>
 ee4fd1a Junio C Hamano Merge branch 'master' of git://repo.or.cz/git/fastimport
@@ -146,9 +191,13 @@ da4a660 Benjamin Sergeant git-p4 fails when cloning a p4 depo.
 1cd5738 Simon Hausmann Make incremental imports easier to use by storing the p4 d
 </pre>
 
-    <p>If we add a <code>--author=Hausmann</code> argument, instead of further
+    <!--<p>If we add a <code>--author=Hausmann</code> argument, instead of further
     filtering it down to the one commit by Simon, it instead will show all
-    commits by Simon OR commits with "p4 depo" in the message:</p>
+    commits by Simon OR commits with "p4 depo" in the message:</p>-->
+    <p>Nếu theo ví dụ trên, chúng ta thêm vào đối số
+    <code>--author=Hausmann</code> để lọc ra một xác nhận của Simon, nhưng lúc
+    này, Git sẽ hiểu rằng chúng ta đang tìm các xác nhận của Simon OR
+    (hay/hoặc) các xác nhận có thông điệp "p4 depo":</p>
 
 <pre>
 <b>$ git log --grep="p4 depo" --format="%h %an %s" --author="Hausmann"</b>
@@ -167,8 +216,11 @@ e96e400 Simon Hausmann git-p4: Fix submit user-interface.
 ...
 </pre>
 
-    <p>However, adding <code>--all-match</code> will get the results you're
-    looking for:</p>
+    <!--<p>However, adding <code>--all-match</code> will get the results you're
+    looking for:</p></p>
+    <p>Tuy nhiên, với tùy chọn <code>--all-match</code>, chúng ta sẽ nhận được
+    đúng kết quả chúng ta đang tìm kiếm là xác nhận của Simon AND (và) có thông
+    điệp chứa "p4 depo":</p>
 
 <pre>
 <b>$ git log --grep="p4 depo" --format="%h %an %s" --author="Hausmann" --all-match</b>
@@ -177,10 +229,10 @@ e96e400 Simon Hausmann git-p4: Fix submit user-interface.
 
     <h4>
       git log -S
-      <small>filter by introduced diff</small>
+      <small>lọc theo các thay đổi mỗi xác nhận</small>
     </h4>
 
-    <p>
+    <!--<p>
       What if you write really horrible commit messages?  Or, what if you are
       looking for when a function was introduced, or where variables started
       to be used?  You can also tell Git to look through the diff of each
@@ -188,6 +240,14 @@ e96e400 Simon Hausmann git-p4: Fix submit user-interface.
       modified anything that looked like the function name
       'userformat_find_requirements', we would run this: (note there is no '='
       between the '-S' and what you are searching for)
+    </p>-->
+    <p>
+    Bạn muốn tìm một thông điệp xác nhận thực sự khó hiểu, hoặc bạn muốn tìm
+    một chức năng được giới thiệu khi nào hay các biến này được đưa vào từ đoạn
+    mã nào? Git sẽ giúp bạn tìm chuỗi kí tự bạn cần thông qua các thay đổi của
+    mỗi xác nhận. Ví dụ, chúng ta cần tìm các xác nhận có tên chức năng
+    'userformat_find_requirements' trong các thay đổi: (chú ý là không có '='
+    giữa '-S' và chuỗi cần tìm)
     </p>
 
 <pre>
@@ -212,7 +272,7 @@ Date:   Tue Apr 13 22:31:12 2010 +0200
 
     <h4>
       git log -p
-      <small>show patch introduced at each commit</small>
+      <small>xem bản vá của mỗi xác nhận</small>
     </h4>
 
     <p>
