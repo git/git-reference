@@ -56,9 +56,9 @@ layout: vi_reference
     với nhánh đó; vì vậy, bạn không phải xử lý nhiều thư mục khác nhau
     cho nhiều nhánh (có nghĩa là, chỉ dùng một thư mục cho nhiều nhánh. Điều
     này rất khác với cách tiếp cận của Subversion -- ND). Cuối cùng, để
-    trộn hai nhánh với nhau, dùng <code>git merge</code>. Có thể dễ dàng
-    trộn nhiều lần hai nhánh với nhau, hoặc có thể xóa một nhánh sau khi
-    nó đã được trộn.
+    tích hợp hai nhánh với nhau, dùng <code>git merge</code>. Có thể dễ dàng
+    tích hợp nhiều lần hai nhánh với nhau, hoặc có thể xóa một nhánh sau khi
+    nó đã được tích hợp.
     </p>
 
   </div>
@@ -129,9 +129,9 @@ $ git branch
     you don't actually have to have a 'master' branch but since it's the default
     that is created, most projects do.
     </p>-->
-    <p>Cho biết bạn đang rẽ vào nhánh 'master'. Đó là nhánh được tạo ra
+    <p>Cho biết bạn đang rẽ vào nhánh <em>'master'</em>. Đó là nhánh được tạo ra
     tự động khi bạn khởi tạo kho bằng lệnh <code>git init</code>. Cái tên
-    'master' không phải là bắt buộc, nhưng nó được hầu hết dự án dùng do
+    <em>'master'</em> không phải là bắt buộc, nhưng nó được hầu hết dự án dùng do
     sự lựa chọn mặc định của Git.
     </p>
 
@@ -163,12 +163,12 @@ $ git branch
     <p>Như bạn thấy, sau khi tạo ta sẽ thấy thêm nhánh mới khi liệt kê.
     Nhánh mới tạo ra sẽ chứa những thay đổi cuối cùng đã xác nhận. Vì thế,
     sau thời điểm nhánh 'testing' được tạo ra, bạn xác nhận các thay đổi
-    mới (sẽ diễn ra ở nhánh 'master'), rồi lại rẽ vào nhánh 'testing',
+    mới (sẽ diễn ra ở nhánh <em>'master'</em>), rồi lại rẽ vào nhánh 'testing',
     thì thư mục làm việc sẽ trở lại trạng thái ngay trước khi nhánh đó
     đuợc tạo ra (nghĩa là nó sẽ không chứa các thay đổi bạn vừa xác nhận).
     Như vậy, nhánh giống như các đánh dấu trên đường đi cho biết bạn đang
     ở đâu. Ta hãy xem việc rẽ nhánh sẽ diễn ra thế nào, với lệnh
-        <code>git checkout tên nhánh</code>
+        <code>git checkout tên_nhánh</code>
     </p>
 
 <pre>
@@ -195,7 +195,7 @@ README   hello.rb
     them re-appear.</p>-->
     <p>Bây giờ, ta rẽ vào nhánh 'testing'. Bạn sẽ thấy các tập tin vừa tạo
     ra ở trên sẽ bị xóa đi, nhưng chúng sẽ xuất hiện trở lại khi bạn quay
-    lại nhánh ban đầu 'master'.</p>
+    lại nhánh ban đầu <em>'master'</em>.</p>
 
 <pre>
 <b>$ ls</b>
@@ -275,7 +275,7 @@ README   hello.rb more.txt test.txt
     contexts we can switch between.</p>-->
     <p>Như thấy ở trên, ta rẽ vào nhánh 'removals' ngay sau khi tạo ra nhánh
     đó; trong nhánh này, ta thực hiện xóa bớt một số tập tin, xác nhận việc
-    xóa và rồi quay lại nhánh chính 'master', ở đó các tập tin vừa xóa sẽ
+    xóa và rồi quay lại nhánh chính <em>'master'</em>, ở đó các tập tin vừa xóa sẽ
     xuất hiện trở lại. Như vậy, việc rẽ nhánh hiểu và phân chia thư mục
     làm việc theo đúng ngữ cảnh được chỉ định; việc chuyển đổi giữa các
     nhánh không làm mất đi tập tin hoặc không gây ra nhầm lẫn.</p>
@@ -289,8 +289,8 @@ README   hello.rb more.txt test.txt
     aside and then come back to.</p>-->
     <p>
     Khi bắt đầu một dự án, bạn nên rẽ vào một nhánh riêng của dự án đó
-    (việc này cũng nhanh và dễ), và sau đó trộn nhánh của bạn với nhánh
-    chính của dự án; sau khi trộn thì có thể xóa nhánh riêng bạn tạo ra.
+    (việc này cũng nhanh và dễ), và sau đó tích hợp nhánh của bạn với nhánh
+    chính của dự án; sau khi tích hợp thì có thể xóa nhánh riêng bạn tạo ra.
     Bằng cách đó, bạn dễ dàng chuyển qua phiên bản (nhánh) ổn định của dự
     án khi xảy ra vấn đề trên nhánh bạn phát triển; hơn nữa, bạn cũng có thể
     dễ dàng tạm gác lại công việc của bạn trên nhánh riêng, để quay trở lại
@@ -371,7 +371,7 @@ xa. Khi bạn xóa phần <code>local-branch</code>, thì phần nhánh đầu x
     already merged branches.
     </p>-->
     <b>Tóm tắt:</b> bạn dùng <code>git branch</code> để liệt kê các nhánh
-    hiện có, rẽ nhánh mới hoặc xóa đi các nhánh đã trộn hoặc không còn cần thiết.
+    hiện có, rẽ nhánh mới hoặc xóa đi các nhánh đã tích hợp hoặc không còn cần thiết.
     </p>
 
   </div>
@@ -397,15 +397,15 @@ xa. Khi bạn xóa phần <code>local-branch</code>, thì phần nhánh đầu x
     deletions in your 'master' branch, you can just merge in the 'removals'
     branch.
     </p>-->
-    <p>Sau khi chia công việc riêng ra từng nhánh, có lúc bạn sẽ cần trộn
-    các nhánh với nhau, hoặc với nhánh chính. Để trộn, bạn dùng lệnh
+    <p>Sau khi chia công việc riêng ra từng nhánh, có lúc bạn sẽ cần tích hợp
+    các nhánh với nhau, hoặc với nhánh chính. Để tích hợp, bạn dùng lệnh
       <code>git merge</code>.
     Xét ví dụ ở trên với nhánh 'removals'. Ta nhớ lại rằng sau khi rẽ vào
     nhánh 'removals', ta xóa đi một vài tập tin và xác nhận sự thay đổi.
     Việc xóa tập tin này chỉ diễn ra ở nhánh 'removals', còn ở nhánh chính
-    'master' không có tập tin nào được xóa. Bây giờ, để xác nhận rằng cả
-    các tập tin bị xóa trong 'removals' cũng bị xóa trong 'master', ta chỉ
-    việc trộn nhánh 'removals' với 'master'.
+    <em>'master'</em> không có tập tin nào được xóa. Bây giờ, để xác nhận rằng cả
+    các tập tin bị xóa trong 'removals' cũng bị xóa trong <em>'master'</em>, ta chỉ
+    việc tích hợp nhánh 'removals' với <em>'master'</em>.
     </p>
 
 <pre>
@@ -437,10 +437,10 @@ Fast-forward
     merge these branches together.  Chaos, you say?  Let's see.
     </p>-->
     <p>Tất nhiên, quá trình phát triển của mã nguồn không chỉ đơn giản
-    là thêm và xóa tập tin :). Git còn hỗ trợ thêm việc trộn các thay đổi
+    là thêm và xóa tập tin. Git còn hỗ trợ thêm việc tích hợp các thay đổi
     (hoặc sự khác biệt) giữa của tập tin ở hai nhánh khác nhau.
     Lấy ví dụ, ta sẽ chỉnh nội dung tập tin ở một nhánh, trong khi ở nhánh
-    kia ta đổi tên tập tin, rồi rồi trộn hai tập tin đó với nhau. Nghe
+    kia ta đổi tên tập tin, rồi rồi tích hợp hai tập tin đó với nhau. Nghe
     có vẻ rối đây! Xem Git giải quyết thế nào nhé!
     </p>
 
@@ -460,7 +460,7 @@ HelloWorld.hello
     <!--<p>So first we're going to create a new branch named 'change_class' and
     switch to it so your class renaming changes are isolated. We're going to
     change each instance of 'HelloWorld' to 'HiWorld'.</p>-->
-    <p>Bây giờ ta đang ở nhánh 'master'. Ta sẽ tạo nhánh 'change_class'
+    <p>Bây giờ ta đang ở nhánh <em>'master'</em>. Ta sẽ tạo nhánh 'change_class'
     và rẽ ngay vào nhánh đó: trong nhánh mới ta sẽ thực hiện đổi tên lớp
     từ 'HelloWorld' dthành 'HiWorld'.</p>
 
@@ -482,7 +482,7 @@ class HiWorld
       time rename the file from <code>hello.rb</code> to <code>ruby.rb</code>.
       </p>-->
     <p>Việc đổi tên lớp được xác nhận sau lệnh <code>git commit</code>.
-      Ta sẽ trở lại nhánh chính 'master' và sẽ thấy rằng trong tên lớp
+      Ta sẽ trở lại nhánh chính <em>'master'</em> và sẽ thấy rằng trong tên lớp
       vẫn là 'HelloWorld' (như cũ!). Ta sẽ đổi xem có sự khác biệt nào
       với thay đổi đã thực hiện ở nhánh 'change_class', đồng thời đổi tên
       tập tin từ <code>hello.rb</code> thành <code>ruby.rb</code>.
@@ -519,10 +519,10 @@ index 2aabb6e..bf64b17 100644
       branch.  However, the name of the file has changed since we branched,
       what will Git do?</p>-->
     <p>Như ban thấy, sự thay đổi tên tập tin và nội dung cũng vừa được
-      xác nhận trong nhánh 'master'. Để ý rằng, tên lớp vẫn là 'HelloWorld'.
-      Nếu muốn thay đổi cả tên của lớp thành 'HiWorld', ta chỉ việc trộn
-      nội dung ở nhánh 'change_class' vào nhánh 'master'. Nhưng liệu Git
-      có trộn được không, vì tên tập tin đã đổi? Hãy xem:</p>
+      xác nhận trong nhánh <em>'master'</em>. Để ý rằng, tên lớp vẫn là 'HelloWorld'.
+      Nếu muốn thay đổi cả tên của lớp thành 'HiWorld', ta chỉ việc tích hợp
+      nội dung ở nhánh 'change_class' vào nhánh <em>'master'</em>. Nhưng liệu Git
+      có tích hợp được không, vì tên tập tin đã đổi? Hãy xem:</p>
 
 <pre>
 <b>$ git branch</b>
@@ -548,7 +548,7 @@ HiWorld.hello
     and the file that had been renamed now has the 'HiWorld' class name change
     that was done in the other branch. Pretty cool.</p>-->
     <p>Tốt quá, mọi chuyện diễn ra đúng như mong đợi. Như vậy trong quá
-    trình trộn ta đã không gặp xung đột nào, kể cả việc đổi tên tập tin
+    trình tích hợp ta đã không gặp xung đột nào, kể cả việc đổi tên tập tin
     hoặc đổi tên lớp diễn ra ở nhánh khác</p>
 
     <h4>
@@ -580,10 +580,10 @@ Switched to a new branch 'fix_readme'
 
     <!--<p>Now we have committed a change to one line in our README file in a
       branch.  Now let's change the same line in a different way back on
-      our 'master' branch.</p>-->
+      our <em>'master'</em> branch.</p>-->
     <p>Sau khi rẽ vào nhánh 'fix_readme', ta thực hiện thay đổi một dòng
       trong tập tin 'README'. Tiếp theo ta sẽ thay đổi cùng dòng đó, nhưng
-      ở tập tin của nhánh 'master'.</p>
+      ở tập tin của nhánh <em>'master'</em>.</p>
 
 <pre>
 <b>$ git checkout master</b>
@@ -596,7 +596,7 @@ Switched to branch 'master'
 
     <!--<p>Now is the fun part - we will merge the first branch into our master
     branch, causing a merge conflict.</p>-->
-    <p>Hãy xem có điều thú vị gì xảy ra khi trộn hai tập tin có xung đột
+    <p>Hãy xem có điều thú vị gì xảy ra khi tích hợp hai tập tin có xung đột
     với nhau:</p>
 
 <pre>
@@ -623,7 +623,7 @@ nearly every programming language.
       (like kdiff3, emerge, p4merge, etc) instead.
     </p>-->
     <p>Như bạn thấy, Git chèn vào các ký hiệu đánh dấu sự xung đột xảy
-      ra khi trộn. Git đã 'bó tay' khi dừng lại ở đó, và tới phiên bạn
+      ra khi tích hợp. Git đã 'bó tay' khi dừng lại ở đó, và tới phiên bạn
       quyết định. Để ý là,
       <a href="http://www.kernel.org/pub/software/scm/git/docs/git-mergetool.html">một số công cụ đồ họa</a>
       như kdiff3, emerge, p4merge, ... sẽ giúp việc giải quyết xung đột
@@ -650,7 +650,7 @@ index 9103e27,69cad1a..0000000
     and how you've resolved it as shown here. Now it's time to mark
     the file as resolved.  In Git we do that with <code>git add</code> -
     to tell Git the file has been resolved you have to stage it.</p>-->
-    <p>Một mẹo rất hay khi trộn các xung đột trong Git là nếu khi dùng
+    <p>Một mẹo rất hay khi tích hợp các xung đột trong Git là nếu khi dùng
         <code>git diff</code>,
     chương trình sẽ cho bạn thấy cả hai phần (cũ, mới) gây nên xung đột,
     và cả cách giải quyết xung đột. Sau đó, bạn cần đánh dấu cho tập tin
@@ -678,8 +678,8 @@ M  README
     how to best combine the different snapshots into a new snapshot with the
     unique work of both.
     </p>-->
-    <b>Tóm tắt:</b> bạn dùng <code>git merge</code> để trộn một nhánh với
-    nhánh bạn đang rẽ vào. Git sẽ tự động xác định phép trộn tốt nhất để
+    <b>Tóm tắt:</b> bạn dùng <code>git merge</code> để tích hợp một nhánh với
+    nhánh bạn đang rẽ vào. Git sẽ tự động xác định phép tích hợp tốt nhất để
     có được sản phẩm chung lai giữa hai nhánh.
     </p>
 
@@ -796,17 +796,16 @@ b7ae93b added from ruby
     <!--<p>What this is telling us is that this is the history of the development
     of this project.  If the commit messages are descriptive, this can inform
     us as to what all changes have been applied or have influenced the current
-    state of the snapshot and thus what is in it.</p>
-
-    <p>We can also use it to see when the history was branched and merged with
-    the very helpful <code>--graph</code> option.  Here is the same command
-    but with the topology graph turned on:</p>-->
+    state of the snapshot and thus what is in it.</p>-->
     <p>Qua thông tin thu được, ta hình dung được toàn bộ quá trình phát triển
     của nhánh hiện tại (và của dự án). Nếu trong mỗi lần xác nhận, thông điệp
     ta muốn Git lưu lại càng chi tiết thì ta dễ dàng nhớ lại, hình dùng
     tốt về các thay đổi đã thực hiện cũng như ảnh hưởng của nó lên nhánh
     hiện tại..</p>
 
+    <!--<p>We can also use it to see when the history was branched and merged with
+    the very helpful <code>--graph</code> option.  Here is the same command
+    but with the topology graph turned on:</p>-->
     <p>Ngoài ra, tùy chọn <code>--graph</code> rất thú vị, khi nó vẽ ra
     một cây phản ánh cấu trúc nhánh của dự án: Kết quả của tùy chọn này
     giải thích tại sao ta dùng từ 'nhánh' để mô tả dự án</p>
@@ -839,7 +838,7 @@ b7ae93b added from ruby
     muddy up our stable branch with code that may not work for a while so we
     can cleanly switch in and out of it.</p>-->
     <p>Minh họa có vẻ đơn sơ trên thực tế giúp bạn hình dung rõ hơn về
-    dự án, lý do tạo nhánh và trộn các nhánh, và cũng giúp ích cho việc
+    dự án, lý do tạo nhánh và tích hợp các nhánh, và cũng giúp ích cho việc
     quản lý các nhánh. Sau đây, ta sẽ thử tạo nhánh mới, rẽ vào đó để thực
     hiện vài thay đổi rồi qua lại nhánh chính. Ta sẽ dùng lệnh <code>log</code>
     để hình dung chung về tất cả các nhánh.</p>
@@ -903,8 +902,8 @@ README  ruby.rb
     that branch, that is the commits that influenced the final snapshot.</p>-->
     <p>Gỉa sử rằng mọi việc đã xong, bạn quay lại với các công việc khác
     hơn là dự án HelloWorld buồn tẻ. Rồi một ngày khác, quay lại dự án này
-    ở nhánh 'master', bạn muốn biết những gì đã diễn ra trên nhánh 'erlang'
-    và vị trí trên nhánh chính 'master' mà bạn bắt đầu rẽ vào 'erlang'.
+    ở nhánh <em>'master'</em>, bạn muốn biết những gì đã diễn ra trên nhánh 'erlang'
+    và vị trí trên nhánh chính <em>'master'</em> mà bạn bắt đầu rẽ vào 'erlang'.
     Nếu chỉ rẽ vào nhánh rồi xem nội dung các tập tin trong nhánh
     đó, hiển nhiên là bạn sẽ không hình dung tại sao lại có phiên bản Haskell
     trong nhánh 'erlang'. Bạn cần phải dùng <code>git log</code> để tìm
@@ -947,16 +946,16 @@ b7ae93b added from ruby
       nhiều thông tin ở trước thời điểm nhánh 'erlang' được tạo ra.
       Quá nhiều! Điều tuyệt vời là Git đã tính tới phàn nàn này: bạn có thể
       chỉ định Git đưa các thông tin chỉ có ở nhánh này mà không xuất hiện
-      ở nhánh khác. Điều này rất có ích, chẳng hạn khi bạn muốn trộn nhánh
-      'erlang' vào nhánh 'master', nhưng trước khi trộn, bạn cần biết
-      những gì sẽ diễn ra khi trộn.
+      ở nhánh khác. Điều này rất có ích, chẳng hạn khi bạn muốn tích hợp nhánh
+      'erlang' vào nhánh <em>'master'</em>, nhưng trước khi tích hợp, bạn cần biết
+      những gì sẽ diễn ra khi tích hợp.
     </p>
 
     <p>
       Để không liệt kê các thông tin không cần thiết của một nhánh, bạn
       dùng dấu mũ <code>^</code> trước tên nhánh. Ví dụ, nếu chỉ muốn xem
       các thay đổi trong nhánh 'erlang', bỏ đi các thay đổi trong nhánh
-      'master', chỉ việc dùng <code>erlang ^master</code>:
+      <em>'master'</em>, chỉ việc dùng <code>erlang ^master</code>:
     </p>
 
 <pre>
@@ -974,7 +973,7 @@ ab5ab4c added erlang
     <p>Sử dụng dấu mũ là một cách đơn giản, hiểu quả khi quản lý các nhánh,
       cho phép bạn thấy được những cái chỉ có ở nhánh này mà không có ở
       nhánh khác. Nhờ đó, bạn kiểm soát các thiếu sót hoặc hình dung
-      được những thay đổi khi trộn các nhánh.
+      được những thay đổi khi tích hợp các nhánh.
     </p>
 
     <p class="nutshell">

@@ -29,8 +29,8 @@ layout: vi_reference
     <p>
     Một khái niệm quan trọng của Git là 'chỉ mục'. Có thể được coi nó là một
     vùng tạm thời trước khi tạo bản sao chính, nhờ nó bạn có thể tạo những bản
-    sao bao gồm một nhóm các thay đổi được tổ chức tốt, thay vì phải xác nhận
-    thay đổi của tất cả các tập tin cùng một lúc.
+    sao bao gồm một nhóm các chỉnh sửa được tổ chức tốt, thay vì phải xác nhận
+    chỉnh sửa của tất cả các tập tin cùng một lúc.
     </p>
 
     <p class="nutshell">
@@ -43,8 +43,8 @@ layout: vi_reference
     </p>-->
     <strong>Tóm tắt:</strong>, quá trình làm việc cơ bản với Git của bạn sẽ như
     sau: sử dụng lệnh <code>git add</code> để bắt đầu theo dõi tập tin mới và
-    cũng để chỉ mục các tập tin cũ đã thay đổi. Sau đó dùng lệnh <code>git
-    status</code> và <code>git diff</code> để xem lại các thay đổi đã được chỉ
+    cũng để chỉ mục các tập tin cũ đã chỉnh sửa. Sau đó dùng lệnh <code>git
+    status</code> và <code>git diff</code> để xem lại các chỉnh sửa đã được chỉ
 mục, và cuối cùng dùng lệnh <code>git commit</code> để lưu lại bản sao của dự
 án.
     </p>
@@ -152,9 +152,9 @@ mục, và cuối cùng dùng lệnh <code>git commit</code> để lưu lại b�
     looks like on disk is necessarily what you want to snapshot - you have to
     tell Git with the <code>git add</code> command.
     </p>-->
-    <p>Trạng thái 'AM' có nghĩa là tập tin đã được thay đổi sau khi ta thêm tập
+    <p>Trạng thái 'AM' có nghĩa là tập tin đã được chỉnh sửa sau khi ta thêm tập
     tin đó vào (chữ 'A' chỉ 'Add', hay thêm vào, còn chữ 'M' chỉ 'Modified',
-    hay thay đổi).  Nếu bây giờ ta xác nhận, Git sẽ xác nhận tập tin này vào
+    hay chỉnh sửa).  Nếu bây giờ ta xác nhận, Git sẽ xác nhận tập tin này vào
     thời điểm ta gõ lệnh <code>git add</code> trước, không phải phiên bản ta
     vừa lưu sửa đổi trên đĩa. Đó là vì Git không mặc định lưu mọi tập tin có
     trong thư mục đang làm việc vào bản sao, mà bạn phải chỉ định cụ thể Git
@@ -169,7 +169,7 @@ mục, và cuối cùng dùng lệnh <code>git commit</code> để lưu lại b�
     your snapshots with a bit more precision than most other SCM
     systems.</p>-->
     <strong>Tóm tắt:</strong>, dùng <code>git add</code> để thêm tập tin đã
-    thay đổi vào phiên bản trước khi tiến hành xác nhận. Chỉ những thay đổi nào
+    chỉnh sửa vào phiên bản trước khi tiến hành xác nhận. Chỉ những chỉnh sửa nào
     được thêm vào mới được xác nhận vào kho, nhờ vậy mà các phiên bản có thể
     bao gồm chính xác những tập tin bạn muốn.</p>
 
@@ -178,7 +178,7 @@ mục, và cuối cùng dùng lệnh <code>git commit</code> để lưu lại b�
     <code>git add</code> in the Pro Git book.</p>-->
     
     <p>Có một ví dụ rất thú vị về cách áp dụng tính mềm dẻo này để chỉ mục chỉ
-    một phần của tập tin đã thay đổi ở phần tùy chọn <code>-p</code> của
+    một phần của tập tin đã chỉnh sửa ở phần tùy chọn <code>-p</code> của
     <code>git add</code> trong sách Pro Git.</p>
 
   </div>
@@ -254,7 +254,7 @@ mục, và cuối cùng dùng lệnh <code>git commit</code> để lưu lại b�
 
     <!--<p>Git will also tell you about files that were deleted since your last
     commit or files that were modified or staged since your last commit.</p>-->
-    <p>Git cũng sẽ cho thấy những tập tin đã bị xóa và tập tin bị thay đổi hay
+    <p>Git cũng sẽ cho thấy những tập tin đã bị xóa và tập tin bị chỉnh sửa hay
     đã được chỉ mục kể từ lần xác nhận trước.
 
 <pre>
@@ -289,7 +289,7 @@ này:
     commit a new snapshot and what will be recorded in it.
     </p>-->
     <strong>Tóm tắt:</strong> dùng lệnh <code>git status</code> khi cần xem
-    những thay đổi và/hoặc đã đưa vào vùng chỉ mục để quyết định xem có nên xác
+    những chỉnh sửa và/hoặc đã đưa vào vùng chỉ mục để quyết định xem có nên xác
     nhận lưu lại chúng hay không.
     </p>
 
@@ -305,7 +305,7 @@ này:
     <a name="diff">git diff</a>
     <!--<span class="desc">shows diff of what is staged and what is
         modified but unstaged</span>-->
-    <span class="desc">hiển thị những thay đổi của tập tin đã chỉ mục và chưa
+    <span class="desc">hiển thị những chỉnh sửa của tập tin đã chỉ mục và chưa
         đưa vào chỉ mục</span>
   </h2>
 
@@ -317,14 +317,14 @@ này:
     going to use it here is to describe the changes that are staged or modified
     on disk but unstaged.</p>-->
     <p>Lệnh <code>git diff</code> có hai công dụng chính. Chúng ta sẽ nói đến
-    công dụng thể hiện những thay đổi đã được chỉ mục hoặc chưa được chỉ mục.
+    công dụng thể hiện những chỉnh sửa đã được chỉ mục hoặc chưa được chỉ mục.
     Công dụng còn lại sẽ được đề cập đến trong trong phần <a
     href="/vi/inspect">"Kiểm tra và so sánh"</a>.</p>
 
     <h4>
       git diff
       <!--<small>show diff of unstaged changes</small>-->
-      <small>chỉ ra những thay đổi chưa được chỉ mục</small>
+      <small>chỉ ra những chỉnh sửa chưa được chỉ mục</small>
     </h4>
 
     <!--<p>Without any extra arguments, a simple <code>git diff</code> will display
@@ -332,7 +332,7 @@ này:
     project since the last commit that are not yet staged for the next commit
     snapshot.
     </p>-->
-    <p>Mặc định <code>git diff</code> sẽ hiển thị tổng hợp những sự thay đổi
+    <p>Mặc định <code>git diff</code> sẽ hiển thị tổng hợp những sự chỉnh sửa
     (một bản vá) mà bạn vừa tạo ra so với lần xác nhận trước mà chưa được ghi
     nhận cho lần xác nhận kế tiếp.
     </p>
@@ -363,14 +363,14 @@ index d62ac43..8d15d50 100644
     a good follow-up command to <code>git status</code>
     </p>-->
     <p>Trong khi lệnh <code>git status</code> sẽ cho ta biết tập tin nào đã bị
-    thay đổi hay đã được chỉ mục kể từ lần xác nhận trước, lệnh <code>git
-    diff</code> sẽ chỉ ra những thay đổi đó chính xác là như thế nào theo từng
+    chỉnh sửa hay đã được chỉ mục kể từ lần xác nhận trước, lệnh <code>git
+    diff</code> sẽ chỉ ra những chỉnh sửa đó chính xác là như thế nào theo từng
 dòng. Lệnh này nên được dùng ngay sau <code>git status</code> </p>
 
     <h4>
       git diff --cached
       <!--<small>show diff of staged changes</small>-->
-      <small>hiển thị những thay đổi đã được chỉ mục</small>
+      <small>hiển thị những chỉnh sửa đã được chỉ mục</small>
     </h4>
 
     <!--<p>The <code>git diff --cached</code> command will show you what contents
@@ -380,9 +380,9 @@ dòng. Lệnh này nên được dùng ngay sau <code>git status</code> </p>
     <code>git diff</code> by itself won't show you any output because it will
     only show you what is <i>not yet</i> staged.
     </p>-->
-    <p>Lệnh <code>git diff --cached</code> sẽ cho ta thấy những thay đổi nào
+    <p>Lệnh <code>git diff --cached</code> sẽ cho ta thấy những chỉnh sửa nào
     đã được chỉ mục, có nghĩa là những chỉ mục sẽ được đưa vào bản sao tiếp
-    theo khi xác nhận. Ở ví dụ trên, nếu bạn đã chỉ mục các thay đổi tập tin
+    theo khi xác nhận. Ở ví dụ trên, nếu bạn đã chỉ mục các chỉnh sửa tập tin
     <code>hello.rb</code>, khi dùng lệnh <code>git diff</code> sẽ không xuất
     ra thông tin gì cho bạn vì lệnh này chỉ xuất thông tin những gì <i>chưa</i>
     được chỉ mục.</p>
@@ -399,7 +399,7 @@ dòng. Lệnh này nên được dùng ngay sau <code>git status</code> </p>
 
     <!--<p>If you want to see the staged changes, you can run
     <code>git diff --cached</code> instead.</p>-->
-    <p>Để xem những thay đổi đã được chỉ mục, bạn dùng lệnh
+    <p>Để xem những chỉnh sửa đã được chỉ mục, bạn dùng lệnh
     <code>git diff --cached</code></p>
 
 <pre>
@@ -426,7 +426,7 @@ index d62ac43..8d15d50 100644
     <h4>
       git diff HEAD
       <!--<small>show diff of all staged or unstaged changes</small>-->
-      <small>xem tất cả các thay đổi đã chỉ mục hoặc chưa chỉ mục</small>
+      <small>xem tất cả các chỉnh sửa đã chỉ mục hoặc chưa chỉ mục</small>
     </h4>
 
     <!--<p>If you want to see both staged and unstaged changes together, you
@@ -436,10 +436,10 @@ index d62ac43..8d15d50 100644
     <code>hello.rb</code> file then we'll have some changes staged and some
     changes unstaged.  Here are what all three <code>diff</code> commands
     will show you:</p>-->
-    <p>Để xem tất cả những thay đổi đã chỉ mục và chưa chỉ mục cùng một lúc,
+    <p>Để xem tất cả những chỉnh sửa đã chỉ mục và chưa chỉ mục cùng một lúc,
     bạn có thể dùng lệnh <code>git diff HEAD</code>. Về cơ bản nghĩa là bạn
-    muốn xem những thay đổi so với lần xác nhận trước. Nếu ta thay đổi tập tin
-    <code>hello.rb</code>, chỉ mục vài thay đổi và không chỉ mục vài thay đổi
+    muốn xem những chỉnh sửa so với lần xác nhận trước. Nếu ta chỉnh sửa tập tin
+    <code>hello.rb</code>, chỉ mục vài chỉnh sửa và không chỉ mục vài chỉnh sửa
     khác. Chúng ta hãy xem kết quả khi dùng ba lệnh <code>diff</code> này:</p>
 
 <pre>
@@ -492,7 +492,7 @@ index 2aabb6e..2ae9ba4 100644
     <h4>
       git diff --stat
       <!--<small>show summary of changes instead of a full diff</small>-->
-      <small>xem tóm tắt những thay đổi</small>
+      <small>xem tóm tắt những chỉnh sửa</small>
     </h4>
 
     <!--<p>If we don't want the full diff output, but we want more than the
@@ -536,7 +536,7 @@ index 2aabb6e..2ae9ba4 100644
     basis.
     </p>-->
     <strong>Tóm tắt:</strong> lệnh <code>git diff</code> dùng để xem chi tiết
-    hơn lệnh <code>git status</code> - xem tập tin đã được thay đổi hoặc ghi
+    hơn lệnh <code>git status</code> - xem tập tin đã được chỉnh sửa hoặc ghi
     nhận <i>như thế nào</i> theo từng dòng.
     </p>
 
@@ -563,8 +563,8 @@ index 2aabb6e..2ae9ba4 100644
     Git records your name and email address with every commit you make,
     so the first step is to tell Git what these are.
     </p>-->
-    <p>Sau khi những thay đổi đã được chỉ mục bằng lệnh <code>git add</code>,
-    bạn dùng lệnh <code>git commit</code> để thực sự ghi những thay đổi đó
+    <p>Sau khi những chỉnh sửa đã được chỉ mục bằng lệnh <code>git add</code>,
+    bạn dùng lệnh <code>git commit</code> để thực sự ghi những chỉnh sửa đó
     thành một bản sao. Git ghi lại tên và email của bạn trong mỗi xác nhận bạn
     tạo, vì vậy, bạn hãy thông tin về bạn cho Git biết.
     </p>
@@ -578,7 +578,7 @@ index 2aabb6e..2ae9ba4 100644
     <code>hello.rb</code> file.  In this first example, we'll use the
     <code>-m</code> option to provide the commit message on the command line.
     </p>-->
-    <p>Bây giờ ta sẽ chỉ mục và xác nhận tất cả những thay đổi của tập tin
+    <p>Bây giờ ta sẽ chỉ mục và xác nhận tất cả những chỉnh sửa của tập tin
     <code>hello.rb</code>. Trong ví dụ này, chúng ta sẽ dùng tùy chọn
     <code>-m</code> để nhập thông điệp xác nhận từ dòng lệnh.
     </p>
@@ -598,7 +598,7 @@ index 2aabb6e..2ae9ba4 100644
     un-snapshotted work in our checkout.</p>-->
     <p>Bản sao đã được ghi lại. Nếu bây giờ ta thực hiện lệnh <code>git
         status</code>, kết quả nhận được sẽ là ta có một "thư mục hiện hành
-    trống", có nghĩa là chúng ta chưa thực hiện thay đổi nào kể từ lần xác nhận
+    trống", có nghĩa là chúng ta chưa thực hiện chỉnh sửa nào kể từ lần xác nhận
     gần nhất.</p>
 
 <pre>
@@ -680,7 +680,7 @@ Further paragraphs come after blank lines.
 ".git/COMMIT_EDITMSG" 25L, 884C written
 </pre>-->
 <pre>
-Tóm lược ngắn (50 ký tự hoặc ít hơn) về những thay đổi
+Tóm lược ngắn (50 ký tự hoặc ít hơn) về những chỉnh sửa
 
 Thông tin chi tiết hơn nếu cần thiết. Giới hạn trong 72 ký tự trên một
 dòng. Trong nhiều hoàn cảnh, dòng đầu tiên được coi như chủ đề và phần
@@ -724,7 +724,7 @@ Các đoạn tiếp theo cũng được phân cách bằng những dòng trống
     Thông điệp xác nhận rất quan trọng vì sức mạnh của Git phần lớn nằm ở
     khả năng có thể tạo những xác nhận và sau đó chia sẻ chúng. Ba hay bốn xác
     nhận được phân chia một cách hợp lý sẽ giúp việc theo dõi và xem lại dễ
-    dàng hơn. Bởi vì có sự phân chia giữa xác nhận và đẩy những thay đổi này,
+    dàng hơn. Bởi vì có sự phân chia giữa xác nhận và đẩy những chỉnh sửa này,
     dành thời gian viết những thông điệp xác nhận tốt sẽ giúp đồng nghiệp
     hiểu được bạn đang làm gì và vì sao dễ dàng hơn.</p>
 
@@ -732,7 +732,7 @@ Các đoạn tiếp theo cũng được phân cách bằng những dòng trống
       git commit -a
       <!--<small>automatically stage all tracked, modified files before the
           commit</small>-->
-      <small>tự động chỉ mục tất cả các tập tin đã thay đổi, theo dõi trước khi
+      <small>tự động chỉ mục tất cả các tập tin đã chỉnh sửa, theo dõi trước khi
           xác nhận</small>
     </h4>
 
@@ -749,10 +749,10 @@ Các đoạn tiếp theo cũng được phân cách bằng những dòng trống
     <p>Nếu bạn cho rằng giai đoạn <code>git add</code> trong chu trình làm việc
     là quá rườm rà, Git cho phép bỏ qua nó bằng tùy chọn <code>-a</code>.  Với
     tùy chọn này, Git sẽ thực hiện <code>git add</code> với tất cả những tập
-    tin đang được "tracked" (theo dõi) - tập tin đã được thay đổi từ lần xác
+    tin đang được "tracked" (theo dõi) - tập tin đã được chỉnh sửa từ lần xác
     nhận trước. Nhờ vậy bạn có thể thực hiện theo một chu trình làm việc theo
     kiểu Subversion, chỉnh sửa tập tin và sau đó dùng lệnh <code>git commit
-    -a</code> để ghi lại tất cả những thay đổi. Bạn sẽ vẫn phải dùng lệnh
+    -a</code> để ghi lại tất cả những chỉnh sửa. Bạn sẽ vẫn phải dùng lệnh
 <code>git add</code> để bắt đầu theo dõi những tập tin mới, tương tự như với
 Subversion.
     </p>
@@ -782,11 +782,11 @@ Subversion.
     is added to be committed.   If you use <code>-a</code>, it will add and
     commit everything at once.
     </p>-->
-    <p>Chú ý rằng nếu bạn chưa chỉ mục thay đổi nào mà thực hiện ngay lệnh
+    <p>Chú ý rằng nếu bạn chưa chỉ mục chỉnh sửa nào mà thực hiện ngay lệnh
     <code>git commit</code>, Git sẽ xuất kết quả lệnh <code>git status</code>,
-    nhắc nhở rằng chưa có thay đổi nào được chỉ mục. Những phần quan trọng của
-    thông điệp này được đánh dấu, nêu rằng không có thay đổi nào đã được thêm
-    vào để xác nhận. Nếu thêm tùy chọn <code>-a</code>, tất cả thay đổi sẽ được
+    nhắc nhở rằng chưa có chỉnh sửa nào được chỉ mục. Những phần quan trọng của
+    thông điệp này được đánh dấu, nêu rằng không có chỉnh sửa nào đã được thêm
+    vào để xác nhận. Nếu thêm tùy chọn <code>-a</code>, tất cả chỉnh sửa sẽ được
     chỉ mục và xác nhận đồng thời.
     </p>
 
@@ -798,7 +798,7 @@ Subversion.
     <p>Đến đây ta đã hoàn thành một chu trình làm việc hoàn chỉnh - bạn thay
     đổi các tập tin, sau đó dùng lệnh <code>git add</code> để chỉ mục các thay
     đổi, lệnh <code>git status</code> và <code>git diff</code> để bạn xem lại
-    những thay đổi đó, và cuối cùng lệnh <code>git commit</code> để thực sự ghi
+    những chỉnh sửa đó, và cuối cùng lệnh <code>git commit</code> để thực sự ghi
     lại bản sao.</p>
 
     <p class="nutshell">
@@ -808,7 +808,7 @@ Subversion.
     if you need to.
     </p>-->
     <strong>Tóm tắt:</strong> dùng lệnh <code>git commit</code> để ghi lại bản
-    sao gồm những thay đổi đã được chỉ mục. Bản sao này sau đó có thể được so
+    sao gồm những chỉnh sửa đã được chỉ mục. Bản sao này sau đó có thể được so
     sánh, chia sẻ hay hoàn lại nếu cần thiết.
     </p>
 
@@ -823,7 +823,7 @@ Subversion.
     </span>
     <a name="reset">git reset</a>
     <!--<span class="desc">undo changes and commits</span>-->
-    <span class="desc">hoàn tác thay đổi và xác nhận</span>
+    <span class="desc">hoàn tác chỉnh sửa và xác nhận</span>
   </h2>
 
   <div class="block">
@@ -839,9 +839,8 @@ Subversion.
 
     <h4>
       git reset HEAD
-      <!--<small>unstage files from index and reset pointer to
-          HEAD</small>-->
-      <small>lấy lại thay đổi từ chỉ mục và trở về HEAD</small>
+      <!--<small>unstage files from index and reset pointer to HEAD</small>-->
+      <small>huỷ chỉ mục tập tin và đặt lại về HEAD</small>
     </h4>
 
     <!--<p>First, you can use it to unstage something that has been
@@ -855,8 +854,8 @@ Subversion.
     get into the habit of using it to separate options from paths even if you
     don't need to.
     </p>-->
-    <p>Trong trường hợp này, ta sẽ dùng nó để lấy lại những thay đổi đã ghi
-    nhận. Giả sử bạn đã thay đổi hai tập tin và muốn lưu lại trong hai lần xác
+    <p>Trong trường hợp này, ta sẽ dùng nó để lấy lại những chỉnh sửa đã ghi
+    nhận. Giả sử bạn đã chỉnh sửa hai tập tin và muốn lưu lại trong hai lần xác
     nhận riêng rẽ. Bạn nên chỉ mục và xác nhận lần lượt từng tập tin một. Nếu
     chẳng may bạn đã chỉ mục cả hai tập tin này, thực hiện lệnh
     <code>git reset HEAD -- file</code>. <code>--</code> dùng để thông báo
@@ -868,8 +867,8 @@ Subversion.
     <!--<p>Let's see what it looks like to unstage something.  Here we have
     two tập tins that have been modified since our last commit.  We will stage
     both, then unstage one of them.</p>-->
-    <p>Dưới đây ta sẽ chỉ mục thay đổi ở hai tập tin và sau đó lần lượt lấy
-    lại những thay đổi của từng tập tin.</p>
+    <p>Dưới đây ta sẽ chỉ mục chỉnh sửa ở hai tập tin và sau đó lần lượt lấy
+    lại những chỉnh sửa của từng tập tin.</p>
 
 <pre>
 <b>$ git status -s</b>
@@ -892,8 +891,8 @@ M hello.rb
     <code>hello.rb</code>.
     </p>-->
     <p>Bây giờ nếu bạn thực hiện lệnh <code>git commit</code> thì sẽ chỉ
-    ghi lại thay đổi ở tập tin <code>README</code>, chứ không bao gồm những
-    thay đổi chưa được chỉ mục trong tập tin <code>hello.rb</code>.
+    ghi lại chỉnh sửa ở tập tin <code>README</code>, chứ không bao gồm những
+    chỉnh sửa chưa được chỉ mục trong tập tin <code>hello.rb</code>.
     </p>
 
     <!--<p class="aside">
@@ -905,7 +904,7 @@ M hello.rb
     </p>-->
     <p class="aside">
     Khi bạn thực hiện lệnh này, thực tế là Git đã ghi đè checksum của một tập tin
-    trong chỉ mục bằng checksum của chính tập tin đó trong lần commit trước. Vì
+    trong chỉ mục bằng checksum của chính tập tin đó trong lần xác nhận trước. Vì
     <code>git add</code> tính checksum của một tập tin và ghi nó vào chỉ mục,
     <code>git reset HEAD</code> ghi lại nó bằng giá trị cũ, từ đó có thể bỏ
     tập tin khỏi phạm vi chỉ mục.
@@ -929,7 +928,7 @@ M hello.rb
        command.  For example, if you run <code>git status</code> without
        the <code>-s</code> when you have staged files, it will tell you
        how to unstage them:</p>-->
-    <p>Nếu bạn không nhớ lệnh nào dùng để hủy chỉ mục thay đổi, Git sẽ nhắc
+    <p>Nếu bạn không nhớ lệnh nào dùng để hủy chỉ mục chỉnh sửa, Git sẽ nhắc
        cho bạn trong kết quả của lệnh <code>git status</code>. Ví dụ khi bạn
        dùng lệnh <code>git status</code> mà không dùng tùy chọn <code>-s</code>
        sẽ được kết quả như sau:</p>
@@ -957,12 +956,19 @@ M hello.rb
       <small>moves HEAD to specified commit reference, index and staging are untouched</small>
     </h4>
 
-    <p>The first thing <code>git reset</code> does is undo the last
+    <!--<p>The first thing <code>git reset</code> does is undo the last
        commit and put the files back onto the stage. If you include the
        <code>--soft</code> flag this is where it stops.  For example,
        if you run <code>git reset --soft HEAD~</code> (the parent of the
        HEAD) the last commit will be undone and the files touched
-       will be back on the stage again.</p>
+       will be back on the stage again.</p>-->
+    <p>
+    Việc đầu tiên <code>git reset</code> làm là hoàn tác xác nhận cuối
+    và đưa các tập tin trở về vùng chỉ mục. Nếu bạn thêm tuỳ chọn
+    <code>--soft</code>. Ví dụ, nếu bạn chạy lệnh <code>git reset --soft
+        HEAD~</code> (cha của HEAD), xác nhận cuối sẽ được hoàn tác và
+    các tập tin sẽ được đưa trở lại vùng chỉ mục.
+    </p>
 
 <pre>
 <b>$ git status -s</b>
@@ -978,20 +984,27 @@ nothing to commit (working directory clean)
 <span class="green">M</span>  hello.rb
 </pre>
 
-    <p>This is basically doing the same thing as
+<!--<p>This is basically doing the same thing as
        <code>git commit --amend</code>, allowing you to do more work
-       before you roll in the file changes into the same commit.</p>
+       before you roll in the file changes into the same commit.</p>-->
+<p>Lệnh này về cơ bản giống lệnh <code>git commit --amend</code>, cho
+phép bạn thêm các chỉnh sửa vào xác nhận trước đó.</p>
 
     <h4>
       git reset --hard
       <small>unstage files AND undo any changes in the working directory since last commit</small>
     </h4>
 
-    <p>The third option is to go <code>--hard</code> and make your working
+<!--<p>The third option is to go <code>--hard</code> and make your working
        directory look like the index, unstage files and undo any changes made
        since the last commit.
        This is the most dangerous option and not working directory safe. Any
-       changes not in the index or have not been commited will be lost.</p>
+       changes not in the index or have not been commited will be
+       lost.</p>-->
+<p>Tuỳ chọn thứ ba là dùng <code>--hard</code> để huỷ chỉ mục, hoàn tác
+mọi chỉnh sửa bạn thêm vào từ lần xác nhận cuối. Đây là tuỳ chọn nguy
+hiểm nhất không an toàn cho thư mục làm việc của bạn. Bất kỳ chỉnh sửa
+chưa xác nhận sẽ mất.</p>
 
 <pre>
 <b>$ git status</b>
@@ -1014,13 +1027,18 @@ HEAD is now at 5857ac1 hello with a flower
 nothing to commit (working directory clean)
 </pre>
 
-    <p>In the above example, while we had both changes ready to commit and
+<!--<p>In the above example, while we had both changes ready to commit and
        ready to stage, a <code>git reset --hard</code> wiped them out.
        The working tree and staging area are reset to the tip of the current
-       branch or HEAD.</p>
+       branch or HEAD.</p>-->
+<p>Ở ví dụ trên, ta có chỉnh sửa dự kiến xác nhận và chỉnh sửa chưa chỉ
+mục của tập tin README. Lệnh <code>git reset --hard</code> đã xoá bỏ
+chúng và đặt lại toàn bộ về trạng thái giống lần xác nhận cuối.</p>
 
-    <p>You can replace <code>HEAD</code> with a commit SHA-1 or another
-    parent reference to reset to that specific point.</p>
+    <!--<p>You can replace <code>HEAD</code> with a commit SHA-1 or another
+    parent reference to reset to that specific point.</p>-->
+    <p>Bạn có thể thay <code>HEAD</code> với mã SHA-1 của lần xác nhận
+    bất ký để đặt lại về lần xác nhận đó.</p>
 
     <p class="nutshell">
     <!--<strong>In a nutshell</strong>,
@@ -1028,9 +1046,13 @@ nothing to commit (working directory clean)
     files that you previously ran <code>git add</code> on and wish to not
     include in the next commit snapshot</p>-->
     <strong>Tóm tắt:</strong>,
-    lệnh <code>git reset HEAD</code> dùng để thôi chỉ mục thay đổi ở những
-    tập tin mà trước đấy đã được <code>git add</code> mà bạn chưa muốn xác nhận
-    ngay.  </p>
+    lệnh <code>git reset HEAD</code> dùng để hoàn tác lần xác nhận cuối,
+    huỷ chỉ mục các tập tin bạn không muốn đưa vào lần xác nhận bản sao
+    kế sau khi bạn đã dùng lệnh <code>git add</code> thêm vào. (ND: bạn
+    có thể xem bài viết <a
+        href="http://git-scm.com/blog/2011/07/11/reset.html">Reset
+        Demystified</a> để hiểu rõ hơn về lệnh <code>reset</code> của
+    Git)</p>
 
   </div>
 </div>
@@ -1125,26 +1147,39 @@ nothing to commit (working directory clean)
 
   <div class="block">
 
-    <p>You're in the middle of some changes but something comes up that you
+<!--<p>You're in the middle of some changes but something comes up that you
     need to jump over to, like a so-urgent-right-now bugfix, but don't want
     to commit or lose your current edits. <code>git stash</code> is there for you.
-    </p>
+    </p>-->
+<p>Bạn đang chỉnh sửa dang dở thì một vấn đề phát sinh cần được thêm vào
+ngay, chẳng hạn một bản vá khẩn cấp, nhưng bạn lại không muốn xác nhận
+hoặc mất các chỉnh sửa hiện tại của bạn. Lệnh <code>git stash</code> sẽ
+giải quyết vấn đề đó giúp bạn.</p>
 
     <h4>
       git stash
       <small>add current changes to the stack</small>
     </h4>
 
-    <p>Stashing takes the current state of the working directory and index,
+    <!--<p>Stashing takes the current state of the working directory and index,
     puts it on a stack for later, and gives you back a clean working directory.
     It will then leave you at the state of the last commit.
-    </p>
+    </p>-->
+    <p>Cất giấu (stash) là đưa thư mục làm việc và vùng chỉ mục hiện tại
+    vào một ngăn xếp và đưa bạn trở về trạng thái của lần xác nhận
+    cuối.</p>
 
-    <p>If you have untracked files, <code>git stash</code> will not include
+    <!--<p>If you have untracked files, <code>git stash</code> will not include
     them. You can either stage those files with <code>git add</code> (you don't
     have to commit) before stashing, or, if you have a recent Git version
     (1.7.7 or above), you can use <code>git stash -u</code> to also stash also
-    unversioned files.</p>
+    unversioned files.</p>-->
+    <p>Lệnh <code>git stash</code> sẽ không kèm theo các tập tin chưa
+    theo dõi. Cũng như các bạn tạo xác nhận, bạn phải dùng lệnh
+    <code>git add</code> để chỉ mục tập tin trước khi cất giấu hoặc với
+    các các phiên bản Git từ 1.7.7 về sau, bạn có thể dùng lệnh
+    <code>git stash -u</code> để cất giấu các tập tin chưa đánh phiên
+    bản.</p>
 
 <pre>
 <b>$ git status -s</b>
@@ -1159,7 +1194,8 @@ nothing to commit (working directory clean)
 
     <h4>
       git stash list
-      <small>view stashes currently on the stack</small>
+      <!--<small>view stashes currently on the stack</small>-->
+    <small>liệt kê ngăn xếp</small>
     </h4>
 
     <p>It's helpful to know what you've got stowed on the stash and this is where

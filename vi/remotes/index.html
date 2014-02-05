@@ -18,19 +18,7 @@ layout: vi_reference
     does this is to synchronize your data with another repository.  There
     is no real difference between a server and a client - a Git repository
     is a Git repository and you can synchronize between any two easily.
-    </p>
-
-    <p>Once you have a Git repository, either one that you set up on your
-    own server, or one hosted someplace like GitHub, you can tell Git to
-    either push any data that you have that is not in the remote repository
-    up, or you can ask Git to fetch differences down from the other repo.
-    </p>
-
-    <p>You can do this any time you are online, it does not have to correspond
-    with a <code>commit</code> or anything else.  Generally you will do a
-    number of commits locally, then fetch data from the online shared repository
-    you cloned the project from to get up to date, merge any new work into the
-    stuff you did, then push your changes back up.</p>-->
+    </p>-->
     <p>
     Git không tập trung dữ liệu mở một máy phục vụ như Subversion. Mà tất
     cả thao tác sẽ cập nhật dữ liệu ngay trên máy tính của bạn. Để cộng tác
@@ -41,6 +29,11 @@ layout: vi_reference
     trên máy phục vụ.
     </p>
 
+    <!--<p>Once you have a Git repository, either one that you set up on your
+    own server, or one hosted someplace like GitHub, you can tell Git to
+    either push any data that you have that is not in the remote repository
+    up, or you can ask Git to fetch differences down from the other repo.
+    </p>-->
     <p>
     Môt khi đã có kho lưu trữ Git, hoặc là bạn sẽ thiết lập máy của bạn thành
     một máy phục vụ sử dụng kho đó để chia sẻ, hoặc bạn sẽ tiến hành đồng
@@ -48,6 +41,11 @@ layout: vi_reference
     hai thao tác đẩy và kéo.
     </p>
 
+    <!--<p>You can do this any time you are online, it does not have to correspond
+    with a <code>commit</code> or anything else.  Generally you will do a
+    number of commits locally, then fetch data from the online shared repository
+    you cloned the project from to get up to date, merge any new work into the
+    stuff you did, then push your changes back up.</p>-->
     <p>
     Thao tác đẩy và kéo được tiến hành bất kỳ khi nào bạn có kết nối mạng
     với kho Git khác, trong khi đó thao tác xác nhận (<code>commit</code>)
@@ -81,19 +79,18 @@ layout: vi_reference
     very different from a server, Git repositories are all basically equal and
     you simply synchronize between them. This makes it easy to have more than
     one remote repository - you can have some that you have read-only access to
-    and others that you can write to as well.</p>
-
-    <p>So that you don't have to use the full URL of a remote repository every
-    time you want to synchronize with it, Git stores an alias or nickname for
-    each remote repository URL you are interested in. You use the
-    <code>git remote</code> command to manage this list of remote repos that
-    you care about.</p>-->
+    and others that you can write to as well.</p>-->
     <p>Vì Git không dùng một máy phục vụ chung để lưu dữ liệu như Subversion,
     các kho lưu trữ Git bình đẳng nhau, nằm trên các máy khác nhau và nhiệm
     vụ của bạn là đồng bộ những kho này với nhau. Từ đó, nảy sinh ra ý phải
     quản lý các kho cùng với kết nối tới chúng, kể cả phân quyền (đọc với
     kho này, được ghi vào kho kia,...). </p>
 
+    <!--<p>So that you don't have to use the full URL of a remote repository every
+    time you want to synchronize with it, Git stores an alias or nickname for
+    each remote repository URL you are interested in. You use the
+    <code>git remote</code> command to manage this list of remote repos that
+    you care about.</p>-->
     <p>Các kho ở máy phục vụ khác nhau không chỉ được phân biệt bằng địa chỉ URL đầy đủ, mà còn có thể bằng một tên ngắn gọn mà bạn gán cho địa chỉ đó. Như vậy,
     việc sử dụng các kho sẽ dễ nhớ, đơn giản hơn rất nhiều. Bạn sử dụng lệnh
     <code>git remote</code> để quản lý danh sách các kho.</p>
@@ -138,17 +135,17 @@ origin	git@github.com:github/git-reference.git (push)
     contributions from someone else's repository - if you want to interact in
     any way with a new repository, it's generally easiest to add it as a remote.
     You do that by running <code>git remote add [alias] [url]</code>.  That
-    adds <code>[url]</code> under a local remote named <code>[alias]</code>.</p>
-
-    <p>For example, if we want to share our Hello World program with the world,
-    we can create a new repository on a server (Using GitHub as an example),
-    which should give you a URL, in this case "git@github.com:schacon/hw.git".
-    To add that to our project so we can push to it and fetch updates from it
-    we would do this:</p>-->
+    adds <code>[url]</code> under a local remote named
+    <code>[alias]</code>.</p>-->
     <p>Ta có thể thêm nhiều địa chỉ kho khác nhau cho dự án, bằng lệnh
     <code>git remote add [tên] [địa chỉ]</code>. Ở đây, '[tên]' là do bạn
     chọn để gợi nhớ, đại diện cho địa chỉ của kho (thường dài dòng khó nhớ).</p>
 
+    <!--<p>For example, if we want to share our Hello World program with the world,
+    we can create a new repository on a server (Using GitHub as an example),
+    which should give you a URL, in this case "git@github.com:schacon/hw.git".
+    To add that to our project so we can push to it and fetch updates from it
+    we would do this:</p>-->
     <p>Lấy ví dụ, bạn muốn chia sẻ chương trình Hello World với mọi người
     bằng cách đẩy nó lên GitHub (dịch vụ khác cũng tương tự), trước hết
     bạn tạo dự án ở GitHub, có tên là <b>hw</b>. Địa chỉ kho mà dịch vụ
@@ -213,7 +210,7 @@ github	git@github.com:schacon/hw.git (push)
     you can do that by running <code>git remote rename [old-alias] [new-alias]</code>. This will
     allow you to modify the current name of the remote.</p>-->
     <p>Nếu bạn muốn đổi tên hiện tại của một kho đầu xa mà không phải xóa và thêm vào lần
-    nữa, bạn dùng lệnh  <code>git remote rename [old-alias] [new-alias]</code></p>
+    nữa, bạn dùng lệnh  <code>git remote rename [tên-cũ] [tên-mới]</code></p>
 
 <pre>
 <b>$ git remote add github git@github.com:schacon/hw.git</b>
@@ -243,9 +240,11 @@ origin	git@github.com:schacon/hw.git (push)
       <small>cập nhật địa chỉ URL kho đầu xa</small>
     </h4>
 
-    <p>Should you ever need to update a remote's URL, you can do so with
+    <!--<p>Should you ever need to update a remote's URL, you can do so with
     the <code>git remote set-url</code> command.
-    </p>
+    </p>-->
+    <p>Lệnh <code>git remote set-url</code> dùng để cập nhật địa chỉ đầu
+    xa</p>
 
 <pre>
 <b>$ git remote -v</b>
@@ -261,10 +260,12 @@ origin	git://github.com/github/git-reference.git (fetch)
 origin	git://github.com/github/git-reference.git (push)
 </pre>
 
-    <p>In addition to this, you can set a different push URL when you
+    <!--<p>In addition to this, you can set a different push URL when you
     include the <code>--push</code> flag. This allows you to fetch from
     one repo while pushing to another and yet both use the same remote alias.
-    </p>
+    </p>-->
+    <p>Với trường hợp dưới đây, bạn có thể thêm địa chỉ đẩy khác khi kèm
+    theo cờ <code>--push</code> để tách biệt hai kho đẩy và tải về.</p>
 
 <pre>
 <b>$ git remote -v</b>
@@ -280,16 +281,22 @@ origin	git://github.com/github/git-reference.git (fetch)
 origin	git://github.com/pjhyett/hw.git (push)
 </pre>
 
-    <p>Internally, the <code>git remote set-url</code> command calls
+    <!--<p>Internally, the <code>git remote set-url</code> command calls
     <code>git config remote</code>, but has the added benefit of reporting
     back any errors. <code>git config remote</code> on the other hand, will
     silently fail if you mistype an argument or option and not actually set
     anything.
-    </p>
+    </p>-->
+    <p>Thực chất, lệnh <code>git remote set-url</code> thực thi lệnh
+    <code>git config remote</code> nhưng trả về kết quả nếu xảy ra lỗi
+    còn lệnh <code>git config remote</code> không trả về kết quả nếu bạn
+    gõ nhầm hoặc lệnh không thực hiện.</p>
 
-    <p>For example, we'll update the <code>github</code> remote but
+    <!--<p>For example, we'll update the <code>github</code> remote but
     instead reference it as <code>guhflub</code> in both invocations.
-    </p>
+    </p>-->
+    <p>Chúng ta sẽ cập nhật kho đầu xa <code>github</code> nhưng ta dùng
+    <code>guhflub</code> trong cả hai trường hợp.</p>
 
 <pre>
 <b>$ git remote -v</b>
@@ -308,9 +315,12 @@ fatal: No such remote 'guhflub'
 </pre>
 
     <p class="nutshell">
-    <b>In a nutshell</b>, you can update the locations of your remotes
+    <!--<b>In a nutshell</b>, you can update the locations of your remotes
     with <code>git remote set-url</code>. You can also set different push
-    and fetch URLs under the same remote alias.
+    and fetch URLs under the same remote alias.-->
+    <b>Tóm tắt:</b> bạn có thể cập nhật đường dẫn kho đầu xa với lệnh
+    <code>git remote set-url</code>. Bạn cũng có thể tách riêng biệt địa
+    chỉ tải về và địa chỉ đẩy.
     </p>
 
   </div>
