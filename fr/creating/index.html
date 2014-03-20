@@ -1,0 +1,142 @@
+---
+layout: reference
+---
+
+<div class="box">
+  <h2>Getting and Creating Projects</h2>
+  <div class="block">
+    <p>
+    In order to do anything in Git, you have to have a Git repository.  This
+    is where Git stores the data for the snapshots you are saving.
+    </p>
+
+    <p>
+    There are two main ways to get a Git repository.  One way is to simply
+    initialize a new one from an existing directory, such as a new project or
+    a project new to source control.  The second way is to clone one from a
+    public Git repository, as you would do if you wanted a copy or wanted to
+    work with someone on a project.  We will cover both of these here.
+    </p>
+
+  </div>
+</div>
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a target="new" href="http://git-scm.com/docs/git-init">docs</a> &nbsp;
+      <a target="new" href="http://git-scm.com/book/en/Git-Basics-Getting-a-Git-Repository#Initializing-a-Repository-in-an-Existing-Directory">book</a>
+    </span>
+    <a name="init">git init</a>
+    <span class="desc">initializes a directory as a Git repository</span>
+  </h2>
+
+  <div class="block">
+    <p>To create a repository from an existing directory of files, you can
+    simply run <code>git init</code> in that directory.  For example,
+    let's say we have a directory with a few files in it, like this:
+    </p>
+
+<pre>
+<b>$ cd konnichiwa</b>
+<b>$ ls</b>
+README   hello.rb
+</pre>
+
+    <p>This is a project where we are writing examples of the "Hello World"
+    program in every language.  So far, we just have Ruby, but hey, it's
+    a start.  To start version controlling this with Git, we can simply
+    run <code>git init</code>.
+    </p>
+
+<pre>
+<b>$ git init</b>
+Initialized empty Git repository in /opt/konnichiwa/.git/
+</pre>
+
+    <p>Now you can see that there is a <code>.git</code> subdirectory in your
+    project.  This is your Git repository where all the data of your
+    project snapshots are stored.
+    </p>
+
+<pre>
+<b>$ ls -a</b>
+.        ..       .git     README   hello.rb
+</pre>
+
+    <p>Congratulations, you now have a skeleton Git repository and can start
+    snapshotting your project.
+    </p>
+
+    <p class="nutshell">
+    <strong>In a nutshell</strong>, you use <code>git init</code> to make an
+    existing directory of content into a new Git repository.  You can do this
+    in any directory at any time, completely locally.</p>
+
+  </div>
+</div>
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a target="new" href="http://git-scm.com/docs/git-clone">docs</a> &nbsp;
+      <a target="new" href="http://git-scm.com/book/en/Git-Basics-Getting-a-Git-Repository#Cloning-an-Existing-Repository">book</a>
+    </span>
+    <a name="clone">git clone</a>
+    <span class="desc">copy a git repository so you can add to it</span>
+  </h2>
+  <div class="block">
+    <p>
+    If you need to collaborate with someone on a project, or if you want to
+    get a copy of a project so you can look at or use the code, you will
+    clone it.  You simply run the <code>git clone [url]</code> command with
+    the URL of the project you want to copy.
+    </p>
+
+<pre>
+<b>$ git clone git://github.com/schacon/simplegit.git</b>
+Initialized empty Git repository in /private/tmp/simplegit/.git/
+remote: Counting objects: 100, done.
+remote: Compressing objects: 100% (86/86), done.
+remote: Total 100 (delta 35), reused 0 (delta 0)
+Receiving objects: 100% (100/100), 9.51 KiB, done.
+Resolving deltas: 100% (35/35), done.
+<b>$ cd simplegit/</b>
+<b>$ ls</b>
+README   Rakefile <span class="blue">lib</span>
+</pre>
+
+    <p>
+    This will copy the entire history of that project so you have it locally
+    and it will give you a working directory of the main branch of that project
+    so you can look at the code or start editing it.  If you change into the
+    new directory, you can see the <code>.git</code> subdirectory - that is
+    where all the project data is.
+    </p>
+
+<pre>
+<b>$ ls -a</b>
+.        ..       <span class="blue">.git</span>     README   Rakefile <span class="blue">lib</span>
+<b>$ cd .git</b>
+<b>$ ls</b>
+HEAD        description <span class="blue">info</span>        packed-refs
+<span class="blue">branches    hooks       logs        refs</span>
+config      index       <span class="blue">objects</span>
+</pre>
+
+    <p>
+    By default, Git will create a directory that is the same name as the
+    project in the URL you give it - basically whatever is after the last slash
+    of the URL.  If you want something different, you can just put it at the
+    end of the command, after the URL.
+    </p>
+
+    <p class="nutshell">
+    <strong>In a nutshell</strong>, you use <code>git clone</code> to get a
+    local copy of a Git repository so you can look at it or start modifying
+    it.</p>
+
+  </div>
+</div>
+
+<p><a class="page-button next-page" href="/basic">On to Basic Snapshotting &#187;</a></p>
