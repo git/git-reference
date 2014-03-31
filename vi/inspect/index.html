@@ -285,6 +285,8 @@ Date:   Tue Apr 13 22:31:12 2010 +0200
     It is a great way to summarize what has happened on a branch or between
     commits.
     </p>
+    <!--<p>Mỗi xác nhận là một bản sao của dự án, và dựa vào mỗi bản sao được xác
+    nhận ghi lại, Git có thể tạo ra một bản vá từ các thay đổi đó. -->
 
 <pre>
 <b>$ git log -p --no-merges -2</b>
@@ -327,17 +329,23 @@ index d053cc8..9103e27 100644
  This project has examples of hello world in
 </pre>
 
-    <p>This is a really nice way of summarizing changes or reviewing a series
-    of commits before merging them or releasing something.</p>
+    <!--<p>This is a really nice way of summarizing changes or reviewing a series
+    of commits before merging them or releasing something.</p>-->
+    <p>Đây là một cách tuyệt vời để tổng hợp các thay đổi hoặc xem lại một nhóm
+    các xác nhận trước khi tích hợp vào nhánh chính hay phát hành bản vá.<p>
 
     <h4>
       git log --stat
-      <small>show diffstat of changes introduced at each commit</small>
+      <!--<small>show diffstat of changes introduced at each commit</small>-->
+      <small>hiển thị thống kê thay đổi theo từng xác nhận</small>
     </h4>
 
-    <p>If the <code>-p</code> option is too verbose for you, you can summarize
+    <!--<p>If the <code>-p</code> option is too verbose for you, you can summarize
     the changes with <code>--stat</code> instead. Here is the same log output
-    with <code>--stat</code> instead of <code>-p</code></p>
+    with <code>--stat</code> instead of <code>-p</code></p>-->
+    <p>Nếu tùy chọn <code>-p</code> quá dài dòng, bạn có thể tóm tắt các thay
+    đổi với <code>--stat</code>. Đây là kết quả của <code>--stat</code> thay
+    cho <code>-p</code> ở ví dụ trên.</p>
 
 <pre>
 <b>$ git log --stat --no-merges -2</b>
@@ -360,8 +368,10 @@ Date:   Fri Jun 4 12:58:53 2010 +0200
  1 files changed, 1 insertions(+), 1 deletions(-)
 </pre>
 
-    <p>Same basic information, but a little more compact - it still lets you
-    see relative changes and which files were modified.</p>
+    <!--<p>Same basic information, but a little more compact - it still lets you
+    see relative changes and which files were modified.</p>-->
+    <p>Cùng thông tin cơ bản nhưng gọn gàng, cô đọng hơn - bạn vẫn xem được các
+    thay đổi liên quan và các tập tin nào đã được chỉnh sửa.</p>
 
   </div>
 </div>
@@ -418,8 +428,10 @@ index bb86f00..192151c 100644
 <span class="green">+HelloWorld.hello</span>
 </pre>
 
-    <p>Just like <code>git log</code>, you can use the <code>--stat</code>
-      option with it.</p>
+    <!--<p>Just like <code>git log</code>, you can use the <code>--stat</code>
+      option with it.</p>-->
+    <p>Bạn có thể thêm tùy chọn <code>--stat</code> giống như đã dùng với lệnh
+    <code>git log</code>.</p>
 
 <pre>
 <b>$ git diff v0.9 --stat</b>
@@ -428,7 +440,7 @@ index bb86f00..192151c 100644
  2 files changed, 3 insertions(+), 3 deletions(-)
 </pre>
 
-    <p>To compare two divergent branches, however, you can run something like
+    <!--<p>To compare two divergent branches, however, you can run something like
     <code>git diff branchA branchB</code> but the problem is that it will do
     exactly what you are asking - it will basically give you a patch file that
     would turn the snapshot at the tip of branchA into the snapshot at the tip
@@ -437,7 +449,18 @@ index bb86f00..192151c 100644
     and then add everything that was introduced into branchB.  This is probably
     not what you want - you want the changes added to branchB that are not in
     branchA, so you really want the difference between where the two branches
-    diverged and the tip of branchB. So, if our history looks like this:</p>
+    diverged and the tip of branchB. So, if our history looks like this:</p>-->
+    <p>Để so sánh hai nhánh khác nhau, tuy nhiên, bạn có thể chạy một cái gì đó
+    như <code>git diff branchA branchB</code> nhưng vấn đề là nó sẽ làm chính
+    xác những gì bạn đang yêu cầu - về cơ bản nó sẽ cung cấp cho bạn một tập
+    tin vá lỗi mà có thể biến ảnh chụp ở mũi của branchA vào ảnh chụp ở mũi của
+    branchB. Điều này có nghĩa nếu hai ngành đã tách ra - đi theo các hướng
+    khác nhau - nó sẽ loại bỏ tất cả các công việc đã được giới thiệu vào
+    branchA và sau đó thêm tất cả mọi thứ đã được giới thiệu vào branchB. Điều
+    này có lẽ không phải những gì bạn muốn - bạn muốn thay đổi thêm vào branchB
+    mà không phải là trong branchA, vì vậy bạn thực sự muốn sự khác biệt giữa
+    nơi hai nhánh tách ra và chóp branchB. Vì vậy, nếu lịch sử của chúng tôi
+    trông như thế này:</p>
 
 <pre>
 <b>$ git log --graph --oneline --decorate --all</b>
@@ -449,9 +472,12 @@ index bb86f00..192151c 100644
 ...
 </pre>
 
-    <p>And we want to see what is on the "erlang" branch compared to the "master"
-    branch, running <code>git diff master erlang</code> will give us the wrong
-    thing.</p>
+    <!--<p>And we want to see what is on the "erlang" branch compared to the
+    "master" branch, running <code>git diff master erlang</code> will give us
+    the wrong thing.</p>-->
+    <p>Và chúng ta muốn xem những gì trên nhánh "erlang" so với nhánh "master",
+    chạy <code>git diff master erlang</code> sẽ cung cấp cho chúng ta điều sai
+    trái.</p>
 
 <pre>
 <b>$ git diff --stat master erlang</b>
@@ -461,12 +487,18 @@ index bb86f00..192151c 100644
  3 files changed, 11 insertions(+), 2 deletions(-)
 </pre>
 
-    <p>You see that it adds the erlang and haskell files, which is what we did
-    in that branch, but then the output also reverts the changes to the ruby file
-    that we did in the master branch.  What we really want to see is just the
-    changes that happened in the "erlang" branch (adding the two files).  We can
-    get the desired result by doing the diff from the common commit they diverged
-    from:</p>
+    <!--<p>You see that it adds the erlang and haskell files, which is what we did
+    in that branch, but then the output also reverts the changes to the ruby
+    file that we did in the master branch.  What we really want to see is just
+    the changes that happened in the "erlang" branch (adding the two files).
+    We can get the desired result by doing the diff from the common commit they
+    diverged from:</p>-->
+    <p>Bạn thấy rằng nó thêm các tập tin của erlang và haskell, đó là những gì
+    chúng tôi đã làm trong chi nhánh đó, nhưng sau đó sản lượng cũng trở lại
+    trạng các thay đổi đối với ruby tập tin mà chúng tôi đã làm trong ngành
+    chủ. Những gì chúng ta thực sự muốn nhìn thấy chỉ là những thay đổi đã xảy
+    ra trong "Erlang" chi nhánh (thêm hai tập tin).  Chúng ta có thể có được
+    kết quả mong muốn bằng cách làm khác từ phổ biến cam kết họ tách ra từ:</p>
 
 <pre>
 <b>$ git diff --stat 8d585ea erlang</b>
@@ -475,12 +507,18 @@ index bb86f00..192151c 100644
  2 files changed, 9 insertions(+), 0 deletions(-)
 </pre>
 
-    <p>That's what we're looking for, but we don't want to have to figure out
+    <!--<p>That's what we're looking for, but we don't want to have to figure out
     what commit the two branches diverged from every time. Luckily, Git has a
     shortcut for this. If you run <code>git diff master...erlang</code> (with
 	three dots in between the branch names), Git will automatically figure out
     what the common commit (otherwise known as the "merge base") of the two
-    commit is and do the diff off of that.</p>
+    commit is and do the diff off of that.</p>-->
+    <p>Đó là những gì chúng tôi đang tìm kiếm, nhưng chúng tôi không muốn phải
+    tìm ra những gì cam kết hai nhánh tách ra từ mỗi lần. May mắn thay, có một
+    Git phím tắt này. Nếu bạn chạy <code>git diff master...erlang</code> (với
+    ba dấu chấm ở giữa tên chi nhánh), Git sẽ tự động tìm ra những gì phổ biến
+    cam kết (hay còn gọi là "hợp nhất cơ sở") của hai cam kết được và làm khác
+    ra điều đó.</p>
 
 <pre>
 <b>$ git diff --stat master erlang</b>
@@ -494,21 +532,29 @@ index bb86f00..192151c 100644
  2 files changed, 9 insertions(+), 0 deletions(-)
 </pre>
 
-    <p>Nearly every time you want to compare two branches, you'll want to use
+    <!--<p>Nearly every time you want to compare two branches, you'll want to use
     the triple-dot syntax, because it will almost always give you what you want.
-    </p>
+    </p>-->
+    <p>Gần như tất cả thời gian bạn muốn so sánh hai nhánh, bạn sẽ muốn sử dụng
+    cú pháp ba dấu chấm, bởi vì nó sẽ hầu như luôn luôn cung cấp cho bạn những
+    gì bạn muốn.</p>
 
-    <p>As a bit of an aside, you can also have Git manually calculate what the
+    <!--<p>As a bit of an aside, you can also have Git manually calculate what the
     merge-base (first common ancestor commit) of any two commits would be with
-    the <code>git merge-base</code> command:</p>
+    the <code>git merge-base</code> command:</p>-->
+    <p>Như một chút của một sang một bên, bạn cũng có thể có Git tay tính toán
+    những gì hợp nhất cơ sở (tổ tiên đầu tiên phổ biến cam kết) của hai cam kết
+    sẽ với các <code>git merge-base</code> lệnh:</p>
 
 <pre>
 <b>$ git merge-base master erlang</b>
 8d585ea6faf99facd39b55d6f6a3b3f481ad0d3d
 </pre>
 
-    <p>You can do the equivalent of <code>git diff master...erlang</code>
-    by running this:</p>
+    <!--<p>You can do the equivalent of <code>git diff master...erlang</code>
+    by running this:</p>-->
+    <p>Lệnh <code>git diff master...erlang</code> có thể được thực hiện bằng
+    lệnh tương đương sau:</p>
 
 <pre>
 <b>$ git diff --stat $(git merge-base master erlang) erlang</b>
@@ -517,19 +563,26 @@ index bb86f00..192151c 100644
  2 files changed, 9 insertions(+), 0 deletions(-)
 </pre>
 
-    <p>You may prefer using the easier syntax though.</p>
+<!--<p>You may prefer using the easier syntax though.</p>-->
+<p>Bạn có thể tùy ý dùng câu lệnh dễ nhớ.</p>
 
 
     <p class="nutshell">
-    <b>In a nutshell</b> you can use <code>git diff</code> to see how a project
+    <!--<b>In a nutshell</b> you can use <code>git diff</code> to see how a project
     has changed since a known point in the past or to see what unique work is
     in one branch since it diverged from another.  Always use
     <code>git diff branchA...branchB</code> to inspect branchB relative to
-    branchA to make things easier.
+    branchA to make things easier.-->
+    <b>Tóm tắt:</b> lệnh <code>git diff</code> cho bạn biết dự án thay đổi thế
+    nào từ lần cuối bạn xem hoặc các công việc độc đáo của một nhánh từ lúc
+    tách ra. Luôn dùng lệnh <code>git diff branchA...branchB</code> để kiểm tra
+    nhánhB liên quan nhánhB thế nào.
     </p>
 
   </div>
 </div>
 
-<p>And that's it!  For more information, try reading the
-<a href="http://git-scm.com/book/">Pro Git book</a>.</p>
+<!--<p>And that's it!  For more information, try reading the
+<a href="http://git-scm.com/book/">Pro Git book</a>.</p>-->
+<p>Bạn hãy đọc <a href="http://git-scm.com/book/">Pro Git book</a> để hiểu hơn
+về Git.</p>

@@ -1198,9 +1198,13 @@ nothing to commit (working directory clean)
     <small>liệt kê ngăn xếp</small>
     </h4>
 
-    <p>It's helpful to know what you've got stowed on the stash and this is where
+    <!--<p>It's helpful to know what you've got stowed on the stash and this is where
     <code>git stash list</code> comes in. Running this command will display a queue
     of current stash items.
+    </p>-->
+    <p>Đôi khi, bạn cần biết bạn đã xếp gọn những gì vào ngăn cất giấu, lệnh
+    <code>git stash list</code> sẽ hiển thị một hàng danh sách của các mục cất
+    giấu của bạn.
     </p>
 
 <pre>
@@ -1208,8 +1212,11 @@ nothing to commit (working directory clean)
 stash@{0}: WIP on master: 5857ac1 hello with a flower
 </pre>
 
-    <p>The last item added onto the stash will be referenced by
+    <!--<p>The last item added onto the stash will be referenced by
     <code>stash@{0}</code> and increment those already there by one.
+    </p>-->
+    <p>Mục cuối cùng thêm vào ngăn cất giấu được tham chiếu đến
+    <code>stash@{0}</code> và tăng dần theo một.
     </p>
 
 <pre>
@@ -1228,12 +1235,18 @@ stash@{1}: WIP on master: 5857ac1 hello with a flower
 
     <h4>
       git stash apply
-      <small>grab the item from the stash list and apply to current working directory</small>
+      <!--<small>grab the item from the stash list and apply to current working
+          directory</small>-->
+      <small>đưa mục từ kho cất giấu vào thư mục làm việc</small>
     </h4>
 
-    <p>When you're ready to continue from where you left off, run the
+    <!--<p>When you're ready to continue from where you left off, run the
     <code>git stash apply</code> command to bring back the saved changes
     onto the working directory.
+    </p>-->
+    <p>Khi bạn đã sẵn sàng tiếp tục công việc từ khi bạn đã cất giấu, lệnh
+    <code>git stash apply</code> sẽ đem các thay đổi đã cất giấu trở lại thư
+    mục làm việc.
     </p>
 
 <pre>
@@ -1248,31 +1261,47 @@ stash@{1}: WIP on master: 5857ac1 hello with a flower
 no changes added to commit (use "git add" and/or "git commit -a")
 </pre>
 
-    <p>By default it will reapply the last added stash item to the working
+    <!--<p>By default it will reapply the last added stash item to the working
     directory. This will be the item referenced by <code>stash@{0}</code>.
     You can grab another stash item instead if you reference it in the arguments
     list. For example, <code>git stash apply stash@{1}</code> will apply the item
     referenced by <code>stash@{1}</code>.
+    </p>-->
+    <p>Mặc định, lệnh trên sẽ tái ghép mục cuối cùng, tham chiếu đến
+    <code>stash@{0}</code>, vào thư mục làm việc. Bạn có thể tái ghép mục cất giấu
+    khác bằng cách thêm vào tham chiếu trong danh sách đối số. Ví dụ, <code>git
+        stash apply stash@{1}</code> sẽ tái ghép mục tham chiếu
+    <code>stash@{1}</code>.
     </p>
 
-    <p>If you also want to remove the item from the stack at the same time,
+    <!--<p>If you also want to remove the item from the stack at the same time,
     use <code>git stash pop</code> instead.
+    </p>-->
+    <p>Nếu bạn muốn xóa mục khỏi ngăn cất giấu sau khi tái ghép, dùng lệnh
+    <code>git stash pop</code> thay thế.
     </p>
 
     <h4>
       git stash drop
-      <small>remove an item from the stash list</small>
+      <!--<small>remove an item from the stash list</small>-->
+      <small>xóa một mục khỏi danh sách cất giấu</small>
     </h4>
 
-    <p>When you're done with the stashed item and/or want to remove it from the
+    <!--<p>When you're done with the stashed item and/or want to remove it from the
     list, run the <code>git stash drop</code> command. By default this will
     remove the last added stash item. You can also remove a specific item if
     you include it as an argument.
+    </p>-->
+    <p>Lệnh <code>git stash drop</code> sẽ xóa mục đã cất giấu. Mặc định, lệnh
+    sẽ xóa mục cuối cùng nếu bạn không kèm theo đối số để xóa một mục xác định.
     </p>
 
-    <p>In this example, our stash list has at least two items, but we want
+    <!--<p>In this example, our stash list has at least two items, but we want
     to get rid of the item added before last, which is referenced by
     <code>stash@{1}</code>.
+    </p>-->
+    <p>Trong ví dụ sau, chúng ta có hai mục trong danh sách cất giấu nhưng
+    chúng ta muốn xóa mục đầu tiên được tham chiếu đến <code>stash@{1}</code>.
     </p>
 
 <pre>
@@ -1280,15 +1309,22 @@ no changes added to commit (use "git add" and/or "git commit -a")
 Dropped stash@{1} (0b1478540189f30fef9804684673907c65865d8f)
 </pre>
 
-    <p>If you want to remove of all the stored items, just run
+    <!--<p>If you want to remove of all the stored items, just run
     the <code>git stash clear</code> command. But only do this if you're
     sure you're done with the stash.
+    </p>-->
+    <p>Khi đã chắc chắn hoàn tất các công việc với danh sách cất giấu, bạn có
+    thể dùng lệnh <code>git stash clear</code> để xóa tất cả các mục đã cất
+    giấu.
     </p>
 
     <p class="nutshell">
-    <strong>In a nutshell</strong>, run <code>git stash</code> to quickly save
+    <!--<strong>In a nutshell</strong>, run <code>git stash</code> to quickly save
     some changes that you're not ready to commit or save, but want to come
-    back to while you work on something else.
+    back to while you work on something else.-->
+    <strong>Tóm tắt:</strong> lệnh <code>git stash</code> lưu tạm vài thay đổi
+    bạn chưa dự định xác nhận, và sẽ được tiếp tục khi bạn đã xong công việc
+    khác.
     </p>
 
   </div>
