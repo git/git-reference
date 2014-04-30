@@ -12,7 +12,7 @@ layout: reference
   <div class="block">
     <p>Branching in Git is one of its many great features.  If you have used other
     version control systems, it's probably helpful to forget most of what you
-    think about branches - in fact, it may be more helpful to think of them
+    think about branches &mdash; in fact, it may be more helpful to think of them
     practically as <i>contexts</i> since that is how you will most often be
     using them.  When you checkout different branches, you change contexts
     that you are working in and you can quickly context-switch back and forth
@@ -59,7 +59,7 @@ layout: reference
   <div class="block">
     <p>The <code>git branch</code> command is a general branch management tool
     for Git and can do several different things.  We'll cover the basic ones
-    that you'll use most - listing branches, creating branches and deleting
+    that you'll use most &mdash; listing branches, creating branches and deleting
     branches.  We will also cover basic <code>git checkout</code> here which
     switches you between your branches.
     </p>
@@ -83,7 +83,7 @@ $ git branch
 
     <p>This means that we have a 'master' branch and we are currently on it.
     When you run <code>git init</code> it will automatically create a 'master'
-    branch for you by default, however there is nothing special about the name -
+    branch for you by default, however there is nothing special about the name &mdash;
     you don't actually have to have a 'master' branch but since it's the default
     that is created, most projects do.
     </p>
@@ -107,9 +107,9 @@ $ git branch
     <p>Now we can see that we have a new branch.  When you create a branch this
     way it creates the branch at your last commit so if you record some commits
     at this point and then switch to 'testing', it will revert your working
-    directory context back to when you created the branch in the first place -
+    directory context back to when you created the branch in the first place &mdash;
     you can think of it like a bookmark for where you currently are.  Let's see
-    this in action - we use <code>git checkout (branch)</code> to switch the
+    this in action &mdash; we use <code>git checkout (branch)</code> to switch the
     branch we're currently on.
     </p>
 
@@ -314,7 +314,7 @@ Fast-forward
     </h4>
 
     <p>Of course, this doesn't just work for simple file additions and
-    deletions. Git will merge file modifications as well - in fact, it's very
+    deletions. Git will merge file modifications as well &mdash; in fact, it's very
     good at it.  For example, let's see what happens when we edit a file in
     one branch and in another branch we rename it and then edit it and then
     merge these branches together.  Chaos, you say?  Let's see.
@@ -445,7 +445,7 @@ Switched to branch 'master'
  1 files changed, 1 insertions(+), 1 deletions(-)
 </pre>
 
-    <p>Now is the fun part - we will merge the first branch into our master
+    <p>Now is the fun part &mdash; we will merge the first branch into our master
       branch, causing a merge conflict.</p>
 
 <pre>
@@ -490,7 +490,7 @@ index 9103e27,69cad1a..0000000
     <p>A cool tip in doing merge conflict resolution in Git is that if you
     run <code>git diff</code>, it will show you both sides of the conflict
     and how you've resolved it as shown here. Now it's time to mark
-    the file as resolved.  In Git we do that with <code>git add</code> -
+    the file as resolved.  In Git we do that with <code>git add</code> &mdash;
     to tell Git the file has been resolved you have to stage it.</p>
 
 <pre>
@@ -633,7 +633,7 @@ b7ae93b added from ruby
     out what is happening on each.</p>
 
     <p>First we'll create a new branch to add the Erlang programming language
-    Hello World example - we want to do this in a branch so that we don't
+    Hello World example &mdash; we want to do this in a branch so that we don't
     muddy up our stable branch with code that may not work for a while so we
     can cleanly switch in and out of it.</p>
 
