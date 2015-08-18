@@ -724,12 +724,13 @@ nothing to commit (working directory clean)
       <small>unstage files AND undo any changes in the working directory since last commit</small>
     </h4>
 
-    <p>The third option is to go <code>--hard</code> and make your working
-       directory look like the index, unstage files and undo any changes made
-       since the last commit.
-       This is the most dangerous option and not working directory safe. Any
-       changes not in the index or have not been commited will be lost.</p>
-
+    <p>The third option is to go <code>--hard</code>. This command discards your staged changes and
+       the changes in your working directory. In other words: it resets your staging area and working
+       directory to the state they were in at the given commit. This is the most
+       dangerous option and is not working directory safe. Any changes not committed will
+       be lost.
+    </p>
+    
 <pre>
 <b>$ git status</b>
 # On branch master
