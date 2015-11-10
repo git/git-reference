@@ -816,12 +816,10 @@ nothing to commit (working directory clean)
     if it's easier, feel free.
     </p>
 
-
-
     <p class="nutshell">
     <strong>In a nutshell</strong>,
     you run <code>git rm</code> to remove files from being tracked in Git. It
-    will also remove them from your working directory.
+    will also remove them from your working directory. If you run <code> git mv</code> it will do essentially the same as <code>git rm --cached</code>, move the file on disk and run <code>git add</code> on the new file.
     </p>
 
   </div>
