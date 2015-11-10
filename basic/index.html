@@ -730,7 +730,7 @@ nothing to commit (working directory clean)
        dangerous option and is not working directory safe. Any changes not committed will
        be lost.
     </p>
-    
+
 <pre>
 <b>$ git status</b>
 # On branch master
@@ -793,6 +793,12 @@ nothing to commit (working directory clean)
     leave the file in the working directory, you can use <code>git rm --cached
     </code>.</p>
 
+    <p class="aside">
+    In its normal form the command is used to delete files.
+    But it's often easier to just remove the files off your disk and
+    then run <code>git commit -a</code>, which will also automatically remove
+    them from your index.</p>
+
     <h4>
       git mv
       <small>git rm --cached orig; mv orig new; git add new</small>
@@ -810,11 +816,7 @@ nothing to commit (working directory clean)
     if it's easier, feel free.
     </p>
 
-    <p class="aside">
-    In its normal form the command is used to delete files.
-    But it's often easier to just remove the files off your disk and
-    then run <code>git commit -a</code>, which will also automatically remove
-    them from your index.</p>
+
 
     <p class="nutshell">
     <strong>In a nutshell</strong>,
@@ -971,4 +973,3 @@ Dropped stash@{1} (0b1478540189f30fef9804684673907c65865d8f)
 </div>
 
 <p><a class="page-button next-page" href="/branching">On to Branching and Merging &#187;</a></p>
-
