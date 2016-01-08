@@ -1,69 +1,74 @@
 ---
-layout: reference
+layout: fr_reference
 ---
 <div class="box">
-  <h2>Introduction to the Git Reference</h2>
+  <h2>Introduction à Référence Git</h2>
   <div class="block">
     <p>
-    This is the Git reference site. It is meant to be a quick
-    reference for learning and remembering the most important and
-    commonly used Git commands.  The commands are organized into
-    sections of the type of operation you may be trying to do, and
-    will present the common options and commands needed to accomplish
-    these common tasks.
+      Ceci est le site Référence Git. Il a pour but de servir
+      de référence rapide pour apprendre et retenir les commandes
+      les plus importantes et les plus utilisées de Git. Les commandes
+      sont organisées en sections selon le type d'opérations que vous
+      seriez tenté de faire, et vous présenteront les options et commandes
+      habituelles pour réaliser ces tâches usuelles.
     </p>
     <p>
-    Each section will link to the next section, so it can be used
-    as a tutorial.  Every page will also link to more in-depth
-    Git documentation such as the official manual pages and relevant
-    sections in the <a href="http://git-scm.com/book">Pro Git book</a>,
-    so you can learn more about any of
-    the commands. First, we'll start with thinking about source code
-    management like Git does.
+      Chaque section pointe vers la section suivante, vous pourrez suivre
+      à la manière d'un tutoriel. Chaque page pointera également vers
+      une documentation Git plus approfondie comme les pages de manuel
+      officielles ou aux sections appropriées du
+      <a href="http://git-scm.com/book/fr/v2">Livre Pro Git</a>,
+      de cette manière vous pourrez en apprendre plus sur les commandes.
+      Nous commencerons par découvrir comment penser gestion de code source
+      à la manière de Git.
     </p>
   </div>
 </div>
 
 <div class="box">
-  <h2>How to Think Like Git</h2>
+  <h2>Comment penser à la Git</h2>
   <div class="block">
     <p>
-    The first important thing to understand about Git is
-    that it thinks about version control very differently than
-    Subversion or Perforce or whatever SCM you may be used to. It
-    is often easier to learn Git by trying to forget your assumptions
-    about how version control works and try to think about it in the
-    Git way.
+      La première chose à comprendre sur Git est qu'il
+      gère les révisions d'une manière totalement différente
+      de Subversion ou Perforce ou tout autre gestionnaire de code source
+      auquel vous pourriez être habitué. Il est souvent plus simple
+      d'apprendre Git en essayant d'oublier toute assertion sur
+      le fonctionnement de la gestion de révisions et d'essayer d'y penser
+      à la Git.
     </p>
 
     <p>
-    Let's start from scratch.  Assume you are designing a new source
-    code management system.  How did you do basic version control before
-    you used a tool for it?  Chances are that you simply copied your
-    project directory to save what it looked like at that point.
+      Partons de zéro. Imaginons que vous conceviez un nouveau système de gestion
+      de code source. Comment géreriez-vous simplement des révisions avant d'utiliser
+      un outil dédié? Il y a de fortes chances pour que vous ayez fait de simples
+      copies du répertoire de votre projet pour sauvegarder son état à ce moment-là.
     </p>
 
     <pre> $ cp -R project project.bak </pre>
 
     <p>
-    That way, you can easily revert files that get messed up later, or
-    see what you have changed by comparing what the project looks like
-    now to what it looked like when you copied it.
+      De cette manière, vous pouvez facilement rétablir des fichiers qui
+      deviendraient inutilisables plus tard, ou pour voir ce que vous avez changé en
+      comparant ce à quoi le projet ressemble maintenant avec ce à quoi il
+      ressemblait lorsque vous l'avez copié.
     </p>
 
     <p>
-    If you are really paranoid, you may do this often, maybe putting the
-    date in the name of the backup:
+      Si vous êtes réellement paranoïaque, vous le ferez peut-être souvent,
+      et vous inclurez la date dans le nom de la sauvegarde:
     </p>
 
     <pre> $ cp -R project project.2010-06-01.bak </pre>
 
     <p>
-    In that case, you may have a bunch of snapshots of your project that
-    you can compare and inspect from. You can even use this model to
-    fairly effectively share changes with someone.  If you zip up your
-    project at a known state and put it on your website, other developers
-    can download that, change it and send you a patch pretty easily.
+      Dans ce cas, vous aurez un tas d'instantanés de votre projet à
+      disposition comme source de comparaison et d'inspection. Vous pouvez
+      également utiliser cette méthode pour partager de manière plutôt
+      efficace des modifications avec un tiers. Si vous compressez votre
+      projet à un certain état et le mettez sur votre site web, d'autres développeurs
+      peuvent le télécharger, le modifier et vous envoyer un correctif
+      assez facilement.
     </p>
 
     <pre>
@@ -76,37 +81,39 @@ layout: reference
  $ (email change.patch)</pre>
 
     <p>
-    Now the original developer can apply that patch to their copy of the
-    project and they have your changes. This is how many open source
-    projects have been collaborated on for several years.
+      Le développeur original peut alors appliquer le correctif à sa copie
+      du projet et avoir vos modifications. C'est de cette manière
+      que de nombreux projets libres ont collaboré pendant plusieurs
+      années.
     </p>
 
     <p>
-    This actually works fairly well, so let's say we want to write a tool
-    to make this basic process faster and easier.  Instead of writing a tool
-    that versions each file individually, like Subversion, we would probably
-    write one that makes it easier to store snapshots of our project without
-    having to copy the whole directory each time.
+      Ceci fonctionne en fait plutôt bien, alors disons que nous désirons
+      écrire un outil pour effectuer ce processus basique plus rapidement
+      et plus facilement. Au lieu d'écrire un outil qui crée des révisions
+      de chaque fichier individuellement, comme Subversion, nous en écririons
+      probablement un qui permettrait de manière plus simple de conserver
+      des instantanés de notre projet sans avoir à copier la totalité du
+      dossier à chaque fois.
     </p>
 
     <p>
-    This is essentially what Git is. You tell Git you want to save a snapshot
-    of your project with the <code>git commit</code> command and it basically
-    records a manifest of what all of the files in your project look like at
-    that point.  Then most of the commands work with those manifests to see
-    how they differ or pull content out of them, etc.
+      C'est fondamentalement ce que fait Git. Vous dites à Git de sauvegarder
+      un instantané de votre projet avec la commande <code>git commit</code>
+      et il va simplement enregistrer l'état de tous vos fichiers de votre projet
+      à ce moment. Ensuite la plupart des commandes travaille avec ces enregistrements
+      d'état pour voir comment ils différent ou y récupérer du contenu, etc.
     </p>
 
-    <center><img src="./images/snapshots.png"/></center>
+    <center><img src="../images/snapshots.png"/></center>
 
     <p>
-    If you think about Git
-    as a tool for storing and comparing and merging snapshots of your project,
-    it may be easier to understand what is going on and how to do things
-    properly.
+      Si vous pensez à Git comme un outil pour conserver et comparer et fusionner des instantanés
+      de votre projet, il sera plus facile de comprendre ce qui se passe et comment
+      faire différents choses correctement.
     </p>
 
   </div>
 </div>
 
-<p><a class="page-button next-page" href="/creating">On to Getting and Creating Projects &#187;</a></p>
+<p><a class="page-button next-page" href="/fr/creating">Aller à Récupérer et Créer des Projets &#187;</a></p>
