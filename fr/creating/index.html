@@ -1,21 +1,23 @@
 ---
-layout: reference
+layout: fr_reference
 ---
 
 <div class="box">
-  <h2>Getting and Creating Projects</h2>
+  <h2>Récupérer et Créer des Projets</h2>
   <div class="block">
     <p>
-    In order to do anything in Git, you have to have a Git repository.  This
-    is where Git stores the data for the snapshots you are saving.
+      Pour pouvoir faire quoi que ce soit avec Git, vous devez
+      avoir un dépôt Git. C'est là que Git stocke les données des
+      instantanés que vous créez.
     </p>
 
     <p>
-    There are two main ways to get a Git repository.  One way is to simply
-    initialize a new one from an existing directory, such as a new project or
-    a project new to source control.  The second way is to clone one from a
-    public Git repository, as you would do if you wanted a copy or wanted to
-    work with someone on a project.  We will cover both of these here.
+      Il y a deux moyens d'avoir un dépôt Git. Le premier est de simplement
+      en initialiser un depuis un dossier existant, comme un nouveau projet
+      ou un projet débutant sa gestion de révisions. Le second est de cloner
+      un dépôt public Git, comme vous le feriez si vous vouliez une copie
+      ou si vous vouliez collaborer avec quelqu'un sur un projet. Nous allons
+      aborder chacun de ces cas.
     </p>
 
   </div>
@@ -25,16 +27,17 @@ layout: reference
   <h2>
     <span class="docs">
       <a target="new" href="http://git-scm.com/docs/git-init">docs</a> &nbsp;
-      <a target="new" href="http://git-scm.com/book/en/Git-Basics-Getting-a-Git-Repository#Initializing-a-Repository-in-an-Existing-Directory">book</a>
+      <a target="new" href="http://git-scm.com/book/fr/v2/Les-bases-de-Git-D%C3%A9marrer-un-d%C3%A9p%C3%B4t-Git#Initialisation-d’un-dépôt-Git-dans-un-répertoire-existant">book</a>
     </span>
     <a name="init">git init</a>
-    <span class="desc">initializes a directory as a Git repository</span>
+    <span class="desc">initialiser un répertoire comme dépôt Git</span>
   </h2>
 
   <div class="block">
-    <p>To create a repository from an existing directory of files, you can
-    simply run <code>git init</code> in that directory.  For example,
-    let's say we have a directory with a few files in it, like this:
+    <p>Pour créer un dépôt à partir d'un répertoire de fichiers existant,
+      vous pouvez simplement faire <code>git init</code> dans ce répertoire.
+      Par exemple, disons que nous avons un répertoire comprenant quelques fichiers,
+      ressemblant à:
     </p>
 
 <pre>
@@ -43,20 +46,20 @@ layout: reference
 README   hello.rb
 </pre>
 
-    <p>This is a project where we are writing examples of the "Hello World"
-    program in every language.  So far, we just have Ruby, but hey, it's
-    a start.  To start version controlling this with Git, we can simply
-    run <code>git init</code>.
+    <p>C'est un projet dans lequel nous écrivons des exemples de programmes
+      "Hello World" dans chaque langage. Pour l'instant, nous avons simplement Ruby,
+      mais ce n'est qu'un début. Pour commencer à en gérer les versions avec Git,
+      nous pouvons simplement lancer <code>git init</code>.
     </p>
 
 <pre>
 <b>$ git init</b>
-Initialized empty Git repository in /opt/konnichiwa/.git/
+Dépôt Git vide initialisé dans /opt/konnichiwa/.git/
 </pre>
 
-    <p>Now you can see that there is a <code>.git</code> subdirectory in your
-    project.  This is your Git repository where all the data of your
-    project snapshots are stored.
+    <p>Maintenant vous pouvez voir qu'il y a un sous-dossier <code>.git</code> dans
+      votre projet. Ceci est votre dossier Git dans lequel toutes les données des
+      instantanés de votre projet sont conservées.
     </p>
 
 <pre>
@@ -64,14 +67,14 @@ Initialized empty Git repository in /opt/konnichiwa/.git/
 .        ..       .git     README   hello.rb
 </pre>
 
-    <p>Congratulations, you now have a skeleton Git repository and can start
-    snapshotting your project.
+    <p>Félicitations, vous avez maintenant une squelette de dépôt Git et vous pouvez
+      maintenant commencer à prendre des instantanés de votre projet.
     </p>
 
     <p class="nutshell">
-    <strong>In a nutshell</strong>, you use <code>git init</code> to make an
-    existing directory of content into a new Git repository.  You can do this
-    in any directory at any time, completely locally.</p>
+    <strong>Pour résumer</strong>, vous utilisez <code>git init</code> pour initialiser
+    le contenu d'un dossier existant en un nouveau dépôt Git. Vous pouvez le faire
+    dans n'importe quel dossier à tout moment, localement.</p>
 
   </div>
 </div>
@@ -80,38 +83,38 @@ Initialized empty Git repository in /opt/konnichiwa/.git/
   <h2>
     <span class="docs">
       <a target="new" href="http://git-scm.com/docs/git-clone">docs</a> &nbsp;
-      <a target="new" href="http://git-scm.com/book/en/Git-Basics-Getting-a-Git-Repository#Cloning-an-Existing-Repository">book</a>
+      <a target="new" href="http://git-scm.com/book/fr/v2/Les-bases-de-Git-D%C3%A9marrer-un-d%C3%A9p%C3%B4t-Git#Cloner-un-dépôt-existant">book</a>
     </span>
     <a name="clone">git clone</a>
-    <span class="desc">copy a git repository so you can add to it</span>
+    <span class="desc">copier un dépôt git pour pouvoir le modifier</span>
   </h2>
   <div class="block">
     <p>
-    If you need to collaborate with someone on a project, or if you want to
-    get a copy of a project so you can look at or use the code, you will
-    clone it.  You simply run the <code>git clone [url]</code> command with
-    the URL of the project you want to copy.
+      Si vous avez besoin de collaborer avec quelqu'un sur un projet, ou si
+      vous voulez obtenir une copie d'un projet pour lire ou utiliser son code,
+      vous le clonerez. Vous lancez simplement la commande <code>git clone [url]</code>
+      avec l'URL du projet que vous voulez copier.
     </p>
 
 <pre>
 <b>$ git clone git://github.com/schacon/simplegit.git</b>
-Initialized empty Git repository in /private/tmp/simplegit/.git/
-remote: Counting objects: 100, done.
-remote: Compressing objects: 100% (86/86), done.
-remote: Total 100 (delta 35), reused 0 (delta 0)
-Receiving objects: 100% (100/100), 9.51 KiB, done.
-Resolving deltas: 100% (35/35), done.
+Clonage dans 'simplegit'...
+remote: Counting objects: 13, done.
+remote: Total 13 (delta 0), reused 0 (delta 0), pack-reused 13
+Réception d'objets: 100% (13/13), 1.63 KiB | 0 bytes/s, fait.
+Résolution des deltas: 100% (2/2), fait.
+Vérification de la connectivité... fait.
 <b>$ cd simplegit/</b>
 <b>$ ls</b>
 README   Rakefile <span class="blue">lib</span>
 </pre>
 
     <p>
-    This will copy the entire history of that project so you have it locally
-    and it will give you a working directory of the main branch of that project
-    so you can look at the code or start editing it.  If you change into the
-    new directory, you can see the <code>.git</code> subdirectory - that is
-    where all the project data is.
+      Cela va copier l'historique complet de ce projet pour que vous l'ayez
+      à disposition localement et vous aurez un dossier de travail de la branche
+      principale de ce projet pour vous permettre de lire le code et commencer à
+      le modifier. Si vous rentrez dans ce nouveau dossier, vous pouvez voir
+      le sous-dossier <code>.git</code> où toutes les données du projet se trouvent.
     </p>
 
 <pre>
@@ -125,18 +128,18 @@ config      index       <span class="blue">objects</span>
 </pre>
 
     <p>
-    By default, Git will create a directory that is the same name as the
-    project in the URL you give it - basically whatever is after the last slash
-    of the URL.  If you want something different, you can just put it at the
-    end of the command, after the URL.
+      Par défaut, Git crée un dossier avec le même nom que le projet de l'URL
+      donnée - typiquement tout ce qui se trouve après le dernier slash de l'URL.
+      Si vous voulez quelque chose de différent, vous pouvez l'indiquer à la fin
+      de la commande, après l'URL.
     </p>
 
     <p class="nutshell">
-    <strong>In a nutshell</strong>, you use <code>git clone</code> to get a
-    local copy of a Git repository so you can look at it or start modifying
-    it.</p>
+      <strong>Pour résumer</strong>, vous utilisez <code>git clone</code> pour
+      obtenir une copie locale d'un dépôt Git pour pouvoir l'étudier ou le modifier.
+    </p>
 
   </div>
 </div>
 
-<p><a class="page-button next-page" href="/basic">On to Basic Snapshotting &#187;</a></p>
+<p><a class="page-button next-page" href="/fr/basic">Aller à Instantanés de Base &#187;</a></p>
