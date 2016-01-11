@@ -1,28 +1,30 @@
 ---
-layout: reference
+layout: fr_reference
 ---
 
 <div class="box">
   <h2>
     <span class="docs">
-      <a target="new" href="http://git-scm.com/book/en/Git-Basics-Viewing-the-Commit-History">book</a>
+      <a target="new" href="http://git-scm.com/book/fr/Les-bases-de-Git-Visualiser-l-historique-des-validations">livre</a>
     </span>
-    Inspection and Comparison
+    Inspection et Comparaison
   </h2>
   <div class="block">
     <p>
-    So now you have a bunch of branches that you are using for short lived
-    topics, long lived features and what not.  How do you keep track of them?
-    Git has a couple of tools to help you figure out where work was done, what
-    the difference between two branches are and more.
+      Vous avez désormais plusieurs branches dont vous vous servez pour des
+      besoins éphémères, des fonctionnalités durables et autres. Comment
+      vous y retrouver parmi celles-ci? Git a différents outils pour vous
+      aider à savoir où un travail donné a eu lieu, quelles sont les différences
+      entre deux branches et bien d'autres choses.
     </p>
 
     <p class="nutshell">
-    <b>In a nutshell</b> you can use <code>git log</code> to find specific
-    commits in your project history - by author, date, content or
-    history.  You can use <code>git diff</code> to compare two different points
-    in your history - generally to see how two branches differ or what has
-    changed from one version of your software to another.
+      <b>Pour résumer</b>, vous utilisez <code>git log</code> pour retrouver des
+      validations spécifiques dans l'historique de votre projet - par auteur, date,
+      contenu et historique. Vous pouvez utiliser <code>git diff</code> pour comparer
+      deux points différents dans votre historique - habituellement pour voir de quelle
+      manière deux branches diffèrent ou ce qui a changé entre une version de votre
+      logiciel et une autre.
     </p>
   </div>
 </div>
@@ -31,35 +33,36 @@ layout: reference
   <h2>
     <span class="docs">
       <a target="new" href="http://git-scm.com/docs/git-log">docs</a> &nbsp;
-      <a target="new" href="http://git-scm.com/book/en/Git-Basics-Viewing-the-Commit-History#Limiting-Log-Output">book</a>
+      <a target="new" href="http://git-scm.com/book/fr/Les-bases-de-Git-Visualiser-l-historique-des-validations#Limiter-la-longueur-de-l'historique">livre</a>
     </span>
     <a name="log">git log</a>
-    <span class="desc">filter your commit history</span>
+    <span class="desc">limiter la longueur de l'historique</span>
   </h2>
 
   <div class="block">
-    <p>We've already seen how to use <code>git log</code> to compare branches,
-    by looking at the commits on one branch that are not reachable from another.
-    (If you don't remember, it looks like this: <code>git log branchA ^branchB</code>).
-    However, you can also use <code>git log</code> to look for specific commits.
-    Here we'll be looking at some of the more commonly used <code>git log</code>
-    options, but there are many.  Take a look at the official docs for the whole
-    list.
+    <p>Nous avons déjà vu comment utiliser <code>git log</code> pour comparer
+      des branches, en visualisant les validations d'une branche. (Si vous ne vous
+      en souvenez pas, cela ressemble à: <code>git log brancheA ^brancheB</code>).
+      Cependant, vous pouvez utiliser <code>git log</code> pour rechercher une
+      validation spécifique. Ici nous allons nous intéresser à certaines options
+      communément utilisées par <code>git log</code>, mais il en existe de très
+      nombreuses. Reportez-vous à la documentation officielle pour la liste complète.
     </p>
 
     <h4 id="log-author">
       git log --author
-      <small>look for only commits from a specific author</small>
+      <small>rechercher uniquement les validations d'un auteur en particulier</small>
     </h4>
 
     <p>
-    To filter your commit history to only the ones done by a specific author,
-    you can use the <code>--author</code> option.  For example, let's say we're
-    looking for the commits in the Git source code done by Linus.  We would
-    type something like <code>git log --author=Linus</code>. The search is
-    case sensitive and will also search the email address.  The following
-    example will use the <code>-[number]</code> option, which will limit the
-    results to the last [number] commits.
+      Pour filtrer votre historique des validations suivant seulement celles effectuées
+      par un auteur en particulier, vous pouvez utiliser l'option <code>--author</code>.
+      Par exemple, disons que nous recherchons les validations du code source de Git
+      qui ont été effectuées par Linus. Nous exécuterions quelque chose comme
+      <code>git log --author=Linus</code>. La recherche est sensible à la casse
+      et recherchera aussi l'adresse email. L'exemple suivant utilise l'option
+      <code>-[nombre]</code>, qui limite les résultats aux [nombre] dernières
+      validations.
     </p>
 
 <pre>
@@ -73,16 +76,17 @@ b532581 make "git unpack-file" a built-in
 
     <h4 id="log-date">
       git log --since --before
-      <small>filter commits by date committed</small>
+      <small>filtrer les validations suivant la date de validation</small>
     </h4>
 
     <p>
-    If you want to specify a date range that you're interested in filtering your
-    commits down to, you can use a number of options such as <code>--since</code>
-    and <code>--before</code>, or you can also use <code>--until</code> and
-    <code>--after</code>.  For example, to see all the commits in
-    the Git project before three weeks ago but after April 18th, you could run this
-    (We're also going to use <code>--no-merges</code> to remove merge commits):
+      Si vous voulez spécifier un intervalle de temps pour filtrer vos validations,
+      vous pouvez utiliser plusieurs options comme  <code>--since</code>
+      et <code>--before</code>, ou vou spouvez aussi utiliser <code>--until</code>
+      et <code>--after</code>. Par exemple, pour voir toutes les validations du projet
+      Git d'il y a trois semaines mais après le 18 Avril, vous pourriez exécuter ceci
+      (Nous allons aussi utiliser <code>--no-merges</code> pour ignorer les validations
+      de fusion):
     </p>
 
 <pre>
@@ -100,15 +104,15 @@ b6c8d2d Documentation/remote-helpers: Add invocation section
 
     <h4 id="log-grep">
       git log --grep
-      <small>filter commits by commit message</small>
+      <small>filtrer les validations suivant les messages de validation</small>
     </h4>
 
     <p>
-      You may also want to look for commits with a certain phrase in the commit
-      message.  Use <code>--grep</code> for that.  Let's say there
-      was a commit that dealt with using the P4EDITOR environment variable and
-      you wanted to remember what that change looked like - you could find the commit
-      with <code>--grep</code>.
+      Vous désireriez peut-être également rechercher les validations avec une certaine
+      phrase dans le message de validation. Utilisez <code>--grep</code> pour cela.
+      Disons qu'il y a une validation qui portait sur la variable d'environnement P4EDITOR
+      et que vous vouliez vous remémorer à quoi ressemblaient les modificiations - vous
+      pourriez retrouver cette validation avec <code>--grep</code>.
     </p>
 
 <pre>
@@ -128,16 +132,16 @@ Date:   Wed Mar 12 19:03:24 2008 -0500
 </pre>
 
     <p>
-    Git will logically OR all <code>--grep</code> and <code>--author</code>
-    arguments.  If you want to use <code>--grep</code> and <code>--author</code>
-    to see commits that were authored by someone AND have a specific message
-    content, you have to add the <code>--all-match</code> option. In these
-    examples we're going to use the <code>--format</code> option, so we can see
-    who the author of each commit was.
+      Git va faire un OU logique de tous les arguments <code>--grep</code> et
+      <code>--author</code>. Si vous voulez utiliser <code>--grep</code> et
+      <code>--author</code> pour voir toutes les validations qui ont été créées
+      par quelqu'un et ont un contenu de message spécifique, vous devez utiliser
+      l'option <code>--all-match</code>. Dans les exemples nous allons utiliser
+      l'option <code>--format</code>, afin de voir qui est l'auteur de chaque validation.
     </p>
 
-    <p>If we look for the commit messages with 'p4 depo' in them, we get these
-    three commits:</p>
+    <p>Si nous recherchons les validations dont le message contient 'p4 depo',
+      nous obtenons ces trois validations:</p>
 
 <pre>
 <b>$ git log --grep="p4 depo" --format="%h %an %s"</b>
@@ -146,9 +150,9 @@ da4a660 Benjamin Sergeant git-p4 fails when cloning a p4 depo.
 1cd5738 Simon Hausmann Make incremental imports easier to use by storing the p4 d
 </pre>
 
-    <p>If we add a <code>--author=Hausmann</code> argument, instead of further
-    filtering it down to the one commit by Simon, it instead will show all
-    commits by Simon OR commits with "p4 depo" in the message:</p>
+      <p>Si nous ajoutons l'argument <code>--author=Hausmann</code>,
+        au lieu de filtrer les validations de Simon, il va plutôt nous montrer
+        toutes les validations par Simon ou dont le message contient "p4 depo".</p>
 
 <pre>
 <b>$ git log --grep="p4 depo" --format="%h %an %s" --author="Hausmann"</b>
@@ -167,28 +171,29 @@ e96e400 Simon Hausmann git-p4: Fix submit user-interface.
 ...
 </pre>
 
-    <p>However, adding <code>--all-match</code> will get the results you're
-    looking for:</p>
+        <p>Néanmoins, ajouter <code>--all-match</code> va vous retourner les résultats
+          que vous attendez:</p>
 
 <pre>
 <b>$ git log --grep="p4 depo" --format="%h %an %s" --author="Hausmann" --all-match</b>
 1cd5738 Simon Hausmann Make incremental imports easier to use by storing the p4 d
 </pre>
 
-    <h4 id="log-s">
-      git log -S
-      <small>filter by introduced diff</small>
-    </h4>
+          <h4 id="log-s">
+            git log -S
+            <small>filtrer suivant les changements introduits</small>
+          </h4>
 
-    <p>
-      What if you write really horrible commit messages?  Or, what if you are
-      looking for when a function was introduced, or where variables started
-      to be used?  You can also tell Git to look through the diff of each
-      commit for a string.  For example, if we wanted to find which commits
-      modified anything that looked like the function name
-      'userformat_find_requirements', we would run this: (note there is no '='
-      between the '-S' and what you are searching for)
-    </p>
+          <p>
+            Que faire si vos messages de validations sont vraiment mauvais? Ou si
+            vous recherchez quand une fonction a été rajoutée, ou quand des
+            variables ont commencé à être utilisées? Vous pouvez aussi dire à Git
+            de rechercher parmi les modifications de chaque validation pour une certaine
+            chaîne de caractères. Par exemple, si nous voulions trouver quelles
+            validations ont modifié tout ce qui ressemble au nom de function
+            'userformat_find_requirements', nous exécuterions ceci (notez qu'il
+            n'y a pas de '=' entre le '-S' et ce que vous recherchez):
+          </p>
 
 <pre>
 <b>$ git log -Suserformat_find_requirements</b>
@@ -210,21 +215,22 @@ Date:   Tue Apr 13 22:31:12 2010 +0200
     Signed-off-by: Junio C Hamano
 </pre>
 
-    <h4 id="log-patch">
-      git log -p
-      <small>show patch introduced at each commit</small>
-    </h4>
+          <h4 id="log-patch">
+            git log -p
+            <small>afficher le correctif introduit par chaque validation</small>
+          </h4>
 
-    <p>
-    Each commit is a snapshot of the project, but since each commit records the
-    snapshot it was based off of, Git can always calculate the difference and
-    show it to you as a patch.  That means for any commit you can get the patch
-    that commit introduced to the project.  You can either do this by running
-    <code>git show [SHA]</code> with a specific commit SHA, or you can run
-    <code>git log -p</code>, which tells Git to put the patch after each commit.
-    It is a great way to summarize what has happened on a branch or between
-    commits.
-    </p>
+          <p>
+            Chaque validation est un instantané de votre projet, mais étant donné que
+            chaque validation sait sur quel instantané elle est basée, Git peut toujours
+            calculer la différence et vous l'afficher sous forme de correctif. Cela
+            signifie que pour chaque validation vous pouvez obtenir le correctif que
+            cette validation a introduit dans le projet. Vous pouvez le faire soit
+            en exécutant <code>git show [SHA]</code> avec un SHA spécifique de validation,
+            ou vous pouvez utiliser <code>git log -p</code>, qui dit à Git de mettre le
+            correctif après chaque validation. C'est un très bon moyen de résumer ce
+            qui est arrivé sur une branche ou entre validations.
+          </p>
 
 <pre>
 <b>$ git log -p --no-merges -2</b>
@@ -267,17 +273,17 @@ index d053cc8..9103e27 100644
  This project has examples of hello world in
 </pre>
 
-    <p>This is a really nice way of summarizing changes or reviewing a series
-    of commits before merging them or releasing something.</p>
+          <p>C'est un très bon moyen de résumer les changements ou passer en revue
+            une série de validations avant de les fusionner ou de publier quoi que ce soit.</p>
 
-    <h4 id="log-stat">
-      git log --stat
-      <small>show diffstat of changes introduced at each commit</small>
-    </h4>
+          <h4 id="log-stat">
+            git log --stat
+            <small>afficher un résumé des modifications introduites par chaque validation</small>
+          </h4>
 
-    <p>If the <code>-p</code> option is too verbose for you, you can summarize
-    the changes with <code>--stat</code> instead. Here is the same log output
-    with <code>--stat</code> instead of <code>-p</code></p>
+          <p>Si vous trouvez l'option <code>-p</code> trop verbeuse, vous pouvez résumer
+            les changements avec <code>--stat</code> à la place. Voici la même sortie du
+            journal avec <code>--stat</code> à la place de <code>-p</code>.</p>
 
 <pre>
 <b>$ git log --stat --no-merges -2</b>
@@ -300,35 +306,37 @@ Date:   Fri Jun 4 12:58:53 2010 +0200
  1 files changed, 1 insertions(+), 1 deletions(-)
 </pre>
 
-    <p>Same basic information, but a little more compact - it still lets you
-    see relative changes and which files were modified.</p>
+            <p>Basiquement les mêmes informations, mais plus succintement - vous pouvez
+              toujours les diférences et quelles fichiers ont été modifiés.</p>
 
-  </div>
-</div>
+          </div>
+        </div>
 
-<div class="box">
-  <h2>
-    <span class="docs">
-      <a target="new" href="http://git-scm.com/docs/git-diff">docs</a> &nbsp;
-      <a target="new" href="http://git-scm.com/book/en/Distributed-Git-Maintaining-a-Project#Determining-What-Is-Introduced">book</a>
-    </span>
-    <a name="diff">git diff</a>
-    <span class="desc"></span>
-  </h2>
+        <div class="box">
+          <h2>
+            <span class="docs">
+              <a target="new" href="http://git-scm.com/docs/git-diff">docs</a> &nbsp;
+              <a target="new" href="http://git-scm.com/book/fr/Git-distribu%C3%A9-Maintenance-d-un-projet#Déterminer-les-modifications-introduites">livre</a>
+            </span>
+            <a name="diff">git diff</a>
+            <span class="desc"></span>
+          </h2>
 
-  <div class="block">
+          <div class="block">
 
-    <p>Finally, to see the absolute changes between any two commit snapshots,
-    you can use the <code>git diff</code> command. This is largely used in two
-    main situations - seeing how two branches differ from one another and
-    seeing what has changed since a release or some other older point in
-    history.  Let's look at both of these situations.</p>
+            <p>Enfin, pour voir les changements absolus entre deux instantanés de validations,
+              vous pouvez utiliser la commande <code>git diff</code>. Ceci est très utilisé
+              principalement dans deux cas - voir en quoi deux branches diffèrent
+              l'une de l'autre et voir ce qui a changé depuis la publication d'une version
+              ou tout autre ancien moment donné passé dans l'historique.
+              Voyons chacune de ces situations.</p>
 
-    <p>To see what has changed since the last release, you can simply run
-    <code>git diff [version]</code> (or whatever you tagged the release).
-    For example, if we want to see what has changed in our project since
-    the v0.9 release, we can run <code>git diff v0.9</code>.
-    </p>
+            <p>Pour voir ce qui a changé depuis la dernière publication, vous pouvez
+              simplement exécuter <code>git diff [version]</code> (ou tout autre étiquette
+              attribuée à la publication). Par exemple, si vous voulez voir ce qui a changé
+              dans votre projet depuis la version v0.9, nous pouvons exécuter
+              <code>git diff v0.9</code>.
+            </p>
 
 <pre>
 <b>$ git diff v0.9</b>
@@ -358,8 +366,8 @@ index bb86f00..192151c 100644
 <span class="green">+HelloWorld.hello</span>
 </pre>
 
-    <p>Just like <code>git log</code>, you can use the <code>--stat</code>
-      option with it.</p>
+            <p>Tout comme <code>git log</code>, vous pouvez utiliser l'option
+              <code>--stat</code> avec.</p>
 
 <pre>
 <b>$ git diff v0.9 --stat</b>
@@ -368,16 +376,18 @@ index bb86f00..192151c 100644
  2 files changed, 3 insertions(+), 3 deletions(-)
 </pre>
 
-    <p>To compare two divergent branches, however, you can run something like
-    <code>git diff branchA branchB</code> but the problem is that it will do
-    exactly what you are asking - it will basically give you a patch file that
-    would turn the snapshot at the tip of branchA into the snapshot at the tip
-    of branchB.  This means if the two branches have diverged - gone in different
-    directions - it will remove all the work that was introduced into branchA
-    and then add everything that was introduced into branchB.  This is probably
-    not what you want - you want the changes added to branchB that are not in
-    branchA, so you really want the difference between where the two branches
-    diverged and the tip of branchB. So, if our history looks like this:</p>
+              <p>Pour comparer deux branches divergentes, néanmoins, vous pouvez exécucter
+                quelque chose de similaire à <code>git diff branchA branchB</code> mais
+                le problème est que cela va faire exactement ce que vous lui demandez
+                - cela va concrétement vous fournir le correctif qui transformerai l'instantané
+                à l'extrémité de la branche brancheA en l'instantané de l'extrémité de la
+                branche brancheB. Cela signifie que si deux branches ont divergé - elles
+                ont pris des directions différentes - cela va occulter toutes les modifications
+                introduites dans brancheA puis ajouter tout ce qui a été introduit dans brancheB.
+                Ce n'est probablement pas ce que vous voulez - vous voulez les changements ajoutés
+                à brancheB qui ne sont pas dans brancheA, vous voulez donc vraiment les différences
+                entre là où les deux branches ont divergé et l'extrémité de brancheB. Donc,
+                si notre historique ressemble à ça:</p>
 
 <pre>
 <b>$ git log --graph --oneline --decorate --all</b>
@@ -389,9 +399,9 @@ index bb86f00..192151c 100644
 ...
 </pre>
 
-    <p>And we want to see what is on the "erlang" branch compared to the "master"
-    branch, running <code>git diff master erlang</code> will give us the wrong
-    thing.</p>
+                <p>Et si nous voulions voir ce qui se trouve sur la branche "erlang" 
+                  par rapport à la branche "master", exécuter <code>git diff master erlang</code>
+                  ne nous afficherait pas la bonne chose.</p>
 
 <pre>
 <b>$ git diff --stat master erlang</b>
@@ -401,12 +411,13 @@ index bb86f00..192151c 100644
  3 files changed, 11 insertions(+), 2 deletions(-)
 </pre>
 
-    <p>You see that it adds the erlang and haskell files, which is what we did
-    in that branch, but then the output also reverts the changes to the ruby file
-    that we did in the master branch.  What we really want to see is just the
-    changes that happened in the "erlang" branch (adding the two files).  We can
-    get the desired result by doing the diff from the common commit they diverged
-    from:</p>
+                  <p>Vous voyez que cela a ajouté les fichiers erlang et haskell, qui est ce
+                    que nous avons fait dans cette branche, mais la sortie revient aussi sur les
+                    changements du fichier ruby que nous avons effetués dans la branche master.
+                    Ce que nous voulons vraiment voir sont juste les changements qui ont été faits
+                    dans la branche "erlang" (l'ajout des deux fichiers). Nous pouvons obtenir le
+                    résultat attendu en faisant la différence entre la validation commune de laquelle
+                    elles ont divergé:</p>
 
 <pre>
 <b>$ git diff --stat 8d585ea erlang</b>
@@ -415,12 +426,13 @@ index bb86f00..192151c 100644
  2 files changed, 9 insertions(+), 0 deletions(-)
 </pre>
 
-    <p>That's what we're looking for, but we don't want to have to figure out
-    what commit the two branches diverged from every time. Luckily, Git has a
-    shortcut for this. If you run <code>git diff master...erlang</code> (with
-	three dots in between the branch names), Git will automatically figure out
-    what the common commit (otherwise known as the "merge base") of the two
-    commit is and do the diff off of that.</p>
+                    <p>C'est ce que nous recherchons, mais nous ne désirons pas à avoir à nous
+                      souvenir de quelle validation les deux branches ont divergé à chaque fois.
+                      Heureusement, Git a un raccourci pour ça. Si vous exécutez
+                      <code>git diff master...erlang</code> (avec trois points entre les noms de
+                      branches), Git va automatiquement savoir quelle est la validation commune
+                      (aussi connue sous le nom de "base de fusion") entre les deux validations et
+                      afficher les modifications en se basant sur celle-ci.</p>
 
 <pre>
 <b>$ git diff --stat master erlang</b>
@@ -434,21 +446,22 @@ index bb86f00..192151c 100644
  2 files changed, 9 insertions(+), 0 deletions(-)
 </pre>
 
-    <p>Nearly every time you want to compare two branches, you'll want to use
-    the triple-dot syntax, because it will almost always give you what you want.
-    </p>
+                      <p>Quasiment à chaque fois que vous voudrez comparer deux branches, vous voudrez
+                        utiliser la syntaxe du triple-point, parce-qu'elle vous donnera sûrement toujours
+                        ce que vous désirez.
+                      </p>
 
-    <p>As a bit of an aside, you can also have Git manually calculate what the
-    merge-base (first common ancestor commit) of any two commits would be with
-    the <code>git merge-base</code> command:</p>
+                      <p>En guise de bonus, vous pouvez aussi faire calculer manuellement par Git quelle
+                        serait la base de fusion (la première validation ancêtre commune) entre deux validations
+                        avec la commande <code>git merge-base</code>:</p>
 
 <pre>
 <b>$ git merge-base master erlang</b>
 8d585ea6faf99facd39b55d6f6a3b3f481ad0d3d
 </pre>
 
-    <p>You can do the equivalent of <code>git diff master...erlang</code>
-    by running this:</p>
+                        <p>Vous pouvez faire l'équivalent de <code>git diff master...erlang</code>
+                          en exécutant:</p>
 
 <pre>
 <b>$ git diff --stat $(git merge-base master erlang) erlang</b>
@@ -457,19 +470,19 @@ index bb86f00..192151c 100644
  2 files changed, 9 insertions(+), 0 deletions(-)
 </pre>
 
-    <p>You may prefer using the easier syntax though.</p>
+                          <p>Vous préférerez peut-être utiliser la forme simple de la syntaxe néanmoins.</p>
 
 
-    <p class="nutshell">
-    <b>In a nutshell</b> you can use <code>git diff</code> to see how a project
-    has changed since a known point in the past or to see what unique work is
-    in one branch since it diverged from another.  Always use
-    <code>git diff branchA...branchB</code> to inspect branchB relative to
-    branchA to make things easier.
-    </p>
+                          <p class="nutshell">
+                            <b>Pour résumer</b> vous pouvez utiliser <code>git diff</code> pour voir
+                            comment un projet a changé depuis un moment donné ou pour voir quel travail
+                            est contenu dans une branche depuis qu'elle a divergé d'une autre. Utilisez
+                            toujours <code>git diff brancheA...brancheB</code> pour inspecter brancheB
+                            par rapport à brancheA pour vous simplifier la vie.
+                          </p>
 
-  </div>
-</div>
+                        </div>
+                      </div>
 
-<p>And that's it!  For more information, try reading the
-<a href="http://git-scm.com/book/">Pro Git book</a>.</p>
+                      <p>Et c'est la fin! Pour plus d'informations, essayez de lire le
+                        <a href="http://git-scm.com/book/fr/">Livre Pro Git</a>.</p>
