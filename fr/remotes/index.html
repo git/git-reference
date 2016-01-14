@@ -1,41 +1,43 @@
 ---
-layout: reference
+layout: fr_reference
 ---
 
 <div class="box">
   <h2>
     <span class="docs">
-      <a target="new" href="http://git-scm.com/book/en/Git-Basics-Working-with-Remotes">book</a>
+      <a target="new" href="http://git-scm.com/book/fr/Les-bases-de-Git-Travailler-avec-des-d%C3%A9p%C3%B4ts-distants">livre</a>
     </span>
-    Sharing and Updating Projects
+    Partager et actualiser des projets
   </h2>
   <div class="block">
     <p>
-    Git doesn't have a central server like Subversion.  All of the commands
-    so far have been done locally, just updating a local database.
-    To collaborate with other developers in Git, you have to put all that
-    data on a server that the other developers have access to.  The way Git
-    does this is to synchronize your data with another repository.  There
-    is no real difference between a server and a client - a Git repository
-    is a Git repository and you can synchronize between any two easily.
+      Git n'a pas de serveur central comme Subversion. Toutes les commandes
+      jusqu'à présent ont été exécutées localement, actualisant seulement la base
+      de données locale. Pour collaborer avec d'autres développeurs sous Git,
+      vous devez mettre toutes ces données sur un serveur auquel les autres
+      ont accès. Git rend cela possible en synchronisant vos données avec un
+      autre dépôt. Il n'y a pas de réelle différence entre un serveur et un client
+      - un dépôt Git est un dépôt Git et vous pouvez les synchroniser indifféremment
+      entre eux facilement.
     </p>
 
-    <p>Once you have a Git repository, either one that you set up on your
-    own server, or one hosted someplace like GitHub, you can tell Git to
-    either push any data that you have that is not in the remote repository
-    up, or you can ask Git to fetch differences down from the other repo.
+    <p>Dès que vous avez un dépôt Git, que ce soit un que vous hébergez sur votre
+      propre serveur, ou un dépôt hébergé chez un tiers comme GitHub, vous pouvez
+      dire à Git soit de pousser toutes données que vous avez qui ne sont pas
+      présentes sur le serveur distant, soit demander à Git de récupérer en local
+      les différences depuis l'autre dépôt.
     </p>
 
-    <p>You can do this any time you are online, it does not have to correspond
-    with a <code>commit</code> or anything else.  Generally you will do a
-    number of commits locally, then fetch data from the online shared repository
-    you cloned the project from to get up to date, merge any new work into the
-    stuff you did, then push your changes back up.</p>
+    <p>Vous pouvez le faire quand vous êtes en ligne, cela n'a pas à être fait
+      en même temps qu'un <code>commit</code> ou tout autre commande. Généralement
+      vous ferez un certains nombres de validations localement, puis vous récupérerez
+      les données depuis le dépôt partagé distant à partir duquel vous avez cloné
+      le projet pour être à jour, puis vous pousserez vos modifications en ligne.</p>
 
     <p class="nutshell">
-    <b>In a nutshell</b> you can update your project with <code>git fetch</code>
-    and share your changes with <code>git push</code>. You can manage your
-    remote repositories with <code>git remote</code>.
+      <b>Pour résumer</b>, vous pouvez actualiser votre projet avec <code>git fetch</code>
+      et partager vos modifications avec <code>git push</code>. Vous pouvez gérer vos
+      dépôts distants avec <code>git remote</code>.
     </p>
   </div>
 </div>
@@ -44,37 +46,37 @@ layout: reference
   <h2>
     <span class="docs">
       <a target="new" href="http://git-scm.com/docs/git-remote">docs</a> &nbsp;
-      <a target="new" href="http://git-scm.com/book/en/Git-Basics-Working-with-Remotes#Showing-Your-Remotes">book</a>
+      <a target="new" href="http://git-scm.com/book/fr/Les-bases-de-Git-Travailler-avec-des-d%C3%A9p%C3%B4ts-distants#Afficher-les-dépôts-distants">livre</a>
     </span>
     <a name="remote">git remote</a>
-    <span class="desc">list, add and delete remote repository aliases</span>
+    <span class="desc">lister, ajouter et supprimer les alias de dépôts distants</span>
   </h2>
 
   <div class="block">
 
-    <p>Unlike centralized version control systems that have a client that is
-    very different from a server, Git repositories are all basically equal and
-    you simply synchronize between them. This makes it easy to have more than
-    one remote repository - you can have some that you have read-only access to
-    and others that you can write to as well.</p>
+    <p>Contrairement aux systèmes de gestion de versions centralisés qui ont un client
+      qui est très différent du serveur, les dépôts Git sont tout simplement équivalents
+      et vous les synchronisez simplement entre eux. Cela simplifie la possibilité
+      d'avoir plus d'un dépôt distant - vous pouvez en avoir certains en lecture seule
+      ainsi que d'autres accessibles en écriture.</p>
 
-    <p>So that you don't have to use the full URL of a remote repository every
-    time you want to synchronize with it, Git stores an alias or nickname for
-    each remote repository URL you are interested in. You use the
-    <code>git remote</code> command to manage this list of remote repos that
-    you care about.</p>
+    <p>Afin de ne pas avoir à donner l'URL complète d'un dépôt distant à chaque
+      fois que vous désirez vous synchroniser avec, Git stocke un alias ou diminutif
+      pour chaque URL de dépôt distant qui vous intéresse. Vous utilisez la commande
+      <code>git remote</code> pour gérer cette liste de dépôts distants qui vous
+      intéresse.</p>
 
     <h4 id="remote-list">
       git remote
-      <small>list your remote aliases</small>
+      <small>lister vos alias distants</small>
     </h4>
 
-    <p>Without any arguments, Git will simply show you the remote repository
-    aliases that it has stored. By default, if you cloned the project (as
-    opposed to creating a new one locally), Git will automatically add the
-    URL of the repository that you cloned from under the name 'origin'. If
-    you run the command with the <code>-v</code> option, you can see the
-    actual URL for each alias.</p>
+    <p>Sans argument, Git va simplement vous afficher les alias de dépôt distants
+      qu'ils stockent. Par défaut, si vous avez cloné le projet (par opposition
+      à en créer un nouveau localement), Git va automatiquement ajouter l'URL
+      de ce dépôt source que vous avez cloné sous le nom 'origin'. SI vous exécutez
+      la commande avec l'option <code>-v</code>, vous pouvez voir
+      l'URL réelle de chaque alias.</p>
 
 <pre>
 <b>$ git remote</b>
@@ -84,26 +86,30 @@ origin	git@github.com:github/git-reference.git (fetch)
 origin	git@github.com:github/git-reference.git (push)
 </pre>
 
-    <p>You see the URL there twice because Git allows you to have different
-    push and fetch URLs for each remote in case you want to use different
-    protocols for reads and writes.</p>
+      <p>Vous voyez l'URL ici en double car Git permet d'avoir des URLS
+        différentes pour pousser et récupérer pour chaque dépôt au cas où
+        vous vouliez utiliser des protocoles différents en lecture
+        et en écriture.</p>
 
-    <h4 id="remote-add">
-      git remote add
-      <small>add a new remote repository of your project</small>
-    </h4>
+      <h4 id="remote-add">
+        git remote add
+        <small>ajouter un nouveau dépôt distant à votre projet</small>
+      </h4>
 
-    <p>If you want to share a locally created repository, or you want to take
-    contributions from someone else's repository - if you want to interact in
-    any way with a new repository, it's generally easiest to add it as a remote.
-    You do that by running <code>git remote add [alias] [url]</code>.  That
-    adds <code>[url]</code> under a local remote named <code>[alias]</code>.</p>
+      <p>Si vous voulez partager un dépôt créé localement, ou vous voulez
+        récupérer les contributions depuis le dépôt d'un tiers - si vous voulez
+        interagir de n'importe quelle manière avec un nouveau dépôt, le plus simple
+        est généralement de l'ajouter comme dépôt distant. Vous faites cela en
+        exécutant <code>git remote add [alias] [url]</code>. Cela ajoute
+        l'<code>[url]</code> en local en tant que dépôt distant sous le nom
+        <code>[alias]</code>.</p>
 
-    <p>For example, if we want to share our Hello World program with the world,
-    we can create a new repository on a server (Using GitHub as an example),
-    which should give you a URL, in this case "git@github.com:schacon/hw.git".
-    To add that to our project so we can push to it and fetch updates from it
-    we would do this:</p>
+      <p>Par exemple, si nous voulons partager notre programme Hello World avec
+        le reste du monde, nous pouvons créer un nouveau dépôt sur un serveur
+        (utilisons Github comme exemple), vous devriez obtenir une URL,
+        dans notre cas "git@github.com:schacon/hw.git". Pour l'ajouter à notre
+        projet afin de pouvoir y pousser et récupérer des mises à jour depuis celui-ci
+        nous ferions:</p>
 
 <pre>
 <b>$ git remote</b>
@@ -113,22 +119,22 @@ github	git@github.com:schacon/hw.git (fetch)
 github	git@github.com:schacon/hw.git (push)
 </pre>
 
-    <p>Like the branch naming, remote alias names are arbitrary - just as 'master'
-    has no special meaning but is widely used because <code>git init</code>
-    sets it up by default, 'origin' is often used as a remote name because
-    <code>git clone</code> sets it up by default as the cloned-from URL. In
-    this case we'll name the remote 'github', but you could name it just
-    about anything.
-    </p>
+        <p>Tout comme la dénomination des branches, le nommage des alias de dépôts
+          distants est arbitraire - tout comme 'master' n'a aucune signification spéciale
+          mais est très largement utilisé car <code>git init</code> le configure par défaut,
+          'origin' est souvent utilisé comme nom de dépôt distant car
+          <code>git clone</code> le configure par défaut comme URL source de clonage. Dans
+          notre cas nous allons appeler ce dépôt distant 'github', mais vous pourriez le
+          nommer comme bon vous semblerait.
+        </p>
 
-    <h4 id="remote-remove">
-      git remote rm
-      <small>removing an existing remote alias</small>
-    </h4>
+        <h4 id="remote-remove">
+          git remote rm
+          <small>enlever un alias existant de dépôt distant</small>
+        </h4>
 
-    <p>Git addeth and Git taketh away.  If you need to remove a remote - you are
-    not using it anymore, the project is gone, etc - you can remove it with
-    <code>git remote rm [alias]</code>.</p>
+        <p>Si vous avez besoin d'enlever un dépôt distant - vous ne l'utilisez plus, le projet
+          n'existe plus, etc - vous pouvez l'enlever avec <code>git remote rm [alias]</code>.</p>
 
 <pre>
 <b>$ git remote -v</b>
@@ -146,14 +152,15 @@ github	git@github.com:schacon/hw.git (fetch)
 github	git@github.com:schacon/hw.git (push)
 </pre>
 
-	<h4 id="remote-rename">
-      git remote rename [old-alias] [new-alias]
-      <small>rename remote aliases</small>
-    </h4>
+          <h4 id="remote-rename">
+            git remote rename [ancien-alias] [nouvel-alias]
+            <small>renommer des alias de dépôt distant</small>
+          </h4>
 
-    <p>If you want to rename remote aliases without having to delete them and add them again 
-    you can do that by running <code>git remote rename [old-alias] [new-alias]</code>. This will
-    allow you to modify the current name of the remote.</p>
+          <p>Si vous voulez renommer des alias de dépôt distant sans avoir à les supprimer puis les
+            ajouter à nouveau vous pouvez le faire en exécutant
+            <code>git remote rename [ancien-alias] [nouvel-alias]</code>. Cela va vous permettre
+            de modifier le nom en cours d'utilisation du dépôt distant.</p>
 
 <pre>
 <b>$ git remote add github git@github.com:schacon/hw.git</b>
@@ -166,21 +173,22 @@ origin	git@github.com:schacon/hw.git (fetch)
 origin	git@github.com:schacon/hw.git (push)
 </pre>
 
-    <p class="nutshell">
-    <b>In a nutshell</b> with <code>git remote</code> you can list our
-    remote repositories and whatever URL
-    that repository is using.  You can use <code>git remote add</code> to
-    add new remotes, <code>git remote rm</code> to delete existing ones or <code>git remote rename [old-alias] [new-alias]</code> to rename them.
-    </p>
+            <p class="nutshell">
+              <b>Pour résumer</b>, avec <code>git remote</code> vous pouvez lister vos dépôts
+              distants et toute URL que ce dépôt utilise. Vous pouvez utiliser
+              <code>git remote add</code> pour ajouter de nouveaux dépôts distants,
+              <code>git remote rm</code> pour en supprimer ou
+              <code>git remote rename [ancien-alias] [nouvel-alias]</code> pour les renommer.
+            </p>
 
-    <h4 id="remote-update">
-      git remote set-url
-      <small>update an existing remote URL</small>
-    </h4>
+            <h4 id="remote-update">
+              git remote set-url
+              <small>actualiser une URL distante existante</small>
+            </h4>
 
-    <p>Should you ever need to update a remote's URL, you can do so with
-    the <code>git remote set-url</code> command.
-    </p>
+            <p>Si vous aviez besoin d'actualiser l'URL d'un dépôt distant, vous
+              pouvez le faire avec la commande <code>git remote set-url</code>.
+            </p>
 
 <pre>
 <b>$ git remote -v</b>
@@ -196,10 +204,11 @@ origin	git://github.com/github/git-reference.git (fetch)
 origin	git://github.com/github/git-reference.git (push)
 </pre>
 
-    <p>In addition to this, you can set a different push URL when you
-    include the <code>--push</code> flag. This allows you to fetch from
-    one repo while pushing to another and yet both use the same remote alias.
-    </p>
+            <p>De plus, vous pouvez définir une URL différente pour pousser quand
+              vous ajoutez le drapeau <code>--push</code>. Cela vous permet de récupérer
+              depuis un dépôt mais de pousser vers un autre tout en leur donnant le
+              même alias.
+            </p>
 
 <pre>
 <b>$ git remote -v</b>
@@ -215,16 +224,17 @@ origin	git://github.com/github/git-reference.git (fetch)
 origin	git://github.com/pjhyett/hw.git (push)
 </pre>
 
-    <p>Internally, the <code>git remote set-url</code> command calls
-    <code>git config remote</code>, but has the added benefit of reporting
-    back any errors. <code>git config remote</code> on the other hand, will
-    silently fail if you mistype an argument or option and not actually set
-    anything.
-    </p>
+            <p>En interne, la commande <code>git remote set-url</code> exécute
+              <code>git config remote</code>, mais avec l'avantage de vous signaler
+              en retour toute erreur. <code>git config remote</code> d'un autre côté,
+              va échouer en silence si vous avez mal tapé un argument ou une option
+              pour ne rien définir au final.
+            </p>
 
-    <p>For example, we'll update the <code>github</code> remote but
-    instead reference it as <code>guhflub</code> in both invocations.
-    </p>
+            <p>Par exemple, nous allons mettre à jour le dépôt distant <code>github</code>
+              mais à la place y faire référence en tant que <code>guhflub</code> à chaque
+              invocation.
+            </p>
 
 <pre>
 <b>$ git remote -v</b>
@@ -242,64 +252,67 @@ origin	git://github.com/github/git-reference.git (push)
 fatal: No such remote 'guhflub'
 </pre>
 
-    <p class="nutshell">
-    <b>In a nutshell</b>, you can update the locations of your remotes
-    with <code>git remote set-url</code>. You can also set different push
-    and fetch URLs under the same remote alias.
-    </p>
+            <p class="nutshell">
+              <b>Pour résumer</b>, vous pouvez mettre à jour les emplacements de vos
+              dépôts distants avec <code>git remote set-url</code>. Vous pouvez aussi définir des URLs
+              différentes pour pousser et récupérer sous le même nom d'alias de dépôt distant.
+            </p>
 
-  </div>
-</div>
+          </div>
+        </div>
 
-<div class="box">
-  <h2>
-    <span class="docs">
-      <a target="new" href="http://git-scm.com/docs/git-fetch">docs</a> &nbsp;
-      <a target="new" href="http://git-scm.com/book/en/Git-Basics-Working-with-Remotes#Fetching-and-Pulling-from-Your-Remotes">book</a>
-    </span>
-    <a name="fetch">git fetch</a>
-    <span class="desc">download new branches and data from a remote repository</span>
-  </h2>
+        <div class="box">
+          <h2>
+            <span class="docs">
+              <a target="new" href="http://git-scm.com/docs/git-fetch">docs</a> &nbsp;
+              <a target="new" href="http://git-scm.com/book/fr/Les-bases-de-Git-Travailler-avec-des-d%C3%A9p%C3%B4ts-distants#Récupérer-et-tirer-depuis-des-dépôts-distants">livre</a>
+            </span>
+            <a name="fetch">git fetch</a>
+            <span class="desc">récupérer de nouvelles branches et données depuis un dépôt distant</span>
+          </h2>
 
-  <br/>
+          <br/>
 
-  <h2>
-    <span class="docs">
-      <a target="new" href="http://git-scm.com/docs/git-pull">docs</a> &nbsp;
-      <a target="new" href="http://git-scm.com/book/en/Git-Basics-Working-with-Remotes#Fetching-and-Pulling-from-Your-Remotes">book</a>
-    </span>
-    <a name="pull">git pull</a>
-    <span class="desc">fetch from a remote repo and try to merge into the current branch</span>
-  </h2>
+          <h2>
+            <span class="docs">
+              <a target="new" href="http://git-scm.com/docs/git-pull">docs</a> &nbsp;
+              <a target="new" href="http://git-scm.com/book/fr/Les-bases-de-Git-Travailler-avec-des-d%C3%A9p%C3%B4ts-distants#Récupérer-et-tirer-depuis-des-dépôts-distants">livre</a>
+            </span>
+            <a name="pull">git pull</a>
+            <span class="desc">récupérer depuis un dépôt distant et essaye de fusionner dans la branche courante</span>
+          </h2>
 
-  <div class="block">
+          <div class="block">
 
-    <p>Git has two commands to update itself from a remote repository.
-    <code>git fetch</code> will synchronize you with another repo, pulling down any data
-    that you do not have locally and giving you bookmarks to where each branch on
-    that remote was when you synchronized.  These are called "remote branches" and are
-    identical to local branches except that Git will not allow you to check them out -
-    however, you can merge from them, diff them to other branches, run history logs on
-    them, etc.  You do all of that stuff locally after you synchronize.
-    </p>
+            <p>Git a deux commandes pour se mettre à jour depuis un dépôt distant.
+              <code>git fetch</code> va vous synchroniser avec un autre dépôt, récupérant
+              en local tout donnée non présente en local et vous donnant des marqueurs sur où
+              chaque branche sur ce dépôt distant en était au momemt de la synchronisation.
+              Celles-ci sont appelées "branches distantes" et sont identiques aux branches locales
+              mis à part que Git ne vous autorisera pas de les extraire - par contre, vous pouvez
+              fusionner avec, les comparer à d'autres branches, exécuter des journaux d'historique
+              dessus, etc. Vous faites toutes ces opérations en local une fois votre synchronisation
+              faite.
+            </p>
 
-    <p>The second command that will fetch down new data from a remote server is
-    <code>git pull</code>.  This command will basically run a <code>git fetch</code>
-    immediately followed by a <code>git merge</code> of the branch on that remote
-    that is tracked by whatever branch you are currently in.  Running the
-    <code>fetch</code> and <code>merge</code> commands separately involves less magic
-    and less problems, but if you like the idea of <code>pull</code>, you can
-    read about it in more detail in the
-    <a target="new" href="http://git-scm.com/docs/git-pull">official docs</a>.
-    </p>
+            <p>La seconde commande qui va récupérer en local des données et la commande
+              <code>git pull</code>. Cette commande va concrètement exécuter <code>git fetch</code>
+              immédiatemment suivi d'un <code>git merge</code> de la branche de ce dépôt distant
+              qui est suivie par toute branche courante dans laquelle vous êtes. Exécuter les commandes
+              <code>fetch</code> et <code>merge</code> séparément est source de moins de magie et
+              et moins de problèmes, mais si vous aimez le principe de <code>pull</code>,
+              vous pouvez le retrouver de manière plus détaillée dans la
+              <a target="new" href="http://git-scm.com/docs/git-pull">documentation officielle</a>.
+            </p>
 
-    <p>Assuming you have a remote all set up and you want to pull in updates, you
-    would first run <code>git fetch [alias]</code> to tell Git to fetch down all the
-    data it has that you do not, then you would run <code>git merge [alias]/[branch]</code>
-    to merge into your current branch anything new you see on the server
-    (like if someone else has pushed in the meantime). So, if you were working on a
-    Hello World project with several other people and wanted to bring in any changes
-    that had been pushed since we last connected, we would do something like this:</p>
+            <p>Partant du principe que vous avez un dépôt distant fonctionnel et que vous voulez tirer
+              en local des mises à jour, vous exécuteriez en premier <code>git fetch [alias]</code>
+              pour dire à Git de récupérer en local toutes les données du dépôt que vous n'avez pas,
+              puis vous exécuteriez <code>git merge [alias]/[branche]</code> pour fusionner dans la
+              branche courante tout ce qu'il y de nouveau sur le serveur (par exemple si quelqu'un
+              a poussé entretemps). Au final, si vous travailliez sur un projet Hello World avec
+              plusieurs autres personnes et que vous vouliez récupérer toutes modifications qui
+              ont été poussées depuis votre dernière connexion, vous feriez quelque chose comme:</p>
 
 <pre>
 <b>$ git fetch github</b>
@@ -316,53 +329,56 @@ From github.com:schacon/hw
  * [new branch]      lisp       -> github/lisp
 </pre>
 
-    <p>Here we can see that since we last synchronized with this remote, five branches
-    have been added or updated.  The 'ada' and 'lisp' branches are new, where the
-    'master', 'c-langs' and 'java' branches have been updated.  In our example case,
-    other developers are pushing proposed updates to remote branches for review before
-    they're merged into 'master'.
-    </p>
+              <p>Dans cet exemple nous pouvons voir que depuis notre dernière synchronisation
+                avec le dépôt distant, cinq branches ont été créées ou mises à jour. Les
+                branches 'ada' et 'lisp' sont nouvelles, alors que les branches 'master', 'c-langs'
+                et 'java' ont été actualisées. Dans notre scénario exemple, les autres développeurs
+                poussent leurs modifications dans des branches distantes pour revue avant d'être
+                fusionnées dans 'master'.
+              </p>
 
-    <p>You can see the mapping that Git makes.  The 'master' branch on the remote
-    repository becomes a branch named 'github/master' locally.  That way you can
-    merge the 'master' branch on that remote into the local 'master' branch by running
-    <code>git merge github/master</code>.  Or, you can see what new commits are on that
-    branch by running <code>git log github/master ^master</code>.  If your remote
-    is named 'origin' it would be <code>origin/master</code> instead.  Almost any
-    command you would run using local branches you can use remote branches with too.
-    </p>
+              <p>Vous pouvez observer ce que Git met en place. La branche 'master' sur le dépôt
+                distant devient une branche appelée 'github/master' en local. De cette manière
+                vous pouvez fusionner la branche 'master' de ce dépôt distant dans la branche locale
+                'master' en exécutant <code>git merge github/master</code>. Ou vous pouvez voir
+                quelles sont les nouvelles validations en exécutant <code>git log github/master ^master</code>.
+                Si votre dépôt distant est nommé 'origin' il sera plutôt nommé <code>origin/master</code>.
+                Quasiment tout commande utilisable sur les branches locales est utilisable également
+                sur les branches distantes.
+              </p>
 
-    <p>If you have more than one remote repository, you can either fetch from specific
-    ones by running <code>git fetch [alias]</code> or you can tell Git to synchronize
-    with all of your remotes by running <code>git fetch --all</code>.
-	</p>
+              <p>Si vous avez plus d'un dépôt distant, vous pouvez plutôt récupérer depuis un dépôt
+                spécifique en exécutant <code>git fetch [alias]</code> ou vous pouvez dire à Git
+                de se synchroniser avec tous les dépôts distants en exécutant <code>git fetch --all</code>.
+              </p>
 
-    <p class="nutshell">
-    <b>In a nutshell</b> you run <code>git fetch [alias]</code> to synchronize your
-    repository with a remote repository, fetching all the data it has that you do
-    not into branch references locally for merging and whatnot.
-    </p>
+              <p class="nutshell">
+                <b>Pour résumer</b>, vous exécutez <code>git fetch [alias]</code> pour synchroniser
+                votre dépôt avec un dépôt distant, en récupérant toutes les données du dépôt
+                distant qui ne sont pas référencées dans une branche locale pour les fusionner
+                ou autre.
+              </p>
 
-  </div>
+            </div>
 
-</div>
+          </div>
 
-<div class="box">
-  <h2>
-    <span class="docs">
-      <a target="new" href="http://git-scm.com/docs/git-push">docs</a> &nbsp;
-      <a target="new" href="http://git-scm.com/book/en/Git-Basics-Working-with-Remotes#Pushing-to-Your-Remotes">book</a>
-    </span>
-    <a name="push">git push</a>
-    <span class="desc">push your new branches and data to a remote repository</span>
-  </h2>
+          <div class="box">
+            <h2>
+              <span class="docs">
+                <a target="new" href="http://git-scm.com/docs/git-push">docs</a> &nbsp;
+                <a target="new" href="http://git-scm.com/book/fr/Les-bases-de-Git-Travailler-avec-des-d%C3%A9p%C3%B4ts-distants#Pousser-son-travail-sur-un-dépôt-distant">livre</a>
+              </span>
+              <a name="push">git push</a>
+              <span class="desc">pousser vos nouvelles branches et données vers un dépôt distant</span>
+            </h2>
 
-  <div class="block">
-    <p>To share the cool commits you've done with others, you need to push your
-    changes to the remote repository. To do this, you run
-    <code>git push [alias] [branch]</code> which will attempt to make your [branch]
-    the new [branch] on the [alias] remote. Let's try it by initially pushing
-    our 'master' branch to the new 'github' remote we created earlier.</p>
+            <div class="block">
+              <p>Pour partager vos sympathiques validations avec d'autres, vous avez besoin de pousser
+                vos modifications vers un dépôt distant. Pour cela, vous exécutez
+                <code>git push [alias] [branche]</code>  qui va tenter de faire de votre [branche]
+                une nouvelle [branche] sur le dépôt distant [alias]. Essayons de le faire en commençant
+                par pousser notre branche 'master' vers le dépôt distant 'github' créé précédemment.</p>
 
 <pre>
 <b>$ git push github master</b>
@@ -375,11 +391,12 @@ To git@github.com:schacon/hw.git
  * [new branch]      master -> master
 </pre>
 
-    <p>Pretty easy. Now if someone clones that repository they will get exactly
-    what we have committed and all of its history.</p>
+                <p>Plutôt simple. Désormais si quelqu'un clone ce dépôt il va obtenir exactement
+                  toutes ses validations et tout son historique.</p>
 
-    <p>What if you have a topic branch like the 'erlang' branch created earlier
-    and want to share just that?  You can just push that branch instead.</p>
+                <p>Comment faire si vous avez une branche spécifique comme la branche 'erlang'
+                  créée précédemment et que vous vouliez just partager celle-ci? Vous pouvez
+                  uniquement pousser cette branche à la place.</p>
 
 <pre>
 <b>$ git push github erlang</b>
@@ -392,25 +409,27 @@ To git@github.com:schacon/hw.git
  * [new branch]      erlang -> erlang
 </pre>
 
-    <p>Now when people clone or fetch from that repository, they'll get an 'erlang'
-    branch they can look at and merge from. You can push any branch to any
-    remote repository that you have write access to in this way. If your branch
-    is already on the server, it will try to update it, if it is not, Git will
-    add it.</p>
+                  <p>Désormais quand quelqu'un clonera ou récupérera depuis ce dépôt, elle aura
+                    une branche 'erlang' qu'elle pourra étudier et fusionner. Vous pouvez pousser
+                    toute branche de cette manière vers n'importe quel dépôt distant auquel
+                    vous avez accès en écriture. Si votre branche est déjà sur le serveur,
+                    Git tentera de la mettre à jour, si elle n'est pas présente, Git l'ajoutera.</p>
 
-    <p>The last major issue you run into with pushing to remote branches is the
-    case of someone pushing in the meantime.  If you and another developer clone
-    at the same time, you both do commits, then she pushes and then you try to
-    push, Git will by default not allow you to overwrite her changes.  Instead,
-    it basically runs <code>git log</code> on the branch you're trying to push and
-    makes sure it can see the current tip of the server's branch in your push's
-    history.  If it can't see what is on the server in your history, it concludes
-    that you are out of date and will reject your push.  You will rightly have to
-    fetch, merge then push again - which makes sure you take her changes into
-    account.</p>
+                  <p>Le dernier problème courant que vous risquez de rencontrer en poussant vers
+                    des branches distantes est dans le cas où quelqu'un pousse en même temps.
+                    Si vous et une autre développeuse clone au même moment, vous créez chacun
+                    vos validations, puis elle pousse et enfin vous essayez de pousser à votre tour,
+                    Git va par défaut refuser que vous écrasiez ses modifications. Au lieu de ça,
+                    Git va simplement exécuter un <code>git log</code> de la branche sur laquelle
+                    vous essayez de pousser et s'assurer qu'il peut trouver l'extrémité courante
+                    de la branche du serveur dans l'historique de ce que vous poussez. S'il ne
+                    peut voir ce qu'il trouve sur le serveur dans votre historique, il en conclut
+                    que vous n'êtes pas à jour et ne va pas accepter que vous poussiez. Pour bien
+                    faire, vous devriez récupérer, fusionner puis pousser à nouveau - pour être sûr
+                    de prendre ses modifications en compte.</p>
 
-    <p>This is what happens when you try to push a branch to a remote branch
-    that has been updated in the meantime:</p>
+                  <p>Voici ce qui arrive lorsque vous essayez de pousser une branche vers une branche
+                    distante qui a été mise à jour en même temps:</p>
 
 <pre>
 <b>$ git push github master</b>
@@ -422,19 +441,19 @@ Merge the remote changes before pushing again.  See the 'Note about
 fast-forwards' section of 'git push --help' for details.
 </pre>
 
-    <p>You can fix this by running <code>git fetch github; git merge github/master</code>
-    and then pushing again.
-	</p>
+                    <p>Vous pouvez corriger cela en exécutant <code>git fetch github; git merge github/master</code>
+                      puis en poussant à nouveau.
+                    </p>
 
-    <p class="nutshell">
-    <b>In a nutshell</b> you run <code>git push [alias] [branch]</code> to update a
-    remote repository with the changes you've made locally.  It will take what your
-    [branch] looks like and push it to be [branch] on the remote, if possible.  If
-    someone else has pushed since you last fetched and merged, the Git server will
-    deny your push until you are up to date.
-    </p>
+                    <p class="nutshell">
+                      <b>Pour résumer</b>, vous exécutez <code>git push [alias] [branche]</code> pour actualiser
+                      une branche distante avec vos modifications locales. Cela va prendre le contenu de
+                      votre [branche] et le pousser pour en faire la [branche] sur le dépôt distant, si possible.
+                      Si quelqu'un a poussé depuis la dernière fois que vous avez récupéré et mis à jour,
+                      le serveur Git va refuser que vous poussiez tant que vous n'êtes pas à jour.
+                    </p>
 
-  </div>
-</div>
+                  </div>
+                </div>
 
-<p><a class="page-button next-page" href="/inspect">On to Inspection and Comparison &#187;</a></p>
+                <p><a class="page-button next-page" href="/fr/inspect">Aller à Inspection et Comparaison &#187;</a></p>
