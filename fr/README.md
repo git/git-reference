@@ -15,4 +15,4 @@ participation est la bienvenue.
 
 Les traductions choisies pour les termes spécifiques à Git se basent sur
 [les références](https://github.com/progit/progit2-fr#références-pour-la-traduction)
-de l'effort de traduction en français de la deuxième édition du livre Progit.
+de l'effort de traduction en français de la deuxième édition du livre Pro Git.
