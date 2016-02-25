@@ -7,7 +7,7 @@ layout: fr_reference
     <span class="docs">
       <a target="new" href="http://git-scm.com/book/fr/Les-bases-de-Git-Travailler-avec-des-d%C3%A9p%C3%B4ts-distants">livre</a>
     </span>
-    Partager et actualiser des projets
+    Partage et Mise à Jour de Projets
   </h2>
   <div class="block">
     <p>
@@ -16,9 +16,9 @@ layout: fr_reference
       de données locale. Pour collaborer avec d'autres développeurs sous Git,
       vous devez mettre toutes ces données sur un serveur auquel les autres
       ont accès. Git rend cela possible en synchronisant vos données avec un
-      autre dépôt. Il n'y a pas de réelle différence entre un serveur et un client
-      - un dépôt Git est un dépôt Git et vous pouvez les synchroniser indifféremment
-      entre eux facilement.
+      autre dépôt. Il n'y a pas de réelle différence entre un serveur et un
+      client—un dépôt Git est un dépôt Git et vous pouvez les synchroniser
+      indifféremment entre eux facilement.
     </p>
 
     <p>Dès que vous avez un dépôt Git, que ce soit un que vous hébergez sur votre
@@ -49,7 +49,7 @@ layout: fr_reference
       <a target="new" href="http://git-scm.com/book/fr/Les-bases-de-Git-Travailler-avec-des-d%C3%A9p%C3%B4ts-distants#Afficher-les-dépôts-distants">livre</a>
     </span>
     <a name="remote">git remote</a>
-    <span class="desc">lister, ajouter et supprimer les alias de dépôts distants</span>
+    <span class="desc">liste, ajoute et supprime les alias de dépôts distants</span>
   </h2>
 
   <div class="block">
@@ -57,7 +57,7 @@ layout: fr_reference
     <p>Contrairement aux systèmes de gestion de versions centralisés qui ont un client
       qui est très différent du serveur, les dépôts Git sont tout simplement équivalents
       et vous les synchronisez simplement entre eux. Cela simplifie la possibilité
-      d'avoir plus d'un dépôt distant - vous pouvez en avoir certains en lecture seule
+      d'avoir plus d'un dépôt distant—vous pouvez en avoir certains en lecture seule
       ainsi que d'autres accessibles en écriture.</p>
 
     <p>Afin de ne pas avoir à donner l'URL complète d'un dépôt distant à chaque
@@ -68,13 +68,13 @@ layout: fr_reference
 
     <h4 id="remote-list">
       git remote
-      <small>lister vos alias distants</small>
+      <small>liste vos alias distants</small>
     </h4>
 
     <p>Sans argument, Git va simplement vous afficher les alias de dépôt distants
       qu'ils stockent. Par défaut, si vous avez cloné le projet (par opposition
       à en créer un nouveau localement), Git va automatiquement ajouter l'URL
-      de ce dépôt source que vous avez cloné sous le nom 'origin'. SI vous exécutez
+      de ce dépôt source que vous avez cloné sous le nom « origin ». SI vous exécutez
       la commande avec l'option <code>-v</code>, vous pouvez voir
       l'URL réelle de chaque alias.</p>
 
@@ -93,11 +93,11 @@ origin	git@github.com:github/git-reference.git (push)
 
       <h4 id="remote-add">
         git remote add
-        <small>ajouter un nouveau dépôt distant à votre projet</small>
+        <small>ajoute un nouveau dépôt distant à votre projet</small>
       </h4>
 
       <p>Si vous voulez partager un dépôt créé localement, ou vous voulez
-        récupérer les contributions depuis le dépôt d'un tiers - si vous voulez
+        récupérer les contributions depuis le dépôt d'un tiers—si vous voulez
         interagir de n'importe quelle manière avec un nouveau dépôt, le plus simple
         est généralement de l'ajouter comme dépôt distant. Vous faites cela en
         exécutant <code>git remote add [alias] [url]</code>. Cela ajoute
@@ -107,9 +107,9 @@ origin	git@github.com:github/git-reference.git (push)
       <p>Par exemple, si nous voulons partager notre programme Hello World avec
         le reste du monde, nous pouvons créer un nouveau dépôt sur un serveur
         (utilisons Github comme exemple), vous devriez obtenir une URL,
-        dans notre cas "git@github.com:schacon/hw.git". Pour l'ajouter à notre
+        dans notre cas « git@github.com:schacon/hw.git ». Pour l'ajouter à notre
         projet afin de pouvoir y pousser et récupérer des mises à jour depuis celui-ci
-        nous ferions:</p>
+        nous ferions :</p>
 
 <pre>
 <b>$ git remote</b>
@@ -120,21 +120,21 @@ github	git@github.com:schacon/hw.git (push)
 </pre>
 
         <p>Tout comme la dénomination des branches, le nommage des alias de dépôts
-          distants est arbitraire - tout comme 'master' n'a aucune signification spéciale
+          distants est arbitraire—tout comme « master » n'a aucune signification spéciale
           mais est très largement utilisé car <code>git init</code> le configure par défaut,
-          'origin' est souvent utilisé comme nom de dépôt distant car
+          « origin » est souvent utilisé comme nom de dépôt distant car
           <code>git clone</code> le configure par défaut comme URL source de clonage. Dans
-          notre cas nous allons appeler ce dépôt distant 'github', mais vous pourriez le
+          notre cas nous allons appeler ce dépôt distant « github », mais vous pourriez le
           nommer comme bon vous semblerait.
         </p>
 
         <h4 id="remote-remove">
           git remote rm
-          <small>enlever un alias existant de dépôt distant</small>
+          <small>enlève un alias existant de dépôt distant</small>
         </h4>
 
-        <p>Si vous avez besoin d'enlever un dépôt distant - vous ne l'utilisez plus, le projet
-          n'existe plus, etc - vous pouvez l'enlever avec <code>git remote rm [alias]</code>.</p>
+        <p>Si vous avez besoin d'enlever un dépôt distant—vous ne l'utilisez plus, le projet
+          n'existe plus, etc—vous pouvez l'enlever avec <code>git remote rm [alias]</code>.</p>
 
 <pre>
 <b>$ git remote -v</b>
@@ -154,7 +154,7 @@ github	git@github.com:schacon/hw.git (push)
 
           <h4 id="remote-rename">
             git remote rename [ancien-alias] [nouvel-alias]
-            <small>renommer des alias de dépôt distant</small>
+            <small>renomme des alias de dépôt distant</small>
           </h4>
 
           <p>Si vous voulez renommer des alias de dépôt distant sans avoir à les supprimer puis les
@@ -183,7 +183,7 @@ origin	git@github.com:schacon/hw.git (push)
 
             <h4 id="remote-update">
               git remote set-url
-              <small>actualiser une URL distante existante</small>
+              <small>actualise une URL distante existante</small>
             </h4>
 
             <p>Si vous aviez besoin d'actualiser l'URL d'un dépôt distant, vous
@@ -268,7 +268,7 @@ fatal: No such remote 'guhflub'
               <a target="new" href="http://git-scm.com/book/fr/Les-bases-de-Git-Travailler-avec-des-d%C3%A9p%C3%B4ts-distants#Récupérer-et-tirer-depuis-des-dépôts-distants">livre</a>
             </span>
             <a name="fetch">git fetch</a>
-            <span class="desc">récupérer de nouvelles branches et données depuis un dépôt distant</span>
+            <span class="desc">récupère de nouvelles branches et données depuis un dépôt distant</span>
           </h2>
 
           <br/>
@@ -279,7 +279,7 @@ fatal: No such remote 'guhflub'
               <a target="new" href="http://git-scm.com/book/fr/Les-bases-de-Git-Travailler-avec-des-d%C3%A9p%C3%B4ts-distants#Récupérer-et-tirer-depuis-des-dépôts-distants">livre</a>
             </span>
             <a name="pull">git pull</a>
-            <span class="desc">récupérer depuis un dépôt distant et essaye de fusionner dans la branche courante</span>
+            <span class="desc">récupère depuis un dépôt distant et essaye de fusionner dans la branche courante</span>
           </h2>
 
           <div class="block">
@@ -288,8 +288,8 @@ fatal: No such remote 'guhflub'
               <code>git fetch</code> va vous synchroniser avec un autre dépôt, récupérant
               en local tout donnée non présente en local et vous donnant des marqueurs sur où
               chaque branche sur ce dépôt distant en était au momemt de la synchronisation.
-              Celles-ci sont appelées "branches distantes" et sont identiques aux branches locales
-              mis à part que Git ne vous autorisera pas de les extraire - par contre, vous pouvez
+              Celles-ci sont appelées « branches distantes » et sont identiques aux branches locales
+              mis à part que Git ne vous autorisera pas de les extraire—par contre, vous pouvez
               fusionner avec, les comparer à d'autres branches, exécuter des journaux d'historique
               dessus, etc. Vous faites toutes ces opérations en local une fois votre synchronisation
               faite.
@@ -312,7 +312,7 @@ fatal: No such remote 'guhflub'
               branche courante tout ce qu'il y de nouveau sur le serveur (par exemple si quelqu'un
               a poussé entretemps). Au final, si vous travailliez sur un projet Hello World avec
               plusieurs autres personnes et que vous vouliez récupérer toutes modifications qui
-              ont été poussées depuis votre dernière connexion, vous feriez quelque chose comme:</p>
+              ont été poussées depuis votre dernière connexion, vous feriez quelque chose comme :</p>
 
 <pre>
 <b>$ git fetch github</b>
@@ -331,18 +331,18 @@ From github.com:schacon/hw
 
               <p>Dans cet exemple nous pouvons voir que depuis notre dernière synchronisation
                 avec le dépôt distant, cinq branches ont été créées ou mises à jour. Les
-                branches 'ada' et 'lisp' sont nouvelles, alors que les branches 'master', 'c-langs'
-                et 'java' ont été actualisées. Dans notre scénario exemple, les autres développeurs
-                poussent leurs modifications dans des branches distantes pour revue avant d'être
-                fusionnées dans 'master'.
+                branches « ada » et « lisp » sont nouvelles, alors que les branches « master »,
+                « c-langs » et « java » ont été actualisées. Dans notre scénario exemple,
+                les autres développeurs poussent leurs modifications dans des branches distantes
+                pour revue avant d'être fusionnées dans « master ».
               </p>
 
-              <p>Vous pouvez observer ce que Git met en place. La branche 'master' sur le dépôt
-                distant devient une branche appelée 'github/master' en local. De cette manière
-                vous pouvez fusionner la branche 'master' de ce dépôt distant dans la branche locale
-                'master' en exécutant <code>git merge github/master</code>. Ou vous pouvez voir
+              <p>Vous pouvez observer ce que Git met en place. La branche « master » sur le dépôt
+                distant devient une branche appelée « github/master » en local. De cette manière
+                vous pouvez fusionner la branche « master » de ce dépôt distant dans la branche locale
+                « master » en exécutant <code>git merge github/master</code>. Ou vous pouvez voir
                 quelles sont les nouvelles validations en exécutant <code>git log github/master ^master</code>.
-                Si votre dépôt distant est nommé 'origin' il sera plutôt nommé <code>origin/master</code>.
+                Si votre dépôt distant est nommé « origin » il sera plutôt nommé <code>origin/master</code>.
                 Quasiment tout commande utilisable sur les branches locales est utilisable également
                 sur les branches distantes.
               </p>
@@ -370,7 +370,7 @@ From github.com:schacon/hw
                 <a target="new" href="http://git-scm.com/book/fr/Les-bases-de-Git-Travailler-avec-des-d%C3%A9p%C3%B4ts-distants#Pousser-son-travail-sur-un-dépôt-distant">livre</a>
               </span>
               <a name="push">git push</a>
-              <span class="desc">pousser vos nouvelles branches et données vers un dépôt distant</span>
+              <span class="desc">pousse vos nouvelles branches et données vers un dépôt distant</span>
             </h2>
 
             <div class="block">
@@ -378,7 +378,7 @@ From github.com:schacon/hw
                 vos modifications vers un dépôt distant. Pour cela, vous exécutez
                 <code>git push [alias] [branche]</code>  qui va tenter de faire de votre [branche]
                 une nouvelle [branche] sur le dépôt distant [alias]. Essayons de le faire en commençant
-                par pousser notre branche 'master' vers le dépôt distant 'github' créé précédemment.</p>
+                par pousser notre branche « master » vers le dépôt distant « github » créé précédemment.</p>
 
 <pre>
 <b>$ git push github master</b>
@@ -394,8 +394,8 @@ To git@github.com:schacon/hw.git
                 <p>Plutôt simple. Désormais si quelqu'un clone ce dépôt il va obtenir exactement
                   toutes ses validations et tout son historique.</p>
 
-                <p>Comment faire si vous avez une branche spécifique comme la branche 'erlang'
-                  créée précédemment et que vous vouliez just partager celle-ci? Vous pouvez
+                <p>Comment faire si vous avez une branche spécifique comme la branche « erlang »
+                  créée précédemment et que vous vouliez just partager celle-ci ? Vous pouvez
                   uniquement pousser cette branche à la place.</p>
 
 <pre>
@@ -410,7 +410,7 @@ To git@github.com:schacon/hw.git
 </pre>
 
                   <p>Désormais quand quelqu'un clonera ou récupérera depuis ce dépôt, elle aura
-                    une branche 'erlang' qu'elle pourra étudier et fusionner. Vous pouvez pousser
+                    une branche « erlang » qu'elle pourra étudier et fusionner. Vous pouvez pousser
                     toute branche de cette manière vers n'importe quel dépôt distant auquel
                     vous avez accès en écriture. Si votre branche est déjà sur le serveur,
                     Git tentera de la mettre à jour, si elle n'est pas présente, Git l'ajoutera.</p>
@@ -425,11 +425,11 @@ To git@github.com:schacon/hw.git
                     de la branche du serveur dans l'historique de ce que vous poussez. S'il ne
                     peut voir ce qu'il trouve sur le serveur dans votre historique, il en conclut
                     que vous n'êtes pas à jour et ne va pas accepter que vous poussiez. Pour bien
-                    faire, vous devriez récupérer, fusionner puis pousser à nouveau - pour être sûr
+                    faire, vous devriez récupérer, fusionner puis pousser à nouveau—pour être sûr
                     de prendre ses modifications en compte.</p>
 
                   <p>Voici ce qui arrive lorsque vous essayez de pousser une branche vers une branche
-                    distante qui a été mise à jour en même temps:</p>
+                    distante qui a été mise à jour en même temps :</p>
 
 <pre>
 <b>$ git push github master</b>

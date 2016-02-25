@@ -7,7 +7,7 @@ layout: fr_reference
     <span class="docs">
       <a target="new" href="http://git-scm.com/book/fr/Les-branches-avec-Git">livre</a>
     </span>
-    Branches et Fusions
+    Création de Branches et Fusion
   </h2>
   <div class="block">
     <p>Les branches sont une des nombreuses fonctionnalités intéressantes de Git.
@@ -43,7 +43,7 @@ layout: fr_reference
       <a target="new" href="http://git-scm.com/book/fr/Les-branches-avec-Git-Ce-qu-est-une-branche">livre</a>
     </span>
     <a name="branch">git branch</a>
-    <span class="desc">lister, créer et gérer les contextes de travail</span>
+    <span class="desc">liste, crée et gére les contextes de travail</span>
   </h2>
 
   <br/>
@@ -54,20 +54,20 @@ layout: fr_reference
       <a target="new" href="http://git-scm.com/book/fr/Les-branches-avec-Git-Brancher-et-fusionner%C2%A0%3A-les-bases">livre</a>
     </span>
     <a name="checkout">git checkout</a>
-    <span class="desc">basculer vers un nouveau contexte de branche</span>
+    <span class="desc">bascule vers un nouveau contexte de branche</span>
   </h2>
 
   <div class="block">
     <p>La commande <code>git branch</code> est un outil de gestion général des branches
       de Git et peut faire de nombreuses choses différentes. Nous allons aborder
-      celles de base que vous utiliserez le plus souvent - lister les branches, créer
+      celles de base que vous utiliserez le plus souvent—lister les branches, créer
       des branches et supprimer des branches. Nous allons aussi aborder
       <code>git checkout</code> ici qui vous permet de basculer entre branches.
     </p>
 
     <h4 id="branch-list">
       git branch
-      <small>lister vos branches disponibles</small>
+      <small>liste vos branches disponibles</small>
     </h4>
 
     <p>Sans argument, <code>git branch</code> va lister vos branches locales.
@@ -82,16 +82,16 @@ $ git branch
 * <span class="green">master</span>
 </pre>
 
-    <p>Cela signifie que nous avons une branche 'master' et que nous sommes sur
+    <p>Cela signifie que nous avons une branche « master » et que nous sommes sur
       celle-ci. Quand vous exécutez <code>git init</code> cela va automatiquement
-      créer une branche 'master' pour vous par défaut, néanmoins il n'y a rien
-      de particulier dans ce nom - vous n'avez pas en fait à avoir de branche 'master'
+      créer une branche « master » pour vous par défaut, néanmoins il n'y a rien
+      de particulier dans ce nom—vous n'avez pas en fait à avoir de branche « master »
       mais étant donné qu'elle est créée par défaut, la plupart des projets en ont une.
     </p>
 
     <h4 id="branch-create">
       git branch (nombranche)
-      <small>créer une nouvelle branche</small>
+      <small>crée une nouvelle branche</small>
     </h4>
 
     <p>Commençons par créer une nouvelle branche puis basculons vers celle-ci.
@@ -107,10 +107,10 @@ $ git branch
 
     <p>Vous pouvez voir que nous avons une nouvelle branche. Quand vous créez une
       branche de cette manière cela crée la branche basée sur votre dernière validation
-      donc si à ce stade vous créez des validations puis basculez vers 'testing',
+      donc si à ce stade vous créez des validations puis basculez vers « testing »,
       vous rétablirez le contexte de votre dossier de travail à celui où il était
-      lorsque la branche a été créée initialement - Vous pouvez penser à cela comme
-      un signet qui indique où vous en êtes. Voyons cela en action - nous utilisons
+      lorsque la branche a été créée initialement—Vous pouvez penser à cela comme
+      un signet qui indique où vous en êtes. Voyons cela en action—nous utilisons
       <code>git checkout (branche)</code> pour changer de branche courante.
     </p>
 
@@ -133,9 +133,9 @@ Switched to branch 'testing'
 README   hello.rb
 </pre>
 
-    <p>Nous voyons que lorsque nous basculons vers la branche 'testing',
+    <p>Nous voyons que lorsque nous basculons vers la branche « testing »,
       nos nouveaux fichiers ont disparu. Nous pouvons retourner vers la
-      branche 'master' et les voir ré-apparaître.</p>
+      branche « master » et les voir ré-apparaître.</p>
 
 <pre>
 <b>$ ls</b>
@@ -148,7 +148,7 @@ README   hello.rb more.txt test.txt
 
       <h4 id="branch-last-commit">
         git branch -v
-        <small>voir la dernière validation de chaque branche</small>
+        <small>affiche la dernière validation de chaque branche</small>
       </h4>
 
       <p>Si nous voulons voir les dernières validations de chaque branche
@@ -163,17 +163,17 @@ README   hello.rb more.txt test.txt
 
         <h4 id="branch-create-switch">
           git checkout -b (nombranche)
-          <small>créer et basculer immédiatement vers une branche</small>
+          <small>crée et bascule immédiatement vers une branche</small>
         </h4>
 
         <p>
           Dans la plupart des cas vous voudrez basculer vers la branche immédiatement,
           afin de pouvoir y travailler puis fusionner dans une branche qui contient
-          seulement du travail stable (comme 'master') plus tard lorsque le travail
+          seulement du travail stable (comme « master ») plus tard lorsque le travail
           dans votre nouveau contexte de branche sera stable. Vous pouvez faire cela
           relativement facilement avec
           <code>git branch nouvellebranche; git checkout nouvellebranche</code>,
-          mais Git a un raccourci pour cela: <code>git checkout -b nouvellebranche</code>.
+          mais Git a un raccourci pour cela : <code>git checkout -b nouvellebranche</code>.
         </p>
 
 <pre>
@@ -216,10 +216,10 @@ README   hello.rb more.txt test.txt
 
         <h4 id="branch-delete">
           git branch -d (nombranche)
-          <small>supprimer une branche</small>
+          <small>supprime une branche</small>
         </h4>
 
-        <p>Si nous voulons supprimer une branche (comme la branche 'testing' de
+        <p>Si nous voulons supprimer une branche (comme la branche « testing » de
           l'exemple précédent vu qu'il n'y a aucun travail particulier sur celle-ci),
           nous pouvons exécuter <code>git branch -d (branche)</code> pour la supprimer.</p>
 
@@ -235,13 +235,13 @@ Deleted branch testing (was 78b2670).
 
           <h4 id="branch-delete-remote">
             git push (nom-distant) :(nombranche)
-            <small>supprimer une branche distante</small>
+            <small>supprime une branche distante</small>
           </h4>
 
           <p>Quand vous en avez fini avec une branche distante, qu'elle ait
             été fusionnée dans le dépôt distant ou que vous vouliez l'abandonner
             et la cacher des regards, vous exécuterez la commande <code>git push</code>
-            avec un symbôle deux-points savamment placé pour supprimer la branche:</p>
+            avec un symbôle deux-points savamment placé pour supprimer la branche :</p>
 
 <pre>
 <b>$ git push origin :tidy-cutlery</b>
@@ -249,8 +249,8 @@ To git@github.com:octocat/Spoon-Knife.git
  - [deleted]         tidy-cutlery
 </pre>
 
-            <p>Dans l'exemple ci-dessus vous avez supprimé la branche "tidy-cutlery"
-              du dépôt distant "origin". Un moyen de se souvenir de cette syntaxe est
+            <p>Dans l'exemple ci-dessus vous avez supprimé la branche « tidy-cutlery »
+              du dépôt distant « origin ». Un moyen de se souvenir de cette syntaxe est
               de penser à celle de
               <code>git push nom-distant branche-locale:branche-distante</code>.
               Cela signifie que vous désirez pousser votre branche locale pour
@@ -282,7 +282,7 @@ To git@github.com:octocat/Spoon-Knife.git
               <a target="new" href="http://git-scm.com/book/fr/Les-branches-avec-Git-Brancher-et-fusionner%C2%A0:-les-bases#Les-bases-de-la-fusion">livre</a>
             </span>
             <a name="merge">git merge</a>
-            <span class="desc">fusionner le contexte d'une branche dans votre contexte courant</span>
+            <span class="desc">fusionne le contexte d'une branche dans votre contexte courant</span>
           </h2>
 
           <div class="block">
@@ -290,11 +290,11 @@ To git@github.com:octocat/Spoon-Knife.git
               l'incorporer dans votre branche principale. Vous pouvez fusionner
               toute branche dans votre branche courante avec la commande
               <code>git merge</code>.  Prenons comme exemple simple la branche
-              'removals' précédente.  Si nous créons une branche et supprimons les fichiers
+              « removals » précédente.  Si nous créons une branche et supprimons les fichiers
               qui s'y trouvent puis que nous validons ces suppressions dans cette branche,
-              cela est isolé de notre branche principale ('master', dans notre cas). Pour
-              inclure ces suppressions dans notre branche 'master', vous pouvez simplement
-              fusionner la branche 'removals'.
+              cela est isolé de notre branche principale (« master », dans notre cas). Pour
+              inclure ces suppressions dans notre branche « master », vous pouvez simplement
+              fusionner la branche « removals ».
             </p>
 
 <pre>
@@ -324,7 +324,7 @@ Fast-forward
               En fait, il est même très bon pour ça. Par exemple, voyons ce qu'il arrive
               quand on édite un fichier dans une branche et dans une autre branche
               nous le renommons et puis l'éditons et enfin nous fusionnons ensemble
-              ces branches. Chaos, vous avez dit? Voyons cela.
+              ces branches. Chaos, vous avez dit ? Voyons cela.
             </p>
 
 <pre>
@@ -341,9 +341,9 @@ HelloWorld.hello
 </pre>
 
             <p>Nous allons donc commencer par créer une nouvelle branche nommée
-              'change_class' basculer vers celle-ci afin que vos modifications
+              « change_class » basculer vers celle-ci afin que vos modifications
               de renommage de classe soient isolées. Nous allons changer chaque
-              instance de 'HelloWorld' en 'HiWorld'.</p>
+              instance de « HelloWorld » en « HiWorld ».</p>
 
 <pre>
 <b>$ git checkout -b change_class</b>
@@ -357,7 +357,7 @@ class HiWorld
 </pre>
 
               <p>Nous avons alors validé les changements de nom de la classe dans
-                une branche 'change_class'. En retournant vers la branche 'master'
+                une branche « change_class ». En retournant vers la branche « master »
                 le nom de la classe sera ré-initialisé à ce à quoi il était avant
                 que nous changions de branche. Ici nous pouvons modifier quelque chose
                 de différent (dans ce cas la sortie affichée) et en même temps
@@ -389,11 +389,11 @@ index 2aabb6e..bf64b17 100644
  rename hello.rb => ruby.rb (65%)
 </pre>
 
-              <p>Désormais ces modifications sont sauvées dans la branche 'master'. Notez
-                que le nom de la classe est de nouveau 'HelloWorld', et non 'HiWorld'.
-                Pou incorporer le changement 'HiWorld' nous pouvons juste fusionner
-                la branche 'change_class'. Néanmoins, le nom du fichier a changé depuis
-                que nous avons changé de branche, que va faire Git?</p>
+              <p>Désormais ces modifications sont sauvées dans la branche « master ». Notez
+                que le nom de la classe est de nouveau « HelloWorld », et non « HiWorld ».
+                Pou incorporer le changement « HiWorld » nous pouvons juste fusionner
+                la branche « change_class ». Néanmoins, le nom du fichier a changé depuis
+                que nous avons changé de branche, que va faire Git ?</p>
 
 <pre>
 <b>$ git branch</b>
@@ -417,14 +417,14 @@ HiWorld.hello
 
                 <p>Et bien, il va simplement s'en rendre compte. Notez qu'il n'y a aucun conflit de
                   fusion et que le fichier qui a été renommé a maintenant le changement de nom
-                  de de classe 'HiWorld' qui a été fait dans l'autre branche. Plutôt cool.</p>
+                  de de classe « HiWorld » qui a été fait dans l'autre branche. Plutôt cool.</p>
 
                 <h4 id="merge-conflicts">
-                  merge conflicts
+                  conflits de fusion
                 </h4>
 
                 <p>Donc, les fusions Git relèvent de la magie, nous n'avons jamais à traiter
-                  des conflits de fusion? Pas tout à fait. Dans des situations où
+                  des conflits de fusion ? Pas tout à fait. Dans des situations où
                   un même bloc de code est édité dans différentes branches il n'y a aucun moyen
                   pour un ordinateur de s'y retrouver, alors c'est à nous de nous débrouiller.
                   Voyons un autre exemple de changement d'une même ligne dans deux branches.
@@ -443,7 +443,7 @@ Switched to a new branch 'fix_readme'
 
                 <p>Maintenant nous avons validé un changement d'une ligne dans notre
                   fichier README dans une branche. Maintenant changeons la même ligne
-                  d'une manière différente depuis notre branche 'master'.</p>
+                  d'une manière différente depuis notre branche « master ».</p>
 
 <pre>
 <b>$ git checkout master</b>
@@ -454,8 +454,8 @@ Switched to branch 'master'
  1 files changed, 1 insertions(+), 1 deletions(-)
 </pre>
 
-                  <p>C'est maintenant le plus rigolo - nous allons fusionner la première
-                    branche dans notre branche 'master', provoquant un conflit de fusion.</p>
+                  <p>C'est maintenant le plus rigolo—nous allons fusionner la première
+                    branche dans notre branche « master », provoquant un conflit de fusion.</p>
 
 <pre>
 <b>$ git merge fix_readme</b>
@@ -501,7 +501,7 @@ index 9103e27,69cad1a..0000000
                       vous exécutez <code>git diff</code>, cela va vous montrer chaque côté
                       du conflit et comment vous l'avez résolu comme affiché ici. Maintenant
                       il est l'heure de marquer notre fichier comme résolu. Avec Git on le fait
-                      avec <code>git add</code> - pour dire à Git que le fichier a été résolu
+                      avec <code>git add</code>—pour dire à Git que le fichier a été résolu
                       vous devez le mettre en attente.</p>
 
 <pre>
@@ -534,15 +534,15 @@ M  README
                         <a target="new" href="http://git-scm.com/book/fr/Utilitaires-Git-S%C3%A9lection-des-versions#Plages-de-<em>commits</em>">livre</a>
                       </span>
                       <a name="log">git log</a>
-                      <span class="desc">afficher l'historique des validations d'une branche</span>
+                      <span class="desc">affiche l'historique des validations d'une branche</span>
                     </h2>
 
                     <div class="block">
 
                       <p>Jusqu'à présent nous avons validé des instantanés de votre projet et basculé
                         entre différents contextes isolés, mais comment faire si nous avons oublié
-                        comment nous en sommes arrivés à un certain point? Ou si nous voulons
-                        savoir à quel point une branche diffère d'une autre? Git fournit un outil
+                        comment nous en sommes arrivés à un certain point ? Ou si nous voulons
+                        savoir à quel point une branche diffère d'une autre ? Git fournit un outil
                         qui affiche tous les messages de validations qui vous ont amené jusqu'à
                         votre instantané courant, appelé <code>git log</code>.</p>
 
@@ -553,12 +553,12 @@ M  README
                         de la validation, Git stocke également la validation sur laquelle vous avez
                         basé votre instantané. C'est-à-dire que, si vous clonez un projet, quel
                         est l'instantané que vous avez modifié pour obtenir l'instantané que vous
-                        enregistrez? C'est utile pour connaître le contexte dans quelle mesure
+                        enregistrez ? C'est utile pour connaître le contexte dans quelle mesure
                         le projet est arrivé à cet état et permet à Git de savoir qui a changé quoi.
                         Si Git a l'instantané que vous avez sauvegardé et celui sur lequel vous vous
                         êtes basé, alors il peut automatiquement savoir ce que vous avez changé.
                         La validation sur laquelle une autre validation est basée est appelée le
-                        "parent".
+                        « parent ».
                       </p>
 
                       <p>Pour voir une liste chronologique des parents de n'importe quelle branche,
@@ -622,7 +622,7 @@ b7ae93b added from ruby
 
                         <p>Nous pouvons aussi l'utiliser pour voir quand l'historique a connu des
                           branches ou fusions avec l'option très utile <code>--graph</code>.
-                          Voici la même commande mais avec le graphe de topologie activé:</p>
+                          Voici la même commande mais avec le graphe de topologie activé :</p>
 
 <pre>
 <b>$ git log --oneline --graph</b>
@@ -648,7 +648,7 @@ b7ae93b added from ruby
                             nous aider à savoir ce qui se passe sur chacune d'elle.</p>
 
                           <p>D'abord nous allons créer une nouvelle branche pour ajouter le langage
-                            Erlang comme exemple Hello World - nous désirons le faire dans une branche
+                            Erlang comme exemple Hello World—nous désirons le faire dans une branche
                             afin de ne pas casser notre branche stable avec du code qui peut ne pas
                             fonctionner pendant un certain temps pour pouvoir basculer proprement
                             depuis ou vers cette branche.</p>
@@ -667,7 +667,7 @@ Switched to a new branch 'erlang'
                             <p>Étant donné que nous nous amusons beaucoup avec les langages de
                               programmation fonctionnelle nous restons dans notre lancée et ajoutons
                               également un programme exemple Haskell alors que nous sommes toujours
-                              dans la branche 'erlang'.</p>
+                              dans la branche « erlang ».</p>
 
 <pre>
 <b>$ vim haskell.hs</b>
@@ -681,7 +681,7 @@ Switched to a new branch 'erlang'
                               <p>Enfin, nous décidons de remettre le nom de classe de notre programme Ruby
                                 à ce qu'il était précédemment. Alors, nous pouvons retourner à la branche
                                 master, le changer et décider de le valider directement dans la branche
-                                master au lieu de créer une autre bracnhe.</p>
+                                master au lieu de créer une autre branche.</p>
 
 <pre>
 <b>$ git checkout master</b>
@@ -696,12 +696,12 @@ README  ruby.rb
 
                                 <p>Alors, maintenant imaginons que nous ne travaillons pas sur le projet
                                   pendant quelques temps, nous avons autre chose à faire. Quand nous
-                                  y revenons nous voulons en savoir plus sur la branche 'erlang' et
+                                  y revenons nous voulons en savoir plus sur la branche « erlang » et
                                   où nous nous en sommes arrêtés sur  la branche master. Juste en regardant
                                   le nom de la branche, nous ne pouvons savoir que nous avons fait des modifications
                                   en Haskell dans celle-ci, mais en utilisant <code>git log</code> nous pouvons
                                   facilement le savoir. Si vous donnez à Git un nom de branche, cela va vous afficher
-                                  uniquement les validations qui sont "accessibles" dans l'historique de cette
+                                  uniquement les validations qui sont « accessibles » dans l'historique de cette
                                   branche, c'est-à-dire les validations qui ont influencé l'instantané
                                   final.</p>
 
@@ -727,12 +727,12 @@ b7ae93b added from ruby
                                   </p>
 
                                   <p>
-                                    Dans ce cas si nous sommes intéressés par la fusion de la branche 'erlang'
+                                    Dans ce cas si nous sommes intéressés par la fusion de la branche « erlang »
                                     nous voulons savoir quelles validations vont affecter notre instantané
                                     quand nous allons fusionner. Pour dire à Git de le faire on utilise
                                     un <code>^</code> devant la branche que nous ne voulons voir. Par exemple,
-                                    si nous voulons voir les validations qui sont dans la branche 'erlang'
-                                    qui ne sont pas dans la branche 'master', on peut exécuter
+                                    si nous voulons voir les validations qui sont dans la branche « erlang »
+                                    qui ne sont pas dans la branche « master », on peut exécuter
                                     <code>erlang ^master</code>, et vice-versa. Notez que la ligne de
                                     commande Windows traite <code>^</code> comme un caractère spécial,
                                     dans ce cas vous devrez mettre <code>^master</code> entre guillemets.
@@ -770,7 +770,7 @@ ab5ab4c added erlang
                                     <a target="new" href="http://git-scm.com/book/fr/Les-bases-de-Git-%C3%89tiquetage">livre</a>
                                   </span>
                                   <a name="tag">git tag</a>
-                                  <span class="desc">étiqueter un moment dans l'historique comme important</span>
+                                  <span class="desc">étiquette un moment dans l'historique comme important</span>
                                 </h2>
 
                                 <div class="block">
@@ -786,9 +786,9 @@ ab5ab4c added erlang
                                   </p>
 
                                   <p>Disons que vous vouliez publier notre projet Hello World en tant
-                                    que version "1.0". Nous pouvons étiqueter la dernière validation
-                                    (<code>HEAD</code>) comme "v1.0" en exécutant <code>git tag -a v1.0</code>.
-                                    Le <code>-a</code> signifie "fait une étiquette annotée", qui permet
+                                    que version « 1.0 ». Nous pouvons étiqueter la dernière validation
+                                    (<code>HEAD</code>) comme « v1.0 » en exécutant <code>git tag -a v1.0</code>.
+                                    Le <code>-a</code> signifie « fait une étiquette annotée », qui permet
                                     de lui ajouter un message d'étiquette, ce que vous voudrez quasiment
                                     toujours faire. L'exécuter sans le <code>-a</code> fonctionne aussi,
                                     mais cela n'enregistre pas quand cela a été étiqueté, qui l'a étiqueté,
@@ -833,7 +833,7 @@ ab5ab4c added erlang
                                         commande, mais avec le SHA de la validation à la fin. Par exemple, disons
                                         que nous avons publié la validation <code>558151a</code> (de plusieurs
                                         validations en arrière) mais avons oublié de l'étiqueter à ce moment-là.
-                                        Nous pouvons l'étiqueter maintenant:</p>
+                                        Nous pouvons l'étiqueter maintenant :</p>
 
 <pre>
 <b>$ git tag -a v0.9 558151a</b>
@@ -893,5 +893,5 @@ From git://github.com:example-user/example-repo
                                       </div>
                                     </div>
 
-                                    <p><a class="page-button next-page" href="/fr/remotes">Aller à Partager et Actualiser des Projets &#187;</a></p>
+                                    <p><a class="page-button next-page" href="/fr/remotes">Aller à Partage et Mise à Jour de Projets &#187;</a></p>
 

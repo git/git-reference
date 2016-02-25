@@ -30,19 +30,20 @@ layout: fr_reference
   <div class="block">
     <p>
       La première chose à comprendre sur Git est qu'il
-      gère les révisions d'une manière totalement différente
+      gère les versions d'une manière totalement différente
       de Subversion ou Perforce ou tout autre gestionnaire de code source
       auquel vous pourriez être habitué. Il est souvent plus simple
       d'apprendre Git en essayant d'oublier toute assertion sur
-      le fonctionnement de la gestion de révisions et d'essayer d'y penser
+      le fonctionnement de la gestion de versions et d'essayer d'y penser
       à la Git.
     </p>
 
     <p>
       Partons de zéro. Imaginons que vous conceviez un nouveau système de gestion
-      de code source. Comment géreriez-vous simplement des révisions avant d'utiliser
-      un outil dédié? Il y a de fortes chances pour que vous ayez fait de simples
-      copies du répertoire de votre projet pour sauvegarder son état à ce moment-là.
+      de code source. Comment gériez-vous simplement différentes versions
+      avant d'utiliser un outil dédié à ça ? Il y a de fortes chances pour que vous ayez
+      fait de simples copies du répertoire de votre projet pour sauvegarder
+      son état à ce moment-là.
     </p>
 
     <pre> $ cp -R project project.bak </pre>
@@ -56,7 +57,7 @@ layout: fr_reference
 
     <p>
       Si vous êtes réellement paranoïaque, vous le ferez peut-être souvent,
-      et vous inclurez la date dans le nom de la sauvegarde:
+      et vous inclurez la date dans le nom de la sauvegarde :
     </p>
 
     <pre> $ cp -R project project.2010-06-01.bak </pre>
@@ -90,7 +91,7 @@ layout: fr_reference
     <p>
       Ceci fonctionne en fait plutôt bien, alors disons que nous désirons
       écrire un outil pour effectuer ce processus basique plus rapidement
-      et plus facilement. Au lieu d'écrire un outil qui crée des révisions
+      et plus facilement. Au lieu d'écrire un outil qui crée des versions
       de chaque fichier individuellement, comme Subversion, nous en écririons
       probablement un qui permettrait de manière plus simple de conserver
       des instantanés de notre projet sans avoir à copier la totalité du
@@ -100,8 +101,8 @@ layout: fr_reference
     <p>
       C'est fondamentalement ce que fait Git. Vous dites à Git de sauvegarder
       un instantané de votre projet avec la commande <code>git commit</code>
-      et il va simplement enregistrer l'état de tous vos fichiers de votre projet
-      à ce moment. Ensuite la plupart des commandes travaille avec ces enregistrements
+      et il va simplement enregistrer l'état de tous les fichiers de votre projet
+      à ce moment. Ensuite la plupart des commandes travaillent avec ces enregistrements
       d'état pour voir comment ils différent ou y récupérer du contenu, etc.
     </p>
 
@@ -116,4 +117,4 @@ layout: fr_reference
   </div>
 </div>
 
-<p><a class="page-button next-page" href="/fr/creating">Aller à Récupérer et Créer des Projets &#187;</a></p>
+<p><a class="page-button next-page" href="/fr/creating">Aller à Obtention et Création des Projets &#187;</a></p>
