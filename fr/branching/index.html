@@ -12,20 +12,20 @@ layout: fr_reference
   <div class="block">
     <p>Les branches sont une des nombreuses fonctionnalités intéressantes de Git.
       Si vous avez utilisé d'autres systèmes de gestion de versions, il sera
-      probablement utile d'oublier tout ce que vous savez sur les branches -
-      En fait, il sera encore plus utile de les voir quasiment comme des
+      probablement utile d'oublier tout ce que vous savez sur les branches—En fait,
+      il sera encore plus utile de les voir quasiment comme des
       <i>contextes</i> car c'est la façon la plus courante dont vous allez
-      vous en servir. Quand vous basculez dans des branches, vous changez de
-      contextes de travail et vous pouvez rapidement basculer de l'une à l'autre.
+      vous en servir. Quand vous basculez dans une branche, vous changez de
+      contexte de travail, et vous pouvez rapidement basculer de l'une à l'autre.
     </p>
 
     <p class="nutshell">
       <b>Pour résumer</b>, vous pouvez créer une branche avec
       <code>git branch (nombranche)</code>, basculer dans ce contexte avec
-      <code>git checkout (nombranche)</code>, enregistrer un instantané de validation
+      <code>git checkout (nombranche)</code>, enregistrer un commit
       depuis ce contexte, puis basculer d'une branche à l'autre facilement.
       Quand vous changez de branche, Git remplace votre dossier de travail
-      avec l'instantané de la dernière validation de cette branche afin que vous
+      avec l'instantané du dernier commit de cette branche afin que vous
       n'ayez pas de multiples dossiers pour de multiples branches. Vous fusionnez
       des branches ensemble avec <code>git merge</code>. Vous pouvez facilement
       faire plusieurs fusions étalées dans le temps depuis la même branche,
@@ -106,8 +106,8 @@ $ git branch
 </pre>
 
     <p>Vous pouvez voir que nous avons une nouvelle branche. Quand vous créez une
-      branche de cette manière cela crée la branche basée sur votre dernière validation
-      donc si à ce stade vous créez des validations puis basculez vers « testing »,
+      branche de cette manière cela crée la branche basée sur votre dernier commit
+      donc si à ce stade vous créez des commits puis basculez vers « testing »,
       vous rétablirez le contexte de votre dossier de travail à celui où il était
       lorsque la branche a été créée initialement—Vous pouvez penser à cela comme
       un signet qui indique où vous en êtes. Voyons cela en action—nous utilisons
@@ -148,10 +148,10 @@ README   hello.rb more.txt test.txt
 
       <h4 id="branch-last-commit">
         git branch -v
-        <small>affiche la dernière validation de chaque branche</small>
+        <small>affiche le dernier commit de chaque branche</small>
       </h4>
 
-      <p>Si nous voulons voir les dernières validations de chaque branche
+      <p>Si nous voulons voir les derniers commits de chaque branche
         nous pouvons exécuter <code>git branch -v</code> pour les voir.</p>
 
 <pre>
@@ -163,14 +163,14 @@ README   hello.rb more.txt test.txt
 
         <h4 id="branch-create-switch">
           git checkout -b (nombranche)
-          <small>crée et bascule immédiatement vers une branche</small>
+          <small>crée puis bascule immédiatement vers une branche</small>
         </h4>
 
         <p>
           Dans la plupart des cas vous voudrez basculer vers la branche immédiatement,
-          afin de pouvoir y travailler puis fusionner dans une branche qui contient
-          seulement du travail stable (comme « master ») plus tard lorsque le travail
-          dans votre nouveau contexte de branche sera stable. Vous pouvez faire cela
+          afin de pouvoir y travailler puis la fusionner plus tard dans une branche qui contient
+          seulement du travail stable (comme « master ») lorsque le travail
+          dans votre nouvelle branche sera stable. Vous pouvez faire cela
           relativement facilement avec
           <code>git branch nouvellebranche; git checkout nouvellebranche</code>,
           mais Git a un raccourci pour cela : <code>git checkout -b nouvellebranche</code>.
@@ -203,7 +203,7 @@ README   hello.rb more.txt test.txt
         <p>Vous pouvez voir ici comment nous avons créé une branche, supprimé certains de nos
           fichiers depuis le contexte de cette branche, puis nous sommes retournés dans
           notre branche principale et nous voyons à nouveau nos fichiers. Les branches
-          isolent de manière sécurisée le travail que nous faisons en des contextes
+          isolent de manière sécurisée le travail que nous faisons dans des contextes
           entre lesquels nous pouvons basculer.</p>
 
         <p>
@@ -262,7 +262,7 @@ To git@github.com:octocat/Spoon-Knife.git
 
             <p>Alternativement, vous pouvez exécuter
               <code>git push nom-distant --delete nombranche</code>
-              qui est raccourci pour la syntaxe deux-points (une paire
+              qui est un raccourci de la syntaxe deux-points (une paire
               <code>source:destination</code>) de suppression d'une branche distante.
             </p>
 
@@ -320,10 +320,10 @@ Fast-forward
             </h4>
 
             <p>Bien sûr, cela ne marche pas juste pour de simples ajouts et suppressions
-              de fichiers. Git va tout autant fusionner les modifications de fichiers -
-              En fait, il est même très bon pour ça. Par exemple, voyons ce qu'il arrive
-              quand on édite un fichier dans une branche et dans une autre branche
-              nous le renommons et puis l'éditons et enfin nous fusionnons ensemble
+              de fichiers. Git va tout autant fusionner les modifications de fichiers—En
+              fait, il est même très bon pour ça. Par exemple, voyons ce qu'il arrive
+              quand on édite un fichier dans une branche et nous le renommons et puis
+              l'éditons dans une autre branche et enfin nous fusionnons ensemble
               ces branches. Chaos, vous avez dit ? Voyons cela.
             </p>
 
@@ -341,9 +341,9 @@ HelloWorld.hello
 </pre>
 
             <p>Nous allons donc commencer par créer une nouvelle branche nommée
-              « change_class » basculer vers celle-ci afin que vos modifications
+              « change_class », puis basculer vers celle-ci afin que les modifications
               de renommage de classe soient isolées. Nous allons changer chaque
-              instance de « HelloWorld » en « HiWorld ».</p>
+              occurrence de « HelloWorld » en « HiWorld ».</p>
 
 <pre>
 <b>$ git checkout -b change_class</b>
@@ -416,14 +416,14 @@ HiWorld.hello
 </pre>
 
                 <p>Et bien, il va simplement s'en rendre compte. Notez qu'il n'y a aucun conflit de
-                  fusion et que le fichier qui a été renommé a maintenant le changement de nom
-                  de de classe « HiWorld » qui a été fait dans l'autre branche. Plutôt cool.</p>
+                  fusion et que le fichier qui a été renommé a désormais le changement de nom
+                  de classe « HiWorld » qui a été fait dans l'autre branche. Plutôt cool.</p>
 
                 <h4 id="merge-conflicts">
                   conflits de fusion
                 </h4>
 
-                <p>Donc, les fusions Git relèvent de la magie, nous n'avons jamais à traiter
+                <p>Les fusions Git relèvent donc de la magie, nous n'avons jamais à traiter
                   des conflits de fusion ? Pas tout à fait. Dans des situations où
                   un même bloc de code est édité dans différentes branches il n'y a aucun moyen
                   pour un ordinateur de s'y retrouver, alors c'est à nous de nous débrouiller.
@@ -441,7 +441,7 @@ Switched to a new branch 'fix_readme'
  1 files changed, 1 insertions(+), 1 deletions(-)
 </pre>
 
-                <p>Maintenant nous avons validé un changement d'une ligne dans notre
+                <p>Nous avons alors créé un commit du changement d'une ligne dans notre
                   fichier README dans une branche. Maintenant changeons la même ligne
                   d'une manière différente depuis notre branche « master ».</p>
 
@@ -454,7 +454,7 @@ Switched to branch 'master'
  1 files changed, 1 insertions(+), 1 deletions(-)
 </pre>
 
-                  <p>C'est maintenant le plus rigolo—nous allons fusionner la première
+                  <p>Arrive le plus amusant—nous allons fusionner la première
                     branche dans notre branche « master », provoquant un conflit de fusion.</p>
 
 <pre>
@@ -502,7 +502,7 @@ index 9103e27,69cad1a..0000000
                       du conflit et comment vous l'avez résolu comme affiché ici. Maintenant
                       il est l'heure de marquer notre fichier comme résolu. Avec Git on le fait
                       avec <code>git add</code>—pour dire à Git que le fichier a été résolu
-                      vous devez le mettre en attente.</p>
+                      vous devez l'indexer.</p>
 
 <pre>
 <b>$ git status -s</b>
@@ -514,14 +514,14 @@ M  README
 [master 8d585ea] Merge branch 'fix_readme'
 </pre>
 
-                      <p>Et nous avons alors résolu avec succès notre conflit de fusion et validé
-                        le résultat.</p>
+                      <p>Et nous avons alors résolu avec succès notre conflit de fusion et créé
+                        un commit avec le résultat.</p>
 
                       <p class="nutshell">
                         <b>Pour résumer</b>, vous utilisez <code>git merge</code> pour combiner
                         un autre contexte de branche dans votre branche courante. Cela va
                         automatiquement décider comment combiner au mieux les différents instantanés
-                        en un nouvel instantané avec le travail unique à chacune des branches.
+                        en un nouvel instantané avec le travail propre de chaque.
                       </p>
 
                     </div>
@@ -534,30 +534,30 @@ M  README
                         <a target="new" href="http://git-scm.com/book/fr/Utilitaires-Git-S%C3%A9lection-des-versions#Plages-de-<em>commits</em>">livre</a>
                       </span>
                       <a name="log">git log</a>
-                      <span class="desc">affiche l'historique des validations d'une branche</span>
+                      <span class="desc">affiche l'historique des commits d'une branche</span>
                     </h2>
 
                     <div class="block">
 
-                      <p>Jusqu'à présent nous avons validé des instantanés de votre projet et basculé
+                      <p>Jusqu'à présent nous créé des commits des instantanés de votre projet et basculé
                         entre différents contextes isolés, mais comment faire si nous avons oublié
                         comment nous en sommes arrivés à un certain point ? Ou si nous voulons
                         savoir à quel point une branche diffère d'une autre ? Git fournit un outil
-                        qui affiche tous les messages de validations qui vous ont amené jusqu'à
-                        votre instantané courant, appelé <code>git log</code>.</p>
+                        qui affiche tous les messages de commits qui vous ont amené jusqu'à
+                        votre commit courant, appelé <code>git log</code>.</p>
 
                       <p>Pour comprendre la commande d'historique, vous devez connaître quelles
                         informations sont stockées quand vous exécutez la commande
                         <code>git commit</code> pour enregistrer un instantané. En plus de la référence
-                        des fichiers et du message de validation et des informations sur l'auteur
-                        de la validation, Git stocke également la validation sur laquelle vous avez
+                        des fichiers et du message de commit et des informations sur l'auteur
+                        du commit, Git stocke également le commit sur laquelle vous avez
                         basé votre instantané. C'est-à-dire que, si vous clonez un projet, quel
                         est l'instantané que vous avez modifié pour obtenir l'instantané que vous
-                        enregistrez ? C'est utile pour connaître le contexte dans quelle mesure
+                        avez enregistré ? C'est utile pour savoir comment
                         le projet est arrivé à cet état et permet à Git de savoir qui a changé quoi.
                         Si Git a l'instantané que vous avez sauvegardé et celui sur lequel vous vous
                         êtes basé, alors il peut automatiquement savoir ce que vous avez changé.
-                        La validation sur laquelle une autre validation est basée est appelée le
+                        Le commit sur lequel un autre commit est basé est appelé le
                         « parent ».
                       </p>
 
@@ -565,7 +565,7 @@ M  README
                         vous pouvez exécuter <code>git log</code> quand vous êtes dans cette branche.
                         Par exemple, si vous exécutez <code>git log</code> dans le projet Hello World
                         sur lequel nous avons travaillé dans cette section, nous allons voir tous les
-                        messages des validations faites.
+                        messages des commits créés.
                       </p>
 
 <pre>
@@ -616,7 +616,7 @@ b7ae93b added from ruby
 </pre>
 
                         <p>Cela nous informe que c'est l'historique du développement de ce projet.
-                          Si les messages de validations sont descriptifs, cela peut nous informer
+                          Si les messages de commit sont descriptifs, cela peut nous informer
                           sur les changements apportés ou qui ont influencé l'état de l'instantané
                           et donc ce qu'il contient.</p>
 
@@ -639,7 +639,7 @@ b7ae93b added from ruby
 * 17f4acf first commit
 </pre>
 
-                          <p>Nous pouvons maintenant voir quand le travail a divergé et puis a
+                          <p>Nous pouvons alors voir quand le travail a divergé et puis a
                             été fusionné. C'est très pratique pour voir ce qui s'est passé ou
                             quels changements ont été appliqués, mais c'est aussi extrêmement utile
                             pour gérer vos branches. Créons une nouvelle branche, effectuons
@@ -694,15 +694,15 @@ README  ruby.rb
  1 files changed, 2 insertions(+), 2 deletions(-)
 </pre>
 
-                                <p>Alors, maintenant imaginons que nous ne travaillons pas sur le projet
-                                  pendant quelques temps, nous avons autre chose à faire. Quand nous
+                                <p>Imaginons alors que nous ne travaillons pas sur le projet
+                                  pendant quelques temps, ayant autre chose à faire. Quand nous
                                   y revenons nous voulons en savoir plus sur la branche « erlang » et
                                   où nous nous en sommes arrêtés sur  la branche master. Juste en regardant
                                   le nom de la branche, nous ne pouvons savoir que nous avons fait des modifications
                                   en Haskell dans celle-ci, mais en utilisant <code>git log</code> nous pouvons
                                   facilement le savoir. Si vous donnez à Git un nom de branche, cela va vous afficher
-                                  uniquement les validations qui sont « accessibles » dans l'historique de cette
-                                  branche, c'est-à-dire les validations qui ont influencé l'instantané
+                                  uniquement les commits qui sont « accessibles » dans l'historique de cette
+                                  branche, c'est-à-dire les commits qui ont influencé l'instantané
                                   final.</p>
 
 <pre>
@@ -721,7 +721,7 @@ b7ae93b added from ruby
                                   <p>De cette manière, c'est très simple de voir que nous avons du code Haskell
                                     inclus dans la branche (mis en surbrillance dans la sortie).
                                     Ce qui est encore plus cool est que nous pouvons facilement dire à Git
-                                    que nous sommes seulement intéressés par les validations qui sont
+                                    que nous sommes seulement intéressés par les commits qui sont
                                     accessibles dans une branche mais non accessibles dans une autre, en d'autres
                                     termes quelles validations sont uniques à une branche par rapport à une autre.
                                   </p>
@@ -747,16 +747,16 @@ ab5ab4c added erlang
 </pre>
 
                                   <p>Cela nous donne un outil de gestion de branche simple et pratique.
-                                    Cela nous permet de facilement voir quelles validations sont uniques
-                                    dans quelles branches afin de savoir ce qu'il nous manque et ce que
-                                    nous fusionnerions si nous faisions la fusion.
+                                    Cela nous permet de facilement voir quels commits sont uniques
+                                    à quelles branches afin de savoir ce qu'il nous manque et ce que
+                                    nous fusionnerions en cas de fusion.
                                   </p>
 
                                   <p class="nutshell">
                                     <b>Pour résumer</b>, vous pouvez utiliser <code>git log</code> pour lister
-                                    l'historique de validation ou lister les changements faits par d'autres
-                                    qui ont mené l'instantané jusqu'à l'extrêmité de la branche. Cela vous permet
-                                    de voir comment le projet dans ce contexte est arrivé à l'état dans lequel il
+                                    l'historique des commits ou lister les changements faits par d'autres
+                                    qui ont mené l'instantané jusqu'à la pointe de la branche. Cela vous permet
+                                    voir comment dans un contexte le projet est arrivé à l'état dans lequel il
                                     est actuellement.
                                   </p>
 
@@ -777,21 +777,21 @@ ab5ab4c added erlang
 
                                   <p>
                                     Si vous arrivez à un moment qui est important et vous voulez définitivement
-                                    vous souvenir de cet instantané de validation spécifiquement, vous pouvez
+                                    vous souvenir de ce commit spécifique, vous pouvez
                                     l'étiqueter avec <code>git tag</code>. La commande <code>tag</code>
-                                    va basiquement mettre un signet permanent sur une validation spécifique
-                                    afin de pouvoir l'utiliser pour le comparer à d'autres validations dans
-                                    le futur. C'est souvent utilisé lorsque vous publier une version ou vous
+                                    va simplement mettre un signet permanent sur un commit spécifique
+                                    afin de pouvoir l'utiliser pour le comparer à d'autres commits dans
+                                    le futur. C'est souvent utilisé lorsque vous publiez une version ou vous
                                     déployez quelque chose.
                                   </p>
 
                                   <p>Disons que vous vouliez publier notre projet Hello World en tant
-                                    que version « 1.0 ». Nous pouvons étiqueter la dernière validation
+                                    que version « 1.0 ». Nous pouvons étiqueter le dernier commit
                                     (<code>HEAD</code>) comme « v1.0 » en exécutant <code>git tag -a v1.0</code>.
                                     Le <code>-a</code> signifie « fait une étiquette annotée », qui permet
                                     de lui ajouter un message d'étiquette, ce que vous voudrez quasiment
                                     toujours faire. L'exécuter sans le <code>-a</code> fonctionne aussi,
-                                    mais cela n'enregistre pas quand cela a été étiqueté, qui l'a étiqueté,
+                                    mais cela n'enregistre pas la date, qui l'a étiqueté,
                                     ou ne vous laisse pas ajouter un message d'étiquette. Il est recommandé
                                     de toujours créer des étiquettes annotées.</p>
 
@@ -799,12 +799,12 @@ ab5ab4c added erlang
 <b>$ git tag -a v1.0 </b>
 </pre>
 
-                                    <p>Quand vous exécutez la ocmmande <code>git tag -a</code>, Git
+                                    <p>Quand vous exécutez la commande <code>git tag -a</code>, Git
                                       va ouvrir votre éditeur et vous laisser écrire un message d'étiquette,
-                                      tout comme vous écrieriez un message de validation.</p>
+                                      tout comme vous écririez un message de validation.</p>
 
-                                    <p>Maintenant, notez que quand vous exécutez <code>git log --decorate</code>,
-                                      nous pouvons y voir nos étiquettes.</p>
+                                    <p>Notez alors que quand vous exécutez <code>git log --decorate</code>,
+                                      nous pouvons voir nos étiquettes.</p>
 
 <pre>
 <b>$ git log --oneline --decorate --graph</b>
@@ -822,18 +822,18 @@ ab5ab4c added erlang
 * 17f4acf first commit
 </pre>
 
-                                      <p>Si nous faisons des validations supplémentaires, l'étiquette va rester
-                                        sur cette validation, nous avons alors cet instantané spécifique étiqueté
+                                      <p>Si nous faisons des commits supplémentaires, l'étiquette va rester
+                                        sur cet commit, nous avons alors cet instantané spécifique étiqueté
                                         indéfiniment et nous pourrons toujours comparer de futurs instantanés
                                         à celui-ci.</p>
 
-                                      <p>Nous ne sommes pas limiter à étiqueter la validation sur laquelle nous sommes,
-                                        néanmoins. Si nous avons oublié d'étiqueter une validation que nous avons
-                                        publiée, nous pouvons rétroactivement l'étiqueter en exécutant la même
-                                        commande, mais avec le SHA de la validation à la fin. Par exemple, disons
-                                        que nous avons publié la validation <code>558151a</code> (de plusieurs
-                                        validations en arrière) mais avons oublié de l'étiqueter à ce moment-là.
-                                        Nous pouvons l'étiqueter maintenant :</p>
+                                      <p>Nous ne sommes pas limités à étiqueter le commit sur lequel nous sommes,
+                                        néanmoins. Si nous avons oublié d'étiqueter un commit que nous avons
+                                        publiéxe, nous pouvons rétroactivement l'étiqueter en exécutant la même
+                                        commande, mais avec le SHA du commit à la fin. Par exemple, disons
+                                        que nous avons publié le commit <code>558151a</code> (de plusieurs
+                                        commits en arrière) mais avons oublié de l'étiqueter à ce moment-là.
+                                        Nous pouvons alors l'étiqueter :</p>
 
 <pre>
 <b>$ git tag -a v0.9 558151a</b>
@@ -852,11 +852,11 @@ ab5ab4c added erlang
 * 17f4acf first commit
 </pre>
 
-                                        <p>Les étiquettes pointant sur des objet suivis par les extrêmités
+                                        <p>Les étiquettes pointant sur des objets suivis par les pointes
                                           des branches seront automatiquement téléchargées quand vous utilisez
                                           la commande <code>fetch</code> sur un dépôt distant. Néanmoins,
-                                          les étiquettes qui ne sont pas accessibles depuis les extrêmités
-                                          de sbranches seront ignorées. Si vous voulez être sûr que
+                                          les étiquettes qui ne sont pas accessibles depuis les pointes
+                                          des branches seront ignorées. Si vous voulez être sûr que
                                           <em>toutes</em> les étiquettes sont <em>toujours</em> incluses,
                                           vous devez inclure l'option <code>--tags</code>.
                                         </p>
@@ -885,8 +885,8 @@ From git://github.com:example-user/example-repo
 
                                         <p class="nutshell">
                                           <b>Pou résumer</b>, vous utilisez <code>git tag</code> pour marquer
-                                          une validation ou un point dans votre dépôt comme important.
-                                          Cela vous permet de faire référence à cette validation avec
+                                          un commit ou un point dans votre dépôt comme important.
+                                          Cela vous permet de faire référence à ce commit avec
                                           quelque chose de plus mémorable qu'un SHA.
                                         </p>
 
