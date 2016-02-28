@@ -17,8 +17,8 @@ layout: fr_reference
       vous devez mettre toutes ces données sur un serveur auquel les autres
       ont accès. Git rend cela possible en synchronisant vos données avec un
       autre dépôt. Il n'y a pas de réelle différence entre un serveur et un
-      client—un dépôt Git est un dépôt Git et vous pouvez les synchroniser
-      indifféremment entre eux facilement.
+      client—un dépôt Git est un dépôt Git et vous pouvez synchroniser
+      des dépôts indifféremment entre eux facilement.
     </p>
 
     <p>Dès que vous avez un dépôt Git, que ce soit un que vous hébergez sur votre
@@ -30,7 +30,7 @@ layout: fr_reference
 
     <p>Vous pouvez le faire quand vous êtes en ligne, cela n'a pas à être fait
       en même temps qu'un <code>commit</code> ou tout autre commande. Généralement
-      vous ferez un certains nombres de validations localement, puis vous récupérerez
+      vous ferez un certains nombres de commits localement, puis vous récupérerez
       les données depuis le dépôt partagé distant à partir duquel vous avez cloné
       le projet pour être à jour, puis vous pousserez vos modifications en ligne.</p>
 
@@ -86,7 +86,7 @@ origin	git@github.com:github/git-reference.git (fetch)
 origin	git@github.com:github/git-reference.git (push)
 </pre>
 
-      <p>Vous voyez l'URL ici en double car Git permet d'avoir des URLS
+      <p>Vous voyez l'URL ici en double car Git permet d'avoir des URLs
         différentes pour pousser et récupérer pour chaque dépôt au cas où
         vous vouliez utiliser des protocoles différents en lecture
         et en écriture.</p>
@@ -123,7 +123,7 @@ github	git@github.com:schacon/hw.git (push)
           distants est arbitraire—tout comme « master » n'a aucune signification spéciale
           mais est très largement utilisé car <code>git init</code> le configure par défaut,
           « origin » est souvent utilisé comme nom de dépôt distant car
-          <code>git clone</code> le configure par défaut comme URL source de clonage. Dans
+          <code>git clone</code> le configure par défaut comme URL source du clonage. Dans
           notre cas nous allons appeler ce dépôt distant « github », mais vous pourriez le
           nommer comme bon vous semblerait.
         </p>
@@ -289,18 +289,18 @@ fatal: No such remote 'guhflub'
               en local tout donnée non présente en local et vous donnant des marqueurs sur où
               chaque branche sur ce dépôt distant en était au momemt de la synchronisation.
               Celles-ci sont appelées « branches distantes » et sont identiques aux branches locales
-              mis à part que Git ne vous autorisera pas de les extraire—par contre, vous pouvez
+              mis à part que Git ne vous autorisera pas d'y faire un checkout—par contre, vous pouvez
               fusionner avec, les comparer à d'autres branches, exécuter des journaux d'historique
               dessus, etc. Vous faites toutes ces opérations en local une fois votre synchronisation
               faite.
             </p>
 
-            <p>La seconde commande qui va récupérer en local des données et la commande
-              <code>git pull</code>. Cette commande va concrètement exécuter <code>git fetch</code>
+            <p>La seconde commande qui va récupérer en local des données est la commande
+              <code>git pull</code>. Cette commande va concrètement exécuter un <code>git fetch</code>
               immédiatemment suivi d'un <code>git merge</code> de la branche de ce dépôt distant
               qui est suivie par toute branche courante dans laquelle vous êtes. Exécuter les commandes
               <code>fetch</code> et <code>merge</code> séparément est source de moins de magie et
-              et moins de problèmes, mais si vous aimez le principe de <code>pull</code>,
+              de moins de problèmes, mais si vous aimez le principe de <code>pull</code>,
               vous pouvez le retrouver de manière plus détaillée dans la
               <a target="new" href="http://git-scm.com/docs/git-pull">documentation officielle</a>.
             </p>
@@ -341,9 +341,9 @@ From github.com:schacon/hw
                 distant devient une branche appelée « github/master » en local. De cette manière
                 vous pouvez fusionner la branche « master » de ce dépôt distant dans la branche locale
                 « master » en exécutant <code>git merge github/master</code>. Ou vous pouvez voir
-                quelles sont les nouvelles validations en exécutant <code>git log github/master ^master</code>.
+                quelles sont les nouveaux commits en exécutant <code>git log github/master ^master</code>.
                 Si votre dépôt distant est nommé « origin » il sera plutôt nommé <code>origin/master</code>.
-                Quasiment tout commande utilisable sur les branches locales est utilisable également
+                Quasiment toute commande utilisable sur les branches locales est utilisable également
                 sur les branches distantes.
               </p>
 
@@ -374,7 +374,7 @@ From github.com:schacon/hw
             </h2>
 
             <div class="block">
-              <p>Pour partager vos sympathiques validations avec d'autres, vous avez besoin de pousser
+              <p>Pour partager vos sympathiques commits avec des tiers, vous avez besoin de pousser
                 vos modifications vers un dépôt distant. Pour cela, vous exécutez
                 <code>git push [alias] [branche]</code>  qui va tenter de faire de votre [branche]
                 une nouvelle [branche] sur le dépôt distant [alias]. Essayons de le faire en commençant
@@ -392,7 +392,7 @@ To git@github.com:schacon/hw.git
 </pre>
 
                 <p>Plutôt simple. Désormais si quelqu'un clone ce dépôt il va obtenir exactement
-                  toutes ses validations et tout son historique.</p>
+                  tous ses commits et tout son historique.</p>
 
                 <p>Comment faire si vous avez une branche spécifique comme la branche « erlang »
                   créée précédemment et que vous vouliez just partager celle-ci ? Vous pouvez
@@ -413,7 +413,7 @@ To git@github.com:schacon/hw.git
                     une branche « erlang » qu'elle pourra étudier et fusionner. Vous pouvez pousser
                     toute branche de cette manière vers n'importe quel dépôt distant auquel
                     vous avez accès en écriture. Si votre branche est déjà sur le serveur,
-                    Git tentera de la mettre à jour, si elle n'est pas présente, Git l'ajoutera.</p>
+                    Git tentera de la mettre à jour. Si elle n'est pas présente, Git l'ajoutera.</p>
 
                   <p>Le dernier problème courant que vous risquez de rencontrer en poussant vers
                     des branches distantes est dans le cas où quelqu'un pousse en même temps.
