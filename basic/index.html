@@ -11,24 +11,23 @@ layout: reference
   </h2>
   <div class="block">
     <p>
-    Git is all about composing and saving snapshots of your project and then
-    working with and comparing those snapshots.  This section will explain
-    the commands needed to compose and commit snapshots of your project.
+    Git saves snapshots of your project.  This section will explain
+    the commands needed to take snapshots.
     </p>
 
     <p>
-    An important concept here is that Git has an 'index', which acts as sort
-    of a staging area for your snapshot.  This allows you to build up a series
-    of well composed snapshots from changed files in your working directory,
-    rather than having to commit all of the file changes at once.
+    Git has an <b>index</b>, which acts as sort <!-- sort of but not really? What is "a staging area"? -->
+    of a staging area for your snapshot.  You should build up a series
+    of well composed <!-- what does "well composed" mean? --> snapshots from changed files in your working directory,
+    rather than committing all changes at once.
     </p>
 
     <p class="nutshell">
-    <strong>In a nutshell</strong>, you will use <code>git add</code> to start tracking new
-    files and also to stage changes to already tracked files, then
+    <strong>In a nutshell</strong>, you will use:<ul> <li><code>git add</code> to start tracking new
+    files and also to stage changes to already tracked files,</li> <li>
     <code>git status</code> and <code>git diff</code> to see what has been
-    modified and staged and finally <code>git commit</code> to record your
-    snapshot into your history.  This will be the basic workflow that you use
+    modified and staged</li><li><code>git commit</code> to record your
+    snapshot into your history.</li></ul>  This will be the basic workflow that you use
     most of the time.
     </p>
 
