@@ -1,0 +1,119 @@
+---
+layout: fr_reference
+---
+<div class="box">
+  <h2>Introduction à Référence Git</h2>
+  <div class="block">
+    <p>
+      Ceci est le site Référence Git. Il a pour but de servir
+      de référence rapide pour apprendre et retenir les commandes
+      les plus importantes et les plus utilisées de Git. Les commandes
+      sont organisées en sections selon le type d'opérations que vous
+      seriez amené à faire, et vous présenteront les options et commandes
+      courantes pour les réaliser.
+    </p>
+    <p>
+      Chaque section pointe vers la section suivante, vous pourrez les suivre
+      à la manière d'un tutoriel. Chaque page pointera également vers
+      une documentation Git plus approfondie comme les pages de manuel
+      officielles ou aux sections appropriées du
+      <a href="http://git-scm.com/book/fr/v2">Livre Pro Git</a>,
+      de cette manière vous pourrez en apprendre plus sur les commandes.
+      Nous commencerons par découvrir comment penser gestion de sources
+      à la manière de Git.
+    </p>
+  </div>
+</div>
+
+<div class="box">
+  <h2>Comment penser à la Git</h2>
+  <div class="block">
+    <p>
+      La première chose à comprendre sur Git est qu'il
+      gère les versions d'une manière totalement différente
+      de Subversion ou Perforce ou tout autre gestionnaire de sources
+      auquel vous seriez habitué. Il est souvent plus simple
+      d'apprendre Git en mettant de côté toute connaissance sur
+      le fonctionnement de la gestion de sources et d'essayer d'y penser
+      à la Git.
+    </p>
+
+    <p>
+      Partons de zéro. Imaginons que vous conceviez un nouveau système de gestion
+      de sources. Comment gériez-vous simplement différentes versions
+      avant d'utiliser un outil dédié à ça ? Il y a de fortes chances pour que vous ayez
+      fait de simples copies du répertoire de votre projet pour sauvegarder
+      son état à ce moment-là.
+    </p>
+
+    <pre> $ cp -R projet projet.bak </pre>
+
+    <p>
+      De cette manière, vous pouvez facilement rétablir des fichiers qui
+      seraient devenus inutilisables plus tard, ou pour voir ce que vous avez changé en
+      comparant l'état du projet actuel avec celui de la copie de sauvegarde.
+    </p>
+
+    <p>
+      Si vous êtes réellement paranoïaque, vous le ferez sûrement souvent,
+      et vous inclurez la date dans le nom de la sauvegarde :
+    </p>
+
+    <pre> $ cp -R projet projet.2010-06-01.bak </pre>
+
+    <p>
+      Dans ce cas, vous aurez un tas d'instantanés de votre projet à
+      disposition comme source de comparaison et d'inspection. Vous pouvez
+      également utiliser cette méthode pour partager de manière plutôt
+      efficace des modifications avec un tiers. Si vous créez une archive compressée
+      de l'état actuel de votre projet et la partagez sur votre site web, d'autres développeurs
+      peuvent la télécharger, modifier votre projet et vous envoyer un correctif
+      assez facilement.
+    </p>
+
+    <pre>
+ $ wget http://exemple.com/projet.2010-06-01.zip
+ $ unzip projet.2010-06-01.zip
+ $ cp -R projet.2010-06-01 projet-ma-copie
+ $ cd projet-ma-copie
+ $ (vous faites des modifications)
+ $ diff projet-ma-copie projet.2010-06-01 > modif.patch
+ $ (email modif.patch)</pre>
+
+    <p>
+      Le développeur original peut alors appliquer le correctif à sa copie
+      du projet et avoir vos modifications. C'est de cette manière
+      que de nombreux projets libres ont collaboré pendant plusieurs
+      années.
+    </p>
+
+    <p>
+      Ceci fonctionne en fait plutôt bien, alors imaginons que nous désirions
+      écrire un outil pour effectuer ce processus basique plus rapidement
+      et plus facilement. Au lieu d'écrire un outil qui crée des versions
+      de chaque fichier individuellement, comme Subversion, nous en écririons
+      probablement un qui permettrait de manière plus simple de conserver
+      des instantanés de notre projet sans avoir à copier la totalité du
+      dossier à chaque fois.
+    </p>
+
+    <p>
+      C'est fondamentalement ce que fait Git. Vous dites à Git de sauvegarder
+      un instantané de votre projet avec la commande <code>git commit</code>
+      et il va simplement enregistrer l'état de tous les fichiers de votre projet
+      à ce moment. Ensuite la plupart des commandes travaillent avec ces enregistrements
+      d'état pour comparer leurs différences ou y récupérer du contenu, etc..
+    </p>
+
+    <center><img src="../images/snapshots.png"/></center>
+
+    <p>
+      Si vous pensez à Git comme un outil pour conserver, comparer et fusionner des instantanés
+      de votre projet, il sera plus facile de comprendre ce qui se passe et comment
+      faire différentes choses correctement.
+    </p>
+
+  </div>
+</div>
+
+<p><a class="page-button next-page" href="/fr/creating">Aller à Obtention et Création des Projets &#187;</a></p>

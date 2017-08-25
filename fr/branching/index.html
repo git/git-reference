@@ -1,0 +1,897 @@
+---
+layout: fr_reference
+---
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a target="new" href="http://git-scm.com/book/fr/Les-branches-avec-Git">livre</a>
+    </span>
+    Création de Branches et Fusion
+  </h2>
+  <div class="block">
+    <p>Les branches sont une des nombreuses fonctionnalités intéressantes de Git.
+      Si vous avez utilisé d'autres systèmes de gestion de versions, il sera
+      probablement utile d'oublier tout ce que vous savez sur les branches—En fait,
+      il sera encore plus utile de les voir quasiment comme des
+      <i>contextes</i> car c'est la façon la plus courante dont vous allez
+      vous en servir. Quand vous basculez dans une branche, vous changez de
+      contexte de travail, et vous pouvez rapidement basculer de l'une à l'autre.
+    </p>
+
+    <p class="nutshell">
+      <b>Pour résumer</b>, vous pouvez créer une branche avec
+      <code>git branch (nombranche)</code>, basculer dans ce contexte avec
+      <code>git checkout (nombranche)</code>, enregistrer un commit
+      depuis ce contexte, puis basculer d'une branche à l'autre facilement.
+      Quand vous changez de branche, Git remplace votre dossier de travail
+      avec l'instantané du dernier commit de cette branche afin que vous
+      n'ayez pas de multiples dossiers pour de multiples branches. Vous fusionnez
+      des branches ensemble avec <code>git merge</code>. Vous pouvez facilement
+      faire plusieurs fusions étalées dans le temps depuis la même branche,
+      ou alternativement vous pouvez choisir de supprimer une branche dès
+      que vous l'avez fusionnée.
+    </p>
+
+  </div>
+</div>
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a target="new" href="http://git-scm.com/docs/git-branch">docs</a> &nbsp;
+      <a target="new" href="http://git-scm.com/book/fr/Les-branches-avec-Git-Ce-qu-est-une-branche">livre</a>
+    </span>
+    <a name="branch">git branch</a>
+    <span class="desc">liste, crée et gére les contextes de travail</span>
+  </h2>
+
+  <br/>
+
+  <h2>
+    <span class="docs">
+      <a target="new" href="http://git-scm.com/docs/git-checkout">docs</a> &nbsp;
+      <a target="new" href="http://git-scm.com/book/fr/Les-branches-avec-Git-Brancher-et-fusionner%C2%A0%3A-les-bases">livre</a>
+    </span>
+    <a name="checkout">git checkout</a>
+    <span class="desc">bascule vers un nouveau contexte de branche</span>
+  </h2>
+
+  <div class="block">
+    <p>La commande <code>git branch</code> est un outil de gestion général des branches
+      de Git et peut faire de nombreuses choses différentes. Nous allons aborder
+      celles de base que vous utiliserez le plus souvent—lister les branches, créer
+      des branches et supprimer des branches. Nous allons aussi aborder
+      <code>git checkout</code> ici qui vous permet de basculer entre branches.
+    </p>
+
+    <h4 id="branch-list">
+      git branch
+      <small>liste vos branches disponibles</small>
+    </h4>
+
+    <p>Sans argument, <code>git branch</code> va lister vos branches locales.
+      La branche courante sur laquelle vous êtes sera précédée d'un astérisque
+      et si vous avez
+      <a href="http://git-scm.com/book/fr/Personnalisation-de-Git-Configuration-de-Git#Couleurs-dans-Git">la colorisation activée</a>,
+      la branche courante sera affichée en vert.
+    </p>
+
+<pre>
+$ git branch
+* <span class="green">master</span>
+</pre>
+
+    <p>Cela signifie que nous avons une branche « master » et que nous sommes sur
+      celle-ci. Quand vous exécutez <code>git init</code> cela va automatiquement
+      créer une branche « master » pour vous par défaut, néanmoins il n'y a rien
+      de particulier dans ce nom—vous n'avez pas en fait à avoir de branche « master »
+      mais étant donné qu'elle est créée par défaut, la plupart des projets en ont une.
+    </p>
+
+    <h4 id="branch-create">
+      git branch (nombranche)
+      <small>crée une nouvelle branche</small>
+    </h4>
+
+    <p>Commençons par créer une nouvelle branche puis basculons vers celle-ci.
+      Vous pouvez le faire en exécutant <code>git branch (nombranche)</code>.
+    </p>
+
+<pre>
+$ git branch testing
+$ git branch
+* <span class="green">master</span>
+  testing
+</pre>
+
+    <p>Vous pouvez voir que nous avons une nouvelle branche. Quand vous créez une
+      branche de cette manière cela crée la branche basée sur votre dernier commit
+      donc si à ce stade vous créez des commits puis basculez vers « testing »,
+      vous rétablirez le contexte de votre dossier de travail à celui où il était
+      lorsque la branche a été créée initialement—Vous pouvez penser à cela comme
+      un signet qui indique où vous en êtes. Voyons cela en action—nous utilisons
+      <code>git checkout (branche)</code> pour changer de branche courante.
+    </p>
+
+<pre>
+<b>$ ls</b>
+README   hello.rb
+<b>$ echo 'test content' > test.txt</b>
+<b>$ echo 'more content' > more.txt</b>
+<b>$ git add *.txt</b>
+<b>$ git commit -m 'added two files'</b>
+[master 8bd6d8b] added two files
+ 2 files changed, 2 insertions(+), 0 deletions(-)
+ create mode 100644 more.txt
+ create mode 100644 test.txt
+<b>$ ls</b>
+README   hello.rb more.txt test.txt
+<b>$ git checkout testing</b>
+Switched to branch 'testing'
+<b>$ ls</b>
+README   hello.rb
+</pre>
+
+    <p>Nous voyons que lorsque nous basculons vers la branche « testing »,
+      nos nouveaux fichiers ont disparu. Nous pouvons retourner vers la
+      branche « master » et les voir ré-apparaître.</p>
+
+<pre>
+<b>$ ls</b>
+README   hello.rb
+<b>$ git checkout master</b>
+Switched to branch 'master'
+<b>$ ls</b>
+README   hello.rb more.txt test.txt
+</pre>
+
+      <h4 id="branch-last-commit">
+        git branch -v
+        <small>affiche le dernier commit de chaque branche</small>
+      </h4>
+
+      <p>Si nous voulons voir les derniers commits de chaque branche
+        nous pouvons exécuter <code>git branch -v</code> pour les voir.</p>
+
+<pre>
+<b>$ git branch -v</b>
+* <span class="green">master</span>      54b417d fix javascript issue
+  development 74c111d modify component.json file
+  testing     62a557a update test scripts
+</pre>
+
+        <h4 id="branch-create-switch">
+          git checkout -b (nombranche)
+          <small>crée puis bascule immédiatement vers une branche</small>
+        </h4>
+
+        <p>
+          Dans la plupart des cas vous voudrez basculer vers la branche immédiatement,
+          afin de pouvoir y travailler puis la fusionner plus tard dans une branche qui contient
+          seulement du travail stable (comme « master ») lorsque le travail
+          dans votre nouvelle branche sera stable. Vous pouvez faire cela
+          relativement facilement avec
+          <code>git branch nouvellebranche; git checkout nouvellebranche</code>,
+          mais Git a un raccourci pour cela : <code>git checkout -b nouvellebranche</code>.
+        </p>
+
+<pre>
+<b>$ git branch</b>
+* master
+<b>$ ls</b>
+README   hello.rb more.txt test.txt
+<b>$ git checkout -b removals</b>
+Switched to a new branch 'removals'
+<b>$ git rm more.txt </b>
+rm 'more.txt'
+<b>$ git rm test.txt </b>
+rm 'test.txt'
+<b>$ ls</b>
+README   hello.rb
+<b>$ git commit -am 'removed useless files'</b>
+[removals 8f7c949] removed useless files
+ 2 files changed, 0 insertions(+), 2 deletions(-)
+ delete mode 100644 more.txt
+ delete mode 100644 test.txt
+<b>$ git checkout master</b>
+Switched to branch 'master'
+<b>$ ls</b>
+README   hello.rb more.txt test.txt
+</pre>
+
+        <p>Vous pouvez voir ici comment nous avons créé une branche, supprimé certains de nos
+          fichiers depuis le contexte de cette branche, puis nous sommes retournés dans
+          notre branche principale et nous voyons à nouveau nos fichiers. Les branches
+          isolent de manière sécurisée le travail que nous faisons dans des contextes
+          entre lesquels nous pouvons basculer.</p>
+
+        <p>
+          Si vous démarrez un travail il est très sutile de toujours le démarrer dans une
+          branche (parce-que cela est rapide et facile à faire) puis de le fusionner et
+          supprimer la branche quand vous en avez terminé. De cette manière si ce sur quoi
+          vous travaillez ne convient pas vous pouvez facilement vous en débarasser, et
+          si vous êtes forcé de basculer vers un contexte de travail plus stable, votre travail
+          en cours est facile à mettre de côté et à retrouver plus tard.</p>
+
+        <h4 id="branch-delete">
+          git branch -d (nombranche)
+          <small>supprime une branche</small>
+        </h4>
+
+        <p>Si nous voulons supprimer une branche (comme la branche « testing » de
+          l'exemple précédent vu qu'il n'y a aucun travail particulier sur celle-ci),
+          nous pouvons exécuter <code>git branch -d (branche)</code> pour la supprimer.</p>
+
+<pre>
+<b>$ git branch</b>
+* <span class="green">master</span>
+  testing
+<b>$ git branch -d testing</b>
+Deleted branch testing (was 78b2670).
+<b>$ git branch</b>
+* <span class="green">master</span>
+</pre>
+
+          <h4 id="branch-delete-remote">
+            git push (nom-distant) :(nombranche)
+            <small>supprime une branche distante</small>
+          </h4>
+
+          <p>Quand vous en avez fini avec une branche distante, qu'elle ait
+            été fusionnée dans le dépôt distant ou que vous vouliez l'abandonner
+            et la cacher des regards, vous exécuterez la commande <code>git push</code>
+            avec un symbôle deux-points savamment placé pour supprimer la branche :</p>
+
+<pre>
+<b>$ git push origin :tidy-cutlery</b>
+To git@github.com:octocat/Spoon-Knife.git
+ - [deleted]         tidy-cutlery
+</pre>
+
+            <p>Dans l'exemple ci-dessus vous avez supprimé la branche « tidy-cutlery »
+              du dépôt distant « origin ». Un moyen de se souvenir de cette syntaxe est
+              de penser à celle de
+              <code>git push nom-distant branche-locale:branche-distante</code>.
+              Cela signifie que vous désirez pousser votre branche locale pour
+              qu'elle soit similaire sur le dépôt distant. Quand vous supprimez
+              la portion <code>branche-locale</code> vous ne faites alors plus rien
+              correspondre sur le dépôt distant, signifiant concrètement à la
+              branche distante d'être nulle.
+            </p>
+
+            <p>Alternativement, vous pouvez exécuter
+              <code>git push nom-distant --delete nombranche</code>
+              qui est un raccourci de la syntaxe deux-points (une paire
+              <code>source:destination</code>) de suppression d'une branche distante.
+            </p>
+
+            <p class="nutshell">
+              <b>Pour résumer</b>, vous utilisez <code>git branch</code> pour lister
+              vos branches, créer de nouvelles branches et supprimer des branches
+              inutiles ou qui ont été fusionnées.
+            </p>
+
+          </div>
+        </div>
+
+        <div class="box">
+          <h2>
+            <span class="docs">
+              <a target="new" href="http://git-scm.com/docs/git-merge">docs</a> &nbsp;
+              <a target="new" href="http://git-scm.com/book/fr/Les-branches-avec-Git-Brancher-et-fusionner%C2%A0:-les-bases#Les-bases-de-la-fusion">livre</a>
+            </span>
+            <a name="merge">git merge</a>
+            <span class="desc">fusionne le contexte d'une branche dans votre contexte courant</span>
+          </h2>
+
+          <div class="block">
+            <p>Une fois isolé un travail dans une branche, vous allez peut-être
+              l'incorporer dans votre branche principale. Vous pouvez fusionner
+              toute branche dans votre branche courante avec la commande
+              <code>git merge</code>.  Prenons comme exemple simple la branche
+              « removals » précédente.  Si nous créons une branche et supprimons les fichiers
+              qui s'y trouvent puis que nous validons ces suppressions dans cette branche,
+              cela est isolé de notre branche principale (« master », dans notre cas). Pour
+              inclure ces suppressions dans notre branche « master », vous pouvez simplement
+              fusionner la branche « removals ».
+            </p>
+
+<pre>
+<b>$ git branch</b>
+* <span class="green">master</span>
+  removals
+<b>$ ls</b>
+README   hello.rb more.txt test.txt
+<b>$ git merge removals</b>
+Updating 8bd6d8b..8f7c949
+Fast-forward
+ more.txt |    1 -
+ test.txt |    1 -
+ 2 files changed, 0 insertions(+), 2 deletions(-)
+ delete mode 100644 more.txt
+ delete mode 100644 test.txt
+<b>$ ls</b>
+<span class="hl">README   hello.rb</span>
+</pre>
+
+            <h4 id="merge-complex">
+              fusions plus avancées
+            </h4>
+
+            <p>Bien sûr, cela ne marche pas juste pour de simples ajouts et suppressions
+              de fichiers. Git va tout autant fusionner les modifications de fichiers—En
+              fait, il est même très bon pour ça. Par exemple, voyons ce qu'il arrive
+              quand on édite un fichier dans une branche et nous le renommons et puis
+              l'éditons dans une autre branche et enfin nous fusionnons ensemble
+              ces branches. Chaos, vous avez dit ? Voyons cela.
+            </p>
+
+<pre>
+<b>$ git branch</b>
+* master
+<b>$ cat hello.rb </b>
+class HelloWorld
+  def self.hello
+    puts "Hello World"
+  end
+end
+
+HelloWorld.hello
+</pre>
+
+            <p>Nous allons donc commencer par créer une nouvelle branche nommée
+              « change_class », puis basculer vers celle-ci afin que les modifications
+              de renommage de classe soient isolées. Nous allons changer chaque
+              occurrence de « HelloWorld » en « HiWorld ».</p>
+
+<pre>
+<b>$ git checkout -b change_class</b>
+Switched to a new branch 'change_class'
+<b>$ vim hello.rb </b>
+<b>$ head -1 hello.rb </b>
+class HiWorld
+<b>$ git commit -am 'changed the class name'</b>
+[change_class 3467b0a] changed the class name
+ 1 files changed, 2 insertions(+), 4 deletions(-)
+</pre>
+
+              <p>Nous avons alors validé les changements de nom de la classe dans
+                une branche « change_class ». En retournant vers la branche « master »
+                le nom de la classe sera ré-initialisé à ce à quoi il était avant
+                que nous changions de branche. Ici nous pouvons modifier quelque chose
+                de différent (dans ce cas la sortie affichée) et en même temps
+                renommer le fichier <code>hello.rb</code> en <code>ruby.rb</code>.
+              </p>
+
+<pre>
+<b>$ git checkout master</b>
+Switched to branch 'master'
+<b>$ git mv hello.rb ruby.rb</b>
+<b>$ vim ruby.rb </b>
+<b>$ git diff</b>
+<span class="umber">diff --git a/ruby.rb b/ruby.rb
+index 2aabb6e..bf64b17 100644
+--- a/ruby.rb
++++ b/ruby.rb</span>
+<span class="lblue">@@ -1,7 +1,7 @@</span>
+ class HelloWorld
+
+   def self.hello
+<span class="red">-    puts "Hello World"</span>
+<span class="green">+    puts "Hello World from Ruby"</span>
+   end
+
+ end
+<b>$ git commit -am 'added from ruby'</b>
+[master b7ae93b] added from ruby
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+ rename hello.rb => ruby.rb (65%)
+</pre>
+
+              <p>Désormais ces modifications sont sauvées dans la branche « master ». Notez
+                que le nom de la classe est de nouveau « HelloWorld », et non « HiWorld ».
+                Pou incorporer le changement « HiWorld » nous pouvons juste fusionner
+                la branche « change_class ». Néanmoins, le nom du fichier a changé depuis
+                que nous avons changé de branche, que va faire Git ?</p>
+
+<pre>
+<b>$ git branch</b>
+  change_class
+* master
+<b>$ git merge change_class</b>
+Renaming hello.rb => ruby.rb
+Auto-merging ruby.rb
+Merge made by recursive.
+ ruby.rb |    6 ++----
+ 1 files changed, 2 insertions(+), 4 deletions(-)
+<b>$ cat ruby.rb</b>
+class HiWorld
+  def self.hello
+    puts "Hello World from Ruby"
+  end
+end
+
+HiWorld.hello
+</pre>
+
+                <p>Et bien, il va simplement s'en rendre compte. Notez qu'il n'y a aucun conflit de
+                  fusion et que le fichier qui a été renommé a désormais le changement de nom
+                  de classe « HiWorld » qui a été fait dans l'autre branche. Plutôt cool.</p>
+
+                <h4 id="merge-conflicts">
+                  conflits de fusion
+                </h4>
+
+                <p>Les fusions Git relèvent donc de la magie, nous n'avons jamais à traiter
+                  des conflits de fusion ? Pas tout à fait. Dans des situations où
+                  un même bloc de code est édité dans différentes branches il n'y a aucun moyen
+                  pour un ordinateur de s'y retrouver, alors c'est à nous de nous débrouiller.
+                  Voyons un autre exemple de changement d'une même ligne dans deux branches.
+                </p>
+
+<pre>
+<b>$ git branch</b>
+* master
+<b>$ git checkout -b fix_readme</b>
+Switched to a new branch 'fix_readme'
+<b>$ vim README </b>
+<b>$ git commit -am 'fixed readme title'</b>
+[fix_readme 3ac015d] fixed readme title
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+</pre>
+
+                <p>Nous avons alors créé un commit du changement d'une ligne dans notre
+                  fichier README dans une branche. Maintenant changeons la même ligne
+                  d'une manière différente depuis notre branche « master ».</p>
+
+<pre>
+<b>$ git checkout master</b>
+Switched to branch 'master'
+<b>$ vim README </b>
+<b>$ git commit -am 'fixed readme title differently'</b>
+[master 3cbb6aa] fixed readme title differently
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+</pre>
+
+                  <p>Arrive le plus amusant—nous allons fusionner la première
+                    branche dans notre branche « master », provoquant un conflit de fusion.</p>
+
+<pre>
+<b>$ git merge fix_readme</b>
+Auto-merging README
+CONFLICT (content): Merge conflict in README
+Automatic merge failed; fix conflicts and then commit the result.
+<b>$ cat README </b>
+<<<<<<< HEAD
+Many Hello World Examples
+=======
+Hello World Lang Examples
+>>>>>>> fix_readme
+
+This project has examples of hello world in
+nearly every programming language.
+</pre>
+
+                    <p>Vous pouvez voir que Git insère des marqueurs standards de conflit de fusion,
+                      très similaires à Subversion, dans les fichiers qui ont un conflit de fusion.
+                      Maintenant c'est à vous de les résoudre. Nous allons le faire manuellement,
+                      mais regardez
+                      <a href="http://git-scm.com/docs/git-mergetool">git mergetool</a>
+                      si vous voulez que Git lance un outil graphique de fusion
+                      (comme kdiff3, emerge, p4merge, etc) à la place.
+                    </p>
+
+<pre>
+<b>$ vim README </b>  <span class="exp"># here I'm fixing the conflict</span>
+<b>$ git diff</b>
+<span class="umber">diff --cc README
+index 9103e27,69cad1a..0000000
+--- a/README
++++ b/README</span>
+<span class="lblue">@@@ -1,4 -1,4 +1,4 @@@</span>
+<span class="red">- Many Hello World Examples</span>
+ <span class="red">-Hello World Lang Examples</span>
+<span class="green">++Many Hello World Lang Examples</span>
+
+  This project has examples of hello world in
+</pre>
+
+                    <p>Un bon conseil lors de la résolution de conflit de fusion est que si
+                      vous exécutez <code>git diff</code>, cela va vous montrer chaque côté
+                      du conflit et comment vous l'avez résolu comme affiché ici. Maintenant
+                      il est l'heure de marquer notre fichier comme résolu. Avec Git on le fait
+                      avec <code>git add</code>—pour dire à Git que le fichier a été résolu
+                      vous devez l'indexer.</p>
+
+<pre>
+<b>$ git status -s</b>
+UU README
+<b>$ git add README </b>
+<b>$ git status -s</b>
+M  README
+<b>$ git commit </b>
+[master 8d585ea] Merge branch 'fix_readme'
+</pre>
+
+                      <p>Et nous avons alors résolu avec succès notre conflit de fusion et créé
+                        un commit avec le résultat.</p>
+
+                      <p class="nutshell">
+                        <b>Pour résumer</b>, vous utilisez <code>git merge</code> pour combiner
+                        un autre contexte de branche dans votre branche courante. Cela va
+                        automatiquement décider comment combiner au mieux les différents instantanés
+                        en un nouvel instantané avec le travail propre de chaque.
+                      </p>
+
+                    </div>
+                  </div>
+
+                  <div class="box">
+                    <h2>
+                      <span class="docs">
+                        <a target="new" href="http://git-scm.com/docs/git-log">docs</a> &nbsp;
+                        <a target="new" href="http://git-scm.com/book/fr/Utilitaires-Git-S%C3%A9lection-des-versions#Plages-de-<em>commits</em>">livre</a>
+                      </span>
+                      <a name="log">git log</a>
+                      <span class="desc">affiche l'historique des commits d'une branche</span>
+                    </h2>
+
+                    <div class="block">
+
+                      <p>Jusqu'à présent nous créé des commits des instantanés de votre projet et basculé
+                        entre différents contextes isolés, mais comment faire si nous avons oublié
+                        comment nous en sommes arrivés à un certain point ? Ou si nous voulons
+                        savoir à quel point une branche diffère d'une autre ? Git fournit un outil
+                        qui affiche tous les messages de commits qui vous ont amené jusqu'à
+                        votre commit courant, appelé <code>git log</code>.</p>
+
+                      <p>Pour comprendre la commande d'historique, vous devez connaître quelles
+                        informations sont stockées quand vous exécutez la commande
+                        <code>git commit</code> pour enregistrer un instantané. En plus de la référence
+                        des fichiers et du message de commit et des informations sur l'auteur
+                        du commit, Git stocke également le commit sur laquelle vous avez
+                        basé votre instantané. C'est-à-dire que, si vous clonez un projet, quel
+                        est l'instantané que vous avez modifié pour obtenir l'instantané que vous
+                        avez enregistré ? C'est utile pour savoir comment
+                        le projet est arrivé à cet état et permet à Git de savoir qui a changé quoi.
+                        Si Git a l'instantané que vous avez sauvegardé et celui sur lequel vous vous
+                        êtes basé, alors il peut automatiquement savoir ce que vous avez changé.
+                        Le commit sur lequel un autre commit est basé est appelé le
+                        « parent ».
+                      </p>
+
+                      <p>Pour voir une liste chronologique des parents de n'importe quelle branche,
+                        vous pouvez exécuter <code>git log</code> quand vous êtes dans cette branche.
+                        Par exemple, si vous exécutez <code>git log</code> dans le projet Hello World
+                        sur lequel nous avons travaillé dans cette section, nous allons voir tous les
+                        messages des commits créés.
+                      </p>
+
+<pre>
+<b>$ git log</b>
+<span class="yellow">commit 8d585ea6faf99facd39b55d6f6a3b3f481ad0d3d</span>
+Merge: 3cbb6aa 3ac015d
+Author: Scott Chacon &lt;schacon@gmail.com>
+Date:   Fri Jun 4 12:59:47 2010 +0200
+
+    Merge branch 'fix_readme'
+
+    Conflicts:
+        README
+
+<span class="yellow">commit 3cbb6aae5c0cbd711c098e113ae436801371c95e</span>
+Author: Scott Chacon &lt;schacon@gmail.com>
+Date:   Fri Jun 4 12:58:53 2010 +0200
+
+    fixed readme title differently
+
+<span class="yellow">commit 3ac015da8ade34d4c7ebeffa2053fcac33fb495b</span>
+Author: Scott Chacon &lt;schacon@gmail.com>
+Date:   Fri Jun 4 12:58:36 2010 +0200
+
+    fixed readme title
+
+<span class="yellow">commit 558151a95567ba4181bab5746bc8f34bd87143d6</span>
+Merge: b7ae93b 3467b0a
+Author: Scott Chacon &lt;schacon@gmail.com>
+Date:   Fri Jun 4 12:37:05 2010 +0200
+
+    Merge branch 'change_class'
+...
+</pre>
+
+                      <p>Pour voir une version plus compacte de ce même historique, nous pouvons
+                        utiliser l'option <code>--oneline</code>.</p>
+
+<pre>
+<b>$ git log --oneline</b>
+8d585ea Merge branch 'fix_readme'
+3cbb6aa fixed readme title differently
+3ac015d fixed readme title
+558151a Merge branch 'change_class'
+b7ae93b added from ruby
+3467b0a changed the class name
+17f4acf first commit
+</pre>
+
+                        <p>Cela nous informe que c'est l'historique du développement de ce projet.
+                          Si les messages de commit sont descriptifs, cela peut nous informer
+                          sur les changements apportés ou qui ont influencé l'état de l'instantané
+                          et donc ce qu'il contient.</p>
+
+                        <p>Nous pouvons aussi l'utiliser pour voir quand l'historique a connu des
+                          branches ou fusions avec l'option très utile <code>--graph</code>.
+                          Voici la même commande mais avec le graphe de topologie activé :</p>
+
+<pre>
+<b>$ git log --oneline --graph</b>
+*   8d585ea Merge branch 'fix_readme'
+|\
+| * 3ac015d fixed readme title
+* | 3cbb6aa fixed readme title differently
+|/
+*   558151a Merge branch 'change_class'
+|\
+| * 3467b0a changed the class name
+* | b7ae93b added from ruby
+|/
+* 17f4acf first commit
+</pre>
+
+                          <p>Nous pouvons alors voir quand le travail a divergé et puis a
+                            été fusionné. C'est très pratique pour voir ce qui s'est passé ou
+                            quels changements ont été appliqués, mais c'est aussi extrêmement utile
+                            pour gérer vos branches. Créons une nouvelle branche, effectuons
+                            du travail dans celle-ci puis basculons et faisons du travail dans notre
+                            branche master, puis voyons comment la commande <code>log</code> peut
+                            nous aider à savoir ce qui se passe sur chacune d'elle.</p>
+
+                          <p>D'abord nous allons créer une nouvelle branche pour ajouter le langage
+                            Erlang comme exemple Hello World—nous désirons le faire dans une branche
+                            afin de ne pas casser notre branche stable avec du code qui peut ne pas
+                            fonctionner pendant un certain temps pour pouvoir basculer proprement
+                            depuis ou vers cette branche.</p>
+
+<pre>
+<b>$ git checkout -b erlang</b>
+Switched to a new branch 'erlang'
+<b>$ vim erlang_hw.erl</b>
+<b>$ git add erlang_hw.erl </b>
+<b>$ git commit -m 'added erlang'</b>
+[erlang ab5ab4c] added erlang
+ 1 files changed, 5 insertions(+), 0 deletions(-)
+ create mode 100644 erlang_hw.erl
+</pre>
+
+                            <p>Étant donné que nous nous amusons beaucoup avec les langages de
+                              programmation fonctionnelle nous restons dans notre lancée et ajoutons
+                              également un programme exemple Haskell alors que nous sommes toujours
+                              dans la branche « erlang ».</p>
+
+<pre>
+<b>$ vim haskell.hs</b>
+<b>$ git add haskell.hs </b>
+<b>$ git commit -m 'added haskell'</b>
+[erlang 1834130] added haskell
+ 1 files changed, 4 insertions(+), 0 deletions(-)
+ create mode 100644 haskell.hs
+</pre>
+
+                              <p>Enfin, nous décidons de remettre le nom de classe de notre programme Ruby
+                                à ce qu'il était précédemment. Alors, nous pouvons retourner à la branche
+                                master, le changer et décider de le valider directement dans la branche
+                                master au lieu de créer une autre branche.</p>
+
+<pre>
+<b>$ git checkout master</b>
+Switched to branch 'master'
+<b>$ ls</b>
+README  ruby.rb
+<b>$ vim ruby.rb </b>
+<b>$ git commit -am 'reverted to old class name'</b>
+[master 594f90b] reverted to old class name
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+</pre>
+
+                                <p>Imaginons alors que nous ne travaillons pas sur le projet
+                                  pendant quelques temps, ayant autre chose à faire. Quand nous
+                                  y revenons nous voulons en savoir plus sur la branche « erlang » et
+                                  où nous nous en sommes arrêtés sur  la branche master. Juste en regardant
+                                  le nom de la branche, nous ne pouvons savoir que nous avons fait des modifications
+                                  en Haskell dans celle-ci, mais en utilisant <code>git log</code> nous pouvons
+                                  facilement le savoir. Si vous donnez à Git un nom de branche, cela va vous afficher
+                                  uniquement les commits qui sont « accessibles » dans l'historique de cette
+                                  branche, c'est-à-dire les commits qui ont influencé l'instantané
+                                  final.</p>
+
+<pre>
+<b>$ git log --oneline erlang</b>
+<span class="hl">1834130 added haskell</span>
+ab5ab4c added erlang
+8d585ea Merge branch 'fix_readme'
+3cbb6aa fixed readme title differently
+3ac015d fixed readme title
+558151a Merge branch 'change_class'
+b7ae93b added from ruby
+3467b0a changed the class name
+17f4acf first commit
+</pre>
+
+                                  <p>De cette manière, c'est très simple de voir que nous avons du code Haskell
+                                    inclus dans la branche (mis en surbrillance dans la sortie).
+                                    Ce qui est encore plus cool est que nous pouvons facilement dire à Git
+                                    que nous sommes seulement intéressés par les commits qui sont
+                                    accessibles dans une branche mais non accessibles dans une autre, en d'autres
+                                    termes quelles validations sont uniques à une branche par rapport à une autre.
+                                  </p>
+
+                                  <p>
+                                    Dans ce cas si nous sommes intéressés par la fusion de la branche « erlang »
+                                    nous voulons savoir quelles validations vont affecter notre instantané
+                                    quand nous allons fusionner. Pour dire à Git de le faire on utilise
+                                    un <code>^</code> devant la branche que nous ne voulons voir. Par exemple,
+                                    si nous voulons voir les validations qui sont dans la branche « erlang »
+                                    qui ne sont pas dans la branche « master », on peut exécuter
+                                    <code>erlang ^master</code>, et vice-versa. Notez que la ligne de
+                                    commande Windows traite <code>^</code> comme un caractère spécial,
+                                    dans ce cas vous devrez mettre <code>^master</code> entre guillemets.
+                                  </p>
+
+<pre>
+<b>$ git log --oneline erlang ^master</b>
+1834130 added haskell
+ab5ab4c added erlang
+<b>$ git log --oneline master ^erlang</b>
+594f90b reverted to old class name
+</pre>
+
+                                  <p>Cela nous donne un outil de gestion de branche simple et pratique.
+                                    Cela nous permet de facilement voir quels commits sont uniques
+                                    à quelles branches afin de savoir ce qu'il nous manque et ce que
+                                    nous fusionnerions en cas de fusion.
+                                  </p>
+
+                                  <p class="nutshell">
+                                    <b>Pour résumer</b>, vous pouvez utiliser <code>git log</code> pour lister
+                                    l'historique des commits ou lister les changements faits par d'autres
+                                    qui ont mené l'instantané jusqu'à la pointe de la branche. Cela vous permet
+                                    voir comment dans un contexte le projet est arrivé à l'état dans lequel il
+                                    est actuellement.
+                                  </p>
+
+                                </div>
+                              </div>
+
+                              <div class="box">
+                                <h2>
+                                  <span class="docs">
+                                    <a target="new" href="http://git-scm.com/docs/git-tag">docs</a> &nbsp;
+                                    <a target="new" href="http://git-scm.com/book/fr/Les-bases-de-Git-%C3%89tiquetage">livre</a>
+                                  </span>
+                                  <a name="tag">git tag</a>
+                                  <span class="desc">étiquette un moment dans l'historique comme important</span>
+                                </h2>
+
+                                <div class="block">
+
+                                  <p>
+                                    Si vous arrivez à un moment qui est important et vous voulez définitivement
+                                    vous souvenir de ce commit spécifique, vous pouvez
+                                    l'étiqueter avec <code>git tag</code>. La commande <code>tag</code>
+                                    va simplement mettre un signet permanent sur un commit spécifique
+                                    afin de pouvoir l'utiliser pour le comparer à d'autres commits dans
+                                    le futur. C'est souvent utilisé lorsque vous publiez une version ou vous
+                                    déployez quelque chose.
+                                  </p>
+
+                                  <p>Disons que vous vouliez publier notre projet Hello World en tant
+                                    que version « 1.0 ». Nous pouvons étiqueter le dernier commit
+                                    (<code>HEAD</code>) comme « v1.0 » en exécutant <code>git tag -a v1.0</code>.
+                                    Le <code>-a</code> signifie « fait une étiquette annotée », qui permet
+                                    de lui ajouter un message d'étiquette, ce que vous voudrez quasiment
+                                    toujours faire. L'exécuter sans le <code>-a</code> fonctionne aussi,
+                                    mais cela n'enregistre pas la date, qui l'a étiqueté,
+                                    ou ne vous laisse pas ajouter un message d'étiquette. Il est recommandé
+                                    de toujours créer des étiquettes annotées.</p>
+
+<pre>
+<b>$ git tag -a v1.0 </b>
+</pre>
+
+                                    <p>Quand vous exécutez la commande <code>git tag -a</code>, Git
+                                      va ouvrir votre éditeur et vous laisser écrire un message d'étiquette,
+                                      tout comme vous écririez un message de validation.</p>
+
+                                    <p>Notez alors que quand vous exécutez <code>git log --decorate</code>,
+                                      nous pouvons voir nos étiquettes.</p>
+
+<pre>
+<b>$ git log --oneline --decorate --graph</b>
+* 594f90b (HEAD, <span class="hl">tag: v1.0</span>, master) reverted to old class name
+*   8d585ea Merge branch 'fix_readme'
+|\
+| * 3ac015d (fix_readme) fixed readme title
+* | 3cbb6aa fixed readme title differently
+|/
+*   558151a Merge branch 'change_class'
+|\
+| * 3467b0a changed the class name
+* | b7ae93b added from ruby
+|/
+* 17f4acf first commit
+</pre>
+
+                                      <p>Si nous faisons des commits supplémentaires, l'étiquette va rester
+                                        sur cet commit, nous avons alors cet instantané spécifique étiqueté
+                                        indéfiniment et nous pourrons toujours comparer de futurs instantanés
+                                        à celui-ci.</p>
+
+                                      <p>Nous ne sommes pas limités à étiqueter le commit sur lequel nous sommes,
+                                        néanmoins. Si nous avons oublié d'étiqueter un commit que nous avons
+                                        publiéxe, nous pouvons rétroactivement l'étiqueter en exécutant la même
+                                        commande, mais avec le SHA du commit à la fin. Par exemple, disons
+                                        que nous avons publié le commit <code>558151a</code> (de plusieurs
+                                        commits en arrière) mais avons oublié de l'étiqueter à ce moment-là.
+                                        Nous pouvons alors l'étiqueter :</p>
+
+<pre>
+<b>$ git tag -a v0.9 558151a</b>
+<b>$ git log --oneline --decorate --graph</b>
+* 594f90b (HEAD, tag: v1.0, master) reverted to old class name
+*   8d585ea Merge branch 'fix_readme'
+|\
+| * 3ac015d (fix_readme) fixed readme title
+* | 3cbb6aa fixed readme title differently
+|/
+*   558151a (<span class="hl">tag: v0.9</span>) Merge branch 'change_class'
+|\
+| * 3467b0a changed the class name
+* | b7ae93b added from ruby
+|/
+* 17f4acf first commit
+</pre>
+
+                                        <p>Les étiquettes pointant sur des objets suivis par les pointes
+                                          des branches seront automatiquement téléchargées quand vous utilisez
+                                          la commande <code>fetch</code> sur un dépôt distant. Néanmoins,
+                                          les étiquettes qui ne sont pas accessibles depuis les pointes
+                                          des branches seront ignorées. Si vous voulez être sûr que
+                                          <em>toutes</em> les étiquettes sont <em>toujours</em> incluses,
+                                          vous devez inclure l'option <code>--tags</code>.
+                                        </p>
+
+<pre>
+<b>$ git fetch origin --tags</b>
+remote: Counting objects: 1832, done.
+remote: Compressing objects: 100% (726/726), done.
+remote: Total 1519 (delta 1000), reused 1202 (delta 764)
+Receiving objects: 100% (1519/1519), 1.30 MiB | 1.21 MiB/s, done.
+Resolving deltas: 100% (1000/1000), completed with 182 local objects.
+From git://github.com:example-user/example-repo
+ * [new tag]         v1.0       -> v1.0
+ * [new tag]         v1.1       -> v1.1
+</pre>
+
+                                        <p>Si vous voulez juste une seule étiquette, utilisez
+                                          <code>git fetch &lt;dépôt-distant> tag &lt;nom-étiquette></code>.
+                                        </p>
+
+                                        <p>Par défaut, les étiquettes ne sont pas incluses quand
+                                          vous utilisez la commande <code>push</code> vers un dépôt distant.
+                                          Pour explicitement les actualiser vous devez inclure l'option
+                                          <code>--tags</code> quand vous utilisez <code>git push</code>.
+                                        </p>
+
+                                        <p class="nutshell">
+                                          <b>Pou résumer</b>, vous utilisez <code>git tag</code> pour marquer
+                                          un commit ou un point dans votre dépôt comme important.
+                                          Cela vous permet de faire référence à ce commit avec
+                                          quelque chose de plus mémorable qu'un SHA.
+                                        </p>
+
+                                      </div>
+                                    </div>
+
+                                    <p><a class="page-button next-page" href="/fr/remotes">Aller à Partage et Mise à Jour de Projets &#187;</a></p>
+

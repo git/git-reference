@@ -1,0 +1,145 @@
+---
+layout: fr_reference
+---
+
+<div class="box">
+  <h2>Obtention et Création des Projets</h2>
+  <div class="block">
+    <p>
+      Pour pouvoir faire quoi que ce soit avec Git, vous devez
+      avoir un dépôt Git. C'est là que Git stocke les données des
+      instantanés que vous créez.
+    </p>
+
+    <p>
+      Il y a deux moyens d'avoir un dépôt Git. Le premier est de simplement
+      en initialiser un depuis un dossier existant, comme un nouveau projet
+      ou un projet débutant sa gestion de versions. Le second est de cloner
+      un dépôt public Git, comme vous le feriez si vous vouliez une copie
+      ou si vous vouliez collaborer avec quelqu'un sur un projet. Nous allons
+      aborder chacun de ces cas.
+    </p>
+
+  </div>
+</div>
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a target="new" href="http://git-scm.com/docs/git-init">docs</a> &nbsp;
+      <a target="new" href="http://git-scm.com/book/fr/v2/Les-bases-de-Git-D%C3%A9marrer-un-d%C3%A9p%C3%B4t-Git#Initialisation-d’un-dépôt-Git-dans-un-répertoire-existant">livre</a>
+    </span>
+    <a name="init">git init</a>
+    <span class="desc">initialise un répertoire comme dépôt Git</span>
+  </h2>
+
+  <div class="block">
+    <p>Pour créer un dépôt à partir d'un répertoire de fichiers existant,
+      vous pouvez simplement faire <code>git init</code> dans ce répertoire.
+      Par exemple, disons que nous avons un répertoire comprenant quelques fichiers,
+      ressemblant à :
+    </p>
+
+<pre>
+<b>$ cd konnichiwa</b>
+<b>$ ls</b>
+README   hello.rb
+</pre>
+
+    <p>C'est un projet dans lequel nous écrivons des exemples de programmes
+      « Hello World » dans chaque langage. Pour l'instant, nous avons simplement Ruby,
+      mais ce n'est qu'un début. Pour commencer à en gérer les versions avec Git,
+      nous pouvons simplement lancer <code>git init</code>.
+    </p>
+
+<pre>
+<b>$ git init</b>
+Dépôt Git vide initialisé dans /opt/konnichiwa/.git/
+</pre>
+
+    <p>Maintenant vous pouvez voir qu'il y a un sous-dossier <code>.git</code> dans
+      votre projet. Ceci est votre dossier Git dans lequel toutes les données des
+      instantanés de votre projet sont conservées.
+    </p>
+
+<pre>
+<b>$ ls -a</b>
+.        ..       .git     README   hello.rb
+</pre>
+
+    <p>Félicitations, vous avez maintenant une squelette de dépôt Git et vous pouvez
+      maintenant commencer à prendre des instantanés de votre projet.
+    </p>
+
+    <p class="nutshell">
+    <strong>Pour résumer</strong>, vous utilisez <code>git init</code> pour initialiser
+    le contenu d'un dossier existant en un nouveau dépôt Git. Vous pouvez le faire
+    dans n'importe quel dossier à tout moment, localement.</p>
+
+  </div>
+</div>
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a target="new" href="http://git-scm.com/docs/git-clone">docs</a> &nbsp;
+      <a target="new" href="http://git-scm.com/book/fr/v2/Les-bases-de-Git-D%C3%A9marrer-un-d%C3%A9p%C3%B4t-Git#Cloner-un-dépôt-existant">livre</a>
+    </span>
+    <a name="clone">git clone</a>
+    <span class="desc">copie un dépôt git pour pouvoir le modifier</span>
+  </h2>
+  <div class="block">
+    <p>
+      Si vous avez besoin de collaborer avec quelqu'un sur un projet, ou si
+      vous voulez obtenir une copie d'un projet pour lire ou utiliser son code,
+      vous le clonerez. Vous lancez simplement la commande <code>git clone [url]</code>
+      avec l'URL du projet que vous voulez copier.
+    </p>
+
+<pre>
+<b>$ git clone git://github.com/schacon/simplegit.git</b>
+Clonage dans 'simplegit'...
+remote: Counting objects: 13, done.
+remote: Total 13 (delta 0), reused 0 (delta 0), pack-reused 13
+Réception d'objets: 100% (13/13), 1.63 KiB | 0 bytes/s, fait.
+Résolution des deltas: 100% (2/2), fait.
+Vérification de la connectivité... fait.
+<b>$ cd simplegit/</b>
+<b>$ ls</b>
+README   Rakefile <span class="blue">lib</span>
+</pre>
+
+    <p>
+      Cela va copier l'historique complet de ce projet pour que vous l'ayez
+      à disposition localement et vous aurez un dossier de travail de la branche
+      principale de ce projet pour vous permettre de lire le code et commencer à
+      le modifier. Si vous rentrez dans ce nouveau dossier, vous pouvez voir
+      le sous-dossier <code>.git</code> où toutes les données du projet se trouvent.
+    </p>
+
+<pre>
+<b>$ ls -a</b>
+.        ..       <span class="blue">.git</span>     README   Rakefile <span class="blue">lib</span>
+<b>$ cd .git</b>
+<b>$ ls</b>
+HEAD        description <span class="blue">info</span>        packed-refs
+<span class="blue">branches    hooks       logs        refs</span>
+config      index       <span class="blue">objects</span>
+</pre>
+
+    <p>
+      Par défaut, Git crée un dossier avec le même nom que le projet de l'URL
+      donnée—typiquement tout ce qui se trouve après le dernier slash de l'URL.
+      Si vous voulez quelque chose de différent, vous pouvez l'indiquer à la fin
+      de la commande, après l'URL.
+    </p>
+
+    <p class="nutshell">
+      <strong>Pour résumer</strong>, vous utilisez <code>git clone</code> pour
+      obtenir une copie locale d'un dépôt Git pour pouvoir l'étudier ou le modifier.
+    </p>
+
+  </div>
+</div>
+
+<p><a class="page-button next-page" href="/fr/basic">Aller à Capture d’Instantané Basique &#187;</a></p>

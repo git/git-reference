@@ -1,0 +1,1009 @@
+---
+layout: fr_reference
+---
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a target="new" href="http://git-scm.com/book/fr/Les-bases-de-Git-Enregistrer-des-modifications-dans-le-d%C3%A9p%C3%B4t">livre</a>
+    </span>
+    Capture d’Instantané Basique
+  </h2>
+  <div class="block">
+    <p>
+      L'essentiel de Git tient à créer et sauvegarder des instantanés de votre projet
+      pour ensuite utiliser et comparer ces instantanés. Cette section va
+      présenter les commandes nécessaires pour créer et sauvegarder des instantanés
+      de votre projet.
+    </p>
+
+    <p>
+      Un concept important ici est que Git dispose d'un « index », qui se comporte
+      comme une sorte de zone d'attente pour votre instantané. Cela vous permet
+      d'accumuler des séries bien ordonnées d'instantanés à partir de fichiers modifiés
+      de votre dossier de travail, plutôt que de valider toutes les modifications de
+      fichiers d'un coup.
+    </p>
+
+    <p class="nutshell">
+      <strong>Pour résumer</strong>, vous utiliserez <code>git add</code> pour
+      commencer à suivre de nouveaux fichiers et aussi pour préparer la capture
+      des modifications apportées à des fichiers déjà suivis, puis
+      <code>git status</code> et <code>git diff</code> pour voir ce qui a été
+      modifié et préparé pour la capture et finalement <code>git commit</code> pour
+      enregistrer un instantané dans votre historique. Ce sera le flux de travail
+      basique que vous utiliserez la plupart du temps.
+    </p>
+
+  </div>
+</div>
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a target="new" href="http://git-scm.com/docs/git-add">docs</a> &nbsp;
+      <a target="new" href="http://git-scm.com/book/fr/Les-bases-de-Git-Enregistrer-des-modifications-dans-le-d%C3%A9p%C3%B4t#Placer-de-nouveaux-fichiers-sous-suivi-de-version">livre</a>
+    </span>
+    <a name="add">git add</a>
+    <span class="desc">ajoute le contenu d'un fichier dans la zone d'attente</span>
+  </h2>
+
+  <div class="block">
+    <p>
+      Dans Git, vous devez ajouter le contenu d'un fichier dans la zone d'attente
+      avant de pouvoir le valider. Si c'est un nouveau fichier, vous pouvez
+      exécuter <code>git add</code> pour l'ajouter au préalable à la zone d'attente,
+      mais même si le fichier est déjà « suivi »—en d'autres termes, il fait partie
+      de votre dernière validation—vous devez toujours lancer <code>git add</code>
+      pour ajouter de nouvelles modifications à votre zone d'attente.
+      Voyons quelques exemples.
+    </p>
+
+    <p>Revenons à notre exemple Hello World, une fois initialisé notre projet,
+      nous commencerions alors à y ajouter des fichiers et le ferions avec
+      <code>git add</code>. Nous pouvons utiliser <code>git status</code> pour
+      afficher l'état de notre projet.
+    </p>
+
+<pre>
+<b>$ git status -s</b>
+<span class="red">??</span> README
+<span class="red">??</span> hello.rb
+</pre>
+
+    Nous avons désormais deux fichiers non suivis. Nous pouvons maintenant les ajouter.
+
+<pre>
+<b>$ git add README hello.rb</b>
+</pre>
+
+    Maintenant si nous exécutons <code>git status</code> à nouveau, nous verrions
+    qu'ils ont été ajoutés.
+
+<pre>
+<b>$ git status -s</b>
+<span class="green">A</span>  README
+<span class="green">A</span>  hello.rb
+</pre>
+
+    <p class="aside">
+      Il est aussi courant d'ajouter récursivement tous les fichiers d'un nouveau projet
+      en indiquant le dossier de travail courant comme suit : <code>git add .</code>.
+      Sachant que Git va ajouter récursivement tous les fichiers dans un dossier que
+      vous lui donnez, si vous lui donnez le répertoire de travail courant, il va
+      simplement faire le suivi de chaque fichier qui s'y trouve. Dans ce cas,
+      la commande <code>git add .</code> aurait donné la même chose que
+      <code>git add README hello.rb</code>.
+    </p>
+
+    <p>OK, à présent si nous éditons un de ces fichiers et exécutons
+      <code>git status</code> à nouveau, nous allons observer
+      un comportement étrange.</p>
+<pre>
+<b>$ vim README</b>
+<b>$ git status -s</b>
+<span class="green">A</span><span class="red">M</span> README
+<span class="green">A</span>  hello.rb
+</pre>
+
+      <p>Le statut « AM » signifie que le fichier a été modifié depuis la dernière
+        fois qu'il a été ajouté. Cela signifie que si nous validons notre instantané
+        tout de suite, nous enregistrerions la version du fichier lors de l'exécution
+        précédente de <code>git add</code>, pas la version actuelle. Git ne suppose
+        pas que le fichier dans sa version actuelle est nécessairement celui que vous
+        voulez prendre en instantané—vous devez le préciser à Git avec la commande
+        <code>git add</code>.
+      </p>
+
+      <p class="nutshell">
+        <strong>Pour résumer</strong>,
+        vous exécutez <code>git add</code> sur un fichier lorsque vous voulez inclure
+        toute modification apportée au fichier dans le prochain instantané.
+        Toute modification qui ne sera pas ajoutée ne sera pas incluse dans
+        l'instantané—cela signifie que vous pouvez créer vos instantanés
+        de manière plus fine que dans la plupart des systèmes de gestion
+        de versions.</p>
+
+      <p>Pour voir cette flexibilité de capture en action dans un exemple
+        particulièrement intéressant qui ne capture que certaines des
+        modifications apportées à un même fichier, voyez l’option
+        « -p » de <code>git add</code> du livre Pro Git.</p>
+
+
+    </div>
+
+  </div>
+
+  <div class="box">
+    <h2>
+      <span class="docs">
+        <a target="new" href="http://git-scm.com/docs/git-status">docs</a> &nbsp;
+        <a target="new" href="http://git-scm.com/book/fr/Les-bases-de-Git-Enregistrer-des-modifications-dans-le-d%C3%A9p%C3%B4t#Vérifier-l%27état-des-fichiers">livre</a>
+      </span>
+      <a name="status">git status</a>
+      <span class="desc">affiche le statut de vos fichiers dans le dossier de travail et dans la zone d'attente</span>
+    </h2>
+
+    <div class="block">
+      <p>Comme vous l'avez vu dans la section <code>git add</code>, pour voir
+        le statut de votre zone d'attente comparé au code de votre dossier de travail,
+        vous pouvez exécuter la commande <code>git status</code>. En utilisant
+        l'option <code>-s</code> l'affichage de la sortie sera réduit. Sans cette option
+        la commande <code>git status</code> vous donnera plus de contexte et d'indications.
+        Voici le même affichage de la sortie du statut avec et sans le <code>-s</code>.
+        La sortie courte ressemble à ça :
+      </p>
+
+<pre>
+<b>$ git status -s</b>
+<span class="green">A</span><span class="red">M</span> README
+<span class="green">A</span>  hello.rb
+</pre>
+
+      Alors que le même statut avec la sortie longue ressemble à ça :
+
+<pre>
+<b>$ git status</b>
+# On branch master
+#
+# Initial commit
+#
+# Changes to be committed:
+#   (use "git rm --staged &lt;file>..." to unstage)
+#
+# <span class="green">new file:   README</span>
+# <span class="green">new file:   hello.rb</span>
+#
+# Changed but not updated:
+#   (use "git add &lt;file>..." to update what will be committed)
+#   (use "git checkout -- &lt;file>..." to discard changes in working directory)
+#
+# <span class="red">modified:   README</span>
+#
+</pre>
+
+      <p>Vous pouvez facilement constater que l'affichage court de la sortie
+        est beaucoup plus compact, mais la sortie longue a des informations et
+        indications utiles dont vous pourriez avoir besoin par la suite.
+      </p>
+
+      <p>Git vous dira également quels fichiers ont été effacés
+        ou les fichiers modifiés ou mis en attente depuis votre dernière validation</p>
+<pre>
+<b>$ git status -s</b>
+<span class="green">M</span>  README
+ <span class="red">D</span> hello.rb
+</pre>
+
+        Remarquez qu'il y a deux colonnes dans la sortie courte du statut.
+        La première colonne est pour la zone d'attente, la seconde est pour le
+        dossier de travail. Par exemple, si vous avez le fichier README en zone
+        d'attente et qu'ensuite vous le modifiez sans exécuter <code>git add</code>
+        une seconde fois, vous verrez ceci :
+
+<pre>
+<b>$ git status -s</b>
+<span class="green">M</span><span class="red">M</span> README
+ <span class="red">D</span> hello.rb
+</pre>
+
+        <p class="nutshell">
+          <strong>Pour résumer</strong>,
+          vous exécutez <code>git status</code> pour voir si quoi que ce soit a été
+          modifié ou mis en attente depuis votre dernier instantané pour que vous
+          puissiez décider si vous voulez valider un nouvel instantané et avec quel
+          contenu.
+        </p>
+
+      </div>
+    </div>
+
+    <div class="box">
+      <h2>
+        <span class="docs">
+          <a target="new" href="http://git-scm.com/docs/git-diff">docs</a> &nbsp;
+          <a target="new" href="http://git-scm.com/book/fr/Les-bases-de-Git-Enregistrer-des-modifications-dans-le-d%C3%A9p%C3%B4t#Inspecter-les-modifications-indexées-et-non-indexées">livre</a>
+        </span>
+        <a name="diff">git diff</a>
+        <span class="desc">affiche les modifications indexées et non indexées</span>
+      </h2>
+
+      <div class="block">
+        <p class="nutshell">
+          Git utilise le terme « indexé » pour indiquer l'action qui consiste
+          à mettre une modification en zone d'attente, en vue de son inclusion
+          dans le prochain instantané. En fait, dans la littérature Git, les termes
+          stage (zone d'attente) et index sont interchangeables.
+          On trouve d'ailleurs très souvent le terme index dans les manuels officiels de Git.
+          Nous utiliserons donc le terme « indexer » et
+          l’adjectif « indexé » dans la suite de ce document.
+        </p>
+
+        <p>Il y a deux utilisations principales de la commande <code>git diff</code>.
+          Nous allons décrire la première ici, l'autre sera décrite plus loin
+          dans la section <a href="/fr/inspect">"Inspection et Comparaison"</a>.
+          Pour le moment, nous allons l’utiliser pour visualiser les modifications
+          déjà indexées pour le prochain instantané, et celles qui ne sont encore
+          présentes que dans notre dossier de travail.</p>
+
+        <h4>
+          git diff
+          <small>affiche les modifications non indexées</small>
+        </h4>
+
+        <p>Sans aucun argument, un simple <code>git diff</code> vous affichera au
+          format diff unifié (un correctif) ce que vous avez changé comme code ou
+          contenu de votre projet depuis la dernière indexation ou,
+          à défaut, le dernier instantané.
+        </p>
+
+<pre>
+<b>$ vim hello.rb</b>
+<b>$ git status -s</b>
+ <span class="red">M</span> hello.rb
+<b>$ git diff</b>
+<span class="umber">diff --git a/hello.rb b/hello.rb
+index d62ac43..8d15d50 100644
+--- a/hello.rb
++++ b/hello.rb</span>
+<span class="lblue">@@ -1,7 +1,7 @@</span>
+ class HelloWorld
+
+   def self.hello
+<span class="red">-    puts "hello world"</span>
+<span class="green">+    puts "bonjour monde"</span>
+   end
+
+ end
+</pre>
+
+        <p>Là où <code>git status</code> vous affichera quels fichiers ont changé
+          et/ou ont été indexés depuis votre dernière validation, <code>git diff</code>
+          va vous montrer quels sont concrètement ces changements, ligne par ligne.
+          C'est généralement une commande utile à la suite d'un <code>git status</code>.
+        </p>
+
+        <h4 id="diff-staged">
+          git diff --staged
+          <small>affiche les modifications indexées</small>
+        </h4>
+
+        <p>La commande <code>git diff --staged</code>  montrera le contenu indexé.
+          C'est-à-dire, elle vous affichera les changements qui seront inclus
+          dans le prochain instantané validé. Ainsi, si vous deviez indexer
+          les modifications de <code>hello.rb</code> de l'exemple précédent,
+          <code>git diff</code> tel quel ne vous affichera rien car il
+          vous afficherait que ce qui n'a <i>pas encore</i> été indexé.
+        </p>
+
+<pre>
+<b>$ git status -s</b>
+ <span class="red">M</span> hello.rb
+<b>$ git add hello.rb </b>
+<b>$ git status -s</b>
+<span class="green">M</span>  hello.rb
+<b>$ git diff</b>
+<b>$ </b>
+</pre>
+
+        <p>Si vous voulez voir les changements indexés, vous pouvez exécuter
+          <code>git diff --staged</code> à la place.</p>
+
+<pre>
+<b>$ git status -s</b>
+<span class="green">M</span>  hello.rb
+<b>$ git diff</b>
+<b>$ </b>
+<b>$ git diff --staged</b>
+<span class="umber">diff --git a/hello.rb b/hello.rb
+index d62ac43..8d15d50 100644
+--- a/hello.rb
++++ b/hello.rb</span>
+<span class="lblue">@@ -1,7 +1,7 @@</span>
+ class HelloWorld
+
+   def self.hello
+<span class="red">-    puts "hello world"</span>
+<span class="green">+    puts "bonjour monde"</span>
+   end
+
+ end
+</pre>
+
+          <h4 id="diff-head">
+            git diff HEAD
+            <small>affiche toutes les modifications, indexées ou non</small>
+          </h4>
+
+          <p>Si vous voulez voir aussi bien les modifications indexées que non indexées ensemble,
+            vous pouvez exécuter <code>git diff HEAD</code>—cela veut simplement
+            dire que vous voulez voir les différences entre votre répertoire de travail et le
+            dernier instantané, ignorant la zone d'index. Si nous apportons une autre modification
+            au fichier <code>hello.rb</code>, alors nous aurons des modifications indexées et
+            d'autres modifications non indexées. Voici ce que chacune des trois commandes
+            <code>diff</code> vous affichera :</p>
+<pre>
+<b>$ vim hello.rb </b>
+<b>$ git diff</b>
+<span class="umber">diff --git a/hello.rb b/hello.rb
+index 4f40006..2ae9ba4 100644
+--- a/hello.rb
++++ b/hello.rb</span>
+<span class="lblue">@@ -1,7 +1,7 @@</span>
+ class HelloWorld
+
+<span class="green">+  # says hello</span>
+   def self.hello
+     puts "bonjour monde"
+   end
+
+ end
+<b>$ git diff --staged</b>
+<span class="umber">diff --git a/hello.rb b/hello.rb
+index 2aabb6e..4f40006 100644
+--- a/hello.rb
++++ b/hello.rb</span>
+<span class="lblue">@@ -1,7 +1,7 @@</span>
+ class HelloWorld
+
+   def self.hello
+<span class="red">-    puts "hello world"</span>
+<span class="green">+    puts "bonjour monde"</span>
+   end
+
+ end
+<b>$ git diff HEAD</b>
+<span class="umber">diff --git a/hello.rb b/hello.rb
+index 2aabb6e..2ae9ba4 100644
+--- a/hello.rb
++++ b/hello.rb</span>
+<span class="lblue">@@ -1,7 +1,8 @@</span>
+ class HelloWorld
+
+<span class="green">+  # says hello</span>
+   def self.hello
+<span class="red">-    puts "hello world"</span>
+<span class="green">+    puts "bonjour monde"</span>
+   end
+
+ end
+</pre>
+
+            <h4 id="diff-stat">
+              git diff --stat
+              <small>affiche un résumé des modifications au lieu de leur détail</small>
+            </h4>
+
+            <p>Si nous ne voulons pas de l'affichage complet des modifications,
+              mais souhaitons davantage que la sortie de <code>git status</code>,
+              on peut utiliser l'option <code>--stat</code>, qui nous donnera
+              à la place un résumé. Voici le même exemple que
+              précédemment, mais en utilisant l'option <code>--stat</code>.
+            </p>
+
+<pre>
+<b>$ git status -s</b>
+<span class="green">M</span><span class="red">M</span> hello.rb
+<b>$ git diff --stat</b>
+ hello.rb |    1 <span class="green">+</span>
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+<b>$ git diff --staged --stat</b>
+ hello.rb |    2 <span class="green">+</span><span class="red">-</span>
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+<b>$ git diff HEAD --stat</b>
+ hello.rb |    3 <span class="green">++</span><span class="red">-</span>
+ 1 files changed, 2 insertions(+), 1 deletions(-)
+</pre>
+
+            <p>
+              Vous pouvez aussi ajouter des chemins à la fin de n’importe laquelle
+              de ces variantes pour réduire la sortie de <code>diff</code>
+              à des fichiers ou dossiers spécifiques.
+            </p>
+
+
+            <p class="nutshell">
+              <strong>Pour résumer</strong>,
+              vous exécutez <code>git diff</code> pour voir les détails de la commande
+              <code>git status</code> : <i>dans quelle mesure</i> les fichiers ont été
+              modifiés ou indexés, ligne par ligne.
+            </p>
+
+
+          </div>
+        </div>
+
+        <div class="box">
+          <h2>
+            <span class="docs">
+              <a target="new" href="http://git-scm.com/docs/git-commit">docs</a> &nbsp;
+              <a target="new" href="http://git-scm.com/book/fr/Les-bases-de-Git-Enregistrer-des-modifications-dans-le-d%C3%A9p%C3%B4t#Valider-vos-modifications">livre</a>
+            </span>
+            <a name="commit">git commit</a>
+            <span class="desc">valide un instantané à partir de la zone d'index</span>
+          </h2>
+
+          <div class="block">
+
+            <p>Maintenant que vous avez indexé le contenu dont vous voulez faire un instantané
+              avec la commande <code>git add</code>, vous exécutez <code>git commit</code>
+              pour enregistrer l'instantané.
+              Git enregistre vos nom et adresse email, il faut donc commencer par indiquer
+              leurs valeurs à Git.
+            </p>
+
+<pre>
+<b>$ git config --global user.name 'Votre Nom'</b>
+<b>$ git config --global user.email vous@domaine.fr</b>
+</pre>
+
+            <p>Indexons et validons tous les changements de notre fichier
+              <code>hello.rb</code>. Dans ce premier exemple, nous allons utiliser
+              l'option <code>-m</code> pour fournir un message de commit sur la ligne
+              de commande.
+            </p>
+
+<pre>
+<b>$ git add hello.rb </b>
+<b>$ git status -s</b>
+<span class="green">M</span>  hello.rb
+<b>$ git commit -m 'mes modifications bonjour monde'</b>
+[master 68aa034] mes modifications bonjour monde
+ 1 files changed, 2 insertions(+), 1 deletions(-)
+</pre>
+
+            <p>Nous avons désormais enregistré un instantané. Si nous exécutons
+              <code>git status</code> à nouveau, nous allons voir que « la copie
+              de travail est propre », ce qui signifie que nous n'avons fait aucune
+              modification depuis notre dernier commit—il n'y a aucun
+              travail en attente.</p>
+
+<pre>
+<b>$ git status</b>
+# On branch master
+nothing to commit (working directory clean)
+</pre>
+
+              <p>Si vous n'utilisez pas l'option <code>-m</code> option, Git va essayer
+                d'ouvrir un éditeur de texte pour écrire votre message de commit.
+                Dans <code>vim</code>, qui est utilisé par défaut à moins que vous
+                n'ayez configuré une alternative à utiliser, votre écran ressemblera
+                vraisemblablement à cela :
+              </p>
+
+<pre>
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD &lt;file>..." to unstage)
+#
+# modified:   hello.rb
+#
+~
+~
+".git/COMMIT_EDITMSG" 9L, 257C
+</pre>
+
+              <p>À ce stade vous ajoutez votre message de commit final au tout
+                début du document. Toute ligne qui commence par « # » sera ignorée—Git
+                va vous y ajouter la sortie de la commande <code>git status</code>
+                pour vous rappeler ce que vous avez modifié et indexé.</p>
+
+              <p>En règle générale, il est très important d'écrire de bons messages de commit.
+                Pour des projets libres, par convention vous écrirez votre message
+                plus ou moins dans ce format :</p>
+
+<pre>
+Un court (50 caractères ou moins) résumé des modifications
+
+Un texte explicatif plus détaillé, si nécessaire. Faites le tenir
+sur environ 72 caractères. Dans certains cas, la première ligne est
+traitée comme le sujet d'un email et le reste du texte comme le corps.
+Le saut de ligne entre le résumé et le corps est très important
+(à moins que vous omettiez complètement le corps) ; certains outils git
+peuvent mal fonctionner si vous les mettez l'un après l'autre.
+
+Les paragraphes supplémentaires viennent après d'autres sauts de ligne.
+
+ - Les listes à puces sont possibles, aussi
+
+ - Typiquement, un tiret ou une astérisque est utilisée comme puce,
+   précédée d'une seule espace, séparées par des sauts de ligne, mais
+   différentes conventions existent
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD &lt;file>..." to unstage)
+#
+# modified:   hello.rb
+#
+~
+~
+~
+".git/COMMIT_EDITMSG" 25L, 884C written
+</pre>
+
+                <p class="aside">
+                  Le message de commit est très important. Étant donné qu'une grande
+                  part de la puissance de Git est cette souplesse dans la création attentionnée
+                  des commits en local pour les partager ensuite, c'est très utile de
+                  pouvoir écrire trois ou quatre validations sur des modifications indépendantes
+                  afin que votre travail puisse être examiné plus facilement par vos pairs.
+                  Étant donné qu'il y a une différence entre créer un commit et pousser ses modifications,
+                  prenez bien le temps de faciliter aux personnes avec lesquelles vous travaillez
+                  la lecture de ce que vous avez fait en plaçant chaque modification indépendante
+                  dans un commit propre avec un joli message pour que ce soit
+                  simple pour eux de voir ce que vous faites et pourquoi.</p>
+
+                <h4 id="commit-a">
+                  git commit -a
+                  <small>indexe automatiquement, avant un commit, toutes les modifications aux fichiers suivis</small>
+                </h4>
+
+                <p>Si l'étape <code>git add</code> du flux de travail vous paraît lourde,
+                  Git vous permet de sauter celle-ci avec l'option <code>-a</code>.
+                  Cela va simplement dire à Git d'exécuter <code>git add</code> sur
+                  chaque fichier qui est « suivi »—c'est-à-dire, chaque fichier qui fait
+                  partie de votre dernier commit et qui a été modifié. Cela vous permet
+                  d'avoir un flux de travail plus proche de celui de Subversion si vous le voulez,
+                  en éditant simplement vos fichiers puis en exécutant <code>git commit -a</code>
+                  pour réaliser un instantané de tout ce qui a changé. Vous aurez toujours à
+                  exécuter <code>git add</code> pour commencer à suivre de nouveaux fichiers,
+                  néanmoins, tout comme avec Subversion.
+                </p>
+
+<pre>
+<b>$ vim hello.rb</b>
+<b>$ git status -s</b>
+ <span class="red">M</span>  hello.rb
+<b>$ git commit -m 'changes to hello file'</b>
+# On branch master
+# Changed but not updated:
+#   (use "git add &lt;file>..." to update what will be committed)
+#   (use "git checkout -- &lt;file>..." to discard changes in working directory)
+#
+# modified:   hello.rb
+#
+<span class="hl">no changes added to commit (use "git add" and/or "git commit -a")</span>
+<b>$ git commit -am 'changes to hello file'</b>
+[master 78b2670] changes to hello file
+ 1 files changed, 2 insertions(+), 1 deletions(-)
+</pre>
+
+                <p>Notez que si vous n'indexez aucune modification et que vous exécutez
+                  <code>git commit</code>, Git va simplement vous retourner la sortie de la
+                  commande <code>git status</code>, pour vous rappeler que rien n'a été indexé.
+                  La partie importante de ce message a été mise en exergue, et signifie que
+                  rien n'a été ajouté pour commit. Si vous utilisez <code>-a</code>,
+                  cela va tout ajouter et créer un commit en même temps.
+                </p>
+
+                <p>Cela va vous permettre de finaliser le flux de travail complet des
+                  instantanés—vous faites des modifications à vos fichiers, vous utilisez
+                  ensuite <code>git add</code> pour indexer les fichiers que vous avez
+                  modifiés, <code>git status</code> et <code>git diff</code> pour voir
+                  ce que vous avez modifié, et finalement <code>git commit</code>
+                  pour enregistrer définitivement votre instantané.</p>
+
+                <p class="nutshell">
+                  <strong>Pour résumer</strong>,
+                  vous exécutez <code>git commit</code> pour enregistrer l'instantané
+                  de votre contenu indexé. Cet instantané peut ensuite être comparé,
+                  partagé et rembobiné au besoin.
+                </p>
+
+              </div>
+            </div>
+
+            <div class="box">
+              <h2>
+                <span class="docs">
+                  <a target="new" href="http://git-scm.com/docs/git-reset">docs</a> &nbsp;
+                  <a target="new" href="http://git-scm.com/book/fr/Les-bases-de-Git-Annuler-des-actions#Désindexer-un-fichier-déjà-indexé">livre</a>
+                </span>
+                <a name="reset">git reset</a>
+                <span class="desc">annule des changements et instantanés</span>
+              </h2>
+
+              <div class="block">
+                <p><code>git reset</code> est probablement la commande source de la plus
+                  grande confusion jamais écrite, mais elle peut être extrêmement utile
+                  une fois qu'on en a saisi le principe. Il y a trois invocations spécifiques
+                  de cette commande qui sont communément utilisées.
+                </p>
+
+                <h4 id="reset-head">
+                  git reset HEAD
+                  <small>retire des fichiers de l'index et ré-initialise le pointeur vers HEAD</small>
+                </h4>
+
+                <p>Pour commencer, vous pouvez l'utiliser pour enlever quelque chose de placé
+                  accidentellement dans l'index. Imaginons que vous avez modifié
+                  deux fichiers et que vous vouliez les enregistrer dans deux commits différents.
+                  Vous devriez indexer et faire un commit pour un fichier, puis indexer et faire un commit
+                  pour l'autre. Si vous avez accidentellement indexé les deux, comment
+                  en <i>dés</i>indexer un ? Vous le faites avec
+                  <code>git reset HEAD -- fichier</code>.  Techniquement vous n'avez pas à ajouter
+                  le <code>--</code>—il est utilisé pour dire à Git où se termine la liste des options
+                  et où commence la liste des chemins, mais c'est probablement une bonne idée
+                  de prendre l'habitude de l'utiliser pour séparer les options des chemins
+                  même si vous n'en avez pas besoin.
+                </p>
+
+                <p>Voyons à quoi cela ressemble de désindexer quelque chose.
+                  Ici nous avons deux fichiers qui ont été modifiés depuis notre dernier commit.
+                  Nous allons les indexer tous les deux, puis en désindexer un des deux.</p>
+
+<pre>
+<b>$ git status -s</b>
+ <span class="red">M</span> README
+ <span class="red">M</span> hello.rb
+<b>$ git add .</b>
+<b>$ git status -s</b>
+<span class="green">M</span>  README
+<span class="green">M</span>  hello.rb
+<b>$ git reset HEAD -- hello.rb </b>
+Unstaged changes after reset:
+M hello.rb
+<b>$ git status -s</b>
+<span class="green">M</span>  README
+ <span class="red">M</span> hello.rb
+</pre>
+
+                  <p>Vous pouvez alors exécuter <code>git commit</code> qui va juste
+                    enregistrer les modifications du fichier <code>README</code>, pas celles
+                    du fichier <code>hello.rb</code>.
+                  </p>
+
+                  <p class="aside">
+                    Si vous êtes curieux, ce que Git fait concrètement ici est de recaler
+                    la somme de contrôle de l'entrée de ce fichier dans l'index à ce qu'elle
+                    était dans la dernière validation. Vu que  <code>git add</code> crée une somme
+                    de contrôle d'un fichier et l'ajoute à l'index, <code>git reset HEAD</code>
+                    écrase cela avec sa valeur précédente, pour ainsi effectivement le sortir
+                    de l'index.
+                  </p>
+
+                  <p class="tip">
+                    Si vous voulez être capable de simplement exécuter <code>git unstage</code>,
+                    vous pouvez facilement définir un alias dans Git. Exécutez simplement
+                    <code>git config --global alias.unstage "reset HEAD"</code>.
+                    Une fois exécuté, vous pouvez ensuite exécuter
+                    <code>git unstage [fichier]</code> à la place.
+                  </p>
+
+                  <p>Si vous oubliez quelle est la commande pour désindexer
+                    quelque chose, Git vient à votre aide en vous le rappelant
+                    dans la sortie de la commande normale <code>git status</code>.
+                    Par exemple, si vous exécutez <code>git status</code> sans le
+                    <code>-s</code> quand vous avez des fichiers indexés, il vous
+                    dira comment les sortir de l'index :</p>
+
+<pre>
+<b>$ git status</b>
+# On branch master
+# Changes to be committed:
+#   <span class="hl">(use "git reset HEAD &lt;file>..." to unstage)</span>
+#
+#   <span class="green">modified:   README</span>
+#   <span class="green">modified:   hello.rb</span>
+#
+</pre>
+
+                    <p>Quand vous exécutez <code>git reset</code> sans spécifier un drapeau
+                      il utilise par défaut <code>--mixed</code>. Les autres options sont
+                      <code>--soft</code> et <code>--hard</code>.</p>
+
+                    <h4 id="reset-soft">
+                      git reset --soft
+                      <small>déplace HEAD vers une référence spécifique de commit, la zone d'attente restant inchangée</small>
+                    </h4>
+
+                    <p>La première chose que fait <code>git reset</code> est d'annuler
+                      le dernier commit et remettre les fichiers dans l'index.
+                      Si vous incluez le drapeau <code>--soft</code> il s'arrête là.
+                      Par exemple, si vous exécutez <code>git reset --soft HEAD~</code>
+                      (le parent de HEAD) le dernier commit sera annulé et les fichiers
+                      modifiés seront mis à nouveau dans l'index.</p>
+
+<pre>
+<b>$ git status -s</b>
+<span class="green">M</span>  hello.rb
+<b>$ git commit -am 'hello with a flower'</b>
+[master 5857ac1] hello with a flower
+ 1 files changed, 3 insertions(+), 1 deletions(-)
+<b>$ git status</b>
+# On branch master
+nothing to commit (working directory clean)
+<b>$ git reset --soft HEAD~</b>
+<b>$ git status -s</b>
+<span class="green">M</span>  hello.rb
+</pre>
+
+                      <p>Ça fait en gros la même chose que
+                        <code>git commit --amend</code>, vous permettant de continuer
+                        à travailler avant que vous n'ajoutiez les modifications de fichiers
+                        dans le même commit.</p>
+
+                      <h4 id="reset-hard">
+                        git reset --hard
+                        <small>annule toute modification, indexée ou encore dans la copie de travail, survenue depuis le dernier commit</small>
+                      </h4>
+
+                      <p>La troisième option est <code>--hard</code>. Cette variante annule toute
+                        modification indexée ou présente dans la copie de travail. En d'autres
+                        termes, elle ramène les deux à leur état du dernier commit en date.
+                        C'est la variante la plus dangereuse, car elle peut passer à la trappe
+                        des modifications de votre copie de travail. Toute modification
+                        non validée au préalable sera perdue.</p>
+
+<pre>
+<b>$ git status</b>
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD &lt;file>..." to unstage)
+#
+# <span class="green">modified:   README</span>
+#
+# Changes not staged for commit:
+#   (use "git add &lt;file>..." to update what will be committed)
+#   (use "git checkout -- &lt;file>..." to discard changes in working directory)
+#
+# <span class="red">modified:   README</span>
+#
+<b>$ git reset --hard HEAD</b>
+HEAD is now at 5857ac1 hello with a flower
+<b>$ git status</b>
+# On branch master
+nothing to commit (working directory clean)
+</pre>
+
+                        <p>Dans l'exemple ci-dessus, alors que nous avions toutes les modifications
+                          prêtes à être validées et ajoutées, un <code>git reset --hard</code>
+                          les a complètement supprimées. Le dossier de travail et l'index
+                          sont ré-initialisés à la pointe de la branche courante ou HEAD.</p>
+
+                        <p>Vous pouvez remplacer <code>HEAD</code> avec le SHA-1 d'un commit
+                          ou une autre référence vers un parent pour ré-initialiser en un point
+                          spécifique.</p>
+
+                        <p class="nutshell">
+                          <strong>Pour résumer</strong>,
+                          vous exécutez <code>git reset HEAD</code> pour annuler le dernier commit,
+                          sortir de l'index des fichiers sur lesquels vous aviez exécuté
+                          <code>git add</code> et que vous ne désirez pas inclure dans le prochain
+                          commit.</p>
+
+                      </div>
+                    </div>
+
+                    <div class="box">
+                      <h2>
+                        <span class="docs">
+                          <a href="http://git-scm.com/docs/git-rm">docs</a> &nbsp;
+                          <a href="http://git-scm.com/book/fr/Les-bases-de-Git-Enregistrer-des-modifications-dans-le-d%C3%A9p%C3%B4t#Effacer-des-fichiers">livre</a>
+                        </span>
+                        <a name="rm-mv">git rm</a>
+                        <span class="desc">supprime des fichiers de l'index</span>
+                      </h2>
+
+                      <div class="block">
+
+                        <p><code>git rm</code> va supprimer des entrées de l'index.
+                          C'est un peu différent de <code>git reset HEAD</code> qui désindexe des
+                          fichiers. Désindexer signifie recaler l'index à l'état dans lequel
+                          il était avant que nous fassions des modifications. <code>git rm</code> d'un
+                          autre côté sort complétement le fichier de l'index, de sorte
+                          qu'il ne sera pas inclus dans le prochain commit,
+                          le supprimant ainsi carrément.</p>
+
+                        <p>Par défaut, un <code>git rm file</code> va supprimer complètement
+                          le fichier de l'index et aussi de votre disque (le dossier
+                          de travail). Pour laisser le fichier dans le dossier de travail,
+                          vous pouvez utiliser <code>git rm --staged</code>.</p>
+
+                        <h4>
+                          git mv
+                          <small>git rm --staged orig; mv original nouveau; git add nouveau</small>
+                        </h4>
+
+                        <p>
+                          Contrairement à la plupart des systèmes de gestion de sources, Git ne
+                          suit pas le renommage des fichiers. À la place, il suit juste les commits
+                          et arrive par la suite à réaliser quels fichiers ont pu être renommés
+                          en comparant les commits. Si un fichier a été supprimé d'un commit
+                          et un autre fichier a été ajouté au suivant avec un contenu similaire,
+                          Git supposera que c'est sûrement un renommage. Alors, bien que la commande
+                          <code>git mv</code> existe, elle est superflue—tout ce qu'elle fait est un
+                          <code>git rm --staged</code>, renomme le fichier sur le disque, puis exécute un
+                          <code>git add</code> sur le nouveau fichier. Vous n'avez pas vraiment besoin
+                          de l'utiliser, mais si cela vous semble plus simple, n'hésitez pas.
+                        </p>
+
+                        <p class="aside">
+                          La commande est communément utilisée pour supprimer les fichiers.
+                          Mais il est souvent plus simple de juste supprimer les fichiers du disque
+                          puis exécuter <code>git commit -a</code>, ce qui va également automatiquement
+                          les supprimer de l'index.</p>
+
+                        <p class="nutshell">
+                          <strong>Pour résumer</strong>,
+                          vous exécutez <code>git rm</code> pour supprimer des fichiers du suivi de Git.
+                          Cela va également les supprimer de votre dossier de travail.
+                        </p>
+
+                      </div>
+                    </div>
+
+                    <div class="box">
+                      <h2>
+                        <span class="docs">
+                          <a href="http://git-scm.com/docs/git-stash">docs</a> &nbsp;
+                          <a href="http://git-scm.com/book/fr/Utilitaires-Git-Le-remisage">livre</a>
+                        </span>
+                        <a name="stash">git stash</a>
+                        <span class="desc">remise pour plus tard des modifications faites dans l'index et le dossier de travail</span>
+                      </h2>
+
+                      <div class="block">
+
+                        <p>Vous êtes au beau milieu de modifications mais quelque chose se présente
+                          qui nécessite que vous vous en occupiez, comme une très-très-urgente
+                          correction de bug, mais ne souhaitez pas valider ou perdre vos modifications
+                          en cours. <code>git stash</code> est là pour vous.
+                        </p>
+
+                        <h4>
+                          git stash
+                          <small>remise les modifications courantes sur la pile</small>
+                        </h4>
+
+                        <p>Un remisage prend l'état courant de votre dossier de travail et de l'index,
+                          les place sur une pile pour plus tard, et vous offre en retour un dossier
+                          de travail propre. Cela va vous ramener à l'état du dernier commit.
+                        </p>
+
+                        <p>Si vous avez des fichiers non suivis, <code>git stash</code> ne les inclura pas.
+                          Vous pouvez soit les indexer avec <code>git add</code> (sans faire un commit)
+                          avant de les remiser, ou, si vous avez une version récente de Git
+                          (1.7.7 ou plus), vous pouvez utiliser <code>git stash -u</code> pour aussi
+                          remiser des fichiers non versionnés.</p>
+
+<pre>
+<b>$ git status -s</b>
+<span class="red">M</span> hello.rb
+<b>$ git stash</b>
+Saved working directory and index state WIP on master: 5857ac1 hello with a flower
+HEAD is now at 5857ac1 hello with a flower
+<b>$ git status</b>
+# On branch master
+nothing to commit (working directory clean)
+</pre>
+
+                          <h4 id="stash-list">
+                            git stash list
+                            <small>affiche les remisages présents sur la pile</small>
+                          </h4>
+
+                          <p>C'est utile de savoir ce que vous avez stocké sur la pile et c'est la où
+                            <code>git stash list</code> entre en jeu. Exécuter cette commande
+                            va vous afficher la liste courante des éléments remisés.
+                          </p>
+
+<pre>
+<b>$ git stash list</b>
+stash@{0}: WIP on master: 5857ac1 hello with a flower
+</pre>
+
+                          <p>Le dernier élément ajouté sur la pile sera référencé par
+                            <code>stash@{0}</code> et incrémentera d'une unité la référence
+                            vers les éléments déjà présents.
+                          </p>
+
+<pre>
+<b>$ vim hello.rb</b>
+<b>$ git commit -am 'it stops raining'</b>
+[master ee2d2c6] it stops raining
+1 files changed, 1 insertions(+), 1 deletions(-)
+<b>$ vim hello.rb</b>
+<b>$ git stash</b>
+Saved working directory and index state WIP on master: ee2d2c6 it stops raining
+HEAD is now at ee2d2c6 it stops raining
+<b>$ git stash list</b>
+stash@{0}: WIP on master: ee2d2c6 it stops raining
+stash@{1}: WIP on master: 5857ac1 hello with a flower
+</pre>
+
+                          <h4 id="stash-apply">
+                            git stash apply
+                            <small>récupère l'élément depuis la pile et l'applique au dossier de travail</small>
+                          </h4>
+
+                          <p>Quand vous êtes prêt à reprendre là où vous en êtiez, exécutez la
+                            commande <code>git stash apply</code> pour appliquer dans le dossier
+                            de travail des modifications remisées.
+                          </p>
+
+<pre>
+<b>$ git stash apply</b>
+# On branch master
+# Changes not staged for commit:
+#   (use "git add &lt;file>..." to update what will be committed)
+#   (use "git checkout -- &lt;file>..." to discard changes in working directory)
+#
+# <span class="red">modified:   hello.rb</span>
+#
+no changes added to commit (use "git add" and/or "git commit -a")
+</pre>
+
+                          <p>Par défaut cela va appliquer le dernier élément remisé au dossier
+                            de travail. Ce sera l'élément référencé par <code>stash@{0}</code>.
+                            Vous pouvez récupérer à la place un autre élément remisé si vous le référencez
+                            dans la liste des arguments. Par exemple, <code>git stash apply stash@{1}</code>
+                            va appliquer l'élément référencé par <code>stash@{1}</code>.
+                          </p>
+
+                          <p>Si vous voulez également supprimer l'élément de la pile en même temps,
+                            utilisez <code>git stash pop</code> à la place.
+                          </p>
+
+                          <h4 id="stash-drop">
+                            git stash drop
+                            <small>supprime un élément de la pile</small>
+                          </h4>
+
+                          <p>Quand vous en avez fini avec un élément remisé et/ou vous voulez le
+                            supprimer de la liste, exécutez la commande <code>git stash drop</code>.
+                            Par défaut cela va supprimer le dernier élément remisé ajouté. Vous pouvez
+                            aussi supprimer un élément en particulier si vous l'indiquez en tant qu'argument.
+                          </p>
+
+                          <p>Dans cet exemple, notre pile a au moins deux éléments, mais nous
+                            voulons nous débarasser de l'élément ajouté avant le dernier, qui
+                            est référencé par <code>stash@{1}</code>.
+                          </p>
+
+<pre>
+<b>$ git stash drop stash@{1}</b>
+Dropped stash@{1} (0b1478540189f30fef9804684673907c65865d8f)
+</pre>
+
+                          <p>Si vous voulez supprimer tous les éléments remisés, exécutez juste
+                            la commande <code>git stash clear</code>. Mais faites cela seulement
+                            si vous êtes sûr d'en avoir fini avec la pile.
+                          </p>
+
+                          <p class="nutshell">
+                            <strong>Pour résumer</strong>, exécutez <code>git stash</code> pour rapidement
+                            remiser des modifications que vous n'êtes pas prêt à valider ou sauver, mais
+                            auxquelles vous voulez revenir après avoir travaillé sur autre chose.
+                          </p>
+
+                        </div>
+                      </div>
+
+                      <p><a class="page-button next-page" href="/fr/branching">Aller à Création de Branches et Fusion &#187;</a></p>
