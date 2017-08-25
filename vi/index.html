@@ -1,0 +1,185 @@
+---
+layout: vi_reference
+---
+<div class="box">
+  <h2>Giới thiệu</h2>
+  <div class="block">
+    <!--<p>
+    This is the Git reference site. It is meant to be a quick
+    reference for learning and remembering the most important and
+    commonly used Git commands.  The commands are organized into
+    sections of the type of operation you may be trying to do, and
+    will present the common options and commands needed to accomplish
+    these common tasks.
+    </p>-->
+    <p>
+    Trang web này để tham khảo về Git: một trang để tham khảo nhanh khi bạn học
+    hoặc sử dụng Git, chỉ chứa những lệnh quan trọng và hay dùng nhất của Git.
+    Các lệnh được nhóm lại thành từng mục theo tác vụ, và sẽ được trình bày với
+    những tùy chọn phổ biến nhất để hoàn thành tác vụ đó.
+    </p>
+
+    <!--<p>
+    Each section will link to the next section, so it can be used
+    as a tutorial.  Every page will also link to more in-depth
+    Git documentation such as the official manual pages and relevant
+    sections in the <a href="http://git-scm.com/book">Pro Git book</a>,
+    so you can learn more about any of
+    the commands. First, we'll start with thinking about source code
+    management like Git does.
+    </p>-->
+    <p>
+    Mỗi mục liên kết tới mục khác; mỗi trang cũng có tham khảo tới tài liệu
+    chuyên sâu hơn (ví dụ liên kết tới trang tài liệu chính thức hoặc các phần
+    trong tài liệu <a href="http://progit.org">Sách Pro Git</a>), để giúp các
+    bạn muốn nắm chắc hơn về Git.
+    </p>
+    <p>Trước tiên ta sẽ tìm hiểu về nguyên lý cơ bản của Git.</p>
+
+  </div>
+</div>
+
+<div class="box">
+  <h2>Ý tưởng của Git</h2>
+  <div class="block">
+    <!--<p>
+    The first important thing to understand about Git is
+    that it thinks about version control very differently than
+    Subversion or Perforce or whatever SCM you may be used to. It
+    is often easier to learn Git by trying to forget your assumptions
+    about how version control works and try to think about it in the
+    Git way.
+    </p>-->
+    <p>
+    Điều đầu tiên hết sức quan trọng mà bạn phải biết, là Git rất khác
+    biệt so với Subversion, Perforce hoặc bất kỳ cách quản lý mã nguồn
+    nào bạn từng biết. Vì thế, để học Git được mau chóng, tốt nhất là
+    bạn hãy quên mọi thứ bạn biết về Subversion, CVS, ... để bắt đầu
+    suy nghĩ theo cách hoàn toàn khác với Git.
+    </p>
+
+    <!--<p>
+    Let's start from scratch.  Assume you are designing a new source
+    code management system.  How did you do basic version control before
+    you used a tool for it?  Chances are that you simply copied your
+    project directory to save what it looked like at that point.
+    </p>-->
+    <p>
+    Hãy bắt dầu từ số không. Giả sử bạn đang thiết kế một hệ thống để
+    quản lý mã nguồn mới. Câu hỏi đặt ra là: phương án đơn giản nhất trước
+    khi phải cần các công cụ mạnh như Subversion, Perforce,.. là gì?
+    Câu trả lời có thể là bạn chỉ việc chép thư mục qua một nơi mới,
+    nhưng cách hay làm để sao lưu dữ liệu.
+    </p>
+
+    <pre> $ cp -R project project.bak </pre>
+
+    <!--<p>
+    That way, you can easily revert files that get messed up later, or
+    see what you have changed by comparing what the project looks like
+    now to what it looked like when you copied it.
+    </p>-->
+    <p>
+    Theo cách này, bạn dễ dàng phục hồi lại các tập tin bị thay đổi không
+    như ý, hoặc bạn có thể so sánh hai thư mục để có được tìm xem có
+    có sự thay đổi nào đã thực hiện.
+    </p>
+
+    <!--<p>
+    If you are really paranoid, you may do this often, maybe putting the
+    date in the name of the backup:
+    </p>-->
+    <p>
+    Nếu việc sao chép như trên diễn ra thường xuyên hơn, bạn có thể dùng
+    thêm các tên thư mục chứa thông tin về ngày tháng:
+    </p>
+
+    <pre> $ cp -R project project.2010-06-01.bak </pre>
+
+    <!--<p>
+    In that case, you may have a bunch of snapshots of your project that
+    you can compare and inspect from. You can even use this model to
+    fairly effectively share changes with someone.  If you zip up your
+    project at a known state and put it on your website, other developers
+    can download that, change it and send you a patch pretty easily.
+    </p>-->
+    <p>
+    Điều này dẫn tới kết quả là bạn sẽ có rất nhiều bản sao khác nhau của
+    dự án. Những bản sao này có thể dùng để chia sẻ với người khác, bằng
+    cách nén một trong các bản sao và đặt chúng lên một máy phục vụ web:
+    các lập trình viên khác có thể tải về bản sao, xem xét và thực hiện
+    các miếng vá thích hợp:
+    </p>
+
+    <pre>
+ $ wget http://example.com/project.2010-06-01.zip
+ $ unzip project.2010-06-01.zip
+ $ cp -R project.2010-06-01 project-my-copy
+ $ cd project-my-copy
+ $ (change something)
+ $ diff project-my-copy project.2010-06-01 > change.patch
+ $ (email change.patch)</pre>
+
+    <!--<p>
+    Now the original developer can apply that patch to their copy of the
+    project and they have your changes. This is how many open source
+    projects have been collaborated on for several years.
+    </p>-->
+    <p>
+    Khi nhận được miếng vá, lập trình viên chính của dự án sẽ xem xét và thực
+    hiện vá vào một bản sao nào đó của dự án. Thực tế, quá trình tạo bản sao,
+    chia sẻ và vá như trên là nguyên lý làm việc của nhiều hệ thống quản lý mã
+    nguồn, đặc biệt là của những dự án mã nguồn mở.
+    </p>
+
+    <!--<p>
+    This actually works fairly well, so let's say we want to write a tool
+    to make this basic process faster and easier.  Instead of writing a tool
+    that versions each file individually, like Subversion, we would probably
+    write one that makes it easier to store snapshots of our project without
+    having to copy the whole directory each time.
+    </p>-->
+    <p>
+    Bây giờ, cũng theo nguyên lý khá hiệu quả đó, ta sẽ xây dựng một
+    công cụ nhanh hơn và đơn giản hơn: thay vì quản lý phiên bản của từng
+    tập tin trong dự án (như cách làm của Subversion), ta xây dựng công
+    cụ để tạo và quản lý các bản sao của toàn bộ dự án, mà ta không phải
+    tạo ra các bản sao mới của toàn bộ các tập tin (như cách sao chép
+    đã mô tả ở trên.)
+    </p>
+
+    <!--<p>
+    This is essentially what Git is. You tell Git you want to save a snapshot
+    of your project with the <code>git commit</code> command and it basically
+    records a manifest of what all of the files in your project look like at
+    that point.  Then most of the commands work with those manifests to see
+    how they differ or pull content out of them, etc.
+    </p>-->
+    <p>
+    Ý tưởng vừa nói mô tả bản chất hoạt động của Git. Bạn sẽ nhờ Git
+    để tạo bản sao của toàn bộ dự án, bằng lệnh <code>git commit</code>
+    (xác nhận), nhưng Git đủ thông minh để tạo ra một danh sách chỉ gồm
+    các tập tin có thay đổi vào lúc xác nhận và thực hiện tạo bản sao
+    chỉ với danh sách đó. Hầu hết các lệnh còn lại của Git sẽ làm việc
+    với các danh sách mà lệnh <code>git commit</code> tạo ra (so sánh,
+    liệt kê), thay vì với toàn bộ các tập tin có trong thư mục.
+    </p>
+
+    <center><img src="./images/snapshots.png"/></center>
+
+    <!--<p>
+    If you think about Git
+    as a tool for storing and comparing and merging snapshots of your project,
+    it may be easier to understand what is going on and how to do things
+    properly.
+    </p>-->
+    <p>
+    Đơn giản hơn, bạn có thể nghĩ Git như một công cụ để so sánh và
+    trộn các bản sao của một dự án. Đừng nghĩ Git như công cụ để quản
+    lý phiên bản của từng tập tin như Subversion.
+    </p>
+
+  </div>
+</div>
+
+<p><a class="page-button next-page" href="/vi/creating">Nhận và Tạo Dự Án &#187;</a></p>

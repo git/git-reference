@@ -1,0 +1,1334 @@
+---
+layout: vi_reference
+---
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a target="new" href="http://git-scm.com/book/en/Git-Basics-Recording-Changes-to-the-Repository">book</a>
+    </span>
+    Cơ Bản Về Bản Sao
+  </h2>
+  <div class="block">
+    <!--<p>
+    Git is all about composing and saving snapshots of your project and then
+    working with and comparing those snapshots.  This section will explain
+    the commands needed to compose and commit snapshots of your project.
+    </p>-->
+    <p>
+    Làm việc với Git chủ yếu bao gồm tạo và so sánh các bản sao của dự án.
+    Phần này trình bày về những lệnh cần thiết để tạo và xác nhận các bản sao.
+    </p>
+
+    <!--<p>
+    An important concept here is that Git has an 'index', which acts as sort
+    of a staging area for your snapshot.  This allows you to build up a series
+    of well composed snapshots from changed files in your working directory,
+    rather than having to commit all of the file changes at once.
+    </p>-->
+    <p>
+    Một khái niệm quan trọng của Git là 'chỉ mục'. Có thể được coi nó là một
+    vùng tạm thời trước khi tạo bản sao chính, nhờ nó bạn có thể tạo những bản
+    sao bao gồm một nhóm các chỉnh sửa được tổ chức tốt, thay vì phải xác nhận
+    chỉnh sửa của tất cả các tập tin cùng một lúc.
+    </p>
+
+    <p class="nutshell">
+    <!--<strong>In a nutshell</strong>, you will use <code>git add</code> to start tracking new
+    files and also to stage changes to already tracked files, then
+    <code>git status</code> and <code>git diff</code> to see what has been
+    modified and staged and finally <code>git commit</code> to record your
+    snapshot into your history.  This will be the basic workflow that you use
+    most of the time.
+    </p>-->
+    <strong>Tóm tắt:</strong>, quá trình làm việc cơ bản với Git của bạn sẽ như
+    sau: sử dụng lệnh <code>git add</code> để bắt đầu theo dõi tập tin mới và
+    cũng để chỉ mục các tập tin cũ đã chỉnh sửa. Sau đó dùng lệnh <code>git
+    status</code> và <code>git diff</code> để xem lại các chỉnh sửa đã được chỉ
+mục, và cuối cùng dùng lệnh <code>git commit</code> để lưu lại bản sao của dự
+án.
+    </p>
+
+  </div>
+</div>
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a target="new" href="http://git-scm.com/docs/git-add">docs</a> &nbsp;
+      <a target="new" href="http://git-scm.com/book/en/Git-Basics-Recording-Changes-to-the-Repository#Tracking-New-Files">book</a>
+    </span>
+    <a name="add">git add</a>
+    <span class="desc">thêm nội dung tập tin vào vùng chỉ mục</span>
+  </h2>
+
+  <div class="block">
+    <!--<p>
+    In Git, you have to add file contents to your staging area before you
+    can commit them.  If the file is new, you can run <code>git add</code>
+    to initially add the file to your staging area, but even if the file
+    is already "tracked" - ie, it was in your last commit - you still need
+    to call <code>git add</code> to add new modifications to your staging
+    area. Let's see a few examples of this.
+    </p>-->
+    <p>
+    Với git, bạn phải thêm tập tin vào vùng chỉ mục trước khi bạn có thể xác nhận.
+    Bạn có thể dùng lệnh <code>git add</code> để thêm cả tập tin mới cũng như
+    những tập tin đã được theo dõi (ví dụ như tập tin từ những lần xác nhận
+    trước) vào vùng chỉ mục. Dưới đây là một vài ví dụ.
+    </p>
+
+    <!--<p>Going back to our Hello World example, once we've initiated the
+        project, we would now start adding our files to it and we would do that
+        with <code>git add</code>.  We can use <code>git status</code> to see
+    what the state of our project is.  </p>-->
+
+    <p>Ở ví dụ Hello World, sau khi khởi tạo dự án, ta sẽ bắt đầu thêm tập tin
+    vào bằng cách dùng <code>git add</code>. Chúng ta có thể dùng <code>git
+    status</code> để xem trạng thái hiện tại của dự án.
+    <p>
+
+<pre>
+<b>$ git status -s</b>
+<span class="red">??</span> README
+<span class="red">??</span> hello.rb
+</pre>
+
+<!--So right now we have two untracked files.  We can now add them.-->
+    Hiện tại có hai tập tin chưa được theo dõi. Chúng ta có thể thêm chúng vào
+    dự án.
+
+<pre>
+<b>$ git add README hello.rb</b>
+</pre>
+
+    <!--Now if we run <code>git status</code> again, we'll see that they've been
+    added.-->
+    Bây giờ nếu chạy <code>git status</code> một lần nữa, chúng ta sẽ thấy
+    chúng đã được thêm.
+
+<pre>
+<b>$ git status -s</b>
+<span class="green">A</span>  README
+<span class="green">A</span>  hello.rb
+</pre>
+
+    <!--<p class="aside">
+    It is also common to recursively add all files in a new project by specifying
+    the current working directory like this: <code>git add .</code>.  Since Git
+    will recursively add all files under a directory you give it, if you give it
+    the current working directory, it will simply start tracking every file
+    there.  In this case, a <code>git add .</code> would have done the same
+    thing as a <code>git add README hello.rb</code>, or for that matter so would
+    <code>git add *</code>, but that's only because we don't have subdirectories
+    which the <code>*</code> would not recurse into.
+    </p>-->
+    <p class="aside">
+    Git có thể thêm một cách đệ qui tất cả các tập tin trong một thư mục, do đó
+    để thêm tất cả các tập tin trong thư mục dự án, ta cũng thường dùng
+    <code>git add .</code>.  Việc dùng <code> git add . </code> cũng có tác
+    dụng như khi bạn gõ lệnh <code>git add README hello.rb</code>, và nếu như
+    trong thư mục hiện tại không có thêm thư mục con nào thì tác dụng của lệnh
+    <code>git add .</code> và <code>git add *</code> có thể nói là như
+    nhau.
+    </p>
+<!--
+    <p>OK, so now if we edit one of these files and run <code>git status</code>
+    again, we will see something odd.</p>-->
+    <p>Nếu bây giờ chúng ta sửa một tập tin và tiếp tục thực hiện lệnh
+    <code>git status</code>, kết quả sẽ như thế này.</p>
+
+<pre>
+<b>$ vim README</b>
+<b>$ git status -s</b>
+<span class="green">A</span><span class="red">M</span> README
+<span class="green">A</span>  hello.rb
+</pre>
+
+    <!--<p>The 'AM' status means that the file has been modified on disk since we
+    last added it.  This means that if we commit our snapshot right now, we will
+    be recording the version of the file when we last ran <code>git add</code>,
+    not the version that is on our disk.  Git does not assume that what the file
+    looks like on disk is necessarily what you want to snapshot - you have to
+    tell Git with the <code>git add</code> command.
+    </p>-->
+    <p>Trạng thái 'AM' có nghĩa là tập tin đã được chỉnh sửa sau khi ta thêm tập
+    tin đó vào (chữ 'A' chỉ 'Add', hay thêm vào, còn chữ 'M' chỉ 'Modified',
+    hay chỉnh sửa).  Nếu bây giờ ta xác nhận, Git sẽ xác nhận tập tin này vào
+    thời điểm ta gõ lệnh <code>git add</code> trước, không phải phiên bản ta
+    vừa lưu sửa đổi trên đĩa. Đó là vì Git không mặc định lưu mọi tập tin có
+    trong thư mục đang làm việc vào bản sao, mà bạn phải chỉ định cụ thể Git
+    thêm tập tin nào vào thông qua lệnh <code>git add</code>.
+    </p>
+
+    <p class="nutshell">
+    <!--<strong>In a nutshell</strong>,
+    you run <code>git add</code> on a file when you want to include whatever
+    changes you've made to it in your next commit snapshot.  Anything you've
+    changed that is not added will not be included - this means you can craft
+    your snapshots with a bit more precision than most other SCM
+    systems.</p>-->
+    <strong>Tóm tắt:</strong>, dùng <code>git add</code> để thêm tập tin đã
+    chỉnh sửa vào phiên bản trước khi tiến hành xác nhận. Chỉ những chỉnh sửa nào
+    được thêm vào mới được xác nhận vào kho, nhờ vậy mà các phiên bản có thể
+    bao gồm chính xác những tập tin bạn muốn.</p>
+
+    <!--<p>For a very interesting example of using this flexibility to stage only
+    parts of modified files at a time, see the '-p' option to
+    <code>git add</code> in the Pro Git book.</p>-->
+    
+    <p>Có một ví dụ rất thú vị về cách áp dụng tính mềm dẻo này để chỉ mục chỉ
+    một phần của tập tin đã chỉnh sửa ở phần tùy chọn <code>-p</code> của
+    <code>git add</code> trong sách Pro Git.</p>
+
+  </div>
+
+</div>
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a target="new" href="http://git-scm.com/docs/git-status">docs</a> &nbsp;
+      <a target="new" href="http://git-scm.com/book/en/Git-Basics-Recording-Changes-to-the-Repository#Checking-the-Status-of-Your-Files">book</a>
+    </span>
+    <a name="status">git status</a>
+    <span class="desc">xem trạng thái tập tin trong thư mục làm việc và vùng
+        tạm</span>
+  </h2>
+
+  <div class="block">
+      <!--<p>
+      As you saw in the <code>git add</code> section, in order to see what the
+      status of your staging area is compared to the code in your working
+      directory, you can run the <code>git status</code> command. Using the
+      <code>-s</code> option will give you short output.  Without that flag,
+      the <code>git status</code> command will give you more context and hints.
+      Here is the same status output with and without the <code>-s</code>.  The
+      short output looks like this:
+      </p>-->
+      <p>
+      Như đã thấy trong mục <code>git add</code>, để xem trạng thái vùng chỉ mục so
+      với thư mục đang làm việc, ta dùng lệnh <code>git status</code>. Để xem
+      kết quả ngắn gọn, ta thêm tùy chọn <code>-s</code>.  Nếu không có tùy
+      chọn nào, lệnh <code>git status</code> sẽ cho thấy nhiều thông tin chi
+      tiết và gợi ý. Dưới đây là kết quả của cùng một trạng thái khi có và
+      không có <code>-s</code>.  Đầu tiên là kết quả ngắn gọn:
+    </p>
+
+<pre>
+<b>$ git status -s</b>
+<span class="green">A</span><span class="red">M</span> README
+<span class="green">A</span>  hello.rb
+</pre>
+
+<!--Where the same status with the long output looks like this:-->
+    Khi không dùng tham số <code>-s</code>, kết quả xuất ra chi tiết hơn:
+
+<pre>
+<b>$ git status</b>
+# On branch master
+#
+# Initial commit
+#
+# Changes to be committed:
+#   (use "git rm --cached &lt;file>..." to unstage)
+#
+# <span class="green">new file:   README</span>
+# <span class="green">new file:   hello.rb</span>
+#
+# Changed but not updated:
+#   (use "git add &lt;file>..." to update what will be committed)
+#   (use "git checkout -- &lt;file>..." to discard changes in working directory)
+#
+# <span class="red">modified:   README</span>
+#
+</pre>
+
+    <!--<p>You can easily see how much more compact the short output is, but the
+    long output has useful tips and hints as to what commands you may want to
+    use next.
+    </p>-->
+    <p>Rất dễ để nhận ra sự khác biệt giữa hai kết quả trên. Dạng đầy đủ có
+    chứa gợi ý về lệnh mà ta sẽ dùng tiếp theo.
+    </p>
+
+    <!--<p>Git will also tell you about files that were deleted since your last
+    commit or files that were modified or staged since your last commit.</p>-->
+    <p>Git cũng sẽ cho thấy những tập tin đã bị xóa và tập tin bị chỉnh sửa hay
+    đã được chỉ mục kể từ lần xác nhận trước.
+
+<pre>
+<b>$ git status -s</b>
+<span class="green">M</span>  README
+ <span class="red">D</span> hello.rb
+</pre>
+
+<!--<p>You can see there are two columns in the short status output.  The first
+    column is for the staging area, the second is for the working directory.
+    So for example, if you have the README file staged and then you modify
+    it again without running <code>git add</code> a second time, you'll see
+    this:</p>-->
+<p>
+Dạng ngắn của trạng thái bao gồm hai cột. Cột đầu tiên dành mô tả trạng thái
+các tập tin trong chỉ mục tạm, còn cột thứ hai là dành liệt kê các tập tin ở
+thư mục hiện hành. Nếu bạn đã sửa tập tin README sau khi chỉ mục nó vào vùng
+tạm mà không thực hiện lệnh <code>git add</code> lần nữa, kết quả sẽ như thế
+này:
+</p>
+
+<pre>
+<b>$ git status -s</b>
+<span class="green">M</span><span class="red">M</span> README
+ <span class="red">D</span> hello.rb
+</pre>
+
+    <p class="nutshell">
+    <!--<strong>In a nutshell</strong>,
+    you run <code>git status</code> to see if anything has been modified
+    and/or staged since your last commit so you can decide if you want to
+    commit a new snapshot and what will be recorded in it.
+    </p>-->
+    <strong>Tóm tắt:</strong> dùng lệnh <code>git status</code> khi cần xem
+    những chỉnh sửa và/hoặc đã đưa vào vùng chỉ mục để quyết định xem có nên xác
+    nhận lưu lại chúng hay không.
+    </p>
+
+  </div>
+</div>
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a target="new" href="http://git-scm.com/docs/git-diff">docs</a> &nbsp;
+      <a target="new" href="http://git-scm.com/book/en/Git-Basics-Recording-Changes-to-the-Repository#Viewing-Your-Staged-and-Unstaged-Changes">book</a>
+    </span>
+    <a name="diff">git diff</a>
+    <!--<span class="desc">shows diff of what is staged and what is
+        modified but unstaged</span>-->
+    <span class="desc">hiển thị những chỉnh sửa của tập tin đã chỉ mục và chưa
+        đưa vào chỉ mục</span>
+  </h2>
+
+  <div class="block">
+    <!--<p>There are two main uses of the <code>git diff</code> command.  One
+        use we
+    will describe here, the other we will describe later in the <a
+    href="/inspect">"Inspection and Comparison"</a> section. The way we're
+    going to use it here is to describe the changes that are staged or modified
+    on disk but unstaged.</p>-->
+    <p>Lệnh <code>git diff</code> có hai công dụng chính. Chúng ta sẽ nói đến
+    công dụng thể hiện những chỉnh sửa đã được chỉ mục hoặc chưa được chỉ mục.
+    Công dụng còn lại sẽ được đề cập đến trong trong phần <a
+    href="/vi/inspect">"Kiểm tra và so sánh"</a>.</p>
+
+    <h4>
+      git diff
+      <!--<small>show diff of unstaged changes</small>-->
+      <small>chỉ ra những chỉnh sửa chưa được chỉ mục</small>
+    </h4>
+
+    <!--<p>Without any extra arguments, a simple <code>git diff</code> will display
+    in unified diff format (a patch) what code or content you've changed in your
+    project since the last commit that are not yet staged for the next commit
+    snapshot.
+    </p>-->
+    <p>Mặc định <code>git diff</code> sẽ hiển thị tổng hợp những sự chỉnh sửa
+    (một bản vá) mà bạn vừa tạo ra so với lần xác nhận trước mà chưa được ghi
+    nhận cho lần xác nhận kế tiếp.
+    </p>
+
+<pre>
+<b>$ vim hello.rb</b>
+<b>$ git status -s</b>
+ <span class="red">M</span> hello.rb
+<b>$ git diff</b>
+<span class="umber">diff --git a/hello.rb b/hello.rb
+index d62ac43..8d15d50 100644
+--- a/hello.rb
++++ b/hello.rb</span>
+<span class="lblue">@@ -1,7 +1,7 @@</span>
+ class HelloWorld
+
+   def self.hello
+<span class="red">-    puts "hello world"</span>
+<span class="green">+    puts "hola mundo"</span>
+   end
+
+ end
+</pre>
+
+    <!--<p>So where <code>git status</code> will show you what files have changed
+    and/or been staged since your last commit, <code>git diff</code> will
+    show you what those changes actually are, line by line.  It's generally
+    a good follow-up command to <code>git status</code>
+    </p>-->
+    <p>Trong khi lệnh <code>git status</code> sẽ cho ta biết tập tin nào đã bị
+    chỉnh sửa hay đã được chỉ mục kể từ lần xác nhận trước, lệnh <code>git
+    diff</code> sẽ chỉ ra những chỉnh sửa đó chính xác là như thế nào theo từng
+dòng. Lệnh này nên được dùng ngay sau <code>git status</code> </p>
+
+    <h4>
+      git diff --cached
+      <!--<small>show diff of staged changes</small>-->
+      <small>hiển thị những chỉnh sửa đã được chỉ mục</small>
+    </h4>
+
+    <!--<p>The <code>git diff --cached</code> command will show you what contents
+    have been staged.  That is, this will show you the changes that will
+    currently go into the next commit snapshot.  So, if you were to stage
+    the change to <code>hello.rb</code> in the example above,
+    <code>git diff</code> by itself won't show you any output because it will
+    only show you what is <i>not yet</i> staged.
+    </p>-->
+    <p>Lệnh <code>git diff --cached</code> sẽ cho ta thấy những chỉnh sửa nào
+    đã được chỉ mục, có nghĩa là những chỉ mục sẽ được đưa vào bản sao tiếp
+    theo khi xác nhận. Ở ví dụ trên, nếu bạn đã chỉ mục các chỉnh sửa tập tin
+    <code>hello.rb</code>, khi dùng lệnh <code>git diff</code> sẽ không xuất
+    ra thông tin gì cho bạn vì lệnh này chỉ xuất thông tin những gì <i>chưa</i>
+    được chỉ mục.</p>
+
+<pre>
+<b>$ git status -s</b>
+ <span class="red">M</span> hello.rb
+<b>$ git add hello.rb </b>
+<b>$ git status -s</b>
+<span class="green">M</span>  hello.rb
+<b>$ git diff</b>
+<b>$ </b>
+</pre>
+
+    <!--<p>If you want to see the staged changes, you can run
+    <code>git diff --cached</code> instead.</p>-->
+    <p>Để xem những chỉnh sửa đã được chỉ mục, bạn dùng lệnh
+    <code>git diff --cached</code></p>
+
+<pre>
+<b>$ git status -s</b>
+<span class="green">M</span>  hello.rb
+<b>$ git diff</b>
+<b>$ </b>
+<b>$ git diff --cached</b>
+<span class="umber">diff --git a/hello.rb b/hello.rb
+index d62ac43..8d15d50 100644
+--- a/hello.rb
++++ b/hello.rb</span>
+<span class="lblue">@@ -1,7 +1,7 @@</span>
+ class HelloWorld
+
+   def self.hello
+<span class="red">-    puts "hello world"</span>
+<span class="green">+    puts "hola mundo"</span>
+   end
+
+ end
+</pre>
+
+    <h4>
+      git diff HEAD
+      <!--<small>show diff of all staged or unstaged changes</small>-->
+      <small>xem tất cả các chỉnh sửa đã chỉ mục hoặc chưa chỉ mục</small>
+    </h4>
+
+    <!--<p>If you want to see both staged and unstaged changes together, you
+    can run <code>git diff HEAD</code> - this basically means you want to
+    see the difference between your working directory and the last commit,
+    ignoring the staging area. If we make another change to our
+    <code>hello.rb</code> file then we'll have some changes staged and some
+    changes unstaged.  Here are what all three <code>diff</code> commands
+    will show you:</p>-->
+    <p>Để xem tất cả những chỉnh sửa đã chỉ mục và chưa chỉ mục cùng một lúc,
+    bạn có thể dùng lệnh <code>git diff HEAD</code>. Về cơ bản nghĩa là bạn
+    muốn xem những chỉnh sửa so với lần xác nhận trước. Nếu ta chỉnh sửa tập tin
+    <code>hello.rb</code>, chỉ mục vài chỉnh sửa và không chỉ mục vài chỉnh sửa
+    khác. Chúng ta hãy xem kết quả khi dùng ba lệnh <code>diff</code> này:</p>
+
+<pre>
+<b>$ vim hello.rb </b>
+<b>$ git diff</b>
+<span class="umber">diff --git a/hello.rb b/hello.rb
+index 4f40006..2ae9ba4 100644
+--- a/hello.rb
++++ b/hello.rb</span>
+<span class="lblue">@@ -1,7 +1,7 @@</span>
+ class HelloWorld
+
+<span class="green">+  # says hello</span>
+   def self.hello
+     puts "hola mundo"
+   end
+
+ end
+<b>$ git diff --cached</b>
+<span class="umber">diff --git a/hello.rb b/hello.rb
+index 2aabb6e..4f40006 100644
+--- a/hello.rb
++++ b/hello.rb</span>
+<span class="lblue">@@ -1,7 +1,7 @@</span>
+ class HelloWorld
+
+   def self.hello
+<span class="red">-    puts "hello world"</span>
+<span class="green">+    puts "hola mundo"</span>
+   end
+
+ end
+<b>$ git diff HEAD</b>
+<span class="umber">diff --git a/hello.rb b/hello.rb
+index 2aabb6e..2ae9ba4 100644
+--- a/hello.rb
++++ b/hello.rb</span>
+<span class="lblue">@@ -1,7 +1,8 @@</span>
+ class HelloWorld
+
+<span class="green">+  # says hello</span>
+   def self.hello
+<span class="red">-    puts "hello world"</span>
+<span class="green">+    puts "hola mundo"</span>
+   end
+
+ end
+</pre>
+
+    <h4>
+      git diff --stat
+      <!--<small>show summary of changes instead of a full diff</small>-->
+      <small>xem tóm tắt những chỉnh sửa</small>
+    </h4>
+
+    <!--<p>If we don't want the full diff output, but we want more than the
+    <code>git status</code> output, we can use the <code>--stat</code>
+    option, which will give us a summary of changes instead. Here is the
+    same example as above, but using the <code>--stat</code> option instead.
+    </p>-->
+    <p>Lệnh <code>git diff --stat</code> cho kết quả chi tiết hơn so với lệnh
+    <code>git status</code>, nhưng lại tóm lược hơn so với các lệnh diff trên.
+    Đây là ví dụ với tùy chọn <code>--stat</code>.
+    </p>
+
+<pre>
+<b>$ git status -s</b>
+<span class="green">M</span><span class="red">M</span> hello.rb
+<b>$ git diff --stat</b>
+ hello.rb |    1 <span class="green">+</span>
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+<b>$ git diff --cached --stat</b>
+ hello.rb |    2 <span class="green">+</span><span class="red">-</span>
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+<b>$ git diff HEAD --stat</b>
+ hello.rb |    3 <span class="green">++</span><span class="red">-</span>
+ 1 files changed, 2 insertions(+), 1 deletions(-)
+</pre>
+
+    <!--<p>
+    You can also provide a file path at the end of any of these options
+    to limit the <code>diff</code> output to a specific file or subdirectory.
+    </p>-->
+    <p>
+    Bạn cũng có thể thêm đường dẫn đến tập tin vào sau các tùy chọn này để giới
+    hạn kết quả của lệnh <code>diff</code> cho một tập tin hay trong một thư
+    mục con.
+    </p>
+
+    <p class="nutshell">
+    <!--<strong>In a nutshell</strong>,
+    you run <code>git diff</code> to see details of the <code>git status</code>
+    command - <i>how</i> files have been modified or staged on a line by line
+    basis.
+    </p>-->
+    <strong>Tóm tắt:</strong> lệnh <code>git diff</code> dùng để xem chi tiết
+    hơn lệnh <code>git status</code> - xem tập tin đã được chỉnh sửa hoặc ghi
+    nhận <i>như thế nào</i> theo từng dòng.
+    </p>
+
+
+  </div>
+</div>
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a target="new" href="http://git-scm.com/docs/git-commit">docs</a> &nbsp;
+      <a target="new" href="http://git-scm.com/book/en/Git-Basics-Recording-Changes-to-the-Repository#Committing-Your-Changes">book</a>
+    </span>
+    <a name="commit">git commit</a>
+    <!--<span class="desc">records a snapshot of the staging area</span>-->
+    <span class="desc">ghi lại một bản sao của vùng chỉ mục</span>
+  </h2>
+
+  <div class="block">
+
+    <!--<p>Now that you have staged the content you want to snapshot with the
+    <code>git add</code> command, you run <code>git commit</code> to actually
+    record the snapshot.
+    Git records your name and email address with every commit you make,
+    so the first step is to tell Git what these are.
+    </p>-->
+    <p>Sau khi những chỉnh sửa đã được chỉ mục bằng lệnh <code>git add</code>,
+    bạn dùng lệnh <code>git commit</code> để thực sự ghi những chỉnh sửa đó
+    thành một bản sao. Git ghi lại tên và email của bạn trong mỗi xác nhận bạn
+    tạo, vì vậy, bạn hãy thông tin về bạn cho Git biết.
+    </p>
+
+<pre>
+<b>$ git config --global user.name 'Your Name'</b>
+<b>$ git config --global user.email you@somedomain.com</b>
+</pre>
+
+    <!--<p>Let's stage and commit all the changes to our
+    <code>hello.rb</code> file.  In this first example, we'll use the
+    <code>-m</code> option to provide the commit message on the command line.
+    </p>-->
+    <p>Bây giờ ta sẽ chỉ mục và xác nhận tất cả những chỉnh sửa của tập tin
+    <code>hello.rb</code>. Trong ví dụ này, chúng ta sẽ dùng tùy chọn
+    <code>-m</code> để nhập thông điệp xác nhận từ dòng lệnh.
+    </p>
+
+<pre>
+<b>$ git add hello.rb </b>
+<b>$ git status -s</b>
+<span class="green">M</span>  hello.rb
+<b>$ git commit -m 'my hola mundo changes'</b>
+[master 68aa034] my hola mundo changes
+ 1 files changed, 2 insertions(+), 1 deletions(-)
+</pre>
+
+    <!--<p>Now we have recorded the snapshot.  If we run <code>git status</code>
+    again, we will see that we have a "clean working directory", which means
+    that we have not made any changes since our last commit - there is no
+    un-snapshotted work in our checkout.</p>-->
+    <p>Bản sao đã được ghi lại. Nếu bây giờ ta thực hiện lệnh <code>git
+        status</code>, kết quả nhận được sẽ là ta có một "thư mục hiện hành
+    trống", có nghĩa là chúng ta chưa thực hiện chỉnh sửa nào kể từ lần xác nhận
+    gần nhất.</p>
+
+<pre>
+<b>$ git status</b>
+# On branch master
+nothing to commit (working directory clean)
+</pre>
+
+    <!--<p>If you leave off the <code>-m</code> option, Git will try to open a
+    text editor for you to write your commit message.  In <code>vim</code>,
+    which it will default to if it can find nothing else in your settings,
+    the screen might look something like this:
+    </p>-->
+    <p>Nếu không dùng tùy chọn <code>-m</code>, Git sẽ mở một trình soạn thảo
+    văn bản để bạn viết thông điệp xác nhận. Theo mặc định trình soạn thảo văn
+    bản là <code>vim</code>, và giao diện sẽ tương tự như thế này:
+    </p>
+
+<pre>
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD &lt;file>..." to unstage)
+#
+# modified:   hello.rb
+#
+~
+~
+".git/COMMIT_EDITMSG" 9L, 257C
+</pre>
+
+    <!--<p>At this point you add your actual commit message at the top of the
+    document.  Any lines starting with '#' will be ignored - Git will put
+    the output of the <code>git status</code> command in there for you as
+    a reminder of what you have modified and staged.</p>-->
+    <p>Lúc này bạn có thể thêm thông điệp xác nhận vào phần đầu văn bản. Những
+    dòng bắt đầu bằng '#' sẽ bị bỏ qua - Git sẽ hiển thị kết quả của lệnh
+    <code>git status</code> ở đây để bạn nhớ bạn đã sửa và chỉ mục những
+    gì.</p>
+
+    <!--<p>In general, it's very important to write a good commit message.
+    For open source projects, it's generally a rule to write your message
+    more or less in this format:</p>-->
+    <p>Thông thường, việc viết một thông điệp xác nhận tốt là rất quan trọng.
+    Đối với các dự án nguồn mở, có một quy tắc chung về việc viết thông điệp
+    xác nhận:</p>
+
+<!--<pre>
+Short (50 chars or less) summary of changes
+
+More detailed explanatory text, if necessary.  Wrap it to about 72
+characters or so.  In some contexts, the first line is treated as the
+subject of an email and the rest of the text as the body.  The blank
+line separating the summary from the body is critical (unless you omit
+the body entirely); some git tools can get confused if you run the
+two together.
+
+Further paragraphs come after blank lines.
+
+ - Bullet points are okay, too
+
+ - Typically a hyphen or asterisk is used for the bullet, preceded by a
+   single space, with blank lines in between, but conventions vary
+   here
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD &lt;file>..." to unstage)
+#
+# modified:   hello.rb
+#
+~
+~
+~
+".git/COMMIT_EDITMSG" 25L, 884C written
+</pre>-->
+<pre>
+Tóm lược ngắn (50 ký tự hoặc ít hơn) về những chỉnh sửa
+
+Thông tin chi tiết hơn nếu cần thiết. Giới hạn trong 72 ký tự trên một
+dòng. Trong nhiều hoàn cảnh, dòng đầu tiên được coi như chủ đề và phần
+còn lại là nội dung của một email. Dòng trống phân cách giữa tóm tắt và
+phần thân rất quan trọng (trừ khi bỏ qua hoàn toàn phần thân); Một số
+công cụ git có thể bị nhầm lẫn nếu bạn viết liền hai phần này với nhau.
+
+Các đoạn tiếp theo cũng được phân cách bằng những dòng trống.
+
+ - Được phép sử dụng gạch đầu dòng
+
+ - Dấu gạch ('-' - ND) hay dấu sao ('*' - ND) có thể được dùng như gạch
+   đầu dòng, bắt đầu bằng một khoảng trắng. Các gạch đầu dòng có thể
+   cách nhau bởi một dòng trống hoặc không, tùy theo quy định riêng
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+# modified:   hello.rb
+#
+~
+~
+~
+".git/COMMIT_EDITMSG" 25L, 884C written
+</pre>
+
+    <!--<p class="aside">
+    The commit message is very important. Since much of the power of
+    Git is this flexibility in carefully crafting commits locally and then
+    sharing them later, it is very powerful to be able to write three or
+    four commits of logically separate changes so that your work may be more
+    easily peer reviewed.  Since there is a separation between committing and
+    pushing those changes, do take the time to make it easier for the people
+    you are working with to see what you've done by putting each logically
+    separate change in a separate commit with a nice commit message so it
+    is easier for them to see what you are doing and why.</p>-->
+    <p class="aside">
+    Thông điệp xác nhận rất quan trọng vì sức mạnh của Git phần lớn nằm ở
+    khả năng có thể tạo những xác nhận và sau đó chia sẻ chúng. Ba hay bốn xác
+    nhận được phân chia một cách hợp lý sẽ giúp việc theo dõi và xem lại dễ
+    dàng hơn. Bởi vì có sự phân chia giữa xác nhận và đẩy những chỉnh sửa này,
+    dành thời gian viết những thông điệp xác nhận tốt sẽ giúp đồng nghiệp
+    hiểu được bạn đang làm gì và vì sao dễ dàng hơn.</p>
+
+    <h4>
+      git commit -a
+      <!--<small>automatically stage all tracked, modified files before the
+          commit</small>-->
+      <small>tự động chỉ mục tất cả các tập tin đã chỉnh sửa, theo dõi trước khi
+          xác nhận</small>
+    </h4>
+
+    <!--<p>If you think the <code>git add</code> stage of the workflow is too
+    cumbersome, Git allows you to skip that part with the <code>-a</code>
+    option.  This basically tells Git to run <code>git add</code> on any file
+    that is "tracked" - that is, any file that was in your last commit and
+    has been modified.  This allows you to do a more Subversion style workflow
+    if you want, simply editing files and then running <code>git commit -a</code>
+    when you want to snapshot everything that has been changed.  You still need
+    to run <code>git add</code> to start tracking new files, though, just like
+    Subversion.
+    </p>-->
+    <p>Nếu bạn cho rằng giai đoạn <code>git add</code> trong chu trình làm việc
+    là quá rườm rà, Git cho phép bỏ qua nó bằng tùy chọn <code>-a</code>.  Với
+    tùy chọn này, Git sẽ thực hiện <code>git add</code> với tất cả những tập
+    tin đang được "tracked" (theo dõi) - tập tin đã được chỉnh sửa từ lần xác
+    nhận trước. Nhờ vậy bạn có thể thực hiện theo một chu trình làm việc theo
+    kiểu Subversion, chỉnh sửa tập tin và sau đó dùng lệnh <code>git commit
+    -a</code> để ghi lại tất cả những chỉnh sửa. Bạn sẽ vẫn phải dùng lệnh
+<code>git add</code> để bắt đầu theo dõi những tập tin mới, tương tự như với
+Subversion.
+    </p>
+
+<pre>
+<b>$ vim hello.rb</b>
+<b>$ git status -s</b>
+ <span class="red">M</span>  hello.rb
+<b>$ git commit -m 'changes to hello file'</b>
+# On branch master
+# Changed but not updated:
+#   (use "git add &lt;file>..." to update what will be committed)
+#   (use "git checkout -- &lt;file>..." to discard changes in working directory)
+#
+# modified:   hello.rb
+#
+<span class="hl">no changes added to commit (use "git add" and/or "git commit -a")</span>
+<b>$ git commit -am 'changes to hello file'</b>
+[master 78b2670] changes to hello file
+ 1 files changed, 2 insertions(+), 1 deletions(-)
+</pre>
+
+    <!--<p>Notice how if you don't stage any changes and then run
+    <code>git commit</code>, Git will simply give you the output of the
+    <code>git status</code> command, reminding you that nothing is staged.
+    The important part of that message has been highlighted, saying that nothing
+    is added to be committed.   If you use <code>-a</code>, it will add and
+    commit everything at once.
+    </p>-->
+    <p>Chú ý rằng nếu bạn chưa chỉ mục chỉnh sửa nào mà thực hiện ngay lệnh
+    <code>git commit</code>, Git sẽ xuất kết quả lệnh <code>git status</code>,
+    nhắc nhở rằng chưa có chỉnh sửa nào được chỉ mục. Những phần quan trọng của
+    thông điệp này được đánh dấu, nêu rằng không có chỉnh sửa nào đã được thêm
+    vào để xác nhận. Nếu thêm tùy chọn <code>-a</code>, tất cả chỉnh sửa sẽ được
+    chỉ mục và xác nhận đồng thời.
+    </p>
+
+    <!--<p>This now lets you complete the entire snapshotting workflow - you
+    make changes to your files, then use <code>git add</code> to stage
+    files you want to change, <code>git status</code> and <code>git diff</code>
+    to see what you've changed, and then finally <code>git commit</code>
+    to actually record the snapshot forever.</p>-->
+    <p>Đến đây ta đã hoàn thành một chu trình làm việc hoàn chỉnh - bạn thay
+    đổi các tập tin, sau đó dùng lệnh <code>git add</code> để chỉ mục các thay
+    đổi, lệnh <code>git status</code> và <code>git diff</code> để bạn xem lại
+    những chỉnh sửa đó, và cuối cùng lệnh <code>git commit</code> để thực sự ghi
+    lại bản sao.</p>
+
+    <p class="nutshell">
+    <!--<strong>In a nutshell</strong>,
+    you run <code>git commit</code> to record the snapshot of your staged
+    content.  This snapshot can then be compared, shared and reverted to
+    if you need to.
+    </p>-->
+    <strong>Tóm tắt:</strong> dùng lệnh <code>git commit</code> để ghi lại bản
+    sao gồm những chỉnh sửa đã được chỉ mục. Bản sao này sau đó có thể được so
+    sánh, chia sẻ hay hoàn lại nếu cần thiết.
+    </p>
+
+  </div>
+</div>
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a target="new" href="http://git-scm.com/docs/git-reset">docs</a> &nbsp;
+      <a target="new" href="http://git-scm.com/book/en/Git-Basics-Undoing-Things#Unstaging-a-Staged-File">book</a>
+    </span>
+    <a name="reset">git reset</a>
+    <!--<span class="desc">undo changes and commits</span>-->
+    <span class="desc">hoàn tác chỉnh sửa và xác nhận</span>
+  </h2>
+
+  <div class="block">
+    <!--<p><code>git reset</code> is probably the most confusing command written
+    by humans, but it can be very useful once you get the hang of it.
+    There are three specific invocations of it that are generally
+    helpful.
+    </p>-->
+    <p>Lệnh <code>git reset</code> có lẽ là lệnh khó hiểu nhất được viết ra
+    nhưng nó rất hữu dụng một khi bạn bám vào nó. Có ba trường hợp được đưa ra
+    về lệnh này hoàn toàn hữu ích.
+    </p>
+
+    <h4>
+      git reset HEAD
+      <!--<small>unstage files from index and reset pointer to HEAD</small>-->
+      <small>huỷ chỉ mục tập tin và đặt lại về HEAD</small>
+    </h4>
+
+    <!--<p>First, you can use it to unstage something that has been
+    accidentally staged.  Let's say that you have modified two files and want
+    to record them into two different commits.  You should stage and commit
+    one, then stage and commit the other.  If you accidentally stage both of
+    them, how do you <i>un-</i>stage one?  You do it with
+    <code>git reset HEAD -- file</code>.  Technically you don't have to
+    add the <code>--</code> - it is used to tell Git when you have stopped
+    listing options and are now listing file paths, but it's probably good to
+    get into the habit of using it to separate options from paths even if you
+    don't need to.
+    </p>-->
+    <p>Trong trường hợp này, ta sẽ dùng nó để lấy lại những chỉnh sửa đã ghi
+    nhận. Giả sử bạn đã chỉnh sửa hai tập tin và muốn lưu lại trong hai lần xác
+    nhận riêng rẽ. Bạn nên chỉ mục và xác nhận lần lượt từng tập tin một. Nếu
+    chẳng may bạn đã chỉ mục cả hai tập tin này, thực hiện lệnh
+    <code>git reset HEAD -- file</code>. <code>--</code> dùng để thông báo
+    với Git rằng các tùy chọn đã được liệt kê hết, và sau đây sẽ là danh
+    sách đường dẫn, nhưng phân cách giữa các tùy chọn và đường dẫn là một
+    thói quen tốt.
+    </p>
+
+    <!--<p>Let's see what it looks like to unstage something.  Here we have
+    two tập tins that have been modified since our last commit.  We will stage
+    both, then unstage one of them.</p>-->
+    <p>Dưới đây ta sẽ chỉ mục chỉnh sửa ở hai tập tin và sau đó lần lượt lấy
+    lại những chỉnh sửa của từng tập tin.</p>
+
+<pre>
+<b>$ git status -s</b>
+ <span class="red">M</span> README
+ <span class="red">M</span> hello.rb
+<b>$ git add .</b>
+<b>$ git status -s</b>
+<span class="green">M</span>  README
+<span class="green">M</span>  hello.rb
+<b>$ git reset HEAD -- hello.rb </b>
+Unstaged changes after reset:
+M hello.rb
+<b>$ git status -s</b>
+<span class="green">M</span>  README
+ <span class="red">M</span> hello.rb
+</pre>
+
+    <!--<p>Now you can run a <code>git commit</code> which will just record
+    the changes to the <code>README</code> file, not the now unstaged
+    <code>hello.rb</code>.
+    </p>-->
+    <p>Bây giờ nếu bạn thực hiện lệnh <code>git commit</code> thì sẽ chỉ
+    ghi lại chỉnh sửa ở tập tin <code>README</code>, chứ không bao gồm những
+    chỉnh sửa chưa được chỉ mục trong tập tin <code>hello.rb</code>.
+    </p>
+
+    <!--<p class="aside">
+    In case you're curious, what it's actually doing here is it is resetting
+    the checksum of the entry for that file in the "index" to be what it was
+    in the last commit.  Since <code>git add</code> checksums a file and adds
+    it to the "index", <code>git reset HEAD</code> overwrites that with what
+    it was before, thereby effectively unstaging it.
+    </p>-->
+    <p class="aside">
+    Khi bạn thực hiện lệnh này, thực tế là Git đã ghi đè checksum của một tập tin
+    trong chỉ mục bằng checksum của chính tập tin đó trong lần xác nhận trước. Vì
+    <code>git add</code> tính checksum của một tập tin và ghi nó vào chỉ mục,
+    <code>git reset HEAD</code> ghi lại nó bằng giá trị cũ, từ đó có thể bỏ
+    tập tin khỏi phạm vi chỉ mục.
+    </p>
+
+    <!--<p class="tip">
+    If you want to be able to just run <code>git unstage</code>, you can easily
+    setup an alias in Git.  Just run
+    <code>git config --global alias.unstage "reset HEAD"</code>.
+    Once you have run that, you can then just run
+    <code>git unstage [file]</code> instead.
+    </p>-->
+    <p class="tip">
+    Bạn có thể tạo một lệnh tắt <code>git unstage</code>  bằng cách chaỵ lệnh
+    <code>git config --global alias.unstage "reset HEAD"</code>. Từ giờ bạn có
+    thể sử dụng lệnh <code>git unstage [file]</code> để thực hiện thao tác này.
+    </p>
+
+    <!--<p>If you forget the command to unstage something, Git is helpful in
+       reminding you in the output of the normal <code>git status</code>
+       command.  For example, if you run <code>git status</code> without
+       the <code>-s</code> when you have staged files, it will tell you
+       how to unstage them:</p>-->
+    <p>Nếu bạn không nhớ lệnh nào dùng để hủy chỉ mục chỉnh sửa, Git sẽ nhắc
+       cho bạn trong kết quả của lệnh <code>git status</code>. Ví dụ khi bạn
+       dùng lệnh <code>git status</code> mà không dùng tùy chọn <code>-s</code>
+       sẽ được kết quả như sau:</p>
+
+<pre>
+<b>$ git status</b>
+# On branch master
+# Changes to be committed:
+#   <span class="hl">(use "git reset HEAD &lt;file>..." to unstage)</span>
+#
+#   <span class="green">modified:   README</span>
+#   <span class="green">modified:   hello.rb</span>
+#
+</pre>
+
+    <!--<p>When you run <code>git reset</code> without specifying a flag
+       it defaults to <code>--mixed</code>. The other options are
+       <code>--soft</code> and <code>--hard</code>.</p>-->
+    <p>Git mặc định dùng tùy chọn <code>--mixed</code> khi bạn không thêm tùy
+    chọn nào vào lệnh <code>git reset</code>. Các tùy chọn khác của lệnh này là
+    <code>--soft</code> và <code>--hard</code>.
+
+    <h4>
+      git reset --soft
+      <small>moves HEAD to specified commit reference, index and staging are untouched</small>
+    </h4>
+
+    <!--<p>The first thing <code>git reset</code> does is undo the last
+       commit and put the files back onto the stage. If you include the
+       <code>--soft</code> flag this is where it stops.  For example,
+       if you run <code>git reset --soft HEAD~</code> (the parent of the
+       HEAD) the last commit will be undone and the files touched
+       will be back on the stage again.</p>-->
+    <p>
+    Việc đầu tiên <code>git reset</code> làm là hoàn tác xác nhận cuối
+    và đưa các tập tin trở về vùng chỉ mục. Nếu bạn thêm tuỳ chọn
+    <code>--soft</code>. Ví dụ, nếu bạn chạy lệnh <code>git reset --soft
+        HEAD~</code> (cha của HEAD), xác nhận cuối sẽ được hoàn tác và
+    các tập tin sẽ được đưa trở lại vùng chỉ mục.
+    </p>
+
+<pre>
+<b>$ git status -s</b>
+<span class="green">M</span>  hello.rb
+<b>$ git commit -am 'hello with a flower'</b>
+[master 5857ac1] hello with a flower
+ 1 files changed, 3 insertions(+), 1 deletions(-)
+<b>$ git status</b>
+# On branch master
+nothing to commit (working directory clean)
+<b>$ git reset --soft HEAD~</b>
+<b>$ git status -s</b>
+<span class="green">M</span>  hello.rb
+</pre>
+
+<!--<p>This is basically doing the same thing as
+       <code>git commit --amend</code>, allowing you to do more work
+       before you roll in the file changes into the same commit.</p>-->
+<p>Lệnh này về cơ bản giống lệnh <code>git commit --amend</code>, cho
+phép bạn thêm các chỉnh sửa vào xác nhận trước đó.</p>
+
+    <h4>
+      git reset --hard
+      <small>unstage files AND undo any changes in the working directory since last commit</small>
+    </h4>
+
+<!--<p>The third option is to go <code>--hard</code> and make your working
+       directory look like the index, unstage files and undo any changes made
+       since the last commit.
+       This is the most dangerous option and not working directory safe. Any
+       changes not in the index or have not been commited will be
+       lost.</p>-->
+<p>Tuỳ chọn thứ ba là dùng <code>--hard</code> để huỷ chỉ mục, hoàn tác
+mọi chỉnh sửa bạn thêm vào từ lần xác nhận cuối. Đây là tuỳ chọn nguy
+hiểm nhất không an toàn cho thư mục làm việc của bạn. Bất kỳ chỉnh sửa
+chưa xác nhận sẽ mất.</p>
+
+<pre>
+<b>$ git status</b>
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD &lt;file>..." to unstage)
+#
+# <span class="green">modified:   README</span>
+#
+# Changes not staged for commit:
+#   (use "git add &lt;file>..." to update what will be committed)
+#   (use "git checkout -- &lt;file>..." to discard changes in working directory)
+#
+# <span class="red">modified:   README</span>
+#
+<b>$ git reset --hard HEAD</b>
+HEAD is now at 5857ac1 hello with a flower
+<b>$ git status</b>
+# On branch master
+nothing to commit (working directory clean)
+</pre>
+
+<!--<p>In the above example, while we had both changes ready to commit and
+       ready to stage, a <code>git reset --hard</code> wiped them out.
+       The working tree and staging area are reset to the tip of the current
+       branch or HEAD.</p>-->
+<p>Ở ví dụ trên, ta có chỉnh sửa dự kiến xác nhận và chỉnh sửa chưa chỉ
+mục của tập tin README. Lệnh <code>git reset --hard</code> đã xoá bỏ
+chúng và đặt lại toàn bộ về trạng thái giống lần xác nhận cuối.</p>
+
+    <!--<p>You can replace <code>HEAD</code> with a commit SHA-1 or another
+    parent reference to reset to that specific point.</p>-->
+    <p>Bạn có thể thay <code>HEAD</code> với mã SHA-1 của lần xác nhận
+    bất ký để đặt lại về lần xác nhận đó.</p>
+
+    <p class="nutshell">
+    <!--<strong>In a nutshell</strong>,
+    you run <code>git reset HEAD</code> to undo the last commit, unstage
+    files that you previously ran <code>git add</code> on and wish to not
+    include in the next commit snapshot</p>-->
+    <strong>Tóm tắt:</strong>,
+    lệnh <code>git reset HEAD</code> dùng để hoàn tác lần xác nhận cuối,
+    huỷ chỉ mục các tập tin bạn không muốn đưa vào lần xác nhận bản sao
+    kế sau khi bạn đã dùng lệnh <code>git add</code> thêm vào. (ND: bạn
+    có thể xem bài viết <a
+        href="http://git-scm.com/blog/2011/07/11/reset.html">Reset
+        Demystified</a> để hiểu rõ hơn về lệnh <code>reset</code> của
+    Git)</p>
+
+  </div>
+</div>
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a href="http://git-scm.com/docs/git-rm">docs</a> &nbsp;
+      <a href="http://git-scm.com/book/en/Git-Basics-Recording-Changes-to-the-Repository#Removing-Files">book</a>
+    </span>
+    <a name="rm-mv">git rm</a>
+    <!--<span class="desc">remove files from the staging area</span>-->
+    <span class="desc">loại bỏ tập tin ra khỏi vùng chỉ mục</span>
+  </h2>
+
+  <div class="block">
+
+    <!--<p><code>git rm</code> will remove entries from the staging area.
+    This is a bit different from <code>git reset HEAD</code> which "unstages"
+    files.  To "unstage" means it reverts the staging area to what was
+    there before we started modifying things.  <code>git rm</code> on the
+    other hand just kicks the file off the stage entirely, so that it's not
+    included in the next commit snapshot, thereby effectively deleting
+    it.</p>-->
+    <p>Lệnh <code>git rm</code> sẽ loại bỏ tập tin ra khỏi vùng chỉ mục. Điểm khác
+    biệt so với lệnh <code>git reset HEAD</code> ở chỗ lệnh lệnh này chỉ hoàn trả
+    vùng chỉ mục lại trạng thái ban đầu, còn lệnh <code>git rm</code> không chỉ
+    loại tập tin khỏi vùng chỉ mục mà còn xóa nó.</p>
+
+    <!--<p>By default, a <code>git rm file</code> will remove the file from the
+    staging area entirely and also off your disk (the working directory). To
+    leave the file in the working directory, you can use <code>git rm --cached
+    </code>.</p>-->
+    <p>Theo mặc định, lệnh <code>git rm file</code> sẽ loại bỏ hoàn toàn tập tin
+    đó khỏi vùng chỉ mục và đồng thời cũng xóa luôn tập tin trên đĩa cứng (thư mục
+    hiện hành). Để giữ tập tin trong thư mục hiện hành, bạn dùng lệnh <code>git rm --cached</code></p>
+
+    <h4>
+      git mv
+      <small>git rm --cached orig; mv orig new; git add new</small>
+    </h4>
+
+    <!--<p>
+    Unlike most other version control systems, Git does not track file renames.
+    Instead, it just tracks the snapshots and then figures out what files were
+    likely renamed by comparing snapshots.  If a file was removed from one
+    snapshot and another file was added to the next one and the contents are
+    similar, Git figures it was most likely a rename.  So, although the
+    <code>git mv</code> command exists, it is superfluous - all it does is a
+    <code>git rm --cached</code>, moves the file on disk, then runs a
+    <code>git add</code> on the new file.  You don't really need to use it, but
+    if it's easier, feel free.
+    </p>-->
+    <p>Khác với phần lớn các hệ thống quản lý mã nguồn khác, Git không theo dõi
+    các tập tin bị đổi tên. Thay vào đó nó chỉ theo dõi các bản sao để phát hiện những
+    tập tin đã bị xóa và thêm vào với nội dung giống nhau, khi đó Git sẽ hiểu đây là
+    trường hợp đổi tên. Mặc dù có lệnh <code>git mv</code>, nhưng nó là thừa -
+    lệnh này chỉ đơn thuần <code>git rm</code>, di chuyển tập tin trên đĩa cứng và
+    sau đó là <code>git add</code> tập tin mới.</p>
+
+    <!--<p class="aside">
+    In its normal form the command is used to delete files.
+    But it's often easier to just remove the files off your disk and
+    then run <code>git commit -a</code>, which will also automatically remove
+    them from your index.</p>-->
+    <p class="aside">
+    Tôi ít khi dùng lệnh này để xóa tập tin. Thay vào đó chỉ cần xóa tập tin trên đĩa
+    cứng và sau đó thực hiện lệnh <code>git commit -a</code> cũng sẽ giúp loại
+    bỏ tập tin khỏi chỉ mục.</p>
+
+    <p class="nutshell">
+    <!--<strong>In a nutshell</strong>,
+    you run <code>git rm</code> to remove files from being tracked in Git. It
+    will also remove them from your working directory.
+    </p>-->
+    <strong>Tóm tắt:</strong>,
+    lệnh <code>git rm</code> dùng để loại một tập tin nào đó khỏi sự theo dõi của
+    Git và đồng thời cũng xóa tập tin đó khỏi thư mục hiện hành.</p>
+
+  </div>
+</div>
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a href="http://git-scm.com/docs/git-stash">docs</a> &nbsp;
+      <a href="http://git-scm.com/book/en/Git-Tools-Stashing">book</a>
+    </span>
+    <a name="stash">git stash</a>
+    <span class="desc">save changes made in the current index and working directory for later</span>
+  </h2>
+
+  <div class="block">
+
+<!--<p>You're in the middle of some changes but something comes up that you
+    need to jump over to, like a so-urgent-right-now bugfix, but don't want
+    to commit or lose your current edits. <code>git stash</code> is there for you.
+    </p>-->
+<p>Bạn đang chỉnh sửa dang dở thì một vấn đề phát sinh cần được thêm vào
+ngay, chẳng hạn một bản vá khẩn cấp, nhưng bạn lại không muốn xác nhận
+hoặc mất các chỉnh sửa hiện tại của bạn. Lệnh <code>git stash</code> sẽ
+giải quyết vấn đề đó giúp bạn.</p>
+
+    <h4>
+      git stash
+      <small>add current changes to the stack</small>
+    </h4>
+
+    <!--<p>Stashing takes the current state of the working directory and index,
+    puts it on a stack for later, and gives you back a clean working directory.
+    It will then leave you at the state of the last commit.
+    </p>-->
+    <p>Cất giấu (stash) là đưa thư mục làm việc và vùng chỉ mục hiện tại
+    vào một ngăn xếp và đưa bạn trở về trạng thái của lần xác nhận
+    cuối.</p>
+
+    <!--<p>If you have untracked files, <code>git stash</code> will not include
+    them. You can either stage those files with <code>git add</code> (you don't
+    have to commit) before stashing, or, if you have a recent Git version
+    (1.7.7 or above), you can use <code>git stash -u</code> to also stash also
+    unversioned files.</p>-->
+    <p>Lệnh <code>git stash</code> sẽ không kèm theo các tập tin chưa
+    theo dõi. Cũng như các bạn tạo xác nhận, bạn phải dùng lệnh
+    <code>git add</code> để chỉ mục tập tin trước khi cất giấu hoặc với
+    các các phiên bản Git từ 1.7.7 về sau, bạn có thể dùng lệnh
+    <code>git stash -u</code> để cất giấu các tập tin chưa đánh phiên
+    bản.</p>
+
+<pre>
+<b>$ git status -s</b>
+<span class="red">M</span> hello.rb
+<b>$ git stash</b>
+Saved working directory and index state WIP on master: 5857ac1 hello with a flower
+HEAD is now at 5857ac1 hello with a flower
+<b>$ git status</b>
+# On branch master
+nothing to commit (working directory clean)
+</pre>
+
+    <h4>
+      git stash list
+      <!--<small>view stashes currently on the stack</small>-->
+    <small>liệt kê ngăn xếp</small>
+    </h4>
+
+    <!--<p>It's helpful to know what you've got stowed on the stash and this is where
+    <code>git stash list</code> comes in. Running this command will display a queue
+    of current stash items.
+    </p>-->
+    <p>Đôi khi, bạn cần biết bạn đã xếp gọn những gì vào ngăn cất giấu, lệnh
+    <code>git stash list</code> sẽ hiển thị một hàng danh sách của các mục cất
+    giấu của bạn.
+    </p>
+
+<pre>
+<b>$ git stash list</b>
+stash@{0}: WIP on master: 5857ac1 hello with a flower
+</pre>
+
+    <!--<p>The last item added onto the stash will be referenced by
+    <code>stash@{0}</code> and increment those already there by one.
+    </p>-->
+    <p>Mục cuối cùng thêm vào ngăn cất giấu được tham chiếu đến
+    <code>stash@{0}</code> và tăng dần theo một.
+    </p>
+
+<pre>
+<b>$ vim hello.rb</b>
+<b>$ git commit -am 'it stops raining'</b>
+[master ee2d2c6] it stops raining
+1 files changed, 1 insertions(+), 1 deletions(-)
+<b>$ vim hello.rb</b>
+<b>$ git stash</b>
+Saved working directory and index state WIP on master: ee2d2c6 it stops raining
+HEAD is now at ee2d2c6 it stops raining
+<b>$ git stash list</b>
+stash@{0}: WIP on master: ee2d2c6 it stops raining
+stash@{1}: WIP on master: 5857ac1 hello with a flower
+</pre>
+
+    <h4>
+      git stash apply
+      <!--<small>grab the item from the stash list and apply to current working
+          directory</small>-->
+      <small>đưa mục từ kho cất giấu vào thư mục làm việc</small>
+    </h4>
+
+    <!--<p>When you're ready to continue from where you left off, run the
+    <code>git stash apply</code> command to bring back the saved changes
+    onto the working directory.
+    </p>-->
+    <p>Khi bạn đã sẵn sàng tiếp tục công việc từ khi bạn đã cất giấu, lệnh
+    <code>git stash apply</code> sẽ đem các thay đổi đã cất giấu trở lại thư
+    mục làm việc.
+    </p>
+
+<pre>
+<b>$ git stash apply</b>
+# On branch master
+# Changes not staged for commit:
+#   (use "git add &lt;file>..." to update what will be committed)
+#   (use "git checkout -- &lt;file>..." to discard changes in working directory)
+#
+# <span class="red">modified:   hello.rb</span>
+#
+no changes added to commit (use "git add" and/or "git commit -a")
+</pre>
+
+    <!--<p>By default it will reapply the last added stash item to the working
+    directory. This will be the item referenced by <code>stash@{0}</code>.
+    You can grab another stash item instead if you reference it in the arguments
+    list. For example, <code>git stash apply stash@{1}</code> will apply the item
+    referenced by <code>stash@{1}</code>.
+    </p>-->
+    <p>Mặc định, lệnh trên sẽ tái ghép mục cuối cùng, tham chiếu đến
+    <code>stash@{0}</code>, vào thư mục làm việc. Bạn có thể tái ghép mục cất giấu
+    khác bằng cách thêm vào tham chiếu trong danh sách đối số. Ví dụ, <code>git
+        stash apply stash@{1}</code> sẽ tái ghép mục tham chiếu
+    <code>stash@{1}</code>.
+    </p>
+
+    <!--<p>If you also want to remove the item from the stack at the same time,
+    use <code>git stash pop</code> instead.
+    </p>-->
+    <p>Nếu bạn muốn xóa mục khỏi ngăn cất giấu sau khi tái ghép, dùng lệnh
+    <code>git stash pop</code> thay thế.
+    </p>
+
+    <h4>
+      git stash drop
+      <!--<small>remove an item from the stash list</small>-->
+      <small>xóa một mục khỏi danh sách cất giấu</small>
+    </h4>
+
+    <!--<p>When you're done with the stashed item and/or want to remove it from the
+    list, run the <code>git stash drop</code> command. By default this will
+    remove the last added stash item. You can also remove a specific item if
+    you include it as an argument.
+    </p>-->
+    <p>Lệnh <code>git stash drop</code> sẽ xóa mục đã cất giấu. Mặc định, lệnh
+    sẽ xóa mục cuối cùng nếu bạn không kèm theo đối số để xóa một mục xác định.
+    </p>
+
+    <!--<p>In this example, our stash list has at least two items, but we want
+    to get rid of the item added before last, which is referenced by
+    <code>stash@{1}</code>.
+    </p>-->
+    <p>Trong ví dụ sau, chúng ta có hai mục trong danh sách cất giấu nhưng
+    chúng ta muốn xóa mục đầu tiên được tham chiếu đến <code>stash@{1}</code>.
+    </p>
+
+<pre>
+<b>$ git stash drop stash@{1}</b>
+Dropped stash@{1} (0b1478540189f30fef9804684673907c65865d8f)
+</pre>
+
+    <!--<p>If you want to remove of all the stored items, just run
+    the <code>git stash clear</code> command. But only do this if you're
+    sure you're done with the stash.
+    </p>-->
+    <p>Khi đã chắc chắn hoàn tất các công việc với danh sách cất giấu, bạn có
+    thể dùng lệnh <code>git stash clear</code> để xóa tất cả các mục đã cất
+    giấu.
+    </p>
+
+    <p class="nutshell">
+    <!--<strong>In a nutshell</strong>, run <code>git stash</code> to quickly save
+    some changes that you're not ready to commit or save, but want to come
+    back to while you work on something else.-->
+    <strong>Tóm tắt:</strong> lệnh <code>git stash</code> lưu tạm vài thay đổi
+    bạn chưa dự định xác nhận, và sẽ được tiếp tục khi bạn đã xong công việc
+    khác.
+    </p>
+
+  </div>
+</div>
+
+<p><a class="page-button next-page" href="/vi/branching">Phân Nhánh và Tích Hợp &#187;</a></p>
+

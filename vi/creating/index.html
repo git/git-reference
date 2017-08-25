@@ -1,0 +1,189 @@
+---
+layout: vi_reference
+---
+
+<div class="box">
+  <h2>Khai Thác và Tạo Dự Án</h2>
+  <div class="block">
+    <!--<p>
+    In order to do anything in Git, you have to have a Git repository.  This
+    is where Git stores the data for the snapshots you are saving.
+    </p>-->
+    <p>Để làm việc với Git, bạn phải có kho lưu trữ để Git cất giữ các bản sao
+    bạn lưu lại.</p>
+
+    <!--<p>
+    There are two main ways to get a Git repository.  One way is to simply
+    initialize a new one from an existing directory, such as a new project or
+    a project new to source control.  The second way is to clone one from a
+    public Git repository, as you would do if you wanted a copy or wanted to
+    work with someone on a project.  We will cover both of these here.
+    </p>-->
+    <p>
+    Có hai cách để có một kho: đơn giản nhất là bắt đầu từ một thư mục trên máy
+    tính của bạn, khi bạn muốn bắt đầu một dự án mới hoặc đã có với Git. Cách
+    thư hai là <strong>nhân bản</strong> từ một kho lưu trữ đã có; cách này
+    thường áp dụng khi bạn làm việc với một vài người khác trong dự án, và việc
+    nhân bản kho lưu trữ Git là để bắt đầu phần việc của riêng bạn cho dự án
+    đó.
+    </p>
+
+  </div>
+</div>
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a target="new" href="http://git-scm.com/docs/git-init">docs</a> &nbsp;
+      <a target="new" href="http://git-scm.com/book/en/Git-Basics-Getting-a-Git-Repository#Initializing-a-Repository-in-an-Existing-Directory">book</a>
+    </span>
+    <a name="init">git init</a>
+    <span class="desc">khởi tạo kho lưu trữ từ thư mục sẵn có</span>
+  </h2>
+
+  <div class="block">
+    <!--<p>To create a repository from an existing directory of files, you can
+    simply run <code>git init</code> in that directory.  For example,
+    let's say we have a directory with a few files in it, like this:
+    </p>-->
+    <p>Bắt đầu từ một thư mục làm việc bất kỳ, bạn dùng lệnh <code>git
+        init</code> để tạo mới một kho lưu trữ Git cho thư mục đó. Ví dụ, ta có
+    thư mục 'konichiwa' với vài tập tin trong đó:</p>
+
+<pre>
+<b>$ cd konnichiwa</b>
+<b>$ ls</b>
+README   hello.rb
+</pre>
+
+    <!--<p>This is a project where we are writing examples of the "Hello World"
+    program in every language.  So far, we just have Ruby, but hey, it's
+    a start.  To start version controlling this with Git, we can simply
+    run <code>git init</code>.
+    </p>-->
+    <p>Trong dự án này, chương trình "Hello World" được viết bằng các ngôn
+    ngữ khác nhau, và Ruby là ngôn ngữ đầu tiên. Để bắt đầu quản lý
+    phiên bản với Git, đơn giản ta chạy lệnh <code>git init</code> để
+    tạo kho lưu trữ:</p>
+
+<pre>
+<b>$ git init</b>
+Initialized empty Git repository in /opt/konnichiwa/.git/
+</pre>
+
+    <!--<p>Now you can see that there is a <code>.git</code> subdirectory in your
+    project.  This is your Git repository where all the data of your
+    project snapshots are stored.
+    </p>-->
+    <p>Bạn sẽ thấy xuất hiện thư mục <code>.git</code> bên trong thư mục
+    'konichiwa'. Thư mục này là kho lưu trữ Git, nơi mà Git lưu mọi thông
+    tin cần thiết để quản lý các phiên bản của dự án.</p>
+
+<pre>
+<b>$ ls -a</b>
+.        ..       .git     README   hello.rb
+</pre>
+
+    <!--<p>Congratulations, you now have a skeleton Git repository and can start
+    snapshotting your project.
+    </p>-->
+    <p>Bây giờ bạn đã có thể bắt đầu ghi các bản sao dự án với khung kho lưu
+    trữ Git vừa tạo của bạn.</p>
+
+    <p class="nutshell">
+    <!--<strong>In a nutshell</strong>, you use <code>git init</code> to make an
+    existing directory of content into a new Git repository.  You can do this
+    in any directory at any time, completely locally.</p>-->
+    <strong>Tóm tắt:</strong>, bạn dùng <code>git init</code> để tạo kho
+    lưu trữ Git cho một thư mục đã có. Việc tạo kho này có thể áp dụng
+    cho bất kỳ thư mục nào trên máy tính của bạn.</p>
+
+  </div>
+</div>
+
+<div class="box">
+  <h2>
+    <span class="docs">
+      <a target="new" href="http://git-scm.com/docs/git-clone">docs</a> &nbsp;
+      <a target="new" href="http://git-scm.com/book/en/Git-Basics-Getting-a-Git-Repository#Cloning-an-Existing-Repository">book</a>
+    </span>
+    <a name="clone">git clone</a>
+    <span class="desc">nhân bản một kho lưu trữ</span>
+  </h2>
+  <div class="block">
+    <!--<p>
+    If you need to collaborate with someone on a project, or if you want to
+    get a copy of a project so you can look at or use the code, you will
+    clone it.  You simply run the <code>git clone [url]</code> command with
+    the URL of the project you want to copy.
+    </p>-->
+    <p>
+    Khi làm việc với người khác, hoặc khi muốn có một bản sao để làm vài việc
+    riêng, bạn sẽ nhân bản kho Git của dự án. Lệnh sẽ dùng là <code>git clone
+    [url]</code>, trong đó, <strong>[url]</strong> là địa chỉ của kho.
+    </p>
+
+<pre>
+<b>$ git clone git://github.com/schacon/simplegit.git</b>
+Initialized empty Git repository in /private/tmp/simplegit/.git/
+remote: Counting objects: 100, done.
+remote: Compressing objects: 100% (86/86), done.
+remote: Total 100 (delta 35), reused 0 (delta 0)
+Receiving objects: 100% (100/100), 9.51 KiB, done.
+Resolving deltas: 100% (35/35), done.
+<b>$ cd simplegit/</b>
+<b>$ ls</b>
+README   Rakefile <span class="blue">lib</span>
+</pre>
+
+    <!--<p>
+    This will copy the entire history of that project so you have it locally
+    and it will give you a working directory of the main branch of that project
+    so you can look at the code or start editing it.  If you change into the
+    new directory, you can see the <code>.git</code> subdirectory - that is
+    where all the project data is.
+    </p>-->
+    <p>
+    Việc nhân bản một kho sẽ sao chép toàn bộ thông tin lược sử quá trình phát
+    triển dự án về thư mục (ở trên là 'simplegit') trên máy tính của bạn.
+    Trạng thái ban đầu của thư mục đó tương ứng với nhánh phát triển chính
+    (hay nhánh mặc định). Trong thư mục cũng có thư mục con <code>.git</code>
+    là kho lưu trữ Git địa phương (trong khi kho gốc được chỉ ra ở địa chỉ kho
+    trong lệnh nhân bản ở trên).
+    </p>
+
+<pre>
+<b>$ ls -a</b>
+.        ..       <span class="blue">.git</span>     README   Rakefile <span class="blue">lib</span>
+<b>$ cd .git</b>
+<b>$ ls</b>
+HEAD        description <span class="blue">info</span>        packed-refs
+<span class="blue">branches    hooks       logs        refs</span>
+config      index       <span class="blue">objects</span>
+</pre>
+
+    <!--<p>
+    By default, Git will create a directory that is the same name as the
+    project in the URL you give it - basically whatever is after the last slash
+    of the URL.  If you want something different, you can just put it at the
+    end of the command, after the URL.
+    </p>-->
+    <p>
+    Khi nhân bản, Git mặc định tạo một thư mục cùng tên với kho Git trong phần địa
+    chỉ được cho khi nhân bản (phần tên này nằm sau dấu gạch chéo cuối cùng).
+    Tuy nhiên, nếu bạn muốn kết quả nhân bản nằm trong thư mục khác, bạn có thể
+    chỉ ra ở sau địa chỉ kho (cách với địa chỉ kho ít nhất một khoảng trắng.)
+    </p>
+
+    <p class="nutshell">
+    <!--<strong>In a nutshell</strong>, you use <code>git clone</code> to get a
+    local copy of a Git repository so you can look at it or start modifying
+    it.</p>-->
+    <strong>Tóm tắt:</strong> bạn dùng <code>git clone</code> để có một
+    bản sao của kho Git trên máy tính, để bạn có thể thực hiện các đóng
+    góp riêng cho dự án.</p>
+
+  </div>
+</div>
+
+<p><a class="page-button next-page" href="/vi/basic">Cơ Bản Về Bản Sao &#187;</a></p>
