@@ -3,16 +3,16 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>Git 参考手册</title>
-		<link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
-		<link rel="stylesheet" type="text/css" href="css/text.css" media="screen" />
-		<link rel="stylesheet" type="text/css" href="css/grid.css" media="screen" />
-		<link rel="stylesheet" type="text/css" href="css/layout.css" media="screen" />
-		<link rel="stylesheet" type="text/css" href="css/nav.css" media="screen" />
-		<!--[if IE 6]><link rel="stylesheet" type="text/css" href="css/ie6.css" media="screen" /><![endif]-->
-		<!--[if IE 7]><link rel="stylesheet" type="text/css" href="css/ie.css" media="screen" /><![endif]-->
-		<script type="text/javascript" src="js/jquery-1.4.1.min.js"></script>
-		<script type="text/javascript" src="js/jquery-ui.min.js"></script>
-		<script type="text/javascript" src="js/action.js"></script>
+		<link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/css/reset.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/css/text.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/css/grid.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/css/layout.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/css/nav.css" media="screen" />
+		<!--[if IE 6]><link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/css/ie6.css" media="screen" /><![endif]-->
+		<!--[if IE 7]><link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/css/ie.css" media="screen" /><![endif]-->
+		<script type="text/javascript" src="{{ site.baseurl }}/js/jquery-1.4.1.min.js"></script>
+		<script type="text/javascript" src="{{ site.baseurl }}/js/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="{{ site.baseurl }}/js/action.js"></script>
 	</head>
 	<body>
     <div class="container_12">
@@ -23,9 +23,9 @@
 
 			<div class="grid_12">
 				<ul id="menu">
-					<li><a id="menu_home" href="zh/index.html">参考手册</a></li>
+					<li><a id="menu_home" href="{{ site.baseurl }}/zh/index.html">参考手册</a></li>
           <!-- <li><a id="menu_cookbook" href="zh/cookbook.html">Cookbook</a></li> -->
-					<li><a id="menu_about" href="zh/about.html">关于</a></li>
+					<li><a id="menu_about" href="{{ site.baseurl }}/zh/about.html">关于</a></li>
 					<li>&#167;</li>
 					<li><a href="https://github.com/git/git-reference">网站源码</a></li>
         </ul>
@@ -35,50 +35,50 @@
 
 			<div class="grid_2" id="reflist">
           <div class="block">
-            <h3><a href="zh/creating">获取与创建项目</a></h3>
+            <h3><a href="{{ site.baseurl }}/zh/creating">获取与创建项目</a></h3>
             <ul>
-              <li><a href="zh/creating/#init">init</a></li>
-              <li><a href="zh/creating/#clone">clone</a></li>
+              <li><a href="{{ site.baseurl }}/zh/creating/#init">init</a></li>
+              <li><a href="{{ site.baseurl }}/zh/creating/#clone">clone</a></li>
             </ul>
 					</div>
 
           <div class="block">
-            <h3><a href="zh/basic">基本的快照</a></h3>
+            <h3><a href="{{ site.baseurl }}/zh/basic">基本的快照</a></h3>
             <ul>
-              <li><a href="zh/basic/#add">add</a></li>
-              <li><a href="zh/basic/#status">status</a></li>
-              <li><a href="zh/basic/#diff">diff</a></li>
-              <li><a href="zh/basic/#commit">commit</a></li>
-              <li><a href="zh/basic/#reset">reset</a></li>
-              <li><a href="zh/basic/#rm-mv">rm, mv</a></li>
+              <li><a href="{{ site.baseurl }}/zh/basic/#add">add</a></li>
+              <li><a href="{{ site.baseurl }}/zh/basic/#status">status</a></li>
+              <li><a href="{{ site.baseurl }}/zh/basic/#diff">diff</a></li>
+              <li><a href="{{ site.baseurl }}/zh/basic/#commit">commit</a></li>
+              <li><a href="{{ site.baseurl }}/zh/basic/#reset">reset</a></li>
+              <li><a href="{{ site.baseurl }}/zh/basic/#rm-mv">rm, mv</a></li>
             </ul>
           </div>
 
           <div class="block">
-            <h3><a href="zh/branching">分支与合并</a></h3>
+            <h3><a href="{{ site.baseurl }}/zh/branching">分支与合并</a></h3>
             <ul>
-              <li><a href="zh/branching/#branch">branch</a></li>
-              <li><a href="zh/branching/#branch">checkout</a></li>
-              <li><a href="zh/branching/#merge">merge</a></li>
-              <li><a href="zh/branching/#log">log</a></li>
-              <li><a href="zh/branching/#tag">tag</a></li>
+              <li><a href="{{ site.baseurl }}/zh/branching/#branch">branch</a></li>
+              <li><a href="{{ site.baseurl }}/zh/branching/#branch">checkout</a></li>
+              <li><a href="{{ site.baseurl }}/zh/branching/#merge">merge</a></li>
+              <li><a href="{{ site.baseurl }}/zh/branching/#log">log</a></li>
+              <li><a href="{{ site.baseurl }}/zh/branching/#tag">tag</a></li>
             </ul>
           </div>
 
           <div class="block">
-            <h3><a href="zh/remotes">分享与更新项目</a></h3>
+            <h3><a href="{{ site.baseurl }}/zh/remotes">分享与更新项目</a></h3>
             <ul>
-              <li><a href="zh/remotes/#fetch">fetch, pull</a></li>
-              <li><a href="zh/remotes/#push">push</a></li>
-              <li><a href="zh/remotes/#remote">remote</a></li>
+              <li><a href="{{ site.baseurl }}/zh/remotes/#fetch">fetch, pull</a></li>
+              <li><a href="{{ site.baseurl }}/zh/remotes/#push">push</a></li>
+              <li><a href="{{ site.baseurl }}/zh/remotes/#remote">remote</a></li>
             </ul>
           </div>
 
           <div class="block">
-            <h3><a href="zh/inspect">检查与比较</a></h3>
+            <h3><a href="{{ site.baseurl }}/zh/inspect">检查与比较</a></h3>
             <ul>
-              <li><a href="zh/inspect/#log">log</a></li>
-              <li><a href="zh/inspect/#diff">diff</a></li>
+              <li><a href="{{ site.baseurl }}/zh/inspect/#log">log</a></li>
+              <li><a href="{{ site.baseurl }}/zh/inspect/#diff">diff</a></li>
             </ul>
           </div>
 
