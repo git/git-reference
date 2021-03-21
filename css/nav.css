@@ -18,7 +18,7 @@ ul.nav li {
 	float:left;
 	text-align:center;
 	list-style-type:none;
-	font-weight:normal;
+	font-weight:400;
 }
 ul.nav li ul {
 	cursor:default;
@@ -69,7 +69,7 @@ ul.nav li:hover ul li a {color:#444;}
 ul.nav li:hover ul li a:hover {color:#000; background:#fff;}
 ul.nav li:hover ul li a:active {color:#666; background:#fff;}
 
-ul.nav li.current a {color:#666; background:#fff; cursor:default; font-weight:bold;}
+ul.nav li.current a {color:#666; background:#fff; cursor:default; font-weight:700;}
 ul.nav li.current ul {left:0;z-index:5}
 ul.nav li.current ul,
 ul.nav li.current {background:#ccc !important}
@@ -139,7 +139,7 @@ ul.nav li.secondary span.status {
 	padding:0 1em;
 	line-height:2.77em;
 	height:2.77em;
-  font-size:0.9em;
+        font-size:0.9em;
 }
 ul.nav li.secondary span.status a {
 	float:none;
@@ -147,7 +147,7 @@ ul.nav li.secondary span.status a {
 	padding:0;
 	height:auto;
 	line-height:auto;
-	color:#cde;
+	color:#ccddee;
 	background:transparent;
 }
 ul.nav li.secondary span.status a:hover {
