@@ -8,7 +8,7 @@ may be trying to do.
 
 If you would like to know more about a command listed, each command
 links to both the official manual page and its relevant chapter
-in the [Pro Git book](http://git-scm.com/book).
+in the [Pro Git book](https://git-scm.com/book).
 
 ## Contributing
 
